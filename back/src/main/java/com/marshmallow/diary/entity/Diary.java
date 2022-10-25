@@ -1,6 +1,7 @@
 package com.marshmallow.diary.entity;
 
 
+import com.marshmallow.diary.dto.DiaryRequest;
 import com.marshmallow.user.entity.User;
 import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
@@ -20,6 +21,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
+@Setter
 public class Diary {
 
     @Id
@@ -47,4 +49,14 @@ public class Diary {
 
     @Column(name = "date" , nullable = false)
     private Date date;
+    public static Diary DiaryCreate(User user, DiaryRequest.Create request, String photo){
+        return Diary.builder()
+                .title(request.getTitle())
+                .content(request.getContent())
+                .weather(request.getWeather())
+                .date(request.getDate())
+                .photo(photo)
+                .user(user)
+                .build();
+    }
 }
