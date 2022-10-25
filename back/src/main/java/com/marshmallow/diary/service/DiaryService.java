@@ -8,14 +8,16 @@ import com.marshmallow.user.entity.User;
 import com.marshmallow.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class DiaryService {
 
     private final DiaryRepository diaryRepository;
@@ -44,13 +46,29 @@ public class DiaryService {
     }
 
     public DiaryResponse.Detail getDetailDiary(UUID diaryId) {
-        Diary diary = diaryRepository.findById(diaryId).get();
-        if(diary == null){
+        Optional<Diary> diary = diaryRepository.findById(diaryId);
+        if(!diary.isPresent()){
             return null;
         }
-        String photo = diary.getPhoto();
+        String photo = diary.get().getPhoto();
         photo = photo.substring(1, photo.length()-1);
         String[] photos = photo.split(", ");
-        return DiaryResponse.Detail.build(diary, photos);
+        return DiaryResponse.Detail.build(diary.get(), photos);
+    }
+
+    public DiaryResponse.Delete delete(UUID diaryId) {
+        Optional<Diary> diary = diaryRepository.findById(diaryId);
+        if(!diary.isPresent()){
+            return DiaryResponse.Delete.build("false");
+        }else{
+            String photo = diary.get().getPhoto();
+            photo = photo.substring(1, photo.length()-1);
+            String[] photos = photo.split(", ");
+            for(int i = 0; i < photos.length; i++){
+                awsS3Service.deleteFile(photos[i]);
+            }
+            diaryRepository.delete(diary.get());
+            return DiaryResponse.Delete.build("true");
+        }
     }
 }

@@ -36,5 +36,15 @@ public class DiaryController {
         return ResponseEntity.ok().body(diaryInfo);
     }
 
+    @PostMapping("/delete")
+    @ApiOperation(value="다이어리 삭제", notes = "diaryId로 해당 다이어리 삭제하는 기능")
+    public ResponseEntity<?> deleteDiary(@RequestBody DiaryRequest.GetDiary request) {
+        DiaryResponse.Delete result = diaryService.delete(request.getDiaryId());
+        if(result.getResult().equals("false")){
+            return ResponseEntity.status(404).body(result);
+        }
+        return ResponseEntity.ok().body(result);
+    }
+
 }
 
