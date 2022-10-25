@@ -24,7 +24,7 @@ public class DiaryRequest {
         @NoArgsConstructor(access = AccessLevel.PRIVATE)
         @AllArgsConstructor(access = AccessLevel.PRIVATE)
         @ToString
-        public static class getDiary{
+        public static class GetDiary{
                 private UUID diaryId;
         }
 
