@@ -49,6 +49,7 @@ const styles = StyleSheet.create({
 });
 
 
+
 export default Register;
 // function Register() {
 //   return (
