@@ -26,7 +26,7 @@ const Stack = createStackNavigator();
 
 const StackNavigation = () => {
     return (
-        <Stack.Navigator initialRouteName='Main'>
+        <Stack.Navigator initialRouteName='Main' screenOptions={{ headerShown: false }}>
           <Stack.Screen name='Home' component={Home} />
           <Stack.Screen name='List' component={List} />
           <Stack.Screen name='Item' component={Item} />

@@ -11,10 +11,8 @@ const styles = StyleSheet.create({
 const Main = ({navigation}) => {
     return (
         <SafeAreaView>
-          <Text>Main</Text>
-          <Button title='go to the home screen' onPress = {() => navigation.navigate('Home')} />
-          <Button title='go to the search screen' onPress = {() => navigation.navigate('Search')} />
           <Button title='go to the password screen' onPress = {() => navigation.navigate('Password')} />
+          <Button title='go to the login screen' onPress = {() => navigation.navigate('Login')} />
           <Text>{"\n"}</Text>
           <Footer />
         </SafeAreaView>

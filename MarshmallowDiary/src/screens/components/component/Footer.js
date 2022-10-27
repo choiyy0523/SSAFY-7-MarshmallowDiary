@@ -44,7 +44,7 @@ const Footer = () => {
             </TouchableOpacity>
             }
 
-            { route.name === 'Search' ?
+            { route.name === 'Search' || route.name === 'Result' ?
               <TouchableOpacity style={{ width:'20%', alignItems:'center', justifyContent:'center', flex:1, height:60, backgroundColor: 'rgba(251, 198, 135, 0.3)'}} onPress = {() => navigation.navigate('Search')}>
                 <Image source={search} style={{ width:33, height:33}} />
               </TouchableOpacity> :
@@ -53,7 +53,7 @@ const Footer = () => {
               </TouchableOpacity>
             }
 
-            { route.name === 'Settings' ? 
+            { route.name === 'Settings' || route.name === 'Push' ? 
               <TouchableOpacity style={{ width:'20%', alignItems:'center', justifyContent:'center', flex:1, height:60, backgroundColor: 'rgba(251, 198, 135, 0.3)'}} onPress = {() => navigation.navigate('Settings')}>
                 <Image source={settings} style={{ width:33, height:33 }} />
               </TouchableOpacity> :
