@@ -1,10 +1,15 @@
 import React from 'react';
-import { Text, View } from 'react-native'; 
+import { Text, View } from 'react-native';
+import Footer from '../../components/component/Footer';
+
 
 const Settings = () => {
   return (
-      <Text> 환경 설정 </Text>
+    <View>
+      <Text>Settings</Text>
+      <Footer />
+    </View>
   )
-}
+};
 
 export default Settings;

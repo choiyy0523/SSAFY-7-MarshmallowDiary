@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import DateHead from './DateHead'
 
+
 function Detail() {
 
   const today = new Date();
