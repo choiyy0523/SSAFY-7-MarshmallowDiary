@@ -12,7 +12,7 @@ import mm_negative from '../../../assets/images/mm/mm_negative.png'
 
 const Analysis = () => {
     const widthAndHeight = 225
-    const series = [60, 25, 15]
+    const series = [60, 25, 15] // axios로 받아와서 각각 7로 나눔 + 데이터 없으면 에러 뜨니 차트 말고 데이터 없음 띄워줘야함
     const sliceColor = ['#91C788','#FBC687','#F38181']
 
     return (
@@ -30,18 +30,18 @@ const Analysis = () => {
               />
             </View>
             <View style={{ marginTop:'5%', alignItems:'center', flex: 1, marginRight:'3%' }}>
-              <ChipYellow label='일주일'/>
+              <ChipYellow label='월'/>
               <View style={{ flexDirection:'row', marginTop:'25%' }}>
                 <Image source={mm_positive} style={{ width:23, height:23 }} />
-                <Text style={{fontSize:15, marginLeft:'3%'}}>긍정</Text>
+                <Text style={{fontSize:15, marginLeft:'3%'}}>긍정 {series[0]}%</Text>
               </View>
               <View style={{ flexDirection:'row', marginTop:'15%' }}>
                 <Image source={mm_neutral} style={{ width:23, height:23 }} />
-                <Text style={{fontSize:15, marginLeft:'3%'}}>중립</Text>
+                <Text style={{fontSize:15, marginLeft:'3%'}}>중립 {series[1]}%</Text>
               </View>
               <View style={{ flexDirection:'row', marginTop:'15%' }}>
                 <Image source={mm_negative} style={{ width:23, height:23 }} />
-                <Text style={{fontSize:15, marginLeft:'3%'}}>부정</Text>
+                <Text style={{fontSize:15, marginLeft:'3%'}}>부정 {series[2]}%</Text>
               </View>
             </View>
           </View>

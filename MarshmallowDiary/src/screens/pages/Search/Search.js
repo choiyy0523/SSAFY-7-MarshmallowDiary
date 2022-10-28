@@ -5,7 +5,7 @@ import Footer from '../../components/component/Footer';
 import positive from '../../../assets/images/character/positive.png'
 import { useNavigation } from '@react-navigation/native';
 import { Icon } from '@rneui/themed';
-import mm_positive from '../../../assets/images/mm/mm_positive.png'
+
 
 
 // 검색어 초기 입력 시 약간 렉 있음

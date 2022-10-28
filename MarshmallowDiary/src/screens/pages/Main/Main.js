@@ -2,7 +2,7 @@ import React from 'react';
 import { Text, View, StyleSheet,TouchableOpacity, Image } from 'react-native'; 
 import Footer from '../../components/component/Footer';
 import { Calendar, CalendarList, Agenda, LocaleConfig } from 'react-native-calendars'
-import mm_positive from '../../../assets/images/mm/mm_positive.png'
+import { Icon } from '@rneui/themed';
 
 LocaleConfig.locales['fr'] = {
   monthNames: ['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'],
@@ -13,33 +13,66 @@ LocaleConfig.locales['fr'] = {
 };
 LocaleConfig.defaultLocale = 'fr';
 
-const styles = StyleSheet.create({
-  calendar: {
-    borderBottomWidth: 1,
-    borderBottomColor: '#e0e0e0',
-  }
-})
 
 const Main = ({navigation}) => {
-  const markedDates = {
-    '2022-10-26': { selected: true },
-    '2022-10-27': { marked: true },
-    '2022-10-28': { marked: true }
-  }
+    var today = new Date();
+
+    var year = today.getFullYear();
+    var month = ('0' + (today.getMonth() + 1)).slice(-2);
+    var day = ('0' + today.getDate()).slice(-2);
+    
+    var dateString = year + '-' + month  + '-' + day;
+
 
     return (
         <View style={{ backgroundColor:'#FFF9F8', flex: 1 }}>
           <View style={{flex:1}}>
             <Calendar 
-            style={styles.calendar} 
+            style={{ marginTop:'5%'}}
             monthFormat={'yyyy년 MM월'}
-            theme={{
-              selectedDayBackgroundColor: 'red',
-              arrowColor: '#000000',
-              dotColor: 'green',
-              todayTextColor: 'yellow',
+            markedDates={{
+              '2022-10-25': {marked: true, dotcolor: '#91C788'},
+              '2022-10-26': {marked: true, dotColor: '#FBC687'},
+              '2022-10-27': {marked: true, dotColor: '#F38181'},
+              // '2022-10-28': {selected:true, selectedColor:'#D9D9D9', color:'black'},
+              dateString : {selected:true, selectedColor:'#D9D9D9', color:'black'}
             }}
+            // markingType={'custom'}
+            // markedDates={{
+            //   '2022-10-28' : {
+            //     customStyles: {
+            //       container: {
+            //         backgroundColor: '#D9D9D9'
+            //       },
+            //       text: {
+            //         color: 'black',
+            //       }
+            //     }
+            //   },
+            //   '2022-10-27' : {
+            //     customStyles: {
+            //       marked: {
+            //         color: 'green',
+            //       }
+            //     }
+            //   },
+            // }}
+            renderArrow={(direction) => direction === "left" ? (
+              <Icon name="left" type='antdesign' size={20} color="#000000" />
+                ) : (
+              <Icon name="right" type='antdesign' size={20} color="#000000" />
+                )
+            }
             />
+          </View>
+          <View style={{ flex:0.3, backgroundColor:'rgba(217,217,217,0.3)', borderRadius:20, marginLeft:'20%', marginRight:'20%' }}>
+            <View style={{ fontSize:15, alignItems:'center', justifyContent:'center', flex: 1}}>
+              <Text>요즘 기분이 좋으신가봐요</Text>
+              <Text>오늘도 좋은 하루였길 바라요</Text>
+            </View>
+          </View>
+          <View style={{ flex:0.1 }}>
+
           </View>
           <Footer />
         </View>
