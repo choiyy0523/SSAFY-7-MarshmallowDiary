@@ -23,7 +23,7 @@ const DarkTheme = {
     card: '#999696',
     text: '#fff9f8',
   },
-},
+}
 
 
 const App = () => {

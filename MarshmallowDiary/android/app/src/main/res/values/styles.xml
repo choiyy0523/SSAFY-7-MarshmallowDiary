@@ -6,4 +6,9 @@
         <item name="android:editTextBackground">@drawable/rn_edit_text_material</item>
     </style>
 
+    <style name="DatePickerTheme" parent="DatePickerBaseTheme">
+        <item name="android:colorControlNormal">#525252</item>
+        <item name="colorAccent">#525252</item>
+    </style>
+
 </resources>
