@@ -33,7 +33,7 @@ const Result = () => {
               <View style={{ backgroundColor:'rgba(255,255,255,0.9)', height:40 , borderRadius:30, 
                   flexDirection:'row', flex:0.8 }}>
                 <TextInput 
-                  style={{width:'90%'}}
+                  style={{width:'85%', marginLeft:'5%'}}
 
                   onChange={(e) => onChange("keyword", e)}
                   value={keyword}

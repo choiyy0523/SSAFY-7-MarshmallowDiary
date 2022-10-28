@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
-import { Text, View, Image, TouchableOpacity } from 'react-native'; 
-import { TextInput } from 'react-native-gesture-handler';
+import { Text, View, Image, TouchableOpacity, Keyboard } from 'react-native'; 
+import { TextInput, TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import Footer from '../../components/component/Footer';
 import positive from '../../../assets/images/character/positive.png'
 import { useNavigation } from '@react-navigation/native';
 import { Icon } from '@rneui/themed';
+import mm_positive from '../../../assets/images/mm/mm_positive.png'
 
 
-
+// 검색어 초기 입력 시 약간 렉 있음
 
 const Search = ({navigation}) => {
     const [inputs, setInputs] = useState({
@@ -37,7 +38,7 @@ const Search = ({navigation}) => {
               <View style={{ backgroundColor:'rgba(255,255,255,0.9)', height:40 , borderRadius:30, 
                   flexDirection:'row', flex:0.8 }}>
                 <TextInput 
-                  style={{width:'90%'}}
+                  style={{width:'85%', marginLeft:'5%'}}
 
                   onChange={(e) => onChange("keyword", e)}
                   value={keyword}
@@ -55,10 +56,10 @@ const Search = ({navigation}) => {
               </TouchableOpacity>
             </View>     
           </View> 
-
-          <View style={{ alignItems:'center', justifyContent:'center', flex:1 }}> 
+          
+          <View style={{ alignItems:'center', justifyContent:'center', flex:1 }} > 
             <Image source={positive} style={{ width:'25%', height:90 }} />
-            <Text style={{ fontSize:17, marginTop:'5%'}}>다시 보고 싶은 일기가 있으신가요?</Text>          
+            <Text style={{ fontSize:17, marginTop:'5%'}}>다시 보고 싶은 일기가 있으신가요?</Text> 
           </View>
           <Footer />
         </View>
