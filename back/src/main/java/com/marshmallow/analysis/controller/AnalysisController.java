@@ -1,5 +1,6 @@
 package com.marshmallow.analysis.controller;
 
+import com.marshmallow.analysis.dto.AnalysisRequest;
 import com.marshmallow.analysis.dto.AnalysisResponse;
 import com.marshmallow.analysis.service.AnalysisService;
 import lombok.RequiredArgsConstructor;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.text.ParseException;
 import java.util.Map;
 import java.util.UUID;
 
@@ -53,6 +55,12 @@ public class AnalysisController {
     ResponseEntity getAllEmotion() {
         AnalysisResponse.getAllEmotion result = analysisService.getAllEmotion();
 
+        return ResponseEntity.status(200).body(result);
+    }
+
+    @GetMapping("/month")
+    ResponseEntity getMonthEmotion(@RequestBody AnalysisRequest.monthReq req) throws ParseException {
+        AnalysisResponse.getAllEmotion result = analysisService.getMonthEmotion(req.getYear(), req.getMonth());
         return ResponseEntity.status(200).body(result);
     }
 

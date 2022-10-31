@@ -19,6 +19,8 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -39,72 +41,14 @@ public class AnalysisService {
     @Autowired
     DiaryRepository diaryRepository;
 
-    @Value("${clova.id}")
-    private String clientId;
-
-    @Value("${clova.key}")
-    private String apiKey;
 
     public AnalysisResponse.getResult result(UUID diaryId) throws Exception{
 
         Optional<Analysis> analysis = anaylsisRepository.findByDiary_DiaryId(diaryId);
 
-        if(analysis.isEmpty()){
-            getEmotion(diaryId);
-        }
-
         return AnalysisResponse.getResult.build(analysis.get());
     }
 
-
-    public void getEmotion(UUID diaryId) throws Exception{
-
-        Optional<Diary> diary = diaryRepository.findById(diaryId);
-
-        JSONObject word = new JSONObject();
-        word.put("content",diary.get().getContent());
-
-        String reqUrl = "https://naveropenapi.apigw.ntruss.com/sentiment-analysis/v1/analyze";
-        URL url = new URL(reqUrl);
-        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-        conn.setRequestMethod("POST");
-        conn.setRequestProperty("X-NCP-APIGW-API-KEY-ID",clientId);
-        conn.setRequestProperty("X-NCP-APIGW-API-KEY",apiKey);
-        conn.setRequestProperty("Content-Type","application/json");
-        conn.setDoOutput(true);
-
-        OutputStreamWriter ow = new OutputStreamWriter(conn.getOutputStream());
-        ow.write(word.toString());
-        ow.flush();
-        // 전송 끝
-
-        BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-        String line = "";
-        String result = "";
-        while((line = br.readLine()) != null){
-            result += line;
-        }
-
-        String[] getResult = result.split(",");
-
-        Analysis analysis = new Analysis();
-
-        String sentiment = getResult[0].split(":")[2];
-        sentiment = sentiment.substring(1,sentiment.length()-1);
-        String negative = getResult[1].split(":")[2];
-        String positive = getResult[2].split(":")[1];
-        String neutral = getResult[3].split(":")[1];
-        neutral = neutral.substring(0,neutral.length()-2);
-
-        analysis.setDiary(diary.get());
-        analysis.setSentiment(sentiment);
-        analysis.setNegative(Float.parseFloat(negative));
-        analysis.setPositive(Float.parseFloat(positive));
-        analysis.setNeutral(Float.parseFloat(neutral));
-
-        anaylsisRepository.save(analysis);
-
-    }
 
     public Map<Integer, String> main(){
 
@@ -123,15 +67,27 @@ public class AnalysisService {
 
         long dist = (currTime-regTime)/(1000*60*60*24);
 
-        int mashmellow = 2;
+        Random idx = new Random();
+        String msg = "";
+        String[] maro = {"이렇게 성실하게 일기를 쓰다니! 대단하신데요?","오늘 하루도 같이 마무리 해봐요!", "오늘은 어떤 하루였는지 알려주세요~ 오늘도 좋은 하루였나요?",
+            "오늘 하루는 어땠나요?", "또 만났네요! 오늘은 어떤 일이 있었나요?", "일기를 작성하며 하루를 잘 마무리해봐요~"};
+        String[] bro = {"오늘은 일기 꼭 쓰실 거죠? 더 이상 미루기는 그만~","오늘 기분은 어떠셨나요? ... 별로?"," 요즘.....잘 지내? 소식이 뜸하네....☆일 없지....?","이번주는 어떻게 보내고 있나요?"," 인간적으로 일주일에 마시멜로 하나는 줘야한다","하나씩 일기를 작성해보는 습관을 길러볼까요?"};
+        String[] siro = {"마시멜로 본지가 언제인지~! 반성하세요! ","성실하지 못한 것은 성공하기 싫다는 표현 중 하나래요","얼른 일기 쓰시고 맛난 마시멜로 주세요!!!!!","일기 안쓰면 시로","시로 당떨어진다~~!!","바쁘더라도 일기를 꾸준히 쓰면 도움이 될거에요"};
+
+        int mashmellow = -1;
 
         if(dist < 3){
             mashmellow = 0;
+            msg = maro[idx.nextInt(6)];
         }else if(dist < 8){
             mashmellow = 1;
+            msg = bro[idx.nextInt(6)];
+        }else{
+            mashmellow = 2;
+            msg = siro[idx.nextInt(6)];
         }
 
-        result.put(mashmellow, "DB에서 불러와서 랜덤으로 보내기");
+        result.put(mashmellow,msg);
 
         return result;
     }
@@ -189,6 +145,36 @@ public class AnalysisService {
 
         return AnalysisResponse.getAllEmotion.build(result);
 
+    }
+
+    public AnalysisResponse.getAllEmotion getMonthEmotion(int year, int month) throws ParseException {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar cal = Calendar.getInstance();
+        cal.set(year, month-1, 1);
+        int lastday = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
+        String st = year+"-"+month+"-1";
+        String ed = year+"-"+month+"-"+lastday;
+        Date startDay = dateFormat.parse(st);
+        Date endDay = dateFormat.parse(ed);
+        List<Diary> diary = diaryRepository.findAllByDateBetween(startDay, endDay);
+
+        float positive = 0.0f;
+        float negative = 0.0f;
+        float neutral = 0.0f;
+
+        for(Diary d : diary){
+            Optional<Analysis> analysis = anaylsisRepository.findByDiary_DiaryId(d.getDiaryId());
+            positive += analysis.get().getPositive();
+            negative += analysis.get().getNegative();
+            neutral += analysis.get().getNeutral();
+        }
+
+        Analysis analysis = new Analysis();
+        analysis.setPositive(positive);
+        analysis.setNegative(negative);
+        analysis.setNeutral(neutral);
+
+        return AnalysisResponse.getAllEmotion.build(analysis);
     }
 
 }

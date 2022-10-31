@@ -10,11 +10,20 @@ import com.marshmallow.diary.repository.DiaryRepository;
 import com.marshmallow.user.entity.User;
 import com.marshmallow.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.configurationprocessor.json.JSONException;
+import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -27,13 +36,20 @@ import java.util.*;
 @Transactional
 public class DiaryService {
 
+
+    @Value("${clova.id}")
+    private String clientId;
+
+    @Value("${clova.key}")
+    private String apiKey;
+
     private final DiaryRepository diaryRepository;
     private final UserRepository userRepository;
 
     private final AnaylsisRepository anaylsisRepository;
 
     private final AwsS3Service awsS3Service;
-    public DiaryResponse.Regist registDiary(DiaryRequest.Create request , List<MultipartFile> multipartFile){
+    public DiaryResponse.Regist registDiary(DiaryRequest.Create request , List<MultipartFile> multipartFile) throws IOException, JSONException {
 
         User user = userRepository.findById(UUID.fromString("18343747-03f9-414f-b7f2-30090b8954e8")).get();
         String photos = null;
@@ -46,9 +62,50 @@ public class DiaryService {
         UUID diaryId = diaryRepository.save(diary).getDiaryId();
         DiaryResponse.Regist response = DiaryResponse.Regist.build(diaryId);
 
-        /*
-          분석 결과 저장하는 코드 추가해야 합니다.
-         */
+        // 분석 결과 저장
+
+        JSONObject word = new JSONObject();
+        word.put("content",diary.getContent());
+
+        String reqUrl = "https://naveropenapi.apigw.ntruss.com/sentiment-analysis/v1/analyze";
+        URL url = new URL(reqUrl);
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.setRequestMethod("POST");
+        conn.setRequestProperty("X-NCP-APIGW-API-KEY-ID",clientId);
+        conn.setRequestProperty("X-NCP-APIGW-API-KEY",apiKey);
+        conn.setRequestProperty("Content-Type","application/json");
+        conn.setDoOutput(true);
+
+        OutputStreamWriter ow = new OutputStreamWriter(conn.getOutputStream());
+        ow.write(word.toString());
+        ow.flush();
+        // 전송 끝
+
+        BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+        String line = "";
+        String result = "";
+        while((line = br.readLine()) != null){
+            result += line;
+        }
+
+        String[] getResult = result.split(",");
+
+        Analysis analysis = new Analysis();
+
+        String sentiment = getResult[0].split(":")[2];
+        sentiment = sentiment.substring(1,sentiment.length()-1);
+        String negative = getResult[1].split(":")[2];
+        String positive = getResult[2].split(":")[1];
+        String neutral = getResult[3].split(":")[1];
+        neutral = neutral.substring(0,neutral.length()-2);
+
+        analysis.setDiary(diary);
+        analysis.setSentiment(sentiment);
+        analysis.setNegative(Float.parseFloat(negative));
+        analysis.setPositive(Float.parseFloat(positive));
+        analysis.setNeutral(Float.parseFloat(neutral));
+
+        anaylsisRepository.save(analysis);
 
         return response;
 
