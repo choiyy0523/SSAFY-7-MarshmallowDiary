@@ -1,6 +1,7 @@
 package com.marshmallow.diary.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.marshmallow.diary.dto.DiaryRequest;
 import com.marshmallow.user.entity.User;
 import lombok.*;
@@ -48,6 +49,8 @@ public class Diary {
     private String photo;
 
     @Column(name = "date" , nullable = false)
+    @JsonFormat(shape= JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
+    @Temporal(TemporalType.DATE)
     private Date date;
     public static Diary DiaryCreate(User user, DiaryRequest.Create request, String photo){
         return Diary.builder()

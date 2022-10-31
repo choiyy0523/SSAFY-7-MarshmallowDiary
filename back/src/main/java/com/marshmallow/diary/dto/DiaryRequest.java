@@ -28,4 +28,13 @@ public class DiaryRequest {
                 private UUID diaryId;
         }
 
+        @Getter
+        @NoArgsConstructor(access = AccessLevel.PRIVATE)
+        @AllArgsConstructor(access = AccessLevel.PRIVATE)
+        @ToString
+        public static class TotalDiary{
+                private int year;
+                private int month;
+        }
+
 }
