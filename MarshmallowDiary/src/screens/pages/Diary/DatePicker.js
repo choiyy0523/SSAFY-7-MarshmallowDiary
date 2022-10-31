@@ -7,7 +7,11 @@ function DayPicker() {
   const [date, setDate] = useState(new Date());
   const [open, setOpen] = useState(false);
 
-  const dayformatted = `${date}`;
+  const year = date.getFullYear();
+  const month = date.getMonth() + 1;
+  const day = date.getDate();
+
+  const dayformatted = `${year}년 ${month}월 ${day}일`;
 
   return (
     <View>
@@ -44,7 +48,7 @@ const styles = StyleSheet.create({
   },
   changeDay: {
     fontFamily: 'GangwonEduAllBold',
-    fontSize: 20,
+    fontSize: 18,
     color: '#525252',
   },
 });
