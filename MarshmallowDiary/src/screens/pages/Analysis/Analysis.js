@@ -11,6 +11,13 @@ import mm_negative from '../../../assets/images/mm/mm_negative.png'
 
 
 const Analysis = () => {
+    var today = new Date();
+
+    var year = today.getFullYear();
+    var month = ('0' + (today.getMonth() + 1)).slice(-2);
+    
+    
+
     const widthAndHeight = 225
     const series = [60, 25, 15] // axios로 받아와서 각각 7로 나눔 + 데이터 없으면 에러 뜨니 차트 말고 데이터 없음 띄워줘야함
     const sliceColor = ['#91C788','#FBC687','#F38181']
@@ -30,7 +37,8 @@ const Analysis = () => {
               />
             </View>
             <View style={{ marginTop:'5%', alignItems:'center', flex: 1, marginRight:'3%' }}>
-              <ChipYellow label='월'/>
+              {/* <ChipYellow label='10월'/> */}
+              <Chip style={{ backgroundColor:'#FFEBA5' }}><Text>{year}년 {month}월</Text></Chip>
               <View style={{ flexDirection:'row', marginTop:'25%' }}>
                 <Image source={mm_positive} style={{ width:23, height:23 }} />
                 <Text style={{fontSize:15, marginLeft:'3%'}}>긍정 {series[0]}%</Text>
