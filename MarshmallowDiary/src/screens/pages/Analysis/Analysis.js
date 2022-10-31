@@ -8,7 +8,6 @@ import PieChart from 'react-native-pie-chart';
 import mm_positive from '../../../assets/images/mm/mm_positive.png'
 import mm_neutral from '../../../assets/images/mm/mm_neutral.png'
 import mm_negative from '../../../assets/images/mm/mm_negative.png'
-import { Dialog } from '@rneui/themed'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 
@@ -17,17 +16,44 @@ const Analysis = () => {
     var today = new Date();
 
     var year = today.getFullYear();
-    var month = ('0' + today.getMonth()).slice(-2); // 현재가 11월이면 10월을 기본으로 설정
+    var month = ('0' + (today.getMonth()+1)).slice(-2); 
 
     const [targetYear, setTargetYear] = useState(year)
     const [targetMonth, setTargetMonth] = useState(month)
+
+
+    const [isAll, setIsAll] = useState(false)
+    const selectAll = () => {
+      setIsAll(true)
+    }
+
+    const selectMonth = () => {
+      setIsAll(false)
+    }
     
     const [visible, setVisible] = useState(false)
-    const toggleModal = () => {
+    const openModal = () => {
       setVisible(true)
     }
     const closeModal = () => {
       setVisible(false)
+    }
+
+    const [visible2, setVisible2] = useState(false)
+    const openModal2 = () => {
+      setVisible2(true)
+    }
+    const closeModal2 = () => {
+      setVisible2(false)
+    }
+
+    const [visible3, setVisible3] = useState(false)
+    const openModal3 = () => {
+      setVisible3(true)
+    }
+
+    const closeModal3 = () => {
+      setVisible3(false)
     }
 
     const widthAndHeight = 225
@@ -49,16 +75,159 @@ const Analysis = () => {
               />
             </View>
             <View style={{ marginTop:'5%', alignItems:'center', flex: 1, marginRight:'3%' }}>
-              <Chip style={{ backgroundColor:'#FFEBA5' }} onPress={toggleModal}><Text>{targetYear}년 {targetMonth}월</Text></Chip>
+              { isAll == true ? 
+              <Chip style={{ backgroundColor:'#FFEBA5' }} onPress={openModal}><Text>전체</Text></Chip> : 
+              <Chip style={{ backgroundColor:'#FFEBA5' }} onPress={openModal}><Text>{targetYear}년 {targetMonth}월</Text></Chip>
+              } 
+              
               <Modal visible={visible} setVisible={setVisible} transparent={true} animationType={'fade'}>
                 <Pressable style={{ flex:1 , justifyContent:'center', alignItems:'center'}} onPress={closeModal}>
                   <View style={{ flex:0.3, backgroundColor:'white', justifyContent:'center', alignItems:'center', width:'80%', borderRadius:30 }}>
-                    <ChipYellow label='월별' />
+                    <Chip style={{ backgroundColor:'#FFEBA5', width:75, alignItems:'center'}} onPress={() => {selectMonth(); closeModal(); openModal2();}}><Text>월별</Text></Chip>
+
                     <View style={{ height:15 }}/>
-                    <ChipYellow label='전체' />
+                    <Chip style={{ backgroundColor:'#FFEBA5', width:75, alignItems:'center'}} onPress={() => {selectAll(); closeModal();}}><Text>전체</Text></Chip>
                   </View>
                 </Pressable>
               </Modal>
+
+              <Modal visible={visible2} setVisible={setVisible2} transparent={true} animationType={'fade'}>
+                <Pressable style={{ flex:1 , justifyContent:'center', alignItems:'center'}} onPress={closeModal2}>
+                  <View style={{ flex:0.5, backgroundColor:'white', justifyContent:'center', alignItems:'center', width:'90%'}}>
+                    <View style={{flex:0.0625 }}/>
+                    <View style={{flex:0.25, flexDirection:'row' }}>
+                      <View style={{flex:0.04}}/>
+                      <Pressable style={{flex:0.2, backgroundColor:'#FFEBA5', justifyContent:'center', alignItems:'center'}} onPress={() => {closeModal2(); openModal3(); setTargetYear(year-6);}}>
+                        <Text>{year-6}년</Text>
+                      </Pressable>
+                      <View style={{flex:0.04}}/>
+                      <Pressable style={{flex:0.2, backgroundColor:'#FFEBA5', justifyContent:'center', alignItems:'center'}} onPress={() => {closeModal2(); openModal3(); setTargetYear(year-5);}}>
+                        <Text>{year-5}년</Text>
+                      </Pressable>
+                      <View style={{flex:0.04}}/>
+                      <Pressable style={{flex:0.2, backgroundColor:'#FFEBA5', justifyContent:'center', alignItems:'center'}} onPress={() => {closeModal2(); openModal3(); setTargetYear(year-4);}}>
+                        <Text>{year-4}년</Text>
+                      </Pressable>
+                      <View style={{flex:0.04}}/>
+                      <Pressable style={{flex:0.2,backgroundColor:'#FFEBA5', justifyContent:'center', alignItems:'center'}} onPress={() => {closeModal2(); openModal3(); setTargetYear(year-3);}}>
+                        <Text>{year-3}년</Text>
+                      </Pressable>
+                      <View style={{flex:0.04}}/>
+                    </View>
+                    <View style={{flex:0.0625 }}/>
+                    <View style={{flex:0.25, flexDirection:'row' }}>
+                      <View style={{flex:0.04}}/>
+                      <Pressable style={{flex:0.2, backgroundColor:'#FFEBA5', justifyContent:'center', alignItems:'center'}} onPress={() => {closeModal2(); openModal3(); setTargetYear(year-2);}}>
+                        <Text>{year-2}년</Text>
+                      </Pressable>
+                      <View style={{flex:0.04}}/>
+                      <Pressable style={{flex:0.2, backgroundColor:'#FFEBA5', justifyContent:'center', alignItems:'center'}} onPress={() => {closeModal2(); openModal3(); setTargetYear(year-1);}}>
+                        <Text>{year-1}년</Text>
+                      </Pressable>
+                      <View style={{flex:0.04}}/>
+                      <Pressable style={{flex:0.2, backgroundColor:'#FFEBA5', justifyContent:'center', alignItems:'center'}} onPress={() => {closeModal2(); openModal3(); setTargetYear(year);}}>
+                        <Text>{year}년</Text>
+                      </Pressable>
+                      <View style={{flex:0.04}}/>
+                      <Pressable style={{flex:0.2, backgroundColor:'#FFEBA5', justifyContent:'center', alignItems:'center'}} onPress={() => {closeModal2(); openModal3(); setTargetYear(year+1);}}>
+                        <Text>{year+1}년</Text>
+                      </Pressable>
+                      <View style={{flex:0.04}}/>
+                    </View>
+                    <View style={{flex:0.0625 }}/>
+                    <View style={{flex:0.25, flexDirection:'row' }}>
+                      <View style={{flex:0.04}}/>
+                      <Pressable style={{flex:0.2, backgroundColor:'#FFEBA5', justifyContent:'center', alignItems:'center'}} onPress={() => {closeModal2(); openModal3(); setTargetYear(year+2);}}>
+                        <Text>{year+2}년</Text>
+                      </Pressable>
+                      <View style={{flex:0.04}}/>
+                      <Pressable style={{flex:0.2, backgroundColor:'#FFEBA5', justifyContent:'center', alignItems:'center'}} onPress={() => {closeModal2(); openModal3(); setTargetYear(year+3);}}>
+                        <Text>{year+3}년</Text>
+                      </Pressable>
+                      <View style={{flex:0.04}}/>
+                      <Pressable style={{flex:0.2, backgroundColor:'#FFEBA5', justifyContent:'center', alignItems:'center'}} onPress={() => {closeModal2(); openModal3(); setTargetYear(year+4);}}>
+                        <Text>{year+4}년</Text>
+                      </Pressable>
+                      <View style={{flex:0.04}}/>
+                      <Pressable style={{flex:0.2, backgroundColor:'#FFEBA5', justifyContent:'center', alignItems:'center'}} onPress={() => {closeModal2(); openModal3(); setTargetYear(year+5);}}>
+                        <Text>{year+5}년</Text>
+                      </Pressable>
+                      <View style={{flex:0.04}}/>
+                    </View>
+                    <View style={{flex:0.0625 }}/>
+                  </View>
+                </Pressable>
+              </Modal> 
+
+              <Modal visible={visible3} setVisible={setVisible3} transparent={true} animationType={'fade'} >
+                <Pressable style={{ flex:1 , justifyContent:'center', alignItems:'center'}} onPress={closeModal3}>
+                  <View style={{ flex:0.5, backgroundColor:'white', justifyContent:'center', alignItems:'center', width:'90%'}}>
+                    <View style={{flex:0.0625 }}/>
+                    <View style={{flex:0.25, flexDirection:'row' }}>
+                      <View style={{flex:0.04}}/>
+                      <Pressable style={{flex:0.2, backgroundColor:'#FFEBA5', justifyContent:'center', alignItems:'center'}} onPress={() => {closeModal3(); setTargetMonth(1);}}>
+                        <Text>1월</Text>
+                      </Pressable>
+                      <View style={{flex:0.04}}/>
+                      <Pressable style={{flex:0.2, backgroundColor:'#FFEBA5', justifyContent:'center', alignItems:'center'}} onPress={() => {closeModal3(); setTargetMonth(2);}}>
+                        <Text>2월</Text>
+                      </Pressable>
+                      <View style={{flex:0.04}}/>
+                      <Pressable style={{flex:0.2, backgroundColor:'#FFEBA5', justifyContent:'center', alignItems:'center'}} onPress={() => {closeModal3(); setTargetMonth(3);}}>
+                        <Text>3월</Text>
+                      </Pressable>
+                      <View style={{flex:0.04}}/>
+                      <Pressable style={{flex:0.2,backgroundColor:'#FFEBA5', justifyContent:'center', alignItems:'center'}} onPress={() => {closeModal3(); setTargetMonth(4);}}>
+                        <Text>4월</Text>
+                      </Pressable>
+                      <View style={{flex:0.04}}/>
+                    </View>
+                    <View style={{flex:0.0625 }}/>
+                    <View style={{flex:0.25, flexDirection:'row' }}>
+                      <View style={{flex:0.04}}/>
+                      <Pressable style={{flex:0.2, backgroundColor:'#FFEBA5', justifyContent:'center', alignItems:'center'}} onPress={() => {closeModal3(); setTargetMonth(5);}}>
+                        <Text>5월</Text>
+                      </Pressable>
+                      <View style={{flex:0.04}}/>
+                      <Pressable style={{flex:0.2, backgroundColor:'#FFEBA5', justifyContent:'center', alignItems:'center'}} onPress={() => {closeModal3(); setTargetMonth(6);}}>
+                        <Text>6월</Text>
+                      </Pressable>
+                      <View style={{flex:0.04}}/>
+                      <Pressable style={{flex:0.2, backgroundColor:'#FFEBA5', justifyContent:'center', alignItems:'center'}} onPress={() => {closeModal3(); setTargetMonth(7);}}>
+                        <Text>7월</Text>
+                      </Pressable>
+                      <View style={{flex:0.04}}/>
+                      <Pressable style={{flex:0.2, backgroundColor:'#FFEBA5', justifyContent:'center', alignItems:'center'}} onPress={() => {closeModal3(); setTargetMonth(8);}}>
+                        <Text>8월</Text>
+                      </Pressable>
+                      <View style={{flex:0.04}}/>
+                    </View>
+                    <View style={{flex:0.0625 }}/>
+                    <View style={{flex:0.25, flexDirection:'row' }}>
+                      <View style={{flex:0.04}}/>
+                      <Pressable style={{flex:0.2, backgroundColor:'#FFEBA5', justifyContent:'center', alignItems:'center'}} onPress={() => {closeModal3(); setTargetMonth(9);}}>
+                        <Text>9월</Text>
+                      </Pressable>
+                      <View style={{flex:0.04}}/>
+                      <Pressable style={{flex:0.2, backgroundColor:'#FFEBA5', justifyContent:'center', alignItems:'center'}} onPress={() => {closeModal3(); setTargetMonth(10);}}>
+                        <Text>10월</Text>
+                      </Pressable>
+                      <View style={{flex:0.04}}/>
+                      <Pressable style={{flex:0.2, backgroundColor:'#FFEBA5', justifyContent:'center', alignItems:'center'}} onPress={() => {closeModal3(); setTargetMonth(11);}}>
+                        <Text>11월</Text>
+                      </Pressable>
+                      <View style={{flex:0.04}}/>
+                      <Pressable style={{flex:0.2, backgroundColor:'#FFEBA5', justifyContent:'center', alignItems:'center'}} onPress={() => {closeModal3(); setTargetMonth(12);}}>
+                        <Text>12월</Text>
+                      </Pressable>
+                      <View style={{flex:0.04}}/>
+                    </View>
+                    <View style={{flex:0.0625 }}/>
+                  </View>
+                </Pressable>
+              </Modal>
+
+
               
               <View style={{ flexDirection:'row', marginTop:'25%' }}>
                 <Image source={mm_positive} style={{ width:23, height:23 }} />
