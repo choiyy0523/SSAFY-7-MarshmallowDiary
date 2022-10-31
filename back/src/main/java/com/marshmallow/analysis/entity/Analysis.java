@@ -13,6 +13,7 @@ import java.util.UUID;
 
 @Entity
 @Getter
+@Setter
 @Builder
 @DynamicInsert
 @DynamicUpdate
@@ -32,14 +33,25 @@ public class Analysis {
     @JoinColumn(name = "diary_id")
     private Diary diary;
 
+    @Column(name = "sentiment" , nullable = false)
+    private String sentiment;
+
     @Column(name = "positive" , nullable = false)
-    private int positive;
+    private float positive;
 
     @Column(name = "negative" , nullable = false)
-    private int negative;
+    private float negative;
 
     @Column(name = "neutral" , nullable = false)
-    private int neutral;
+    private float neutral;
 
 
+    public Analysis create (Diary diary, float positive, float negative, float neutral){
+        return Analysis.builder()
+                .diary(diary)
+                .positive(positive)
+                .negative(negative)
+                .neutral(neutral)
+                .build();
+    }
 }
