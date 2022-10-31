@@ -1,5 +1,5 @@
-import React from 'react';
-import { Text, View, Image } from 'react-native';
+import React, { useState } from 'react';
+import { Text, View, Image, Modal, Button, Pressable } from 'react-native';
 import Footer from '../../components/component/Footer';
 import ChipYellow from '../../components/component/ChipYellow';
 import { Icon } from '@rneui/themed'; 
@@ -8,7 +8,8 @@ import PieChart from 'react-native-pie-chart';
 import mm_positive from '../../../assets/images/mm/mm_positive.png'
 import mm_neutral from '../../../assets/images/mm/mm_neutral.png'
 import mm_negative from '../../../assets/images/mm/mm_negative.png'
-
+import { Dialog } from '@rneui/themed'
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 
 
@@ -16,9 +17,18 @@ const Analysis = () => {
     var today = new Date();
 
     var year = today.getFullYear();
-    var month = ('0' + (today.getMonth() + 1)).slice(-2);
+    var month = ('0' + today.getMonth()).slice(-2); // 현재가 11월이면 10월을 기본으로 설정
+
+    const [targetYear, setTargetYear] = useState(year)
+    const [targetMonth, setTargetMonth] = useState(month)
     
-    
+    const [visible, setVisible] = useState(false)
+    const toggleModal = () => {
+      setVisible(true)
+    }
+    const closeModal = () => {
+      setVisible(false)
+    }
 
     const widthAndHeight = 225
     const series = [60, 25, 15] // axios로 받아와서 각각 7로 나눔 + 데이터 없으면 에러 뜨니 차트 말고 데이터 없음 띄워줘야함
@@ -39,8 +49,17 @@ const Analysis = () => {
               />
             </View>
             <View style={{ marginTop:'5%', alignItems:'center', flex: 1, marginRight:'3%' }}>
-              {/* <ChipYellow label='10월'/> */}
-              <Chip style={{ backgroundColor:'#FFEBA5' }}><Text>{year}년 {month}월</Text></Chip>
+              <Chip style={{ backgroundColor:'#FFEBA5' }} onPress={toggleModal}><Text>{targetYear}년 {targetMonth}월</Text></Chip>
+              <Modal visible={visible} setVisible={setVisible} transparent={true} animationType={'fade'}>
+                <Pressable style={{ flex:1 , justifyContent:'center', alignItems:'center'}} onPress={closeModal}>
+                  <View style={{ flex:0.3, backgroundColor:'white', justifyContent:'center', alignItems:'center', width:'80%', borderRadius:30 }}>
+                    <ChipYellow label='월별' />
+                    <View style={{ height:15 }}/>
+                    <ChipYellow label='전체' />
+                  </View>
+                </Pressable>
+              </Modal>
+              
               <View style={{ flexDirection:'row', marginTop:'25%' }}>
                 <Image source={mm_positive} style={{ width:23, height:23 }} />
                 <Text style={{fontSize:15, marginLeft:'3%'}}>긍정 {series[0]}%</Text>
