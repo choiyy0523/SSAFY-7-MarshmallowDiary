@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Text, View, Image, TouchableOpacity, Keyboard } from 'react-native'; 
-import { TextInput, TouchableWithoutFeedback } from 'react-native-gesture-handler';
+import { Text, View, Image, TouchableOpacity } from 'react-native';
+import { TextInput } from 'react-native-gesture-handler';
 import Footer from '../../components/component/Footer';
 import positive from '../../../assets/images/character/positive.png'
 import { useNavigation } from '@react-navigation/native';
@@ -10,27 +10,29 @@ import { Icon } from '@rneui/themed';
 
 // 검색어 초기 입력 시 약간 렉 있음
 
-const Search = ({navigation}) => {
-    const [inputs, setInputs] = useState({
-      name: '',
+
+const Search = ({ navigation }) => {
+  const [inputs, setInputs] = useState({
+    name: '',
+  });
+
+  const { keyword } = inputs;
+
+  const onChange = (keyvalue, e) => {
+    const { text } = e.nativeEvent
+    setInputs({
+      ...inputs,
+      [keyvalue]: text
     });
-
-    const { keyword } = inputs;
-
-    const onChange = (keyvalue, e) => {
-        const {text} = e.nativeEvent
-        setInputs({
-          ...inputs, 
-          [keyvalue]: text 
-        });
-      };
+  
 
     const onReset = () => {
       setInputs({
         keyword: '',
       })
     };
-    
+
+  
     return (
         <View style={{ backgroundColor:'#FFF9F8', flex:1 }}>
           <View style={{ backgroundColor:'#D9D9D9', height:60 }}>
@@ -61,9 +63,17 @@ const Search = ({navigation}) => {
             <Image source={positive} style={{ width:'25%', height:90 }} />
             <Text style={{ fontSize:17, marginTop:'5%'}}>다시 보고 싶은 일기가 있으신가요?</Text> 
           </View>
-          <Footer />
-        </View>
-    )
+          <TouchableOpacity style={{ fontWeight: 'bold', marginLeft: '3%' }} onPress={() => navigation.navigate('Result')}>
+            <Icon name='search' type='fontawesome' />
+          </TouchableOpacity>
+
+      <View style={{ alignItems: 'center', justifyContent: 'center', flex: 1 }}>
+        <Image source={positive} style={{ width: '25%', height: 90 }} />
+        <Text style={{ fontSize: 17, marginTop: '5%' }}>다시 보고 싶은 일기가 있으신가요?</Text>
+      </View>
+      <Footer />
+    </View>
+  )
 };
 
 export default Search;

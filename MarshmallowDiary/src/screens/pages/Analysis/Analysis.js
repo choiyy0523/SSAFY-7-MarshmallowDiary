@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, Image } from 'react-native'; 
+import { Text, View } from 'react-native';
 import Footer from '../../components/component/Footer';
 import ChipYellow from '../../components/component/ChipYellow';
 import { Icon } from '@rneui/themed'; 

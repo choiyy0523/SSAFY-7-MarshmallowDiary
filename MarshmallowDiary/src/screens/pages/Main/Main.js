@@ -1,5 +1,6 @@
 import React from 'react';
-import { Text, View, StyleSheet,TouchableOpacity, Image } from 'react-native'; 
+import { Button } from 'react-native';
+import { Text, View, SafeAreaView, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import Footer from '../../components/component/Footer';
 import { Calendar, CalendarList, Agenda, LocaleConfig } from 'react-native-calendars'
 import { Icon } from '@rneui/themed';
@@ -12,7 +13,6 @@ LocaleConfig.locales['fr'] = {
   today: 'Aujourd\'hui'
 };
 LocaleConfig.defaultLocale = 'fr';
-
 
 const Main = ({navigation}) => {
     var today = new Date();
