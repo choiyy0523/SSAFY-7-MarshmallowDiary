@@ -1,7 +1,10 @@
 package com.marshmallow.diary.service;
 
+import com.marshmallow.analysis.entity.Analysis;
+import com.marshmallow.analysis.repository.AnaylsisRepository;
 import com.marshmallow.diary.dto.DiaryRequest;
 import com.marshmallow.diary.dto.DiaryResponse;
+import com.marshmallow.diary.dto.MainDiaryInfo;
 import com.marshmallow.diary.entity.Diary;
 import com.marshmallow.diary.repository.DiaryRepository;
 import com.marshmallow.user.entity.User;
@@ -11,9 +14,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.temporal.TemporalAdjuster;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -22,6 +29,8 @@ public class DiaryService {
 
     private final DiaryRepository diaryRepository;
     private final UserRepository userRepository;
+
+    private final AnaylsisRepository anaylsisRepository;
 
     private final AwsS3Service awsS3Service;
     public DiaryResponse.Regist registDiary(DiaryRequest.Create request , List<MultipartFile> multipartFile){
@@ -32,6 +41,7 @@ public class DiaryService {
             List<String> photo = awsS3Service.uploadFile(multipartFile);
             photos = photo.toString();
         }
+        System.out.println(request.getDate()+" 입력으로 들어온 날짜");
         Diary diary = Diary.DiaryCreate(user, request, photos);
         UUID diaryId = diaryRepository.save(diary).getDiaryId();
         DiaryResponse.Regist response = DiaryResponse.Regist.build(diaryId);
@@ -70,5 +80,29 @@ public class DiaryService {
             diaryRepository.delete(diary.get());
             return DiaryResponse.Delete.build("true");
         }
+    }
+
+    public DiaryResponse.totalDiary searchTotalDiary(DiaryRequest.TotalDiary request) throws ParseException {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar cal = Calendar.getInstance();
+        cal.set(request.getYear(), request.getMonth()-1, 1); //월은 -1해줘야 해당월로 인식
+        int lastday = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
+        String st = request.getYear()+"-"+request.getMonth()+"-1";
+        String ed = request.getYear()+"-"+request.getMonth()+"-"+lastday;
+        Date startDay = dateFormat.parse(st);
+        Date endDay = dateFormat.parse(ed);
+        List<Diary> diaryList = diaryRepository.findAllByDateBetween(startDay, endDay);
+        List<MainDiaryInfo> list = new ArrayList<>();
+        for(Diary d : diaryList){
+            Optional<Analysis> analysis = anaylsisRepository.findByDiary_DiaryId(d.getDiaryId());
+            String emotion = "분석없음";
+            if(!analysis.isEmpty()){
+                emotion = analysis.get().getSentiment();
+            }
+            MainDiaryInfo mainDiaryInfo = MainDiaryInfo.MainDiaryInfoCreate(d.getDate(), d.getDiaryId(), emotion);
+            list.add(mainDiaryInfo);
+        }
+        return DiaryResponse.totalDiary.build(list);
+
     }
 }

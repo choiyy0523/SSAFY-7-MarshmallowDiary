@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.text.ParseException;
 import java.util.List;
 import java.util.UUID;
 
@@ -44,6 +45,12 @@ public class DiaryController {
             return ResponseEntity.status(404).body(result);
         }
         return ResponseEntity.ok().body(result);
+    }
+
+    @GetMapping("")
+    @ApiOperation(value="한달 다이어리 기록 조회", notes = "요청한 연도, 월에 맞는 다이어리 기록 조회 기능")
+    public ResponseEntity<?> totalDiary(@RequestBody DiaryRequest.TotalDiary request) throws ParseException {
+        return ResponseEntity.ok().body(diaryService.searchTotalDiary(request));
     }
 
 }

@@ -5,6 +5,7 @@ import com.marshmallow.diary.entity.Diary;
 import lombok.*;
 
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 public class DiaryResponse {
@@ -57,6 +58,19 @@ public class DiaryResponse {
         public static DiaryResponse.Delete build(String result){
             return Delete.builder()
                     .result(result)
+                    .build();
+        }
+    }
+
+    @Getter
+    @Builder
+    @NoArgsConstructor(access = AccessLevel.PRIVATE)
+    @AllArgsConstructor(access = AccessLevel.PRIVATE)
+    public static class totalDiary{
+        private List<MainDiaryInfo> list;
+        public static DiaryResponse.totalDiary build(List<MainDiaryInfo> result){
+            return totalDiary.builder()
+                    .list(result)
                     .build();
         }
     }
