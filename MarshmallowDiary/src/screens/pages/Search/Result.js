@@ -13,12 +13,21 @@ const Result = () => {
   const { keyword } = inputs;
 
   const onChange = (keyvalue, e) => {
+<<<<<<< Updated upstream
     const { text } = e.nativeEvent
     setInputs({
       ...inputs,
       [keyvalue]: text
     });
   };
+=======
+      const { text } = e.nativeEvent
+      setInputs({
+        ...inputs,
+        [keyvalue]: text
+      });
+    }
+>>>>>>> Stashed changes
 
   const onReset = () => {
     setInputs({
@@ -45,12 +54,12 @@ const Result = () => {
               <TouchableOpacity style={{ justifyContent: 'center' }} onPress={() => onReset()} >
                 <Icon name='highlight-off' type='maeterialicons' />
               </TouchableOpacity>
+<<<<<<< Updated upstream
             }
 
+=======
+>>>>>>> Stashed changes
           </View>
-          <TouchableOpacity style={{ fontWeight: 'bold', marginLeft: '3%' }} onPress={() => navigation.navigate('Result')}>
-            <Icon name='search' type='fontawesome' />
-          </TouchableOpacity>
         </View>
       </View>
 

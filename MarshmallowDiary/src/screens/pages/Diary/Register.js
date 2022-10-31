@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, TextInput, Text, View, Button } from 'react-native'
+import Footer from '../../components/component/Footer';
 
 function Register() {
   return (
@@ -8,6 +9,7 @@ function Register() {
       <TextInput placeholder="제목을 입력하세요." style={styles.titleInput} />
       <TextInput placeholder="오늘의 기록을 남겨보세요." style={styles.diaryInput} />
       <Button title='버튼' />
+      <Footer />
     </View>
   );
 }
