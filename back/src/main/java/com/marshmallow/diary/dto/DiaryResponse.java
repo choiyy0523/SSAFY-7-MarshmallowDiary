@@ -34,7 +34,8 @@ public class DiaryResponse {
         private String content;
         private int weather;
         private String[] photo;
-        @JsonFormat(pattern = "yyyy-MM-dd" )
+
+        @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+9")
         private Date date;
 
         public static DiaryResponse.Detail build(Diary diary, String[] photo){

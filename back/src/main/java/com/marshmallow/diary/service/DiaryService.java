@@ -26,9 +26,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.time.temporal.TemporalAdjuster;
 import java.util.*;
 
 @Service
@@ -117,9 +114,16 @@ public class DiaryService {
         if(!diary.isPresent()){
             return null;
         }
+        String[] photos = null;
         String photo = diary.get().getPhoto();
-        photo = photo.substring(1, photo.length()-1);
-        String[] photos = photo.split(", ");
+        System.out.println(photo+" photo");
+        if(photo != null){
+            photo = photo.substring(1, photo.length()-1);
+            photos = photo.split(", ");
+        }
+        System.out.println(diary.get().getDate()+" 날짜");
+        System.out.println(diary.get().getTitle()+" 타이틀");
+
         return DiaryResponse.Detail.build(diary.get(), photos);
     }
 
@@ -163,3 +167,4 @@ public class DiaryService {
 
     }
 }
+
