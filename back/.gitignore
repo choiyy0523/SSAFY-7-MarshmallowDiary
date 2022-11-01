@@ -38,3 +38,5 @@ out/
 
 ### back ###
 **/application-secure.properties
+**/dependencies/*
+**/application/*
