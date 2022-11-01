@@ -25,7 +25,8 @@ public class DiaryRequest {
         @AllArgsConstructor(access = AccessLevel.PRIVATE)
         @ToString
         public static class GetDiary{
-                private UUID diaryId;
+                @JsonFormat(pattern = "yyyy-MM-dd" )
+                private Date date;
         }
 
         @Getter
