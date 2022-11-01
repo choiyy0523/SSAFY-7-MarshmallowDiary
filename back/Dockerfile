@@ -1,11 +1,10 @@
-# FROM openjdk:11-alpine as builder
 FROM openjdk:11-jdk as builder
 WORKDIR application
-ARG JAR_FILE=build/libs/*.jar
+ARG JAR_FILE=back/build/libs/*.jar
 COPY ${JAR_FILE} application.jar
 RUN java -Djarmode=layertools -jar application.jar extract 
 
-FROM openjdk:8-jdk-alpine
+FROM openjdk:11-jdk
 WORKDIR application
 ENV port 9090
 ENV spring.profiles.active local
