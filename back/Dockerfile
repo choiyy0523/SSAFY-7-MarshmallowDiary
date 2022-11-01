@@ -1,4 +1,5 @@
 FROM openjdk:11-jdk as builder
+RUN apt-get update
 RUN apt-get install dos2unix
 RUN dos2unix ./gradlew
 RUN ./gradlew clean build
