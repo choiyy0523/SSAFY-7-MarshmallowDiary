@@ -6,12 +6,14 @@ import com.marshmallow.diary.service.DiaryService;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.configurationprocessor.json.JSONException;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -29,10 +31,10 @@ public class DiaryController {
         return ResponseEntity.ok().body(diaryService.registDiary(diary, photos));
     }
 
-    @GetMapping("/detail/{diaryId}")
-    @ApiOperation(value="다이어리 조회", notes = "diaryId로 해당 다이어리 내용 조회하는 기능")
-    public ResponseEntity<DiaryResponse.Detail> detailDiary(@PathVariable("diaryId") UUID diaryId) {
-        DiaryResponse.Detail diaryInfo = diaryService.getDetailDiary(diaryId);
+    @GetMapping("/detail/{date}")
+    @ApiOperation(value="다이어리 조회", notes = "date로 해당 다이어리 내용 조회하는 기능")
+    public ResponseEntity<DiaryResponse.Detail> detailDiary(@PathVariable("date") @DateTimeFormat(pattern="yyyy-MM-dd") Date date) {
+        DiaryResponse.Detail diaryInfo = diaryService.getDetailDiary(date);
         if(diaryInfo == null){
             return ResponseEntity.status(404).body(diaryInfo);
         }
@@ -40,9 +42,9 @@ public class DiaryController {
     }
 
     @PostMapping("/delete")
-    @ApiOperation(value="다이어리 삭제", notes = "diaryId로 해당 다이어리 삭제하는 기능")
+    @ApiOperation(value="다이어리 삭제", notes = "date 로 해당 다이어리 삭제하는 기능")
     public ResponseEntity<?> deleteDiary(@RequestBody DiaryRequest.GetDiary request) {
-        DiaryResponse.Delete result = diaryService.delete(request.getDiaryId());
+        DiaryResponse.Delete result = diaryService.delete(request);
         if(result.getResult().equals("false")){
             return ResponseEntity.status(404).body(result);
         }

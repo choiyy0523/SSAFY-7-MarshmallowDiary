@@ -17,9 +17,7 @@ public interface DiaryRepository extends JpaRepository<Diary, UUID> {
     List<Diary> findAllByUser_UserIdAndDateBetween(UUID userId,Date st, Date ed);
 
 
-
-
-
+    Optional<Diary> findByUser_UserIdAndDate(UUID userId, Date date);
 }
 
 
