@@ -1,6 +1,5 @@
 FROM openjdk:11-jdk as builder
 WORKDIR application
-COPY ./gradlew ./gradlew
 RUN chmod +x ./gradlew
 RUN ./gradlew clean build
 ARG JAR_FILE=build/libs/*.jar
