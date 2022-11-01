@@ -1,8 +1,5 @@
 FROM openjdk:11-jdk as builder
 WORKDIR application
-#RUN dos2unix ./gradlew
-#RUN chmod +x ./gradlew
-#RUN ./gradlew clean build
 ARG JAR_FILE=build/libs/*.jar
 COPY ${JAR_FILE} application.jar
 RUN java -Djarmode=layertools -jar application.jar extract # --destination
