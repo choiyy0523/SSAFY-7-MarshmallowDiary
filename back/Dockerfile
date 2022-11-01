@@ -1,5 +1,5 @@
 FROM openjdk:11-jdk as builder
-RUN chmod +x ./gradlew
+RUN dos2unix ./gradlew
 RUN ./gradlew clean build
 WORKDIR application
 ARG JAR_FILE=build/libs/*.jar
