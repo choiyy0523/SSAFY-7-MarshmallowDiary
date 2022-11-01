@@ -144,6 +144,11 @@ public class DiaryService {
     }
 
     public DiaryResponse.totalDiary searchTotalDiary(DiaryRequest.TotalDiary request) throws ParseException {
+        /*
+            userId 토큰에서 찾도록 수정해야 함
+         */
+        UUID userId = UUID.fromString("18343747-03f9-414f-b7f2-30090b8954e8");
+
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Calendar cal = Calendar.getInstance();
         cal.set(request.getYear(), request.getMonth()-1, 1); //월은 -1해줘야 해당월로 인식
@@ -152,7 +157,7 @@ public class DiaryService {
         String ed = request.getYear()+"-"+request.getMonth()+"-"+lastday;
         Date startDay = dateFormat.parse(st);
         Date endDay = dateFormat.parse(ed);
-        List<Diary> diaryList = diaryRepository.findAllByDateBetween(startDay, endDay);
+        List<Diary> diaryList = diaryRepository.findAllByUser_UserIdAndDateBetween(userId,startDay, endDay);
         List<MainDiaryInfo> list = new ArrayList<>();
         for(Diary d : diaryList){
             Optional<Analysis> analysis = anaylsisRepository.findByDiary_DiaryId(d.getDiaryId());
