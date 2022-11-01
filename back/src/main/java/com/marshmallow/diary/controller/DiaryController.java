@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
+
 
 @RequiredArgsConstructor
 @RestController
@@ -55,6 +55,12 @@ public class DiaryController {
     @ApiOperation(value="한달 다이어리 기록 조회", notes = "요청한 연도, 월에 맞는 다이어리 기록 조회 기능")
     public ResponseEntity<?> totalDiary(@RequestBody DiaryRequest.TotalDiary request) throws ParseException {
         return ResponseEntity.ok().body(diaryService.searchTotalDiary(request));
+    }
+
+    @PostMapping("/search")
+    @ApiOperation(value="검색 기록 조회", notes = "키워드로 다이어리 검색")
+    public ResponseEntity<DiaryResponse.SearchResponse> searchKeyword(@RequestBody DiaryRequest.Search request) throws ParseException {
+        return ResponseEntity.ok().body(diaryService.searchKeyword(request));
     }
 
 }

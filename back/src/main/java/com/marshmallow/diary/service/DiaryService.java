@@ -4,6 +4,7 @@ import com.marshmallow.analysis.entity.Analysis;
 import com.marshmallow.analysis.repository.AnaylsisRepository;
 import com.marshmallow.diary.dto.DiaryRequest;
 import com.marshmallow.diary.dto.DiaryResponse;
+import com.marshmallow.diary.dto.DiarySearch;
 import com.marshmallow.diary.dto.MainDiaryInfo;
 import com.marshmallow.diary.entity.Diary;
 import com.marshmallow.diary.repository.DiaryRepository;
@@ -182,5 +183,64 @@ public class DiaryService {
         return DiaryResponse.totalDiary.build(list);
 
     }
+
+    public DiaryResponse.SearchResponse searchKeyword(DiaryRequest.Search request) {
+        /*
+            userId 토큰에서 찾도록 수정해야 함
+         */
+        UUID userId = UUID.fromString("18343747-03f9-414f-b7f2-30090b8954e8");
+        List<Diary> list = diaryRepository.findAllByUser_UserIdAndTitleContainingOrContentContaining(userId, request.getKeyword(), request.getKeyword());
+        List<DiarySearch> response = new ArrayList<>();
+        for(int i = 0; i < list.size(); i++){
+            Diary d = list.get(i);
+            String title = this.cutSearchKeyword(d.getTitle(), request.getKeyword(), 2, 10);
+            String content = this.cutSearchKeyword(d.getContent(), request.getKeyword(), 10, 20);
+            String[] photos = null;
+            String photo = d.getPhoto();
+            if(photo != null){
+                photo = photo.substring(1, photo.length()-1);
+                photos = photo.split(", ");
+            }
+            String mainphoto = null;
+            if(photos != null){
+                mainphoto = photos[0];
+            }
+            DiarySearch diarySearch = DiarySearch.DiarySearchCreate(d.getDate(), title, content, mainphoto);
+            response.add(diarySearch);
+
+        }
+
+        return DiaryResponse.SearchResponse.build(response);
+    }
+
+    private String cutSearchKeyword(String text, String keyword,int leftright, int size){
+        String response = null;
+        if(text.contains(keyword)){
+            int st = text.indexOf(keyword);
+            if(st < leftright){
+                if(text.length() > st+keyword.length()+leftright){
+                    response = text.substring(0, st+keyword.length()+leftright);
+                }else{
+                    response = text.substring(0, text.length());
+                }
+            }else{
+                if(text.length() > st+keyword.length()+leftright){
+                    response = text.substring(st-leftright, st+keyword.length()+leftright);
+                }else{
+                    response = text.substring(st-leftright, text.length());
+                }
+            }
+
+        }else{
+            if(text.length() > size){
+                response = text.substring(0, size);
+            }else{
+                response = text;
+            }
+        }
+
+        return response;
+    }
+
 }
 
