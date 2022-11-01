@@ -55,8 +55,9 @@ tasks.named('test') {
 // build.gradle
 bootJar {
     mainClass = 'com.marshmallow.MarshmallowApplication'
-    baseName = 'marshmallow'
-    version = '0.0.1'
+    archivesBaseName = 'marshmallow'
+    archiveVersion = '0.0.1'
+    archiveFileName = 'marshmallow.jar'
     layered {
         includeLayerTools = true
     }
