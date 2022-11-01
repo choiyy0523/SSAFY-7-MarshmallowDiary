@@ -131,8 +131,12 @@ public class DiaryService {
         return DiaryResponse.Detail.build(diary.get(), photos);
     }
 
-    public DiaryResponse.Delete delete(UUID diaryId) {
-        Optional<Diary> diary = diaryRepository.findById(diaryId);
+    public DiaryResponse.Delete delete(DiaryRequest.GetDiary request) {
+        /*
+            userId 토큰에서 찾도록 수정해야 함
+         */
+        UUID userId = UUID.fromString("18343747-03f9-414f-b7f2-30090b8954e8");
+        Optional<Diary> diary = diaryRepository.findByUser_UserIdAndDate(userId, request.getDate());
         if(!diary.isPresent()){
             return DiaryResponse.Delete.build("false");
         }else{
@@ -142,6 +146,9 @@ public class DiaryService {
             for(int i = 0; i < photos.length; i++){
                 awsS3Service.deleteFile(photos[i]);
             }
+            /*
+            분석결과 지우는 코드 필요함
+             */
             diaryRepository.delete(diary.get());
             return DiaryResponse.Delete.build("true");
         }
@@ -169,7 +176,7 @@ public class DiaryService {
             if(!analysis.isEmpty()){
                 emotion = analysis.get().getSentiment();
             }
-            MainDiaryInfo mainDiaryInfo = MainDiaryInfo.MainDiaryInfoCreate(d.getDate(), d.getDiaryId(), emotion);
+            MainDiaryInfo mainDiaryInfo = MainDiaryInfo.MainDiaryInfoCreate(d.getDate(), emotion);
             list.add(mainDiaryInfo);
         }
         return DiaryResponse.totalDiary.build(list);

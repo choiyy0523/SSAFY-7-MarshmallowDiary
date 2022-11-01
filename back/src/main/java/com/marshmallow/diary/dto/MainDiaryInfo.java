@@ -14,13 +14,11 @@ import java.util.UUID;
 @Setter
 public class MainDiaryInfo {
     private Date day;
-    private UUID diaryId;
     private String emotion;
 
-    public static MainDiaryInfo MainDiaryInfoCreate(Date day, UUID diaryId, String emotion){
+    public static MainDiaryInfo MainDiaryInfoCreate(Date day,  String emotion){
         return MainDiaryInfo.builder()
                 .day(day)
-                .diaryId(diaryId)
                 .emotion(emotion)
                 .build();
     }
