@@ -57,5 +57,8 @@ bootJar {
     mainClass = 'com.marshmallow.MarshmallowApplication'
     baseName = 'marshmallow'
     version = '0.0.1'
+    layered {
+        includeLayerTools = true
+    }
 }
 
