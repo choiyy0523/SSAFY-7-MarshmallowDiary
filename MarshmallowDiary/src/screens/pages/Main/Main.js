@@ -30,13 +30,13 @@ const Main = ({ navigation }) => {
         <Calendar
           style={{ marginTop: '5%' }}
           monthFormat={'yyyy년 MM월'}
-          markedDates={{
-            '2022-10-25': { marked: true, dotcolor: '#91C788' },
-            '2022-10-26': { marked: true, dotColor: '#FBC687' },
-            '2022-10-27': { marked: true, dotColor: '#F38181' },
-            // '2022-10-28': {selected:true, selectedColor:'#D9D9D9', color:'black'},
-            dateString: { selected: true, selectedColor: '#D9D9D9', color: 'black' }
-          }}
+          // markedDates={{
+          //   '2022-10-25': { marked: true, dotcolor: '#91C788' },
+          //   '2022-10-26': { marked: true, dotColor: '#FBC687' },
+          //   '2022-10-27': { marked: true, dotColor: '#F38181' },
+          //   // '2022-10-28': {selected:true, selectedColor:'#D9D9D9', color:'black'},
+          //   dateString: { selected: true, selectedColor: '#D9D9D9', color: 'black' }
+          // }}
           // markingType={'custom'}
           // markedDates={{
           //   '2022-10-28' : {
@@ -72,7 +72,7 @@ const Main = ({ navigation }) => {
         </View>
       </View>
       <View style={{ flex: 0.1 }}>
-        <Button title='로그인' onPress={() => navigation.navigate('Login')} />
+        
       </View>
       <Footer />
     </View>
