@@ -75,4 +75,17 @@ public class DiaryResponse {
         }
     }
 
+    @Getter
+    @Builder
+    @NoArgsConstructor(access = AccessLevel.PRIVATE)
+    @AllArgsConstructor(access = AccessLevel.PRIVATE)
+    public static class SearchResponse{
+        private List<DiarySearch> list;
+        public static DiaryResponse.SearchResponse build(List<DiarySearch> result){
+            return SearchResponse.builder()
+                    .list(result)
+                    .build();
+        }
+    }
+
 }

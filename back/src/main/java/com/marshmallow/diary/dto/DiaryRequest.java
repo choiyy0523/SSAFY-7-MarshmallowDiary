@@ -38,4 +38,12 @@ public class DiaryRequest {
                 private int month;
         }
 
+        @Getter
+        @NoArgsConstructor(access = AccessLevel.PRIVATE)
+        @AllArgsConstructor(access = AccessLevel.PRIVATE)
+        @ToString
+        public static class Search{
+                private String keyword;
+        }
+
 }
