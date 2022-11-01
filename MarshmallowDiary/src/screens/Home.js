@@ -10,6 +10,7 @@ const Home = ({ navigation }) => {
             <Button title='go to the list screen' onPress={() => navigation.navigate('List')} />
             <Button title='일기 조회' onPress={() => navigation.navigate('Detail')} />
             <Button title='일기 등록' onPress={() => navigation.navigate('Register')} />
+            <Button title='환경설정' onPress={() => navigation.navigate('Settings')} />
             <Button title='go to the list screen' onPress={() => navigation.navigate('List')} />
             <Button title='go to the main screen' onPress={() => navigation.navigate('Main')} />
         </View>

@@ -1,6 +1,6 @@
-import React from 'react'; W
+import React from 'react';
 import { Text, View, SafeAreaView } from 'react-native';
-import Privacy from '../>../components/component/Privacy.js'
+import Privacy from '../../components/component/Privacy'
 
 const Password = () => {
   return (
