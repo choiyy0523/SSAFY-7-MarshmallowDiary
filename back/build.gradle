@@ -33,6 +33,10 @@ dependencies {
     implementation group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.9.2'
     implementation 'org.projectlombok:lombok:1.18.22'
 
+    implementation group: 'org.javassist', name:'javassist', version: '3.15.0-GA'
+    implementation 'org.springframework.boot:spring-boot-configuration-processor'
+    implementation 'org.springframework.boot:spring-boot-gradle-plugin:2.5.0'
+
     compileOnly 'org.projectlombok:lombok'
     runtimeOnly 'mysql:mysql-connector-java'
     annotationProcessor 'org.projectlombok:lombok'
@@ -47,3 +51,11 @@ dependencies {
 tasks.named('test') {
     useJUnitPlatform()
 }
+
+// build.gradle
+bootJar {
+    mainClass = 'com.marshmallow.MarshmallowApplication'
+    baseName = 'marshmallow'
+    version = '0.0.1'
+}
+
