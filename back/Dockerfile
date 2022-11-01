@@ -1,5 +1,5 @@
 FROM openjdk:11-jdk as builder
-CMD ["./gradlew", "bootJar"]
+CMD ["./gradlew", "clean", "build"]
 WORKDIR application
 ARG JAR_FILE=build/libs/*.jar
 COPY ${JAR_FILE} application.jar
