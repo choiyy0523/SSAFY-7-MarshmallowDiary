@@ -4,11 +4,11 @@ import { Stack, Chip } from "@react-native-material/core";
 
 const ChipYellow = props => {
     return (
-        <SafeAreaView>
-          <Chip style={{ backgroundColor:'#FFEBA5', width:50, height:30 }}>
-            <Text>{props.label}</Text>
+        <View>
+          <Chip style={{ backgroundColor:'#FFEBA5', width: 75 , height:30, alignItems:'center' }}>
+            <Text style={{ fontSize:17 }} >{props.label}</Text>
           </Chip>
-        </SafeAreaView>
+        </View>
     )
 };
 

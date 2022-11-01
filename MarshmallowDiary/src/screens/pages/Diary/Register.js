@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { BackHandler, StyleSheet, TextInput, Alert, Text, View, Button, TouchableOpacity, Image } from 'react-native'
+import Footer from '../../components/component/Footer';
 import DayPicker from './DatePicker';
 import WeatherPicker from './WeatherPicker';
-import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
+import { launchImageLibrary } from 'react-native-image-picker';
 import CancleDialogs from '../../components/modal/Diary/Cancel'
+
 
 const ShowPicker = () => {
   //launchImageLibrary : 사용자 앨범 접근
@@ -40,6 +42,7 @@ function Register() {
       {/* 제목 */}
       <TextInput placeholder="제목을 입력하세요." style={styles.titleInput} />
 
+
       {/* 사진 첨부 */}
       <View style={styles.imageInput}>
         <TouchableOpacity onPress={ShowPicker}>
@@ -56,7 +59,10 @@ function Register() {
         multiline={true}
         style={styles.diaryInput}
       />
-    </View>
+
+      <Footer />
+
+    </View >
   )
 };
 
