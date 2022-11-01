@@ -15,11 +15,12 @@ public class DiaryResponse {
     @AllArgsConstructor(access = AccessLevel.PRIVATE)
     public static class Regist{
 
-        private UUID diaryId;
+        @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+9")
+        private Date date;
 
-        public static DiaryResponse.Regist build(UUID diaryId){
+        public static DiaryResponse.Regist build(Date date){
             return Regist.builder()
-                    .diaryId(diaryId)
+                    .date(date)
                     .build();
         }
     }
@@ -29,7 +30,6 @@ public class DiaryResponse {
     @NoArgsConstructor(access = AccessLevel.PRIVATE)
     @AllArgsConstructor(access = AccessLevel.PRIVATE)
     public static class Detail{
-        private UUID diaryId;
         private String title;
         private String content;
         private int weather;
@@ -40,7 +40,6 @@ public class DiaryResponse {
 
         public static DiaryResponse.Detail build(Diary diary, String[] photo){
             return Detail.builder()
-                    .diaryId(diary.getDiaryId())
                     .title(diary.getTitle())
                     .content(diary.getContent())
                     .weather(diary.getWeather())

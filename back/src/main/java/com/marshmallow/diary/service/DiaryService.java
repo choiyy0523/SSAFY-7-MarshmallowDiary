@@ -56,8 +56,8 @@ public class DiaryService {
         }
         System.out.println(request.getDate()+" 입력으로 들어온 날짜");
         Diary diary = Diary.DiaryCreate(user, request, photos);
-        UUID diaryId = diaryRepository.save(diary).getDiaryId();
-        DiaryResponse.Regist response = DiaryResponse.Regist.build(diaryId);
+        Diary saved = diaryRepository.save(diary);
+        DiaryResponse.Regist response = DiaryResponse.Regist.build(saved.getDate());
 
         // 분석 결과 저장
 
@@ -109,8 +109,12 @@ public class DiaryService {
 
     }
 
-    public DiaryResponse.Detail getDetailDiary(UUID diaryId) {
-        Optional<Diary> diary = diaryRepository.findById(diaryId);
+    public DiaryResponse.Detail getDetailDiary(Date date) {
+        /*
+            userId 토큰에서 찾도록 수정해야 함
+         */
+        UUID userId = UUID.fromString("18343747-03f9-414f-b7f2-30090b8954e8");
+        Optional<Diary> diary = diaryRepository.findByUser_UserIdAndDate(userId, date);
         if(!diary.isPresent()){
             return null;
         }

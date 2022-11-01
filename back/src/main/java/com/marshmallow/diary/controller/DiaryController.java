@@ -6,12 +6,14 @@ import com.marshmallow.diary.service.DiaryService;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.configurationprocessor.json.JSONException;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -29,10 +31,10 @@ public class DiaryController {
         return ResponseEntity.ok().body(diaryService.registDiary(diary, photos));
     }
 
-    @GetMapping("/detail/{diaryId}")
+    @GetMapping("/detail/{date}")
     @ApiOperation(value="다이어리 조회", notes = "diaryId로 해당 다이어리 내용 조회하는 기능")
-    public ResponseEntity<DiaryResponse.Detail> detailDiary(@PathVariable("diaryId") UUID diaryId) {
-        DiaryResponse.Detail diaryInfo = diaryService.getDetailDiary(diaryId);
+    public ResponseEntity<DiaryResponse.Detail> detailDiary(@PathVariable("date") @DateTimeFormat(pattern="yyyy-MM-dd") Date date) {
+        DiaryResponse.Detail diaryInfo = diaryService.getDetailDiary(date);
         if(diaryInfo == null){
             return ResponseEntity.status(404).body(diaryInfo);
         }
