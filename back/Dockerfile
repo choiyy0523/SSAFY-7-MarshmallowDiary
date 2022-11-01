@@ -1,5 +1,6 @@
 FROM openjdk:11-jdk as builder
 WORKDIR application
+COPY gradlew .
 RUN ./gradlew clean build
 ARG JAR_FILE=build/libs/*.jar
 COPY ${JAR_FILE} application.jar
