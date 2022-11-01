@@ -72,7 +72,7 @@ const Main = ({navigation}) => {
             </View>
           </View>
           <View style={{ flex:0.1 }}>
-
+            <Button title='로그인' onPress={() => navigation.navigate('Login')} />
           </View>
           <Footer />
         </View>

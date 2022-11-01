@@ -5,7 +5,7 @@ import { Stack, Chip } from "@react-native-material/core";
 const ChipYellow = props => {
     return (
         <View>
-          <Chip style={{ backgroundColor:'#FFEBA5', width: props.width , height:30 }}>
+          <Chip style={{ backgroundColor:'#FFEBA5', width: 75 , height:30, alignItems:'center' }}>
             <Text style={{ fontSize:17 }} >{props.label}</Text>
           </Chip>
         </View>
