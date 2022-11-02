@@ -9,4 +9,5 @@ import java.util.UUID;
 public interface UserRepository extends JpaRepository<User, UUID> {
     Optional<User> findBySocialId(String authId);
     User saveAndFlush(User entity);
+    Optional<User> findByUsername(String username);
 }
