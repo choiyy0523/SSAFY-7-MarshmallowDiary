@@ -4,6 +4,8 @@ import { Text, View, SafeAreaView, StyleSheet, TouchableOpacity, Image } from 'r
 import Footer from '../../components/component/Footer';
 import { Calendar, CalendarList, Agenda, LocaleConfig } from 'react-native-calendars'
 import { Icon } from '@rneui/themed';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import base64 from 'base-64'
 
 LocaleConfig.locales['fr'] = {
   monthNames: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
@@ -22,6 +24,17 @@ const Main = ({ navigation }) => {
   var day = ('0' + today.getDate()).slice(-2);
 
   var dateString = year + '-' + month + '-' + day;
+
+
+  AsyncStorage.getItem('token', (err, result) => {
+    const token = result;
+    console.log(token)
+  });
+  
+  AsyncStorage.getItem('password', (err, result) => {
+    const pw = result;
+    console.log(pw)
+  });
 
 
   return (

@@ -10,6 +10,7 @@ import Register from '../screens/pages/Diary/Register'
 import Remind from '../screens/pages/Diary/Remind'
 import Today from '../screens/pages/Diary/Today';
 import Login from '../screens/pages/Login/Login';
+import LoginCheck from '../screens/pages/Login/LoginCheck'
 import Password from '../screens/pages/Login/Password';
 import Main from '../screens/pages/Main/Main';
 import Result from '../screens/pages/Search/Result';
@@ -22,6 +23,7 @@ import PwReset from '../screens/pages/Settings/PwReset';
 import Settings from '../screens/pages/Settings/Settings';
 import Terms from '../screens/pages/Settings/Terms';
 import ResetCheck from '../screens/pages/Settings/ResetCheck';
+
 
 const Stack = createStackNavigator();
 
@@ -39,6 +41,7 @@ const StackNavigation = () => {
       <Stack.Screen name='Remind' component={Remind} />
       <Stack.Screen name='Today' component={Today} />
       <Stack.Screen name='Login' component={Login} />
+      <Stack.Screen name='LoginCheck' component={LoginCheck} />
       <Stack.Screen name='Password' component={Password} />
       <Stack.Screen name='Main' component={Main} />
       <Stack.Screen name='Result' component={Result} />

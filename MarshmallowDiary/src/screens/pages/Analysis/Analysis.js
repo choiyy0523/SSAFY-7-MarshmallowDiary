@@ -10,8 +10,8 @@ import mm_neutral from '../../../assets/images/mm/mm_neutral.png'
 import mm_negative from '../../../assets/images/mm/mm_negative.png'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
-const Analysis = () => {
 
+const Analysis = () => {
     var today = new Date();
 
     var year = today.getFullYear();
