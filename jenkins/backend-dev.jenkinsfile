@@ -1,37 +1,37 @@
 node {
-  stage ('git checkout') {
-   git branch: 'back', credentialsId: '${env.CREDENTIAL_ID}', url: 'https://lab.ssafy.com/s07-final/S07P31A303.git'
+  stage ("git checkout") {
+   git branch: "back", credentialsId: "${env.CREDENTIAL_ID}", url: "https://lab.ssafy.com/s07-final/S07P31A303.git"
   }
 
-  stage ('image prune') {
-      sh 'sudo docker image prune -a --force'
+  stage ("image prune") {
+      sh "sudo docker image prune -a --force"
   }
 
-	stage('kill previous container') {
-			sh 'sudo docker rm -f ${env.SPRING_CONTAINER_NAME}'
+	stage("kill previous container") {
+			sh "sudo docker rm -f ${env.SPRING_CONTAINER_NAME}"
 	}
   
-  stage('build jar') {
-      dir('back'){
-          sh 'chmod +x ./gradlew'
-          sh 'sudo ./gradlew clean build -x test'
+  stage("build jar") {
+      dir("back"){
+          sh "chmod +x ./gradlew"
+          sh "sudo ./gradlew clean build -x test"
       }
   }
 
-  stage ('save spring image') {
-  	sh 'sudo docker build --no-cache -t ${env.SPRING_IMAGE_NAME} back'
-		sh 'sudo docker save ${env.SPRING_IMAGE_NAME} > marshmallow.tar'
+  stage ("save spring image") {
+  	sh "sudo docker build --no-cache -t ${env.SPRING_IMAGE_NAME} back"
+		sh "sudo docker save ${env.SPRING_IMAGE_NAME} > marshmallow.tar"
   }
 
-  stage('deploy'){
-		sh 'sudo docker load -i marshmallow.tar'
-        sh 'sudo docker run -dit -p 80:80 -p ${env.SPRING_PORT}:${env.SPRING_PORT} --name ${env.SPRING_CONTAINER_NAME} ${env.SPRING_IMAGE_NAME}'
+  stage("deploy"){
+		sh "sudo docker load -i marshmallow.tar"
+        sh "sudo docker run -dit -p 80:80 -p ${env.SPRING_PORT}:${env.SPRING_PORT} --name ${env.SPRING_CONTAINER_NAME} ${env.SPRING_IMAGE_NAME}"
 		script {
-			  def NONE_CONTAINERS = sh(script: 'sudo docker images -f "dangling=true" -q', returnStdout:true)
+			  def NONE_CONTAINERS = sh(script: "sudo docker images -f \"dangling=true\" -q", returnStdout:true)
 			 // echo NONE_CONTAINERS
 			  if(!NONE_CONTAINERS.isEmpty()){
-			     // echo 'containers need to be deleted'
-			      sh 'sudo docker rmi -f $(sudo docker images -f "dangling=true" -q)'
+			     // echo "containers need to be deleted"
+			      sh "sudo docker rmi -f $(sudo docker images -f \"dangling=true\" -q)"
 			  }
 		}
 	}
