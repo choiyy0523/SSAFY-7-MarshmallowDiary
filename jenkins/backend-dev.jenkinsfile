@@ -28,10 +28,10 @@ node {
         sh "sudo docker run -dit -p 80:80 -p ${env.SPRING_PORT}:${env.SPRING_PORT} --name ${env.SPRING_CONTAINER_NAME} ${env.SPRING_IMAGE_NAME}"
 		script {
 			  def NONE_CONTAINERS = sh(script: "sudo docker images -f \"dangling=true\" -q", returnStdout:true)
-			 // echo NONE_CONTAINERS
+			  // echo NONE_CONTAINERS
 			  if(!NONE_CONTAINERS.isEmpty()){
-			     // echo "containers need to be deleted"
-			      sh "sudo docker rmi -f $(sudo docker images -f \"dangling=true\" -q)"
+			      // echo "containers need to be deleted"
+			      sh "sudo docker rmi -f \$(sudo docker images -f \"dangling=true\" -q)"
 			  }
 		}
 	}
