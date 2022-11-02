@@ -16,6 +16,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.boot.configurationprocessor.json.JSONObject;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -45,13 +46,11 @@ public class DiaryService {
 
     private final DiaryRepository diaryRepository;
     private final UserRepository userRepository;
-
     private final AnaylsisRepository anaylsisRepository;
-
     private final AwsS3Service awsS3Service;
     public DiaryResponse.Regist registDiary(DiaryRequest.Create request , List<MultipartFile> multipartFile) throws IOException, JSONException, AlreadyRegistDiary, CanNotRegistDiary {
 
-        User user = userRepository.findById(UUID.fromString("18343747-03f9-414f-b7f2-30090b8954e8")).get();
+        User user = this.getCurrentUser();
         Optional<Diary> checkdiary = diaryRepository.findByUser_UserIdAndDate(user.getUserId(), request.getDate());
         if(checkdiary.isPresent()){
             throw new AlreadyRegistDiary();
@@ -120,11 +119,8 @@ public class DiaryService {
     }
 
     public DiaryResponse.Detail getDetailDiary(Date date) {
-        /*
-            userId 토큰에서 찾도록 수정해야 함
-         */
-        UUID userId = UUID.fromString("18343747-03f9-414f-b7f2-30090b8954e8");
-        Optional<Diary> diary = diaryRepository.findByUser_UserIdAndDate(userId, date);
+        User user = this.getCurrentUser();
+        Optional<Diary> diary = diaryRepository.findByUser_UserIdAndDate(user.getUserId(), date);
         if(!diary.isPresent()){
             return null;
         }
@@ -142,11 +138,8 @@ public class DiaryService {
     }
 
     public DiaryResponse.Delete delete(DiaryRequest.GetDiary request) {
-        /*
-            userId 토큰에서 찾도록 수정해야 함
-         */
-        UUID userId = UUID.fromString("18343747-03f9-414f-b7f2-30090b8954e8");
-        Optional<Diary> diary = diaryRepository.findByUser_UserIdAndDate(userId, request.getDate());
+        User user = this.getCurrentUser();
+        Optional<Diary> diary = diaryRepository.findByUser_UserIdAndDate(user.getUserId(), request.getDate());
         if(!diary.isPresent()){
             return DiaryResponse.Delete.build("false");
         }else{
@@ -167,11 +160,7 @@ public class DiaryService {
     }
 
     public DiaryResponse.totalDiary searchTotalDiary(DiaryRequest.TotalDiary request) throws ParseException {
-        /*
-            userId 토큰에서 찾도록 수정해야 함
-         */
-        UUID userId = UUID.fromString("18343747-03f9-414f-b7f2-30090b8954e8");
-
+        User user = this.getCurrentUser();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Calendar cal = Calendar.getInstance();
         cal.set(request.getYear(), request.getMonth()-1, 1); //월은 -1해줘야 해당월로 인식
@@ -180,7 +169,7 @@ public class DiaryService {
         String ed = request.getYear()+"-"+request.getMonth()+"-"+lastday;
         Date startDay = dateFormat.parse(st);
         Date endDay = dateFormat.parse(ed);
-        List<Diary> diaryList = diaryRepository.findAllByUser_UserIdAndDateBetween(userId,startDay, endDay);
+        List<Diary> diaryList = diaryRepository.findAllByUser_UserIdAndDateBetween(user.getUserId(),startDay, endDay);
         List<MainDiaryInfo> list = new ArrayList<>();
         for(Diary d : diaryList){
             Optional<Analysis> analysis = anaylsisRepository.findByDiary_DiaryId(d.getDiaryId());
@@ -196,11 +185,8 @@ public class DiaryService {
     }
 
     public DiaryResponse.SearchResponse searchKeyword(DiaryRequest.Search request) {
-        /*
-            userId 토큰에서 찾도록 수정해야 함
-         */
-        UUID userId = UUID.fromString("18343747-03f9-414f-b7f2-30090b8954e8");
-        List<Diary> list = diaryRepository.findAllByUser_UserIdAndTitleContainingOrContentContaining(userId, request.getKeyword(), request.getKeyword());
+        User user = this.getCurrentUser();
+        List<Diary> list = diaryRepository.findAllByUser_UserIdAndTitleContainingOrContentContaining(user.getUserId(), request.getKeyword(), request.getKeyword());
         List<DiarySearch> response = new ArrayList<>();
         for(int i = 0; i < list.size(); i++){
             Diary d = list.get(i);
@@ -252,6 +238,15 @@ public class DiaryService {
 
         return response;
     }
+
+    private User getCurrentUser() {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        return userRepository.findByUsername(username)
+                .orElseThrow(() -> new RuntimeException("Error : User is not found"));
+    }
+
+
+
 
 }
 
