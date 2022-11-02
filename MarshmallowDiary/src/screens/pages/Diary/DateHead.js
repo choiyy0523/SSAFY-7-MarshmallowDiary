@@ -22,10 +22,9 @@ function DateHead({ date }) {
 const styles = StyleSheet.create({
   block: {
     padding: 16,
-    backgroundColor: '#fff9f8',
+    // backgroundColor: '#fff9f8',
   },
   dateText: {
-    fontFamily: 'GangwonEduAllBold',
     fontSize: 20,
     color: '#525252',
   },

@@ -10,6 +10,7 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@react-native-async-storage/async-storage": "^1.17.10",
     "@react-native-community/art": "^1.2.0",
     "@react-native-community/masked-view": "^0.1.11",
     "@react-native-material/core": "^1.3.7",
@@ -36,7 +37,8 @@
     "react-native-screens": "^3.18.2",
     "react-native-snap-carousel": "^3.9.1",
     "react-native-vector-icons": "^9.2.0",
-    "rnpm": "^1.5.1"
+    "rnpm": "^1.5.1",
+    "styled-components": "^5.3.6"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",

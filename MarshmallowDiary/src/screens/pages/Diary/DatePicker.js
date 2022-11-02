@@ -44,10 +44,9 @@ function DayPicker() {
 const styles = StyleSheet.create({
   block: {
     padding: 16,
-    backgroundColor: '#fff9f8',
+    // backgroundColor: '#fff9f8',
   },
   changeDay: {
-    fontFamily: 'GangwonEduAllBold',
     fontSize: 18,
     color: '#525252',
   },

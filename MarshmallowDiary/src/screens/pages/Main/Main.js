@@ -25,7 +25,7 @@ const Main = ({ navigation }) => {
 
 
   return (
-    <View style={{ backgroundColor: '#FFF9F8', flex: 1 }}>
+    <View style={{ flex: 1 }}>
       <View style={{ flex: 1 }}>
         <Calendar
           style={{ marginTop: '5%' }}

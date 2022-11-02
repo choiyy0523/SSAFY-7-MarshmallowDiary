@@ -113,14 +113,14 @@ const styles = StyleSheet.create({
     marginVertical: -10,
   },
   buttonText: {
-    fontFamily: 'GangwonEduAllBold',
+    // fontFamily: 'GangwonEduAllBold',
     fontSize: 15,
     fontWeight: 'Bold'
   },
   titleInput: {
     fontSize: 15,
     paddingVertical: 8,
-    fontFamily: 'GangwonEduAllBold',
+    // fontFamily: 'GangwonEduAllBold',
     height: 50,
     paddingHorizontal: 16,
     justifyContent: 'flex-start',
@@ -151,7 +151,7 @@ const styles = StyleSheet.create({
   diaryInput: {
     fontSize: 15,
     paddingVertical: 15,
-    fontFamily: 'GangwonEduAllLight',
+    // fontFamily: 'GangwonEduAllLight',
     height: 250,
     paddingHorizontal: 16,
     justifyContent: 'flex-start',

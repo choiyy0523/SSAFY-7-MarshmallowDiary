@@ -4,9 +4,10 @@ import Privacy from '../../components/component/Privacy'
 
 const Password = () => {
   return (
-    <SafeAreaView style={{ backgroundColor: '#FFF9F8', flex: 1 }}>
+    // <SafeAreaView style={{ backgroundColor: '#FFF9F8', flex: 1 }}>
+    <SafeAreaView style={{ flex: 1 }}>
       <Privacy />
-    </SafeAreaView>
+    </SafeAreaView >
   )
 };
 
