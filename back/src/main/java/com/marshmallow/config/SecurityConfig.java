@@ -22,7 +22,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 public class SecurityConfig {
     @Autowired
-    JwtTokenProvider jwtTokenProvider;
+    JwtTokenProvider tokenProvider;
     @Autowired
     UserDetailsService userDetailsService;
     @Autowired
@@ -40,13 +40,13 @@ public class SecurityConfig {
                 .csrf().disable()
                 .cors().and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-//                .formLogin().disable()
 
-                .addFilterBefore(new JwtFilter(), UsernamePasswordAuthenticationFilter.class)
-                .authorizeRequests().anyRequest().permitAll()
+                .addFilterBefore(new JwtFilter(tokenProvider), UsernamePasswordAuthenticationFilter.class)
+                .authorizeRequests()
+                .antMatchers("/diary/**").authenticated()
+                .antMatchers("/analysis/**").authenticated()
                 .and()
                 .build();
-//                .addFilter(new AuthenticationFilter(configuration.getAuthenticationManager(), jwtTokenProvider)).build();
     }
     @Bean
     AuthenticationManager authenticationManager() throws Exception {
