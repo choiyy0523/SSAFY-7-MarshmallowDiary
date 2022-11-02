@@ -1,10 +1,7 @@
 package com.marshmallow.user.entity;
 
 import lombok.*;
-import org.hibernate.annotations.DynamicInsert;
-import org.hibernate.annotations.DynamicUpdate;
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Type;
+import org.hibernate.annotations.*;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -30,9 +27,20 @@ public class User {
     @Column(name = "user_id")
     private UUID userId;
 
-    @Column(name = "user_name")
-    private String userName;
+    @Column(name = "username")
+    private String username;
+
+    @Column(name = "nickname")
+    private String nickname;
 
     @Column(name = "social_id")
     private String socialId;
+
+    @Column(name = "password")
+//    @ColumnDefault("'pwd'")
+    private String password;
+
+    @Column(name = "role")
+    @ColumnDefault("'ROLE_USER'")
+    private String role;
 }
