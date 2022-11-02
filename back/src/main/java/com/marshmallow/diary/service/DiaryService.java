@@ -8,6 +8,8 @@ import com.marshmallow.diary.dto.DiarySearch;
 import com.marshmallow.diary.dto.MainDiaryInfo;
 import com.marshmallow.diary.entity.Diary;
 import com.marshmallow.diary.repository.DiaryRepository;
+import com.marshmallow.exception.AlreadyRegistDiary;
+import com.marshmallow.exception.CanNotRegistDiary;
 import com.marshmallow.user.entity.User;
 import com.marshmallow.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -47,9 +49,16 @@ public class DiaryService {
     private final AnaylsisRepository anaylsisRepository;
 
     private final AwsS3Service awsS3Service;
-    public DiaryResponse.Regist registDiary(DiaryRequest.Create request , List<MultipartFile> multipartFile) throws IOException, JSONException {
+    public DiaryResponse.Regist registDiary(DiaryRequest.Create request , List<MultipartFile> multipartFile) throws IOException, JSONException, AlreadyRegistDiary, CanNotRegistDiary {
 
         User user = userRepository.findById(UUID.fromString("18343747-03f9-414f-b7f2-30090b8954e8")).get();
+        Optional<Diary> checkdiary = diaryRepository.findByUser_UserIdAndDate(user.getUserId(), request.getDate());
+        if(checkdiary.isPresent()){
+            throw new AlreadyRegistDiary();
+        }
+        if(request.getTitle() == null || request.getContent() == null || request.getDate() == null || request.getWeather() == 0){
+            throw new CanNotRegistDiary();
+        }
         String photos = null;
         if(multipartFile != null){
             List<String> photo = awsS3Service.uploadFile(multipartFile);
@@ -142,10 +151,12 @@ public class DiaryService {
             return DiaryResponse.Delete.build("false");
         }else{
             String photo = diary.get().getPhoto();
-            photo = photo.substring(1, photo.length()-1);
-            String[] photos = photo.split(", ");
-            for(int i = 0; i < photos.length; i++){
-                awsS3Service.deleteFile(photos[i]);
+            if(photo != null){
+                photo = photo.substring(1, photo.length()-1);
+                String[] photos = photo.split(", ");
+                for(int i = 0; i < photos.length; i++){
+                    awsS3Service.deleteFile(photos[i]);
+                }
             }
             /*
             분석결과 지우는 코드 필요함
