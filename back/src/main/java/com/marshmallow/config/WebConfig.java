@@ -11,21 +11,10 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOrigins("http://localhost:9090", "http://k7a303.p.ssafy.io")
+                .allowedOrigins("http://localhost:9090", "http://k7a303.p.ssafy.io:9090", "https://www.marshmallowdiary.com")
                 .allowedMethods("GET", "POST")
                 .allowedHeaders("*")
                 .allowCredentials(true)
                 .maxAge(3600);
     }
-
-
-//    @Autowired
-//    private JWTInterceptor jwtInterceptor;
-//
-//    @Override
-//    public void addInterceptors(InterceptorRegistry registry) {
-//        registry.addInterceptor(jwtInterceptor)
-//                .addPathPatterns("/**").
-////                .excludePathPatterns("");
-//    }
 }

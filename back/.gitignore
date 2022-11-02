@@ -38,5 +38,7 @@ out/
 
 ### back ###
 **/application-secure.properties
-**/dependencies/*
-**/application/*
+
+/dependencies/
+/application/
+/spring-boot-loader/

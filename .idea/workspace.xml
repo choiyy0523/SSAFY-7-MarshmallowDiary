@@ -6,15 +6,58 @@
   <component name="ChangeListManager">
     <list default="true" id="7b1ca06a-03f9-4914-a961-b3046016f9ec" name="Changes" comment="# [#Issue Number] type: 제목&#10;# [#Issue Number] init: 초기 설정 (환경 설정 등)&#10;# [#Issue Number] feat: 기능 (새로운 기능)&#10;# [#Issue Number] fix: 버그 (버그 수정)&#10;# [#Issue Number] refactor: 리팩토링&#10;# [#Issue Number] docs: 문서 (문서 추가, 수정, 삭제)&#10;# [#Issue Number] test: 테스트 (테스트 코드 추가, 수정, 삭제: 비즈니스 로직에 변경 없음)&#10;# [#Issue Number] chore: 기타 변경사항 (빌드 스크립트 수정 등)&#10;# —————————&#10;#     제목 끝에 마침표(.) 금지&#10;#     제목과 본문을 한 줄 띄워 분리하기&#10;#     본문은 “어떻게” 보다 “무엇을“, “왜”를 설명한다.&#10;# —————————&#10;######## 제목은 한 줄에 최대 50 글자까지만 입력 ############ -&gt; |&#10;&#10;&#10;######## 본문은 한 줄에 최대 72 글자까지만 입력 ################################## -&gt; |">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/config/WebConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/config/WebConfig.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/diary/dto/DiaryResponse$Delete$DeleteBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/diary/dto/DiaryResponse$Delete$DeleteBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/diary/dto/DiaryResponse$Delete.class" beforeDir="false" afterPath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/diary/dto/DiaryResponse$Delete.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/diary/dto/DiaryResponse$Detail$DetailBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/diary/dto/DiaryResponse$Detail$DetailBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/diary/dto/DiaryResponse$Detail.class" beforeDir="false" afterPath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/diary/dto/DiaryResponse$Detail.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/diary/dto/DiaryResponse$totalDiary$totalDiaryBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/diary/dto/DiaryResponse$totalDiary$totalDiaryBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/diary/dto/DiaryResponse$totalDiary.class" beforeDir="false" afterPath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/diary/dto/DiaryResponse$totalDiary.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/diary/service/DiaryService.class" beforeDir="false" afterPath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/diary/service/DiaryService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/classpath.idx" beforeDir="false" afterPath="$PROJECT_DIR$/back/application/BOOT-INF/classpath.idx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/classes/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/MarshmallowApplication.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/analysis/controller/AnalysisController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/analysis/dto/AnalysisRequest$monthReq.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/analysis/dto/AnalysisRequest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/analysis/dto/AnalysisResponse$getAllEmotion$getAllEmotionBuilder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/analysis/dto/AnalysisResponse$getAllEmotion.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/analysis/dto/AnalysisResponse$getResult$getResultBuilder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/analysis/dto/AnalysisResponse$getResult.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/analysis/dto/AnalysisResponse$getdiaryId$getdiaryIdBuilder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/analysis/dto/AnalysisResponse$getdiaryId.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/analysis/dto/AnalysisResponse.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/analysis/entity/Analysis$AnalysisBuilder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/analysis/entity/Analysis.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/analysis/repository/AnaylsisRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/analysis/service/AnalysisService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/config/AwsS3Config.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/config/SecurityConfig.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/config/SwaggerConfig.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/config/WebConfig.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/diary/controller/DiaryController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/diary/dto/DiaryRequest$Create.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/diary/dto/DiaryRequest$GetDiary.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/diary/dto/DiaryRequest$TotalDiary.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/diary/dto/DiaryRequest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/diary/dto/DiaryResponse$Delete$DeleteBuilder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/diary/dto/DiaryResponse$Delete.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/diary/dto/DiaryResponse$Detail$DetailBuilder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/diary/dto/DiaryResponse$Detail.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/diary/dto/DiaryResponse$Regist$RegistBuilder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/diary/dto/DiaryResponse$Regist.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/diary/dto/DiaryResponse$totalDiary$totalDiaryBuilder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/diary/dto/DiaryResponse$totalDiary.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/diary/dto/DiaryResponse.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/diary/dto/MainDiaryInfo$MainDiaryInfoBuilder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/diary/dto/MainDiaryInfo.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/diary/entity/Diary$DiaryBuilder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/diary/entity/Diary.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/diary/repository/DiaryRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/diary/service/AwsS3Service.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/diary/service/DiaryService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/exception/exception.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/user/controller/UserController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/user/dto/UserRequest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/user/entity/User$UserBuilder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/user/entity/User.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/user/repository/UserRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/user/service/UserService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/classpath.idx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/layers.idx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/application/META-INF/MANIFEST.MF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/jenkins/backend-dev.jenkinsfile" beforeDir="false" afterPath="$PROJECT_DIR$/jenkins/backend-dev.jenkinsfile" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -141,6 +184,7 @@
       <workItem from="1667262676097" duration="50000" />
       <workItem from="1667350253916" duration="333000" />
       <workItem from="1667353684951" duration="616000" />
+      <workItem from="1667374428198" duration="34000" />
     </task>
     <servers />
   </component>

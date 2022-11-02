@@ -3,6 +3,8 @@ package com.marshmallow.diary.controller;
 import com.marshmallow.diary.dto.DiaryRequest;
 import com.marshmallow.diary.dto.DiaryResponse;
 import com.marshmallow.diary.service.DiaryService;
+import com.marshmallow.exception.AlreadyRegistDiary;
+import com.marshmallow.exception.CanNotRegistDiary;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.configurationprocessor.json.JSONException;
@@ -27,7 +29,7 @@ public class DiaryController {
 
     @PostMapping("/regist")
     @ApiOperation(value="다이어리 등록", notes = "제목,내용,날씨,사진,날짜를 입력받아 다이어리를 등록하는 기능")
-    public ResponseEntity<DiaryResponse.Regist> regist(@RequestPart(value = "photos" ,required = false)  List<MultipartFile> photos, @RequestPart(value = "diary") DiaryRequest.Create diary) throws JSONException, IOException {
+    public ResponseEntity<DiaryResponse.Regist> regist(@RequestPart(value = "photos" ,required = false)  List<MultipartFile> photos, @RequestPart(value = "diary") DiaryRequest.Create diary) throws JSONException, IOException, AlreadyRegistDiary, CanNotRegistDiary {
         return ResponseEntity.ok().body(diaryService.registDiary(diary, photos));
     }
 
