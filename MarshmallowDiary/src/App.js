@@ -20,7 +20,7 @@ const App = () => {
   //   }
   // });
 
-  const isLight = true;
+  const isLight = false;
 
   return (
     <ThemeProvider theme={isLight ? lightTheme : darkTheme}>
