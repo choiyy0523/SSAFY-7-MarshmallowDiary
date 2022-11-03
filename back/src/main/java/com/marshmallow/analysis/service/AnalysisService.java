@@ -58,8 +58,7 @@ public class AnalysisService {
 
     private User getCurrentUser() {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
-        return userRepository.findByUsername(username)
-                .orElseThrow(() -> new RuntimeException("Error : User is not found"));
+        return userRepository.findByUsername(username);
     }
 
 
