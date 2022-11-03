@@ -18,8 +18,8 @@ public class JwtTokenProvider {
 
     @Value("${spring.jwt.secretKey}")
     private String secretKey;
-    private static final int ACCESS_TOKEN_EXPIRE_TIME = 1000 * 60 * 60 * 24 * 7 * 4; // ms
-    private static final int REFRESH_TOKEN_EXPIRE_TIME = 1000 * 60 * 60 * 24 * 7 * 8; // ms
+    private static final long ACCESS_TOKEN_EXPIRE_TIME = 60 * 60 * 24 * 7 * 4; // s
+    private static final long REFRESH_TOKEN_EXPIRE_TIME = 60 * 60 * 24 * 7 * 8; // s
     @Autowired
     private UserDetailsService userDetailsService;
 
@@ -31,7 +31,7 @@ public class JwtTokenProvider {
         return Jwts.builder()
                 .setSubject((String) authentication.getName()) // claims의 subject 설정
                 .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + ACCESS_TOKEN_EXPIRE_TIME))
+                .setExpiration(new Date(System.currentTimeMillis() + 1000 * ACCESS_TOKEN_EXPIRE_TIME))
                 .signWith(SignatureAlgorithm.HS256, secretKey)
                 .compact();
     }
@@ -39,7 +39,7 @@ public class JwtTokenProvider {
     public String generateRefreshToken(Authentication authentication) {
         return Jwts.builder()
                 .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + REFRESH_TOKEN_EXPIRE_TIME))
+                .setExpiration(new Date(System.currentTimeMillis() + 1000 * REFRESH_TOKEN_EXPIRE_TIME))
                 .signWith(SignatureAlgorithm.HS256, secretKey)
                 .compact();
     }
