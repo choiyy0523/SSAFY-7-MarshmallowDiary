@@ -36,7 +36,7 @@ public class JwtTokenProvider {
                 .compact();
     }
 
-    public String generateRefreshToken(Authentication authentication) {
+    public String generateRefreshToken() {
         return Jwts.builder()
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * REFRESH_TOKEN_EXPIRE_TIME))
@@ -61,5 +61,14 @@ public class JwtTokenProvider {
                 .getBody();
         UserDetails userDetails = userDetailsService.loadUserByUsername(claims.getSubject());
         return new UsernamePasswordAuthenticationToken(userDetails.getUsername(), null, userDetails.getAuthorities());
+    }
+
+    public String generateToken(String username) {
+        return Jwts.builder()
+                .setSubject((String) username) // claims의 subject 설정
+                .setIssuedAt(new Date())
+                .setExpiration(new Date(System.currentTimeMillis() + 1000 * ACCESS_TOKEN_EXPIRE_TIME))
+                .signWith(SignatureAlgorithm.HS256, secretKey)
+                .compact();
     }
 }

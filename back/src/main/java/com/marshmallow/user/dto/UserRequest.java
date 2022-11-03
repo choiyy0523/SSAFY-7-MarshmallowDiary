@@ -1,6 +1,5 @@
 package com.marshmallow.user.dto;
 
-import lombok.Builder;
 import lombok.Getter;
 
 public class UserRequest {
@@ -8,6 +7,12 @@ public class UserRequest {
     public static class Login {
         private String authId;
         private String nickname;
+    }
+
+    @Getter
+    public static class Reissue {
+        private String authId;
+        private String refreshToken;
     }
 
 }
