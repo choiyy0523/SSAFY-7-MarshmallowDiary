@@ -46,9 +46,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row'
   },
   dateStyle: {
-    // fontFamily: 'GangwonEduAllBold',
-    fontSize: 18,
-    // color: '#525252',
   },
   weatherButton: {
     marginHorizontal: 15,
@@ -65,7 +62,6 @@ const styles = StyleSheet.create({
   titleInput: {
     fontSize: 15,
     paddingVertical: 8,
-    // fontFamily: 'GangwonEduAllBold',
     height: 50,
     paddingHorizontal: 16,
     justifyContent: 'flex-start',
@@ -89,7 +85,6 @@ const styles = StyleSheet.create({
   diaryInput: {
     fontSize: 15,
     paddingVertical: 15,
-    // fontFamily: 'GangwonEduAllLight',
     height: 250,
     paddingHorizontal: 16,
     justifyContent: 'flex-start',

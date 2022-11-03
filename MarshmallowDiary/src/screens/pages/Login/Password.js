@@ -1,13 +1,14 @@
 import React from 'react';
-import { Text, View, SafeAreaView } from 'react-native';
-import Privacy from '../../components/component/Privacy'
+import { Text, View } from 'react-native';
+import Privacy from '../../components/component/Privacy.js'
 
-const Password = () => {
+
+const Password = ({ navigation }) => {
+
   return (
-    // <SafeAreaView style={{ backgroundColor: '#FFF9F8', flex: 1 }}>
-    <SafeAreaView style={{ flex: 1 }}>
+    <View style={{ backgroundColor: '#FFF9F8', flex: 1 }}>
       <Privacy />
-    </SafeAreaView >
+    </View>
   )
 };
 

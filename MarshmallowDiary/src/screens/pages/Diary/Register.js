@@ -6,6 +6,8 @@ import WeatherPicker from './WeatherPicker';
 import { launchImageLibrary } from 'react-native-image-picker';
 import ButtonRegister from '../../components/component/ButtonRegister'
 // import CancleDialogs from '../../components/modal/Diary/Cancel'
+import CancelDialogs from '../../components/modal/Diary/Cancel'
+
 
 
 const ShowPicker = () => {
@@ -44,37 +46,6 @@ function Register() {
           </ ButtonRegister>
         </View>
       </View >
-
-
-
-
-
-      <View>
-        {/* 제목 */}
-        < TextInput placeholder="제목을 입력하세요." style={styles.titleInput} />
-
-
-        {/* 사진 첨부 */}
-        < View style={styles.imageInput} >
-          <TouchableOpacity onPress={ShowPicker}>
-            <Image
-              source={require('../../../assets/images/etc/photo.png')}
-              style={styles.imageButton}
-            />
-          </TouchableOpacity>
-        </View >
-
-        {/* 일기 작성 */}
-        <TextInput
-          placeholder="오늘의 기록을 남겨보세요."
-          multiline={true}
-          style={styles.diaryInput}
-        />
-
-      </View>
-
-
-
       <Footer />
 
     </ScrollView >
@@ -119,8 +90,6 @@ const styles = StyleSheet.create({
   },
   titleInput: {
     fontSize: 15,
-    paddingVertical: 8,
-    // fontFamily: 'GangwonEduAllBold',
     height: 50,
     paddingHorizontal: 16,
     justifyContent: 'flex-start',
@@ -151,7 +120,6 @@ const styles = StyleSheet.create({
   diaryInput: {
     fontSize: 15,
     paddingVertical: 15,
-    // fontFamily: 'GangwonEduAllLight',
     height: 250,
     paddingHorizontal: 16,
     justifyContent: 'flex-start',

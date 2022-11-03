@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Button } from 'react-native';
 import { Text, View, SafeAreaView, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import Footer from '../../components/component/Footer';
 import { Calendar, CalendarList, Agenda, LocaleConfig } from 'react-native-calendars'
 import { Icon } from '@rneui/themed';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import base64 from 'base-64'
 
 LocaleConfig.locales['fr'] = {
   monthNames: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
@@ -24,19 +26,42 @@ const Main = ({ navigation }) => {
   var dateString = year + '-' + month + '-' + day;
 
 
+  AsyncStorage.getItem('token', (err, result) => {
+    const token = result;
+    console.log(token)
+  });
+  
+  // AsyncStorage.getItem('password', (err, result) => {
+  //   const pw = result;
+  //   console.log(pw)
+  // });
+
+  useEffect(() => {
+    AsyncStorage.getItem('token', (err, result) => {
+      const token = result;
+      console.log('token', token)
+    });
+
+    AsyncStorage.getItem('123', (err, result) => {
+      const ex = result;
+      console.log('123', ex)
+    });
+  })
+
+
   return (
     <View style={{ flex: 1 }}>
       <View style={{ flex: 1 }}>
         <Calendar
           style={{ marginTop: '5%' }}
           monthFormat={'yyyy년 MM월'}
-          markedDates={{
-            '2022-10-25': { marked: true, dotcolor: '#91C788' },
-            '2022-10-26': { marked: true, dotColor: '#FBC687' },
-            '2022-10-27': { marked: true, dotColor: '#F38181' },
-            // '2022-10-28': {selected:true, selectedColor:'#D9D9D9', color:'black'},
-            dateString: { selected: true, selectedColor: '#D9D9D9', color: 'black' }
-          }}
+          // markedDates={{
+          //   '2022-10-25': { marked: true, dotcolor: '#91C788' },
+          //   '2022-10-26': { marked: true, dotColor: '#FBC687' },
+          //   '2022-10-27': { marked: true, dotColor: '#F38181' },
+          //   // '2022-10-28': {selected:true, selectedColor:'#D9D9D9', color:'black'},
+          //   dateString: { selected: true, selectedColor: '#D9D9D9', color: 'black' }
+          // }}
           // markingType={'custom'}
           // markedDates={{
           //   '2022-10-28' : {
@@ -72,7 +97,7 @@ const Main = ({ navigation }) => {
         </View>
       </View>
       <View style={{ flex: 0.1 }}>
-        <Button title='로그인' onPress={() => navigation.navigate('Login')} />
+        
       </View>
       <Footer />
     </View>

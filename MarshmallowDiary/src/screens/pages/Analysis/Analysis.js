@@ -11,7 +11,6 @@ import mm_negative from '../../../assets/images/mm/mm_negative.png'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 
-
 const Analysis = () => {
   var today = new Date();
 
@@ -245,15 +244,26 @@ const Analysis = () => {
       </View>
 
       {/* 나중에 ai 응답으로 대체 */}
-      <View style={{ flex: 0.8, backgroundColor: 'rgba(217,217,217,0.3)', borderRadius: 20, marginLeft: '5%', marginRight: '5%' }}>
-        <View style={{ fontSize: 15, marginTop: '5%', marginLeft: '5%' }}>
-          <Text>오늘은 즐거운 하루셨군요!</Text>
-          <Text>내일도 즐거운 하루 되시기 바랍니다~</Text>
+      <View style={{ flex: 0.8, backgroundColor: 'rgba(217,217,217,0.3)', borderRadius: 20, marginLeft: '5%', marginRight: '5%', justifyContent: 'center', alignItems: 'center' }}>
+        <View style={{ fontSize: 15 }}>
+          {isAll == true ?
+            <View>
+              <Text>긍정 : all에서 받아온 횟수</Text>
+              <Text>중립 : all에서 받아온 횟수</Text>
+              <Text>부정 : all에서 받아온 횟수</Text>
+              <Text>추천 긍정일기 보러가기</Text>
+            </View> :
+            <View>
+              <Text>긍정 : 달에서 받아온 횟수</Text>
+              <Text>중립 : 달에서 받아온 횟수</Text>
+              <Text>부정 : 달에서 받아온 횟수</Text>
+              <Text>추천 긍정일기 보러가기</Text>
+            </View>}
         </View>
       </View>
 
       <View style={{ flex: 0.3, alignItems: 'center', justifyContent: 'center' }}>
-        <Chip style={{ alignItems: 'center', justifyContent: 'center', backgroundColor: '#FFEBA5', width: '30%' }}>
+        <Chip style={{ alignItems: 'center', justifyContent: 'center', backgroundColor: '#FFEBA5', width: '30%' }} >
           <Icon name='share' type='fontisto' />
           <Text style={{ fontSize: 17 }}>  공유하기 </Text>
         </Chip>
