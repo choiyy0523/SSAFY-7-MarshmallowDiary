@@ -25,7 +25,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff9f8',
   },
   dateText: {
-    fontFamily: 'GangwonEduAllBold',
     fontSize: 20,
     color: '#525252',
   },

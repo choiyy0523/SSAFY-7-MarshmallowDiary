@@ -12,46 +12,46 @@ import { View, Text, StyleSheet, BackHandler } from 'react-native';
 const CancleDialogs = () => {
   // const route = useRoute()
 
-  state = {
-    cancleOption: false
-  }
+  // state = {
+  //   cancleOption: false
+  // }
 
-  useEffect(() => {
-    const backAction = () => {
-      if (this.state.cancleOption === true) {
-        navigation.pop()
-        console.log('일기 작성 취소')
-        this.setState({
-          cancleOption: false
-        })
-      }
-      // 취소 선택시 이전 스택으로 돌아감
-      else {
-        console.log('일기 계속 작성')
-      }
-      return true;
-    }
+  // useEffect(() => {
+  //   const backAction = () => {
+  //     if (this.state.cancleOption === true) {
+  //       navigation.pop()
+  //       console.log('일기 작성 취소')
+  //       this.setState({
+  //         cancleOption: false
+  //       })
+  //     }
+  //     // 취소 선택시 이전 스택으로 돌아감
+  //     else {
+  //       console.log('일기 계속 작성')
+  //     }
+  //     return true;
+  //   }
 
-    const backHandler = BackHandler.addEventListener(
-      'hardwareBackPress',
-      backAction
-    );
-    return () => backHandler.remove()
-  }, [])
+  //   const backHandler = BackHandler.addEventListener(
+  //     'hardwareBackPress',
+  //     backAction
+  //   );
+  //   return () => backHandler.remove()
+  // }, [])
 
 
-  const [cancle, setCancle] = useState(false);
+  // const [cancle, setCancle] = useState(false);
 
-  const changeCancleOption = () => {
-    if (this.state.cancleOption === false) {
-      // 만약 cancleOption이 false라면
-      this.setState({
-        cancleOption: true
-      })
-    } else {
-      null;
-    }
-  }
+  // const changeCancleOption = () => {
+  //   if (this.state.cancleOption === false) {
+  //     // 만약 cancleOption이 false라면
+  //     this.setState({
+  //       cancleOption: true
+  //     })
+  //   } else {
+  //     null;
+  //   }
+  // }
 
   return (
     <View>

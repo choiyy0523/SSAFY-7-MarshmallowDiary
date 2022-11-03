@@ -4,7 +4,7 @@ import Footer from '../../components/component/Footer';
 import DayPicker from './DatePicker';
 import WeatherPicker from './WeatherPicker';
 import { launchImageLibrary } from 'react-native-image-picker';
-import CancleDialogs from '../../components/modal/Diary/Cancel'
+import CancelDialogs from '../../components/modal/Diary/Cancel'
 
 
 const ShowPicker = () => {
@@ -20,7 +20,7 @@ const ShowPicker = () => {
 function Register() {
   return (
     <View>
-      <CancleDialogs />
+      {/* <CancelDialogs /> */}
       {/* 날짜, 날씨, 등록버튼 - 일기장 헤더 */}
       <View style={styles.block}>
         {/* 날짜 선택 */}
@@ -91,7 +91,6 @@ const styles = StyleSheet.create({
   titleInput: {
     fontSize: 15,
     paddingVertical: 8,
-    fontFamily: 'GangwonEduAllBold',
     height: 50,
     paddingHorizontal: 16,
     justifyContent: 'flex-start',
@@ -121,7 +120,6 @@ const styles = StyleSheet.create({
   diaryInput: {
     fontSize: 15,
     paddingVertical: 15,
-    fontFamily: 'GangwonEduAllLight',
     height: 250,
     paddingHorizontal: 16,
     justifyContent: 'flex-start',
