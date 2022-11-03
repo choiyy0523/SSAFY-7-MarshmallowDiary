@@ -35,6 +35,12 @@ local.properties
 # node.js
 #
 node_modules/
+!node_modules/react-native-calendars
+!node_modules/react-native-calendars/src
+!node_modules/react-native-calendars/src/calendar
+!node_modules/react-native-calendars/src/calendar/day
+!node_modules/react-native-calendars/src/calendar/day/basic
+!node_modules/react-native-calendars/src/calendar/day/dot
 npm-debug.log
 yarn-error.log
 

@@ -30,7 +30,7 @@ const Main = ({ navigation }) => {
     const token = result;
     console.log(token)
   });
-  
+
   // AsyncStorage.getItem('password', (err, result) => {
   //   const pw = result;
   //   console.log(pw)
@@ -97,7 +97,7 @@ const Main = ({ navigation }) => {
         </View>
       </View>
       <View style={{ flex: 0.1 }}>
-        
+
       </View>
       <Footer />
     </View>

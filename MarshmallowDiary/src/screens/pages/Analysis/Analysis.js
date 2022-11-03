@@ -60,7 +60,7 @@ const Analysis = () => {
   const sliceColor = ['#91C788', '#FBC687', '#F38181']
 
   return (
-    <View style={{ backgroundColor: '#FFF9F8', flex: 1 }}>
+    <View style={{ flex: 1 }}>
       <View style={{ alignItems: 'center', justifyContent: 'center', marginTop: '15%' }} >
         <Text style={{ fontSize: 25, fontWeight: 'bold' }}>김싸피님의 감정 분석 레포트</Text>
       </View>
