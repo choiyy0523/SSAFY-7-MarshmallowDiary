@@ -151,9 +151,9 @@ public class DiaryService {
                     awsS3Service.deleteFile(photos[i]);
                 }
             }
-            /*
-            분석결과 지우는 코드 필요함
-             */
+            Optional<Analysis> analysis = anaylsisRepository.findByDiary_DiaryId(diary.get().getDiaryId());
+            anaylsisRepository.delete(analysis.get());
+
             diaryRepository.delete(diary.get());
             return DiaryResponse.Delete.build("true");
         }

@@ -10,7 +10,7 @@ import java.util.UUID;
 
 public interface DiaryRepository extends JpaRepository<Diary, UUID> {
 
-    Optional<Diary> findFirstByOrderByDateDesc();
+    Optional<Diary> findFirstByUser_UserIdOrderByDateDesc(UUID userId);
 
     List<Diary> findAllByDateBetween(Date st, Date ed);
 
@@ -21,6 +21,8 @@ public interface DiaryRepository extends JpaRepository<Diary, UUID> {
 
 
     List<Diary> findAllByUser_UserIdAndTitleContainingOrContentContaining(UUID userId, String keyword, String word);
+
+    List<Diary> findAllByUser_UserId(UUID userId);
 }
 
 
