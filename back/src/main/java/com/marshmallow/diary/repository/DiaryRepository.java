@@ -20,7 +20,7 @@ public interface DiaryRepository extends JpaRepository<Diary, UUID> {
     Optional<Diary> findByUser_UserIdAndDate(UUID userId, Date date);
 
 
-    List<Diary> findAllByUser_UserIdAndTitleContainingOrContentContaining(UUID userId, String keyword, String word);
+    List<Diary> findAllByUser_UserIdAndTitleContainingOrContentContainingOrderByDateDesc(UUID userId, String keyword, String word);
 
     List<Diary> findAllByUser_UserId(UUID userId);
 }

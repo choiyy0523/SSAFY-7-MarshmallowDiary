@@ -186,7 +186,7 @@ public class DiaryService {
 
     public DiaryResponse.SearchResponse searchKeyword(DiaryRequest.Search request) {
         User user = this.getCurrentUser();
-        List<Diary> list = diaryRepository.findAllByUser_UserIdAndTitleContainingOrContentContaining(user.getUserId(), request.getKeyword(), request.getKeyword());
+        List<Diary> list = diaryRepository.findAllByUser_UserIdAndTitleContainingOrContentContainingOrderByDateDesc(user.getUserId(), request.getKeyword(), request.getKeyword());
         List<DiarySearch> response = new ArrayList<>();
         for(int i = 0; i < list.size(); i++){
             Diary d = list.get(i);
