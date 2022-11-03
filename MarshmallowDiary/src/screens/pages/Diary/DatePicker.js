@@ -47,7 +47,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff9f8',
   },
   changeDay: {
-    fontFamily: 'GangwonEduAllBold',
     fontSize: 18,
     color: '#525252',
   },

@@ -52,6 +52,7 @@ const Login = ({navigation}) => {
     })
   };
 
+
   const unlinkKakao = async (): Promise<void> => {
     const message = await unlink();
   

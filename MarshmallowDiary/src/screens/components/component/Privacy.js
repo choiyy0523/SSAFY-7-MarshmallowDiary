@@ -3,11 +3,29 @@ import { Text, View, Image, TouchableOpacity } from 'react-native';
 import mm_positive from '../../../assets/images/mm/mm_positive.png'
 import mm_neutral from '../../../assets/images/mm/mm_neutral.png';
 import mm_negative from '../../../assets/images/mm/mm_negative.png';
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {useRoute} from '@react-navigation/native';
 
 
 const Privacy = () => {
   const [input, setInput] = useState('')
+  const route = useRoute();
+
+  AsyncStorage.getItem('password', (err, result) => {
+    const pw = result;
+
+    if (route.name == 'Password') {
+      if (input.length >= 4) {
+        if (input.slice(0, 3) == pw) {
+          navigation.navigate('Main')
+        }
+        else {
+          setInput('')
+        }
+      }
+    }
+  });
+
 
   return (
     <View style={{ backgroundColor:'#FFF9F8', flex:1 }} >
@@ -63,7 +81,7 @@ const Privacy = () => {
         </TouchableOpacity>
       </View>
       <View>
-        <Text style={{ marginTop: '15%', textAlign: 'center', color: '#D9D9D9', fontFamily: 'GangwonEduAllLight' }}>비밀번호 분실 시 앱을 재설치 후 다시 로그인하세요</Text>
+        <Text style={{ marginTop: '15%', textAlign: 'center', color: '#D9D9D9' }}>비밀번호 분실 시 앱을 재설치 후 다시 로그인하세요</Text>
       </View>
     </View>
   )

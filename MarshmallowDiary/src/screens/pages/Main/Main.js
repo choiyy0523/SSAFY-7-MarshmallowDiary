@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Button } from 'react-native';
 import { Text, View, SafeAreaView, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import Footer from '../../components/component/Footer';
@@ -31,10 +31,22 @@ const Main = ({ navigation }) => {
     console.log(token)
   });
   
-  AsyncStorage.getItem('password', (err, result) => {
-    const pw = result;
-    console.log(pw)
-  });
+  // AsyncStorage.getItem('password', (err, result) => {
+  //   const pw = result;
+  //   console.log(pw)
+  // });
+
+  useEffect(() => {
+    AsyncStorage.getItem('token', (err, result) => {
+      const token = result;
+      console.log('token', token)
+    });
+
+    AsyncStorage.getItem('123', (err, result) => {
+      const ex = result;
+      console.log('123', ex)
+    });
+  })
 
 
   return (

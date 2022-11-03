@@ -1,13 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Text, View } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const LoginCheck = ({navigation}) => {
-  // 항상 실행하면 안됨 >> AsyncStorage getallkeys로 비었는지 아닌지 확인 한 다음 비어있으면 setItem
-  AsyncStorage.setItem('token', '')
-  AsyncStorage.setItem('expireDate', '')
-  AsyncStorage.setItem('password', '')
-  AsyncStorage.setItem('isNew', true)
+  // 최초 접속 유저의 경우 isNew = 없는 키 >> 값이 null
+  AsyncStorage.getItem('isNew', (err, result) => {
+    const isNew = result;
+    if (isNew == null) {
+      AsyncStorage.setItem('token', '')
+      AsyncStorage.setItem('isExpire', '')
+      AsyncStorage.setItem('password', '')
+      AsyncStorage.setItem('isNew', true)      
+    }
+  });
 
   // 최초 로그인 전인 유저는 token이 null >> Login으로
   AsyncStorage.getItem('token', (err, result) => {
@@ -18,9 +23,9 @@ const LoginCheck = ({navigation}) => {
   });
   
   // 기존 유저의 토큰 만료된 경우 >> Login으로
-  AsyncStorage.getItem('expireDate', (err, result) => {
-    const expireDate = result;
-    if (expireDate == '만료') {
+  AsyncStorage.getItem('isExpire', (err, result) => {
+    const isExpire = result;
+    if (isExpire == true) {
       navigation.navigate('Login')
     }
   });
