@@ -25,7 +25,7 @@ node {
 
   stage("deploy"){
 		sh "sudo docker load -i marshmallow.tar"
-        sh "sudo docker run -dit -p 80:80 -p ${env.SPRING_PORT}:${env.SPRING_PORT} --name ${env.SPRING_CONTAINER_NAME} ${env.SPRING_IMAGE_NAME}"
+        sh "sudo docker run -dit -p ${env.SPRING_PORT}:${env.SPRING_PORT} --name ${env.SPRING_CONTAINER_NAME} ${env.SPRING_IMAGE_NAME}"
 		script {
 			  def NONE_CONTAINERS = sh(script: "sudo docker images -f \"dangling=true\" -q", returnStdout:true)
 			  // echo NONE_CONTAINERS
