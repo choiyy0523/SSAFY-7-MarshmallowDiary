@@ -6,12 +6,14 @@ import com.marshmallow.analysis.service.AnalysisService;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.text.ParseException;
+import java.util.Date;
 import java.util.Map;
 import java.util.UUID;
 
@@ -24,21 +26,16 @@ public class AnalysisController {
     @Autowired
     private AnalysisService analysisService;
 
-//    @PostMapping("/{diaryId}")
-//    public ResponseEntity<AnalysisResponse.getResult> resultEmotion(UUID diaryId, HttpServletRequest res) throws Exception {
-//        AnalysisResponse.getResult response = analysisService.result(diaryId);
-//
-//        return ResponseEntity.status(200).body(response);
-//    }
+    @GetMapping("/{date}")
+    @ApiOperation(value = "해당 일기의 감정 분석 결과", notes = "다이어리 날짜를 입력받아 해당 일기의 감정 분석 결과 조회 기능")
+    public ResponseEntity<AnalysisResponse.getResult> getEmotion(@PathVariable("date") @DateTimeFormat(pattern="yyyy-MM-dd") Date date) throws Exception {
 
-    @PostMapping("/{diaryId}}")
-    @ApiOperation(value = "해당 일기의 감정 분석 결과", notes = "다이어리 아이디를 입력받아 해당 일기의 감정 분석 결과 조회 기능")
-    public ResponseEntity getEmotion(@PathVariable UUID diaryId, HttpServletRequest res) throws Exception {
-
-        AnalysisResponse.getResult result = analysisService.result(diaryId);
+        AnalysisResponse.getResult result = analysisService.diaryResult(date);
+        System.out.println("결과        "+result);
 
         return ResponseEntity.status(200).body(result);
     }
+
 
     @GetMapping("/loyalty")
     @ApiOperation(value = "메인페이지 마로,별로,시로 값과 멘트 전달", notes = "얼마나 일기를 꾸준하게 작성했는지 판단하는 기능")
@@ -50,7 +47,7 @@ public class AnalysisController {
 
     @GetMapping("/positive")
     @ApiOperation(value = "긍정 일기 조회", notes = "긍정적인 일기를 조회하는 기능")
-    ResponseEntity getId() throws Exception {
+    ResponseEntity<AnalysisResponse.getdiaryId> getId() throws Exception {
         AnalysisResponse.getdiaryId result = analysisService.getdiaryId();
 
         return ResponseEntity.status(200).body(result);
@@ -58,16 +55,15 @@ public class AnalysisController {
 
     @GetMapping("/all")
     @ApiOperation(value = "전체 기간 동안 감정 분석 결과 조회", notes = "전체 기간동안 긍정, 중립, 부장의 값의 합을 제공")
-    ResponseEntity getAllEmotion() {
+    ResponseEntity<AnalysisResponse.getAllEmotion> getAllEmotion() {
         AnalysisResponse.getAllEmotion result = analysisService.getAllEmotion();
-
         return ResponseEntity.status(200).body(result);
     }
 
-    @GetMapping("/month")
-    @ApiOperation(value = "해당 월의 감정 분석 결과 조회", notes = "해당 월의 긍정, 중립, 부장의 값의 합을 제공")
-    ResponseEntity getMonthEmotion(@RequestBody AnalysisRequest.monthReq req) throws ParseException {
-        AnalysisResponse.getAllEmotion result = analysisService.getMonthEmotion(req.getYear(), req.getMonth());
+    @PostMapping("/month")
+    @ApiOperation(value = "해당 월의 감정 분석 결과 조회", notes = "해당 월의 긍정, 중립, 부정의 값의 합, 횟수, 가장 긍정적인 날을 제공")
+    ResponseEntity<AnalysisResponse.getReport> getMonthEmotion(@RequestBody AnalysisRequest.monthReq req) throws ParseException {
+        AnalysisResponse.getReport result = analysisService.getMonthEmotion(req.getYear(), req.getMonth());
         return ResponseEntity.status(200).body(result);
     }
 

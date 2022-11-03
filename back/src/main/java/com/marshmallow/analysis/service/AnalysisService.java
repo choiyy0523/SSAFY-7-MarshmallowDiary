@@ -5,12 +5,15 @@ import com.marshmallow.analysis.entity.Analysis;
 import com.marshmallow.analysis.repository.AnaylsisRepository;
 import com.marshmallow.diary.entity.Diary;
 import com.marshmallow.diary.repository.DiaryRepository;
+import com.marshmallow.user.entity.User;
+import com.marshmallow.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.PropertySources;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
@@ -32,7 +35,6 @@ import java.util.*;
         @PropertySource("classpath:application-secure.properties")
 })
 @Service
-@RequiredArgsConstructor
 public class AnalysisService {
 
     @Autowired
@@ -41,20 +43,36 @@ public class AnalysisService {
     @Autowired
     DiaryRepository diaryRepository;
 
+    @Autowired
+    UserRepository userRepository;
 
-    public AnalysisResponse.getResult result(UUID diaryId) throws Exception{
 
-        Optional<Analysis> analysis = anaylsisRepository.findByDiary_DiaryId(diaryId);
+    public AnalysisResponse.getResult diaryResult(Date date) throws Exception{
+        UUID userId = getCurrentUser().getUserId();
+
+        Optional<Diary> diary = diaryRepository.findByUser_UserIdAndDate(userId, date);
+        Optional<Analysis> analysis = anaylsisRepository.findByDiary_DiaryId(diary.get().getDiaryId());
 
         return AnalysisResponse.getResult.build(analysis.get());
     }
+
+    private User getCurrentUser() {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        return userRepository.findByUsername(username)
+                .orElseThrow(() -> new RuntimeException("Error : User is not found"));
+    }
+
+
 
 
     public Map<Integer, String> main(){
 
         Map<Integer, String> result = new HashMap<>();
 
-        Optional<Diary> diary = diaryRepository.findFirstByOrderByDateDesc();
+        UUID userId = getCurrentUser().getUserId();
+
+        Optional<Diary> diary = diaryRepository.findFirstByUser_UserIdOrderByDateDesc(userId);
+        System.out.println("출력 "+ diary);
 
         long currTime = System.currentTimeMillis();
         long regTime;
@@ -93,16 +111,21 @@ public class AnalysisService {
     }
 
     public AnalysisResponse.getdiaryId getdiaryId() throws Exception{
-        LocalDate st = LocalDate.of(LocalDate.now().getYear(), LocalDate.now().getDayOfMonth()-1, 1);
-        LocalDate ed = LocalDate.of(LocalDate.now().getYear(), LocalDate.now().getDayOfMonth(), 31);
+        LocalDate st = LocalDate.of(LocalDate.now().getYear(),  LocalDate.now().getMonth().minus(1), 1);
+
+        LocalDate ed = LocalDate.of(LocalDate.now().getYear(), LocalDate.now().getMonth().minus(1), 31);
 
         Date start = java.sql.Date.valueOf(st);
         Date end = java.sql.Date.valueOf(ed);
 
-
-        List<Diary> diary = diaryRepository.findAllByDateBetween(start, end);
+        UUID userId = getCurrentUser().getUserId();
+        System.out.println("현재"+LocalDate.now());
+        System.out.println("시작월"+start);
+        System.out.println("끝"+end);
+        List<Diary> diary = diaryRepository.findAllByUser_UserIdAndDateBetween(userId, start, end);
 
         String idx = "-1";
+        String date = "-1";
 
         for(Diary d : diary){
             Optional<Analysis> analysis = anaylsisRepository.findByDiary_DiaryId(d.getDiaryId());
@@ -117,37 +140,43 @@ public class AnalysisService {
             float positive = 0.0f;
 
             if(analysis.get().getPositive() > positive){
+                positive = analysis.get().getPositive();
                 idx = analysis.get().getDiary().getDiaryId().toString();
+                date = String.valueOf(analysis.get().getDiary().getDate());
             }
         }
 
-        return AnalysisResponse.getdiaryId.build(idx);
+        return AnalysisResponse.getdiaryId.build(idx, date);
     }
 
     public AnalysisResponse.getAllEmotion getAllEmotion(){
 
-        List<Analysis> analyses = anaylsisRepository.findAll();
+        UUID userId = getCurrentUser().getUserId();
+        List<Diary> diaries = diaryRepository.findAllByUser_UserId(userId);
 
         float positive = 0.0f;
         float negative = 0.0f;
         float neutral = 0.0f;
 
-        for(Analysis a : analyses){
-            positive+=a.getPositive();
-            negative+=a.getNegative();
-            neutral+=a.getNeutral();
+        for(Diary d : diaries){
+            UUID diaryId = d.getDiaryId();
+            Optional<Analysis> a = anaylsisRepository.findByDiary_DiaryId(diaryId);
+            positive+=a.get().getPositive();
+            negative+=a.get().getNegative();
+            neutral+=a.get().getNeutral();
         }
 
         Analysis result = new Analysis();
         result.setPositive(positive);
         result.setNeutral(neutral);
         result.setNegative(negative);
+        System.out.println("서비스           "+ result);
 
         return AnalysisResponse.getAllEmotion.build(result);
 
     }
 
-    public AnalysisResponse.getAllEmotion getMonthEmotion(int year, int month) throws ParseException {
+    public AnalysisResponse.getReport getMonthEmotion(int year, int month) throws ParseException {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Calendar cal = Calendar.getInstance();
         cal.set(year, month-1, 1);
@@ -156,25 +185,41 @@ public class AnalysisService {
         String ed = year+"-"+month+"-"+lastday;
         Date startDay = dateFormat.parse(st);
         Date endDay = dateFormat.parse(ed);
-        List<Diary> diary = diaryRepository.findAllByDateBetween(startDay, endDay);
+
+
+        UUID userId = getCurrentUser().getUserId();
+        List<Diary> diary = diaryRepository.findAllByUser_UserIdAndDateBetween(userId, startDay, endDay);
 
         float positive = 0.0f;
         float negative = 0.0f;
         float neutral = 0.0f;
+        int pCnt = 0;
+        int negCnt = 0;
+        int neuCnt = 0;
+        String bDate = "-1";
+        float bestP = 0.0f;
 
         for(Diary d : diary){
             Optional<Analysis> analysis = anaylsisRepository.findByDiary_DiaryId(d.getDiaryId());
+
+            if(analysis.get().getSentiment().equals("positive")){
+                pCnt++;
+                if(analysis.get().getPositive() > bestP){
+                    bestP = analysis.get().getPositive();
+                    bDate = String.valueOf(analysis.get().getDiary().getDate());
+                }
+            }else if(analysis.get().getSentiment().equals("negative")){
+                negCnt++;
+            }else{
+                neuCnt++;
+            }
             positive += analysis.get().getPositive();
             negative += analysis.get().getNegative();
             neutral += analysis.get().getNeutral();
         }
 
-        Analysis analysis = new Analysis();
-        analysis.setPositive(positive);
-        analysis.setNegative(negative);
-        analysis.setNeutral(neutral);
 
-        return AnalysisResponse.getAllEmotion.build(analysis);
+        return AnalysisResponse.getReport.build(positive, negative, neutral, pCnt, negCnt, neuCnt, bDate);
     }
 
 }

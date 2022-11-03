@@ -14,7 +14,7 @@ public interface AnaylsisRepository extends JpaRepository<Analysis, UUID> {
 
         Optional<Analysis> findByDiary_DiaryId(UUID diaryId);
 
-        List<Analysis> findAll();
+
 
 
 

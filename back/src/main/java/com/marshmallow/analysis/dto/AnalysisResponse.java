@@ -1,10 +1,7 @@
 package com.marshmallow.analysis.dto;
 
 import com.marshmallow.analysis.entity.Analysis;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 
 import static java.lang.Math.round;
@@ -14,6 +11,8 @@ public class AnalysisResponse {
     @Builder
     @AllArgsConstructor
     @NoArgsConstructor
+    @ToString
+    @Getter
     public static class getResult{
         private int positive;
         private int negative;
@@ -31,13 +30,17 @@ public class AnalysisResponse {
     @Builder
     @AllArgsConstructor
     @NoArgsConstructor
+    @ToString
+    @Getter
     public static class getdiaryId{
 
         private String diaryId;
+        private String date;
 
-        public static AnalysisResponse.getdiaryId build(String diaryId){
-            return AnalysisResponse.getdiaryId.builder()
+        public static AnalysisResponse.getdiaryId build(String diaryId, String date){
+            return getdiaryId.builder()
                     .diaryId(diaryId)
+                    .date(date)
                     .build();
         }
     }
@@ -45,6 +48,8 @@ public class AnalysisResponse {
     @Builder
     @AllArgsConstructor
     @NoArgsConstructor
+    @ToString
+    @Getter
     public static class getAllEmotion{
         private float positive;
         private float negative;
@@ -57,6 +62,34 @@ public class AnalysisResponse {
                     .neutral(analysis.getNeutral())
                     .build();
         }
+    }
+
+    @Builder
+    @AllArgsConstructor
+    @NoArgsConstructor
+    @ToString
+    @Getter
+    public static class getReport{
+        private float positive;
+        private float negative;
+        private float neutral;
+        private int positiveCnt;
+        private float negativeCnt;
+        private float neutralCnt;
+        private String bestPositiveDate;
+
+        public static AnalysisResponse.getReport build(float positive, float negative, float neutral, int positiveCnt, int negativeCnt, int neutralCnt, String bestPositiveDate){
+            return getReport.builder()
+                    .positive(positive)
+                    .negative(negative)
+                    .neutral(neutral)
+                    .positiveCnt(positiveCnt)
+                    .negativeCnt(negativeCnt)
+                    .neutralCnt(neutralCnt)
+                    .bestPositiveDate(bestPositiveDate)
+                    .build();
+        }
+
     }
 
 }
