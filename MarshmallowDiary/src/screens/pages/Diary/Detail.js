@@ -46,8 +46,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row'
   },
   dateStyle: {
-    fontSize: 18,
-    color: '#525252',
   },
   weatherButton: {
     marginHorizontal: 15,

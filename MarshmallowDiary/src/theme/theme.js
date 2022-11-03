@@ -1,28 +1,26 @@
-// import React from 'react';
-// import { StyleSheet } from 'react-native';
-// import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
-
-// export default function Theme() {
-//   const LightTheme = {
-//     dark: false,
-//     colors: {
-//       background: '#fff9f8',
-//       card: '#D9D9D9',
-//       text: '#525252',
-//     },
-//   };
-
-//   const DarkTheme = {
-//     dark: false,
-//     colors: {
-//       background: '#525252',
-//       card: '#999696',
-//       text: '#fff9f8',
-//     },
-//   }
-//   return (
-
-//   )
+import React, { useState, useEffect } from "react";
+import { StyleSheet, Dimensions } from 'react-native';
 
 
-// }
+
+export const lightTheme = {
+  background: '#fff9f8',
+  text: '#525252',
+  lightgray: '#D9D9D9',
+  lightgray_opacity: 'rgba(217, 217, 217, 0.3)'
+}
+
+export const darkTheme = {
+  background: '#525252',
+  text: '#fff9f8',
+  darkgray: '#D9D9D9',
+  darkgray_opacity: 'rgba(217, 217, 217, 0.3)'
+}
+
+export const customFont1 = {
+  fontfamily: 'GangwonEduAllBold'
+}
+
+export const customFont2 = {
+  fontfamily: 'cookierun'
+}

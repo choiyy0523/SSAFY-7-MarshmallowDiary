@@ -29,6 +29,7 @@
     "react-native-charts-wrapper": "^0.5.11",
     "react-native-date-picker": "^4.2.5",
     "react-native-gesture-handler": "^2.8.0",
+    "react-native-global-props": "^1.1.5",
     "react-native-image-picker": "^4.10.0",
     "react-native-modal-datetime-picker": "^14.0.0",
     "react-native-pie-chart": "^2.0.2",
@@ -38,7 +39,8 @@
     "react-native-screens": "^3.18.2",
     "react-native-snap-carousel": "^3.9.1",
     "react-native-vector-icons": "^9.2.0",
-    "rnpm": "^1.5.1"
+    "rnpm": "^1.5.1",
+    "styled-components": "^5.3.6"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",

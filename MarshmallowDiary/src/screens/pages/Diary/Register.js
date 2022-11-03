@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { BackHandler, StyleSheet, TextInput, Alert, Text, View, Button, TouchableOpacity, Image } from 'react-native'
+import { BackHandler, StyleSheet, TextInput, Alert, Text, View, Button, TouchableOpacity, Image, ScrollView } from 'react-native'
 import Footer from '../../components/component/Footer';
 import DayPicker from './DatePicker';
 import WeatherPicker from './WeatherPicker';
 import { launchImageLibrary } from 'react-native-image-picker';
+import ButtonRegister from '../../components/component/ButtonRegister'
+// import CancleDialogs from '../../components/modal/Diary/Cancel'
 import CancelDialogs from '../../components/modal/Diary/Cancel'
+
 
 
 const ShowPicker = () => {
@@ -19,50 +22,33 @@ const ShowPicker = () => {
 
 function Register() {
   return (
-    <View>
-      {/* <CancelDialogs /> */}
-      {/* 날짜, 날씨, 등록버튼 - 일기장 헤더 */}
-      <View style={styles.block}>
-        {/* 날짜 선택 */}
-        <DayPicker />
-        {/* 날씨 선택 */}
-        <TouchableOpacity onPress={WeatherPicker}>
-          <Image
-            source={require('../../../assets/images/weather/1_sunny.png')}
-            style={styles.weatherButton}
-          />
-        </TouchableOpacity>
-        {/* 글 등록 버튼 */}
-        <Button
-          title="등록"
-          style={styles.submitButton}
-          onPress={() => Alert.alert('DB 등록 구현중')} />
-      </View>
+    <ScrollView >
+      {/* <CancleDialogs /> */}
+      <View style={styles.block2}>
+        {/* 날짜, 날씨, 등록버튼 - 일기장 헤더 */}
+        <View style={styles.block}>
+          {/* 날짜 선택 */}
+          < DayPicker />
 
-      {/* 제목 */}
-      <TextInput placeholder="제목을 입력하세요." style={styles.titleInput} />
+          {/* 날씨 선택 */}
+          < TouchableOpacity onPress={WeatherPicker} >
+            <Image
+              source={require('../../../assets/images/weather/1_sunny.png')}
+              style={styles.weatherButton}
+            />
+          </ TouchableOpacity>
+        </View>
 
-
-      {/* 사진 첨부 */}
-      <View style={styles.imageInput}>
-        <TouchableOpacity onPress={ShowPicker}>
-          <Image
-            source={require('../../../assets/images/etc/photo.png')}
-            style={styles.imageButton}
-          />
-        </TouchableOpacity>
-      </View>
-
-      {/* 일기 작성 */}
-      <TextInput
-        placeholder="오늘의 기록을 남겨보세요."
-        multiline={true}
-        style={styles.diaryInput}
-      />
-
+        <View style={styles.block3}>
+          {/* 글 등록 버튼 */}
+          < ButtonRegister onPress={() => Alert.alert('DB 등록 구현중')}>
+            <Text style={styles.buttonText}>등록</Text>
+          </ ButtonRegister>
+        </View>
+      </View >
       <Footer />
 
-    </View >
+    </ScrollView >
   )
 };
 
@@ -72,30 +58,44 @@ const styles = StyleSheet.create({
     height: 64,
     paddingVertical: 20,
     marginTop: 10,
+    marginHorizontal: 10,
+    justifyContent: 'flex-start',
+    flexDirection: 'row',
+  },
+  block2: {
+    height: 64,
     marginHorizontal: 15,
     justifyContent: 'flex-start',
-    flexDirection: 'row'
+    flexDirection: 'row',
+  },
+  block3: {
+    height: 64,
+    paddingVertical: 15,
+    marginTop: 10,
+    marginHorizontal: 85,
+    justifyContent: 'flex-end',
+    flexDirection: 'row',
+    alignItems: 'flex-end'
   },
   weatherButton: {
-    marginHorizontal: 15,
+    marginHorizontal: 10,
     width: 40,
     height: 40,
+    marginVertical: -10,
   },
-  submitButton: {
-    borderRadius: 18,
-    color: 'FFEBA5',
-    height: 50,
+  buttonText: {
+    // fontFamily: 'GangwonEduAllBold',
     fontSize: 15,
-    justifyContent: 'flex-end'
+    fontWeight: 'Bold'
   },
   titleInput: {
     fontSize: 15,
-    paddingVertical: 8,
     height: 50,
     paddingHorizontal: 16,
     justifyContent: 'flex-start',
     backgroundColor: 'rgba(217, 217, 217, 0.3)',
     borderRadius: 18,
+    marginTop: 5,
     marginBottom: 20,
     marginHorizontal: 15,
   },
