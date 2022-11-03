@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
   titleInput: {
     fontSize: 15,
     paddingVertical: 8,
-    fontFamily: 'GangwonEduAllBold',
+    // fontFamily: 'GangwonEduAllBold',
     height: 50,
     paddingHorizontal: 16,
     justifyContent: 'flex-start',

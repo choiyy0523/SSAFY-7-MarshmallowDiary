@@ -48,7 +48,6 @@ const styles = StyleSheet.create({
   },
   changeDay: {
     fontSize: 18,
-    color: '#525252',
   },
 });
 

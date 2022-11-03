@@ -26,7 +26,6 @@ const styles = StyleSheet.create({
   },
   dateText: {
     fontSize: 20,
-    color: '#525252',
   },
 });
 
