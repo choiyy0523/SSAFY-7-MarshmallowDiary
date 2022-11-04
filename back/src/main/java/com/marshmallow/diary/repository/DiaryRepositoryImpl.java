@@ -27,6 +27,7 @@ public class DiaryRepositoryImpl implements DiaryRepository.DiaryRepositoryCusto
                             d.title.contains(keyword)
                             .or(d.content.contains(keyword))
                         ))
+                .orderBy(d.date.desc())
                 .fetch();
     }
 }
