@@ -5,12 +5,14 @@ import Footer from '../../components/component/Footer';
 import positive from '../../../assets/images/character/positive.png'
 import { useNavigation } from '@react-navigation/native';
 import { Icon } from '@rneui/themed';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 const Search = ({ navigation }) => {
     const [inputs, setInputs] = useState({
       name: '',
     });
+
 
     const { keyword } = inputs;
 

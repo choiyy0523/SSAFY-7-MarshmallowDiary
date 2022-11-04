@@ -44,9 +44,12 @@ const Login = ({navigation}) => {
       console.log(res.data)
       console.log(res.data.userId)
       console.log(res.data.accessToken)
+      console.log(res.data.refreshToken)
 
       AsyncStorage.setItem('token', res.data.accessToken)
       AsyncStorage.setItem('isNew', 'false')
+      AsyncStorage.setItem('refresh', res.data.refreshToken)
+      AsyncStorage.setItem('userId', res.data.userId)
       
     })
 
