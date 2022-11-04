@@ -1,86 +1,142 @@
+// 부모
 import React, { useEffect, useState } from 'react';
 import { BackHandler, StyleSheet, TextInput, Alert, Text, View, Button, TouchableOpacity, Image, ScrollView } from 'react-native'
 import Footer from '../../components/component/Footer';
 import DayPicker from './DatePicker';
 import WeatherPicker from './WeatherPicker';
-import { launchImageLibrary } from 'react-native-image-picker';
+import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
+// import ImagePicker from './ImagePicker';
 import ButtonRegister from '../../components/component/ButtonRegister'
+import axios from 'axios'
 // import CancleDialogs from '../../components/modal/Diary/Cancel'
 
 
-const ShowPicker = () => {
-  //launchImageLibrary : 사용자 앨범 접근
-  launchImageLibrary({}, res => {
-    alert(res.assets[0].uri)
-    const formdata = new FormData()
-    formdata.append('file', res.assets[0].uri);
-    console.log(res);
-  })
+function ImagePicker() {
+  state = {
+    path: ''
+  }
+
+  const addImage = () => {
+    launchImageLibrary({}, response => {
+      this.setState({
+        path: response.uri
+      })
+    })
+  }
+
+
+  return (
+    <View>
+      <Image source={{ uri: this.state.path }} />
+      <View style={styles.imageInput}>
+        <TouchableOpacity onPress={addImage}>
+          <Image
+            source={require('../../../assets/images/etc/photo.png')}
+            style={styles.imageButton}
+          />
+        </TouchableOpacity>
+      </View >
+    </View>
+  )
 }
 
-function Register() {
-  return (
-    <ScrollView >
-      {/* <CancleDialogs /> */}
-      <View style={styles.block2}>
-        {/* 날짜, 날씨, 등록버튼 - 일기장 헤더 */}
-        <View style={styles.block}>
-          {/* 날짜 선택 */}
-          < DayPicker />
 
-          {/* 날씨 선택 */}
-          < TouchableOpacity onPress={WeatherPicker} >
-            <Image
-              source={require('../../../assets/images/weather/1_sunny.png')}
-              style={styles.weatherButton}
-            />
-          </ TouchableOpacity>
-        </View>
+// // 일기 등록
+// const DiaryRegister = async () => {
+//   const [title, setTitle] = useState('')
+//   const [content, setContent] = useState('')
+//   const [weather, setWeather] = useState('')
+//   const [date, setDate] = useState('')
 
-        <View style={styles.block3}>
-          {/* 글 등록 버튼 */}
-          < ButtonRegister onPress={() => Alert.alert('DB 등록 구현중')}>
-            <Text style={styles.buttonText}>등록</Text>
-          </ ButtonRegister>
-        </View>
-      </View >
+//   const formData = new FormData()
 
+//   formData.append("file", files[0]) //files[0] === upload file
 
+//   const diary = [{
+//     title: title,
+//     content: content,
+//     weather: weather,
+//     date: date
+//   }]
 
+//   const blob = new Blob([JSON.stringify(diary)], { type: "application/json" })
 
-
-      <View>
-        {/* 제목 */}
-        < TextInput placeholder="제목을 입력하세요." style={styles.titleInput} />
+//   formData.append("data", blob) // 또는  formData.append("data", JSON.stringify(value)); // JSON 형식으로 파싱
+//   await axios({
+//     method: "POST",
+//     url: `https://marshmallowdiary.com/api/diary/regist`,
+//     // mode: "cors",
+//     headers: {
+//       "Content-Type": "multipart/form-data",
+//     },
+//     data: formData, // data 전송시에 반드시 생성되어 있는 formData 객체만 전송 하여야 한다.
+//   })
 
 
-        {/* 사진 첨부 */}
+
+return (
+  <ScrollView >
+    {/* <CancleDialogs /> */}
+    <View style={styles.block2}>
+      {/* 날짜, 날씨, 등록버튼 - 일기장 헤더 */}
+      <View style={styles.block}>
+        {/* 날짜 선택 */}
+        <DayPicker setDate={setDate} />
+
+        {/* 날씨 선택 */}
+        <TouchableOpacity setWeather={setWeather} onPress={WeatherPicker} >
+          <Image
+            source={require('../../../assets/images/weather/1_sunny.png')}
+            style={styles.weatherButton}
+          />
+        </TouchableOpacity>
+      </View>
+
+      <View style={styles.block3}>
+        {/* 글 등록 버튼 */}
+        < ButtonRegister onPress={DiaryRegister}>
+          <Text style={styles.buttonText}>등록</Text>
+        </ ButtonRegister>
+      </View>
+    </View >
+
+
+    <View>
+      {/* 제목 */}
+      < TextInput
+        placeholder="제목을 입력하세요."
+        style={styles.titleInput}
+        value={title}
+        onChangeText={title => setTitle(title)} />
+
+
+      {/* 사진 첨부 */}
+      {/* <Image source={{ uri: photo }}></Image>
         < View style={styles.imageInput} >
-          <TouchableOpacity onPress={ShowPicker}>
+          <TouchableOpacity onPress={showPicker}>
             <Image
               source={require('../../../assets/images/etc/photo.png')}
               style={styles.imageButton}
             />
           </TouchableOpacity>
-        </View >
+        </View > */}
+      <ImagePicker />
 
-        {/* 일기 작성 */}
-        <TextInput
-          placeholder="오늘의 기록을 남겨보세요."
-          multiline={true}
-          style={styles.diaryInput}
-        />
+      {/* 일기 작성 */}
+      <TextInput
+        placeholder="오늘의 기록을 남겨보세요."
+        multiline={true}
+        style={styles.diaryInput}
+        value={content}
+        onChangeText={content => setContent(content)}
+      />
 
-      </View>
+    </View>
+    <Footer />
 
-
-
-      <Footer />
-
-    </ScrollView >
-  )
-};
-
+  </ScrollView >
+)
+}
 
 const styles = StyleSheet.create({
   block: {
@@ -162,4 +218,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Register;
+export default DiaryRegister;

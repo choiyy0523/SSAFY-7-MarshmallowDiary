@@ -3,7 +3,7 @@ import { StyleSheet, Button, TouchableOpacity, Text, View } from 'react-native'
 import DatePicker from 'react-native-date-picker'
 
 
-function DayPicker() {
+function DayPicker(props) {
   const [date, setDate] = useState(new Date());
   const [open, setOpen] = useState(false);
 
@@ -12,9 +12,15 @@ function DayPicker() {
   const day = date.getDate();
 
   const dayformatted = `${year}년 ${month}월 ${day}일`;
+  const todayIs = `${year}-${month}-${day}`
+
+  function sendData() {
+    props.setDate({ todayIs })
+  }
+
 
   return (
-    <View>
+    <View onPress={sendData}>
       <TouchableOpacity onPress={() => setOpen(true)}>
         <Text style={styles.changeDay}>
           {dayformatted}
@@ -23,7 +29,7 @@ function DayPicker() {
             open={open}
             mode="date"
             date={date}
-            onConfirm={date => {
+            onConfirm={() => {
               setOpen(false)
               setDate(date)
             }}
