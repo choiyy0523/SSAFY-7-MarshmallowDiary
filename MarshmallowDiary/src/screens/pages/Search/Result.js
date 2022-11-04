@@ -8,6 +8,7 @@ import http from '../../../api/http';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Pagination from './Pagination';
+import positive from '../../../assets/images/character/positive.png'
 
 const Result = ({route, navigation}) => {
   const { searchWord } = route.params;
@@ -66,9 +67,10 @@ const Result = ({route, navigation}) => {
       setPage(page);
     };
 
-    if ( searchResult != undefined ) {
-      console.log(searchResult.length)
-    }
+    // if ( searchResult != undefined ) {
+    //   console.log(searchResult.length)
+    // }
+    // console.log(searchResult[0].header_img)
 
     return (
         <View style={{ backgroundColor:'#FFF9F8', flex:1 }}>
@@ -114,7 +116,7 @@ const Result = ({route, navigation}) => {
                     <Text>{data.date}</Text>
                   </View>
                   <View style={{ flex: 0.5, justifyContent:'center', alignItems:'center'}}>
-                    <Text>{data.header_img}</Text>
+                    <Image source={{uri: `https://marshmallow-bucket.s3.ap-northeast-2.amazonaws.com/${data.header_img}`}} style={{ width:100, height:100 }}/>
                   </View>
                   <View style={{ flex: 0.25, justifyContent:'center', alignItems:'center'}}>
                     <Text>{data.title}</Text>
@@ -127,6 +129,9 @@ const Result = ({route, navigation}) => {
                 </View>
               </View>
             ))}
+
+            {searchResult.length % 2 && page == (searchResult.length+1)/2 ? <View style={{flex:0.4}} /> : null}
+
             <View style={{ flex: 0.1, justifyContent:'center', alignItems:'center' }}>
               <Pagination
                 total={searchResult.length}

@@ -12,19 +12,22 @@ function Pagination({ total, limit, page, setPage }) {
   const offset = Math.floor((page - 1) / 10) * limit2;
 
   const toLeft = () => {
-    if ( page > 5 ) {
+    if ( page <= 10) {}
+    else {
       setPage(Math.floor((page - 11) / 10) * 10 + 1)
     }
   }
 
   const toRight = () => {
     if (Math.floor((Math.ceil(total / limit) - 1) / 10) * 10 + 1 <= page && page <= Math.ceil(total / limit)) {
+      
+    }
+    else {
       setPage(Math.floor((page + 9) / 10) * 10 + 1)
     }
-    else {}
   }
 
-  console.log(page)
+  console.log('page', page)
 
   return (
     <View style={{ flexDirection:'row', flex:1, justifyContent:'center', alignItems:'center'}}>
@@ -32,15 +35,17 @@ function Pagination({ total, limit, page, setPage }) {
         <Icon name='left' type='antdesign'/>
       </TouchableOpacity>
 
-      <TouchableOpacity style={{ flexDirection:'row', flex:0.6, justifyContent:'center', alignItems:'center' }}>
+      <View style={{ flexDirection:'row', flex:0.6, justifyContent:'center', alignItems:'center' }}>
         {numPages.slice(offset, offset + limit2).map(function (number) {
             return (
-              <Text key={number} onPress={() => setPage(number)}>
-                {number}
-              </Text>
+              <TouchableOpacity>
+                <Text key={number} onPress={() => setPage(number)} style={{ margin:7, fontSize:20 }}>
+                  {number}
+                </Text>
+              </TouchableOpacity>
             );
           })}
-      </TouchableOpacity>
+      </View>
 
       <TouchableOpacity onPress={toRight} style={{ flexDirection:'row', flex:0.2, justifyContent:'center', alignItems:'center' }}>
         <Icon name='right' type='antdesign'/>
