@@ -57,21 +57,16 @@ const Search = ({ navigation }) => {
               <TouchableOpacity style={{ fontWeight:'bold', marginLeft:'3%' }} onPress = {search}>
                 <Icon name='search' type='fontawesome' />
               </TouchableOpacity>
-            }
-
+            </View>
           </View>
-          <TouchableOpacity style={{ fontWeight: 'bold', marginLeft: '3%' }} onPress={() => navigation.navigate('Result')}>
-            <Icon name='search' type='fontawesome' />
-          </TouchableOpacity>
-        </View>
-      </View>
+    
 
-      <View style={{ alignItems: 'center', justifyContent: 'center', flex: 1 }} >
-        <Image source={positive} style={{ width: '25%', height: 90 }} />
-        <Text style={{ fontSize: 17, marginTop: '5%' }}>다시 보고 싶은 일기가 있으신가요?</Text>
-      </View>
-      <Footer />
-    </View>
+          <View style={{ alignItems: 'center', justifyContent: 'center', flex: 1 }} >
+            <Image source={positive} style={{ width: '25%', height: 90 }} />
+            <Text style={{ fontSize: 17, marginTop: '5%' }}>다시 보고 싶은 일기가 있으신가요?</Text>
+          </View>
+          <Footer />
+        </View>
   )
 };
 
