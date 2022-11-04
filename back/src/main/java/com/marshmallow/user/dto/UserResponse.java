@@ -15,4 +15,11 @@ public class UserResponse {
         private String refreshToken;
     }
 
+    @Getter
+    @Builder
+    public static class Result {
+        private String result;
+        private String message;
+    }
+
 }

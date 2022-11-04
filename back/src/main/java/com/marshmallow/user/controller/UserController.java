@@ -25,10 +25,21 @@ public class UserController {
         return new ResponseEntity<UserResponse.Token>(userService.login(loginRequest), HttpStatus.OK);
     }
 
-    @ApiOperation(value="로그인", notes = "access token 재발급 기능")
+    @ApiOperation(value="토큰 재발급", notes = "access token 재발급 기능")
     @PostMapping("/reissue")
     public ResponseEntity<?> reissue(@RequestBody UserRequest.Reissue reissueRequest) throws Exception {
         return new ResponseEntity<UserResponse.Token>(userService.reissue(reissueRequest), HttpStatus.OK);
     }
 
+    @ApiOperation(value="회원 탈퇴", notes = "회원 탈퇴 기능")
+    @PostMapping(value="/delete")
+    public ResponseEntity<?> deleteUser() throws Exception {
+        return new ResponseEntity<UserResponse.Result>(userService.delete(), HttpStatus.OK);
+    }
+
+    @ApiOperation(value="로그아웃", notes = "로그아웃 기능")
+    @PostMapping(value="/logout")
+    public ResponseEntity<?> logout() throws Exception {
+        return new ResponseEntity<UserResponse.Result>(userService.logout(), HttpStatus.OK);
+    }
 }
