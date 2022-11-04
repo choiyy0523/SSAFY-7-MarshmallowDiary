@@ -3,13 +3,11 @@ package com.marshmallow.diary.repository;
 import com.marshmallow.diary.entity.Diary;
 import com.marshmallow.diary.entity.QDiary;
 import com.marshmallow.user.entity.User;
-import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.EntityManager;
 import java.util.List;
-import java.util.UUID;
 
 public class DiaryRepositoryImpl implements DiaryRepository.DiaryRepositoryCustom {
 
@@ -17,7 +15,7 @@ public class DiaryRepositoryImpl implements DiaryRepository.DiaryRepositoryCusto
     EntityManager em;
 
     @Override
-    public List<Diary> test(User user, String keyword) {
+    public List<Diary> searchKeyword(User user, String keyword) {
         JPAQueryFactory query = new JPAQueryFactory(em);
 
         QDiary d = new QDiary("d");

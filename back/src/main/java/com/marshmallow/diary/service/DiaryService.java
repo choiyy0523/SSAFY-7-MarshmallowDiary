@@ -8,6 +8,7 @@ import com.marshmallow.diary.dto.DiarySearch;
 import com.marshmallow.diary.dto.MainDiaryInfo;
 import com.marshmallow.diary.entity.Diary;
 import com.marshmallow.diary.repository.DiaryRepository;
+import com.marshmallow.diary.repository.DiaryRepositoryImpl;
 import com.marshmallow.exception.AlreadyRegistDiary;
 import com.marshmallow.exception.CanNotRegistDiary;
 import com.marshmallow.user.entity.User;
@@ -20,7 +21,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
-
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -48,6 +48,8 @@ public class DiaryService {
     private final UserRepository userRepository;
     private final AnaylsisRepository anaylsisRepository;
     private final AwsS3Service awsS3Service;
+
+    private final DiaryRepositoryImpl diaryRepoImpl;
     public DiaryResponse.Regist registDiary(DiaryRequest.Create request , List<MultipartFile> multipartFile) throws IOException, JSONException, AlreadyRegistDiary, CanNotRegistDiary {
 
         User user = this.getCurrentUser();
@@ -186,7 +188,7 @@ public class DiaryService {
 
     public DiaryResponse.SearchResponse searchKeyword(DiaryRequest.Search request) {
         User user = this.getCurrentUser();
-        List<Diary> list = diaryRepository.findAllByUser_UserIdAndTitleContainingOrContentContainingOrderByDateDesc(user.getUserId(), request.getKeyword(), request.getKeyword());
+        List<Diary> list = diaryRepoImpl.searchKeyword(user, request.getKeyword());
         List<DiarySearch> response = new ArrayList<>();
         for(int i = 0; i < list.size(); i++){
             Diary d = list.get(i);
