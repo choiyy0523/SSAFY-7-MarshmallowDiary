@@ -7,52 +7,55 @@ import { useNavigation } from '@react-navigation/native';
 import { Icon } from '@rneui/themed';
 
 
-
-// 검색어 초기 입력 시 약간 렉 있음
-
-
 const Search = ({ navigation }) => {
-  const [inputs, setInputs] = useState({
-    name: '',
-  });
-
-  const { keyword } = inputs;
-
-  const onChange = (keyvalue, e) => {
-    const { text } = e.nativeEvent
-    setInputs({
-      ...inputs,
-      [keyvalue]: text
+    const [inputs, setInputs] = useState({
+      name: '',
     });
 
-  };
+    const { keyword } = inputs;
 
+    const onChange = (keyvalue, e) => {
+      const { text } = e.nativeEvent
+      setInputs({
+        ...inputs,
+        [keyvalue]: text
+      });
 
-  const onReset = () => {
-    setInputs({
-      keyword: '',
-    })
-  };
+    };
 
+    const onReset = () => {
+      setInputs({
+        keyword: '',
+      })
+    };
 
-  return (
-    <View style={{ flex: 1 }}>
-      <View style={{ backgroundColor: '#D9D9D9', height: 60 }}>
-        <View style={{ alignItems: 'center', justifyContent: 'center', flex: 1, flexDirection: 'row' }}>
-          <View style={{
-            backgroundColor: 'rgba(255,255,255,0.9)', height: 40, borderRadius: 30,
-            flexDirection: 'row', flex: 0.8
-          }}>
-            <TextInput
-              style={{ width: '85%', marginLeft: '5%' }}
+    const search = () => {
+      if (inputs.keyword) {
+        navigation.navigate('Result', { searchWord:keyword } )
+      }
+    }
 
-              onChange={(e) => onChange("keyword", e)}
-              value={keyword}
-            >
-            </TextInput>
-            {keyword === null || keyword === '' || keyword === undefined ? null :
-              <TouchableOpacity style={{ justifyContent: 'center' }} onPress={() => onReset()} >
-                <Icon name='highlight-off' type='maeterialicons' />
+    return (
+        <View style={{ backgroundColor:'#FFF9F8', flex:1 }}>
+          <View style={{ backgroundColor:'#D9D9D9', height:60 }}>
+            <View style={{ alignItems:'center', justifyContent:'center' , flex:1, flexDirection:'row' }}>
+              <View style={{ backgroundColor:'rgba(255,255,255,0.9)', height:40 , borderRadius:30, flexDirection:'row', flex:0.8 }}>
+                <TextInput 
+                  style={{width:'85%', marginLeft:'5%'}}
+                  onChange={(e) => onChange("keyword", e)}
+                  value={keyword}
+                  >
+                </TextInput>    
+                
+                {keyword === null || keyword === '' || keyword === undefined ? null : 
+                    <TouchableOpacity style={{justifyContent:'center'}} onPress = {() => onReset() } >
+                      <Icon name='highlight-off' type='maeterialicons' />
+                    </TouchableOpacity>
+                }
+              </View>
+
+              <TouchableOpacity style={{ fontWeight:'bold', marginLeft:'3%' }} onPress = {search}>
+                <Icon name='search' type='fontawesome' />
               </TouchableOpacity>
             }
 

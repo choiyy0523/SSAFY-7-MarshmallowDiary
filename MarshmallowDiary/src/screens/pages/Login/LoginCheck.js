@@ -10,7 +10,7 @@ const LoginCheck = ({navigation}) => {
       AsyncStorage.setItem('token', '')
       AsyncStorage.setItem('isExpire', '')
       AsyncStorage.setItem('password', '')
-      AsyncStorage.setItem('isNew', true)      
+      AsyncStorage.setItem('isNew', 'true')      
     }
   });
 
