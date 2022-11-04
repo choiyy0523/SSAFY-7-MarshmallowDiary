@@ -148,7 +148,7 @@ public class AnalysisService {
         return AnalysisResponse.getdiaryId.build(idx, date);
     }
 
-    public AnalysisResponse.getAllEmotion getAllEmotion(){
+    public AnalysisResponse.getReport getAllEmotion(){
 
         UUID userId = getCurrentUser().getUserId();
         List<Diary> diaries = diaryRepository.findAllByUser_UserId(userId);
@@ -156,22 +156,39 @@ public class AnalysisService {
         float positive = 0.0f;
         float negative = 0.0f;
         float neutral = 0.0f;
+        int pCnt = 0;
+        int negCnt = 0;
+        int neuCnt = 0;
+        String bDate = "-1";
+        float bestP = 0.0f;
 
         for(Diary d : diaries){
             UUID diaryId = d.getDiaryId();
-            Optional<Analysis> a = anaylsisRepository.findByDiary_DiaryId(diaryId);
-            positive+=a.get().getPositive();
-            negative+=a.get().getNegative();
-            neutral+=a.get().getNeutral();
+            Optional<Analysis> analysis = anaylsisRepository.findByDiary_DiaryId(diaryId);
+
+            if(analysis.get().getSentiment().equals("positive")){
+                pCnt++;
+                if(analysis.get().getPositive() > bestP){
+                    bestP = analysis.get().getPositive();
+                    bDate = String.valueOf(analysis.get().getDiary().getDate());
+                }
+            }else if(analysis.get().getSentiment().equals("negative")){
+                negCnt++;
+            }else{
+                neuCnt++;
+            }
+
+            positive+=analysis.get().getPositive();
+            negative+=analysis.get().getNegative();
+            neutral+=analysis.get().getNeutral();
         }
 
         Analysis result = new Analysis();
         result.setPositive(positive);
         result.setNeutral(neutral);
         result.setNegative(negative);
-        System.out.println("서비스           "+ result);
 
-        return AnalysisResponse.getAllEmotion.build(result);
+        return AnalysisResponse.getReport.build(positive, negative, neutral, pCnt, negCnt, neuCnt, bDate);
 
     }
 

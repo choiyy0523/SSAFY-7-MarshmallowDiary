@@ -55,8 +55,8 @@ public class AnalysisController {
 
     @GetMapping("/all")
     @ApiOperation(value = "전체 기간 동안 감정 분석 결과 조회", notes = "전체 기간동안 긍정, 중립, 부장의 값의 합을 제공")
-    ResponseEntity<AnalysisResponse.getAllEmotion> getAllEmotion() {
-        AnalysisResponse.getAllEmotion result = analysisService.getAllEmotion();
+    ResponseEntity<AnalysisResponse.getReport> getAllEmotion() {
+        AnalysisResponse.getReport result = analysisService.getAllEmotion();
         return ResponseEntity.status(200).body(result);
     }
 
