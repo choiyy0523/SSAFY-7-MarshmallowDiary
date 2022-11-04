@@ -18,8 +18,10 @@ public class JwtTokenProvider {
 
     @Value("${spring.jwt.secretKey}")
     private String secretKey;
-    private static final long ACCESS_TOKEN_EXPIRE_TIME = 60 * 60 * 24 * 7 * 4; // s
-    private static final long REFRESH_TOKEN_EXPIRE_TIME = 60 * 60 * 24 * 7 * 8; // s
+    @Value("${jwt.expirationtime.access}")
+    private long ACCESS_TOKEN_EXPIRE_TIME; // s
+    @Value("${jwt.expirationtime.refresh}")
+    private long REFRESH_TOKEN_EXPIRE_TIME; // s
     @Autowired
     private UserDetailsService userDetailsService;
 

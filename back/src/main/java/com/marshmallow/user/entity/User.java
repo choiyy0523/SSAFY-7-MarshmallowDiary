@@ -37,7 +37,6 @@ public class User {
     private String socialId;
 
     @Column(name = "password")
-//    @ColumnDefault("'pwd'")
     private String password;
 
     @Column(name = "role")

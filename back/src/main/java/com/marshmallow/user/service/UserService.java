@@ -6,6 +6,7 @@ import com.marshmallow.user.dto.UserResponse;
 import com.marshmallow.user.entity.User;
 import com.marshmallow.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -14,6 +15,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
+
+import java.util.concurrent.TimeUnit;
 
 @Service
 public class UserService {
@@ -27,6 +30,8 @@ public class UserService {
     private PasswordEncoder passwordEncoder;
     @Autowired
     private RedisTemplate<String, String> redisTemplate;
+    @Value("${jwt.expirationtime.refresh}")
+    private long REFRESH_TOKEN_EXPIRE_TIME; // s
 
     public UserResponse.Token login(UserRequest.Login loginDto) {
         User user = userRepository.findBySocialId(loginDto.getAuthId()).orElseGet(() -> userRepository.saveAndFlush(User.builder().username(loginDto.getAuthId()).socialId(loginDto.getAuthId()).nickname(loginDto.getNickname()).password(passwordEncoder.encode("pwd")).role("ROLE_USER").build()));
@@ -36,14 +41,13 @@ public class UserService {
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String accessToken = tokenProvider.generateToken(authentication);
         String refreshToken = tokenProvider.generateRefreshToken();
-//        Base64.Decoder decoder = Base64.getDecoder();
-//        String payload = new String(decoder.decode(token.split("[.]")[1]));
 
         // RefreshToken Redis에 업데이트
         redisTemplate.opsForValue().set(
                 user.getUserId().toString(),
                 refreshToken
         );
+        redisTemplate.expire(user.getUserId().toString(), REFRESH_TOKEN_EXPIRE_TIME, TimeUnit.SECONDS);
 
         // refresh token 저장하기
         return UserResponse.Token.builder()
@@ -80,5 +84,24 @@ public class UserService {
                 .refreshToken(refreshToken)
                 .build();
 
+    }
+
+    public UserResponse.Result delete() {
+        userRepository.delete(getCurrentUser());
+        return UserResponse.Result.builder()
+                .result("success")
+                .message("회원 탈퇴 완료").build();
+    }
+
+    public UserResponse.Result logout() {
+        redisTemplate.delete(getCurrentUser().getUserId().toString());
+        return UserResponse.Result.builder()
+                .result("success")
+                .message("로그아웃 완료").build();
+    }
+
+    private User getCurrentUser() {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        return userRepository.findByUsername(username);
     }
 }

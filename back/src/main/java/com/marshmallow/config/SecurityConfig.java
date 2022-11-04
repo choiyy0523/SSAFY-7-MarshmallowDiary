@@ -45,6 +45,8 @@ public class SecurityConfig {
                 .authorizeRequests()
                 .antMatchers("/diary/**").authenticated()
                 .antMatchers("/analysis/**").authenticated()
+                .antMatchers("/user/delete").authenticated()
+                .antMatchers("/user/logout").authenticated()
                 .and()
                 .build();
     }
