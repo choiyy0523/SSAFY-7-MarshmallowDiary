@@ -1,6 +1,7 @@
 package com.marshmallow.diary.repository;
 
 import com.marshmallow.diary.entity.Diary;
+import com.marshmallow.user.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Date;
@@ -23,6 +24,10 @@ public interface DiaryRepository extends JpaRepository<Diary, UUID> {
     List<Diary> findAllByUser_UserIdAndTitleContainingOrContentContainingOrderByDateDesc(UUID userId, String keyword, String word);
 
     List<Diary> findAllByUser_UserId(UUID userId);
+
+    public interface DiaryRepositoryCustom {
+        List<Diary> test(User user, String keyword);
+    }
 }
 
 
