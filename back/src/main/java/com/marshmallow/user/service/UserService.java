@@ -16,6 +16,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 @Service
@@ -61,7 +62,7 @@ public class UserService {
         if (!StringUtils.hasText(reissueRequest.getRefreshToken()) || !tokenProvider.validateToken(reissueRequest.getRefreshToken())) {
             throw new Exception();
         }
-        User user = userRepository.findByUsername(reissueRequest.getAuthId());
+        User user = userRepository.findByUserId(UUID.fromString(reissueRequest.getUserId()));
 
         // refresh token 확인
         String token = redisTemplate.opsForValue().get(user.getUserId().toString());
@@ -69,7 +70,7 @@ public class UserService {
             throw new Exception();
         }
 
-        String accessToken = tokenProvider.generateToken(reissueRequest.getAuthId());
+        String accessToken = tokenProvider.generateToken(user.getUsername());
         String refreshToken = tokenProvider.generateRefreshToken();
 
         // RefreshToken Redis에 업데이트
