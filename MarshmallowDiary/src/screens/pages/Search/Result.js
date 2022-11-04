@@ -96,7 +96,14 @@ const Result = ({route, navigation}) => {
                 <Icon name='search' type='fontawesome' />
               </TouchableOpacity>
           </View>
+          <TouchableOpacity style={{ fontWeight: 'bold', marginLeft: '3%' }} onPress={() => navigation.navigate('Result')}>
+            <Icon name='search' type='fontawesome' />
+          </TouchableOpacity>
+
+
+
         </View>
+      </View>
 
         {searchResult == undefined || (searchResult != undefined && searchResult.length == 0) ?  
           <View style={{ alignItems: 'center', justifyContent: 'center', flex: 1 }}>
