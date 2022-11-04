@@ -10,4 +10,5 @@ public interface UserRepository extends JpaRepository<User, UUID> {
     Optional<User> findBySocialId(String authId);
     User saveAndFlush(User entity);
     User findByUsername(String username);
+    User findByUserId(UUID userId);
 }

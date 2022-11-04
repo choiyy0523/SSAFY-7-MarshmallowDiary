@@ -11,7 +11,7 @@ public class UserRequest {
 
     @Getter
     public static class Reissue {
-        private String authId;
+        private String userId;
         private String refreshToken;
     }
 
