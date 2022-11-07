@@ -4,6 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import StackNavigation from './navigations/Stack';
 import { Provider as PaperProvider } from 'react-native-paper';
 import { Text } from 'react-native-paper';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 // import { configureFonts, DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
 // import { ThemeProvider } from "styled-components"
 // import SplashScreen from 'react-native-splash-screen';
@@ -83,10 +84,16 @@ const App = () => {
   //   }
   // });
 
+
+
+  // AsyncStorage.setItem(theme, lightTheme)
+  //   .then(() => console.log('테마 변경 성공'))
+  //   .catch(e => console.log('테마 변경 실패', e.message))
+
   return (
-    <PaperProvider theme={darkTheme}>
-      <NavigationContainer theme={darkTheme} >
-        <StackNavigation theme={darkTheme} />
+    <PaperProvider theme={lightTheme}>
+      <NavigationContainer theme={lightTheme} >
+        <StackNavigation theme={lightTheme} />
       </NavigationContainer>
     </PaperProvider>
   )
