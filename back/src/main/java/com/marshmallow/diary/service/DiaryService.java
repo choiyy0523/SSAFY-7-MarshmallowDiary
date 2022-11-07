@@ -11,6 +11,7 @@ import com.marshmallow.diary.repository.DiaryRepository;
 import com.marshmallow.diary.repository.DiaryRepositoryImpl;
 import com.marshmallow.exception.AlreadyRegistDiary;
 import com.marshmallow.exception.CanNotRegistDiary;
+import com.marshmallow.exception.NotFindDiary;
 import com.marshmallow.user.entity.User;
 import com.marshmallow.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -50,7 +51,7 @@ public class DiaryService {
     private final AwsS3Service awsS3Service;
 
     private final DiaryRepositoryImpl diaryRepoImpl;
-    public DiaryResponse.Regist registDiary(DiaryRequest.Create request , List<MultipartFile> multipartFile) throws IOException, JSONException, AlreadyRegistDiary, CanNotRegistDiary {
+    public DiaryResponse.Regist registDiary(DiaryRequest.Create request) throws IOException, JSONException, AlreadyRegistDiary, CanNotRegistDiary {
 
         User user = this.getCurrentUser();
         Optional<Diary> checkdiary = diaryRepository.findByUser_UserIdAndDate(user.getUserId(), request.getDate());
@@ -61,11 +62,6 @@ public class DiaryService {
             throw new CanNotRegistDiary();
         }
         String photos = null;
-        if(multipartFile != null){
-            List<String> photo = awsS3Service.uploadFile(multipartFile);
-            photos = photo.toString();
-        }
-        System.out.println(request.getDate()+" 입력으로 들어온 날짜");
         Diary diary = Diary.DiaryCreate(user, request, photos);
         Diary saved = diaryRepository.save(diary);
         DiaryResponse.Regist response = DiaryResponse.Regist.build(saved.getDate());
@@ -120,6 +116,27 @@ public class DiaryService {
 
     }
 
+    public DiaryResponse.Regist registPhoto(List<MultipartFile> multipartFile, Date date) throws NotFindDiary {
+
+        User user = this.getCurrentUser();
+        Optional<Diary> diary = diaryRepository.findByUser_UserIdAndDate(user.getUserId(), date);
+        if(!diary.isPresent()){
+            throw new NotFindDiary();
+        }
+
+        String photos = null;
+        if(multipartFile != null){
+            List<String> photo = awsS3Service.uploadFile(multipartFile);
+            photos = photo.toString();
+        }
+        System.out.println(photos+" 저장한 사진 파일");
+        diary.get().setPhoto(photos);
+        Diary saved = diaryRepository.save(diary.get());
+        DiaryResponse.Regist response = DiaryResponse.Regist.build(saved.getDate());
+
+        return response;
+    }
+
     public DiaryResponse.Detail getDetailDiary(Date date) {
         User user = this.getCurrentUser();
         Optional<Diary> diary = diaryRepository.findByUser_UserIdAndDate(user.getUserId(), date);
@@ -171,7 +188,7 @@ public class DiaryService {
         String ed = request.getYear()+"-"+request.getMonth()+"-"+lastday;
         Date startDay = dateFormat.parse(st);
         Date endDay = dateFormat.parse(ed);
-        List<Diary> diaryList = diaryRepository.findAllByUser_UserIdAndDateBetween(user.getUserId(),startDay, endDay);
+        List<Diary> diaryList = diaryRepository.findAllByUser_UserIdAndDateBetweenOrderByDate(user.getUserId(),startDay, endDay);
         List<MainDiaryInfo> list = new ArrayList<>();
         for(Diary d : diaryList){
             Optional<Analysis> analysis = anaylsisRepository.findByDiary_DiaryId(d.getDiaryId());
