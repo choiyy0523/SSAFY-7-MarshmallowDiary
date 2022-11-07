@@ -16,6 +16,7 @@ const Home = ({ navigation }) => {
             <Button title='go to the main screen' onPress={() => navigation.navigate('Main')} />
             <Button title='로그인' onPress={() => navigation.navigate('Login')} />
             <Button title='패스워드' onPress={() => navigation.navigate('Password')} />
+            <Button title='달력' onPress={() => navigation.navigate('Calendar')} />
         </View>
 
     )

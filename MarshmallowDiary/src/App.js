@@ -2,11 +2,13 @@ import React, { useState, useEffect } from "react";
 import { StyleSheet, Dimensions } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import StackNavigation from './navigations/Stack';
+
 import { Provider as PaperProvider } from 'react-native-paper';
 import { Text } from 'react-native-paper';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 // import { configureFonts, DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
 // import { ThemeProvider } from "styled-components"
+
 // import SplashScreen from 'react-native-splash-screen';
 // import { lightTheme, darkTheme } from "./theme/theme";
 
@@ -91,11 +93,13 @@ const App = () => {
   //   .catch(e => console.log('테마 변경 실패', e.message))
 
   return (
+
     <PaperProvider theme={lightTheme}>
       <NavigationContainer theme={lightTheme} >
         <StackNavigation theme={lightTheme} />
       </NavigationContainer>
     </PaperProvider>
+
   )
 }
 

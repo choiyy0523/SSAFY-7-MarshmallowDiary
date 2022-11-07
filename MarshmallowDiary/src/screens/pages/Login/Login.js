@@ -14,6 +14,7 @@ import {
 
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import http  from '../../../api/http';
 
 
 const Login = ({navigation}) => {
@@ -35,9 +36,6 @@ const Login = ({navigation}) => {
   const getKakaoProfile = async (): Promise<void> => {
     const profile: KakaoProfile = await getProfile();
   
-    // setResult2(JSON.stringify(profile));
-    // console.log(profile.id)
-    // console.log(profile.nickname)
     axios.post('http://k7a303.p.ssafy.io:9090/api/v1/user/login', {
       authId: profile.id,
       nickname: profile.nickname,
@@ -45,11 +43,29 @@ const Login = ({navigation}) => {
     .then(res => {
       console.log(res.data)
       console.log(res.data.userId)
-      
-      AsyncStorage.mergeItem('token', JSON.stringify(res.data.accessToken))
-      AsyncStorage.mergeItem('isNew', false)
+      console.log(res.data.accessToken)
+      console.log(res.data.refreshToken)
+
+      AsyncStorage.setItem('token', res.data.accessToken)
+      AsyncStorage.setItem('isNew', 'false')
+      AsyncStorage.setItem('refresh', res.data.refreshToken)
+      AsyncStorage.setItem('userId', res.data.userId)
       
     })
+
+    // http.post('/user/login', {
+    //   authId: profile.id,
+    //   nickname: profile.nickname,
+    // })
+    // .then(res => {
+    //   console.log(res.data)
+    //   console.log(res.data.userId)
+    //   console.log(res.data.accessToken)
+
+    //   AsyncStorage.setItem('token', res.data.accessToken)
+    //   AsyncStorage.setItem('isNew', 'false')
+      
+    // })
   };
 
 
@@ -70,8 +86,8 @@ const Login = ({navigation}) => {
         </View>
         {/* <Text>result : {result}</Text>
         <Text>result2 : {result2}</Text> */}
-
-        <TouchableOpacity onPress={() => signInWithKakao() && getKakaoProfile()}>
+        
+        <TouchableOpacity style={{ flex:0.3 }} onPress={() => signInWithKakao() && getKakaoProfile()}>
           <Image source={kakao} style={{ marginTop: '40%' }} />
         </TouchableOpacity>
       </View>

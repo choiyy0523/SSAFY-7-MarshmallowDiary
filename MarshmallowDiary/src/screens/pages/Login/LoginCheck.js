@@ -1,8 +1,41 @@
 import React, { useState, useEffect } from 'react';
 import { Text, View } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { KakaoProfile, getProfile } from '@react-native-seoul/kakao-login';
 
 const LoginCheck = ({navigation}) => {
+  
+  useEffect(() => {
+    AsyncStorage.getAllKeys((err, keys) => {
+      AsyncStorage.multiGet(keys, (err, stores) => {
+        var id = ''
+        var refresh= ''
+        stores.map((result, i, store) => {
+          if (stores[i][0] == 'userId') {
+            id = store[i][1]
+          }
+          if (stores[i][0] == 'refresh') {
+            refresh = store[i][1]
+          }
+        });
+        console.log('id', id)
+        console.log('refresh', refresh)
+  
+        if (id != null && refresh != null) {
+          axios.post('http://k7a303.p.ssafy.io:9090/api/v1/user/reissue', {
+            userId: id,
+            refreshToken: refresh
+          })
+          .then(res => {
+            console.log(res.data)
+            AsyncStorage.setItem('token', res.data.accessToken)
+            AsyncStorage.setItem('refresh', res.data.refreshToken)
+          })
+        }
+      });
+    })
+  }, [])
+
   // 최초 접속 유저의 경우 isNew = 없는 키 >> 값이 null
   AsyncStorage.getItem('isNew', (err, result) => {
     const isNew = result;
@@ -10,7 +43,7 @@ const LoginCheck = ({navigation}) => {
       AsyncStorage.setItem('token', '')
       AsyncStorage.setItem('isExpire', '')
       AsyncStorage.setItem('password', '')
-      AsyncStorage.setItem('isNew', true)      
+      AsyncStorage.setItem('isNew', 'true')      
     }
   });
 

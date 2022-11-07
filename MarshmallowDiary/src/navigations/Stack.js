@@ -23,6 +23,7 @@ import PwReset from '../screens/pages/Settings/PwReset';
 import Settings from '../screens/pages/Settings/Settings';
 import Terms from '../screens/pages/Settings/Terms';
 import ResetCheck from '../screens/pages/Settings/ResetCheck';
+import Calendar from '../screens/pages/Main/Calendar'
 
 
 const Stack = createStackNavigator();
@@ -54,6 +55,7 @@ const StackNavigation = () => {
       <Stack.Screen name='ResetCheck' component={ResetCheck} />
       <Stack.Screen name='Settings' component={Settings} />
       <Stack.Screen name='Terms' component={Terms} />
+      <Stack.Screen name='Calendar' component={Calendar} />
     </Stack.Navigator>
   );
 };
