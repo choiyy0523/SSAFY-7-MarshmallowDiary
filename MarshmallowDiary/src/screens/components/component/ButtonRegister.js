@@ -5,7 +5,7 @@ import DiaryRegister from '../../pages/Diary/Register4';
 const ButtonRegister = () => {
   return (
     <View>
-      <TouchableOpacity onPress={DiaryRegister}>
+      <TouchableOpacity onPress={() => {DiaryRegister}}>
         {/* 여기서 onPress걸어 DB 보내기 */}
         <View style={styles.buttonRegister}>
           <Text style={styles.buttonText}>등록</Text>

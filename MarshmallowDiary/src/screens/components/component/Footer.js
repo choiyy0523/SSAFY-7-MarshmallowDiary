@@ -8,7 +8,10 @@ import negative from '../../../assets/images/character/negative.png'
 import search from '../../../assets/images/footer/search.png'
 import settings from '../../../assets/images/footer/settings.png'
 import { useNavigation, useRoute } from '@react-navigation/native';
+import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
+const Footer = () => {
   const navigation = useNavigation()
   const route = useRoute()
 
@@ -41,10 +44,10 @@ import { useNavigation, useRoute } from '@react-navigation/native';
 
   return (
     <SafeAreaView>
-      <View style={{ height: 60 }}>
+      <View style={{ height: 60, backgroundColor: '#FFF9F8' }}>
         <View style={{ flexDirection: 'row' }}>
           {route.name === 'Main' ?
-            <TouchableOpacity style={{ width: '20%', alignItems: 'center', justifyContent: 'center', flex: 1, height: 60, backgroundColor: 'rgba(251, 198, 135, 0.3)' }} onPress={() => navigation.navigate('Main')}>
+            <TouchableOpacity style={{ width: '20%', alignItems: 'center', justifyContent: 'center', flex: 1, height: 60, backgroundColor: 'rgba(251, 198, 135, 0.3)' }}>
               <Image source={home} style={{ width: 33, height: 33 }} />
             </TouchableOpacity> :
             <TouchableOpacity style={{ width: '20%', alignItems: 'center', justifyContent: 'center', flex: 1 }} onPress={() => navigation.navigate('Main')}>
@@ -52,7 +55,7 @@ import { useNavigation, useRoute } from '@react-navigation/native';
             </TouchableOpacity>}
 
           {route.name === 'Analysis' ?
-            <TouchableOpacity style={{ width: '20%', alignItems: 'center', justifyContent: 'center', flex: 1, height: 60, backgroundColor: 'rgba(251, 198, 135, 0.3)' }} onPress={() => navigation.navigate('Analysis')}>
+            <TouchableOpacity style={{ width: '20%', alignItems: 'center', justifyContent: 'center', flex: 1, height: 60, backgroundColor: 'rgba(251, 198, 135, 0.3)' }}>
               <Image source={analysis} style={{ width: 33, height: 33 }} />
             </TouchableOpacity> :
             <TouchableOpacity style={{ width: '20%', alignItems: 'center', justifyContent: 'center', flex: 1 }} onPress={() => navigation.navigate('Analysis')}>
@@ -62,8 +65,10 @@ import { useNavigation, useRoute } from '@react-navigation/native';
 
           {/* 오늘 detail 없으면 register, 있으면 detail로 보내는 함수 db 적용 후 작성예정 */}
           {route.name === 'Register' || route.name === 'Detail' ?
-            <TouchableOpacity style={{ width: '20%', alignItems: 'center', justifyContent: 'center', flex: 1, height: 60, backgroundColor: 'rgba(251, 198, 135, 0.3)' }} onPress={() => navigation.navigate('Register')}>
-              <Image source={positive} style={{ width: 33, height: 33 }} />
+            <TouchableOpacity style={{ width: '20%', alignItems: 'center', justifyContent: 'center', flex: 1, height: 60, backgroundColor: 'rgba(251, 198, 135, 0.3)' }}>
+              {loyalty == '0' ? <Image source={positive} style={{ width: 33, height: 33 }} /> : 
+              loyalty == '1' ?  <Image source={neutral} style={{ width: 33, height: 33 }} /> : 
+                                  <Image source={negative} style={{ width: 33, height: 33 }} /> }
             </TouchableOpacity> :
             <TouchableOpacity style={{ width: '20%', alignItems: 'center', justifyContent: 'center', flex: 1 }} onPress={() => navigation.navigate('Register')}>
               {loyalty == '0' || loyalty == undefined ? <Image source={positive} style={{ width: 33, height: 33 }} /> : 
@@ -73,7 +78,7 @@ import { useNavigation, useRoute } from '@react-navigation/native';
           }
 
           {route.name === 'Search' || route.name === 'Result' ?
-            <TouchableOpacity style={{ width: '20%', alignItems: 'center', justifyContent: 'center', flex: 1, height: 60, backgroundColor: 'rgba(251, 198, 135, 0.3)' }} onPress={() => navigation.navigate('Search')}>
+            <TouchableOpacity style={{ width: '20%', alignItems: 'center', justifyContent: 'center', flex: 1, height: 60, backgroundColor: 'rgba(251, 198, 135, 0.3)' }}>
               <Image source={search} style={{ width: 33, height: 33 }} />
             </TouchableOpacity> :
             <TouchableOpacity style={{ width: '20%', alignItems: 'center', justifyContent: 'center', flex: 1 }} onPress={() => navigation.navigate('Search')}>
@@ -82,7 +87,7 @@ import { useNavigation, useRoute } from '@react-navigation/native';
           }
 
           {route.name === 'Settings' || route.name === 'Push' ?
-            <TouchableOpacity style={{ width: '20%', alignItems: 'center', justifyContent: 'center', flex: 1, height: 60, backgroundColor: 'rgba(251, 198, 135, 0.3)' }} onPress={() => navigation.navigate('Settings')}>
+            <TouchableOpacity style={{ width: '20%', alignItems: 'center', justifyContent: 'center', flex: 1, height: 60, backgroundColor: 'rgba(251, 198, 135, 0.3)' }}>
               <Image source={settings} style={{ width: 33, height: 33 }} />
             </TouchableOpacity> :
             <TouchableOpacity style={{ width: '20%', alignItems: 'center', justifyContent: 'center', flex: 1 }} onPress={() => navigation.navigate('Settings')}>
@@ -97,5 +102,4 @@ import { useNavigation, useRoute } from '@react-navigation/native';
   )
 };
 
-// export default withTheme(Footer);
 export default Footer;
