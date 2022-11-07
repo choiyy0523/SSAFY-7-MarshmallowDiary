@@ -121,7 +121,7 @@ public class AnalysisService {
         System.out.println("현재"+LocalDate.now());
         System.out.println("시작월"+start);
         System.out.println("끝"+end);
-        List<Diary> diary = diaryRepository.findAllByUser_UserIdAndDateBetween(userId, start, end);
+        List<Diary> diary = diaryRepository.findAllByUser_UserIdAndDateBetweenOrderByDate(userId, start, end);
 
         String idx = "-1";
         String date = "-1";
@@ -204,7 +204,7 @@ public class AnalysisService {
 
 
         UUID userId = getCurrentUser().getUserId();
-        List<Diary> diary = diaryRepository.findAllByUser_UserIdAndDateBetween(userId, startDay, endDay);
+        List<Diary> diary = diaryRepository.findAllByUser_UserIdAndDateBetweenOrderByDate(userId, startDay, endDay);
 
         float positive = 0.0f;
         float negative = 0.0f;

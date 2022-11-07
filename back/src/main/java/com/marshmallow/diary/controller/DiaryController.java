@@ -5,10 +5,12 @@ import com.marshmallow.diary.dto.DiaryResponse;
 import com.marshmallow.diary.service.DiaryService;
 import com.marshmallow.exception.AlreadyRegistDiary;
 import com.marshmallow.exception.CanNotRegistDiary;
+import com.marshmallow.exception.NotFindDiary;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -28,10 +30,19 @@ public class DiaryController {
 
     private final DiaryService diaryService;
 
-    @PostMapping("/regist")
-    @ApiOperation(value="다이어리 등록", notes = "제목,내용,날씨,사진,날짜를 입력받아 다이어리를 등록하는 기능")
-    public ResponseEntity<DiaryResponse.Regist> regist(@RequestPart(value = "photos" ,required = false)  List<MultipartFile> photos, @RequestPart(value = "diary") DiaryRequest.Create diary) throws JSONException, IOException, AlreadyRegistDiary, CanNotRegistDiary {
-        return ResponseEntity.ok().body(diaryService.registDiary(diary, photos));
+    @PostMapping("/regist/diary")
+    @ApiOperation(value="다이어리 내용 등록", notes = "제목,내용,날씨,날짜를 입력받아 다이어리를 등록하는 기능")
+    public ResponseEntity<DiaryResponse.Regist> registDiary( @RequestBody DiaryRequest.Create diary) throws JSONException, IOException, AlreadyRegistDiary, CanNotRegistDiary {
+        return ResponseEntity.ok().body(diaryService.registDiary(diary));
+    }
+
+//    @PostMapping("/regist/photo/{date}")
+    @RequestMapping(path = "/regist/photo/{date}", method = RequestMethod.POST,
+            consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
+    @ApiOperation(value="다이어리 사진 등록", notes = "사진을 입력받아 다이어리를 등록하는 기능")
+    public ResponseEntity<DiaryResponse.Regist> registPhoto(@RequestPart(value = "photos" ,required = false)  List<MultipartFile> photos, @PathVariable("date") @DateTimeFormat(pattern="yyyy-MM-dd") Date date) throws NotFindDiary {
+        System.out.println(photos+" : 입력으로 들어온 사진");
+        return ResponseEntity.ok().body(diaryService.registPhoto(photos, date));
     }
 
     @GetMapping("/detail/{date}")
@@ -56,7 +67,9 @@ public class DiaryController {
 
     @GetMapping("")
     @ApiOperation(value="한달 다이어리 기록 조회", notes = "요청한 연도, 월에 맞는 다이어리 기록 조회 기능")
-    public ResponseEntity<?> totalDiary(@RequestBody DiaryRequest.TotalDiary request) throws ParseException {
+    public ResponseEntity<?> totalDiary(@ModelAttribute DiaryRequest.TotalDiary request) throws ParseException {
+        System.out.println(request.getMonth());
+        System.out.println(request.getYear());
         return ResponseEntity.ok().body(diaryService.searchTotalDiary(request));
     }
 

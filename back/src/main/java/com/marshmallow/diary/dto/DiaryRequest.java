@@ -33,6 +33,7 @@ public class DiaryRequest {
         @NoArgsConstructor(access = AccessLevel.PRIVATE)
         @AllArgsConstructor(access = AccessLevel.PRIVATE)
         @ToString
+        @Setter
         public static class TotalDiary{
                 private int year;
                 private int month;
