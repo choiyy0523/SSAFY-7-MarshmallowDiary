@@ -3,9 +3,6 @@ import axios from "axios";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
-
-
-
 const http = axios.create({
   baseURL: process.env.BASE_URL,
   headers: {

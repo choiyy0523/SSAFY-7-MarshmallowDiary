@@ -38,15 +38,18 @@ const Main = ({ navigation }) => {
         }
       })
       .then(res => {
-        setWords(res.data[0])
+        // console.log(res.data)
+        // console.log(typeof(res.data))
+        Object.entries(res.data).map(([k, v]) => {
+          // console.log('value', v)
+          setWords(v)
+        })
       })
     });
   }, [])
 
-
-
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{ flex: 1, backgroundColor:'#FFF9F8'  }}>
       <View style={{ flex: 1 }}>
         <Calendar
           style={{ marginTop: '5%' }}

@@ -8,6 +8,7 @@ import PieChart from 'react-native-pie-chart';
 import mm_positive from '../../../assets/images/mm/mm_positive.png'
 import mm_neutral from '../../../assets/images/mm/mm_neutral.png'
 import mm_negative from '../../../assets/images/mm/mm_negative.png'
+import ch_neutral from '../../../assets/images/character/neutral.png'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -17,7 +18,7 @@ const Analysis = () => {
   var today = new Date();
 
   var year = today.getFullYear();
-  var month = ('0' + (today.getMonth() + 1)).slice(-2);
+  var month = Number(('0' + (today.getMonth() + 1)).slice(-2));
 
   const [targetYear, setTargetYear] = useState(year)
   const [targetMonth, setTargetMonth] = useState(month)
@@ -41,10 +42,27 @@ const Analysis = () => {
         }
       })
       .then(res => {
-        console.log(targetMonth, targetYear, res.data)
-        setPositive(res.data.positive)
-        setNeutral(res.data.neutral)
-        setNegative(res.data.negative)
+        // setPositive(res.data.positive)
+        // setNeutral(res.data.neutral)
+        // setNegative(res.data.negative)
+        if ( res.data.positive == 0) {
+          setPositive(3200)
+        }
+        else {
+          setPositive(res.data.positive)
+        }
+        if (res.data.neutral == 0) {
+          setNeutral(3200)
+        }
+        else {
+          setNeutral(res.data.neutral)
+        }
+        if (res.data.negative == 0) {
+          setNegative(3200)
+        }
+        else {
+          setNegative(res.data.negative)
+        }
         setPcnt(res.data.positiveCnt)
         setNcnt(res.data.neutralCnt)
         setNgcnt(res.data.negativeCnt)
@@ -53,17 +71,20 @@ const Analysis = () => {
     });
   }
 
+  const widthAndHeight = 225
+  var series = [60, 25, 15]
+  series = [Math.round(positive), Math.round(neutral), Math.round(negative)]
+  // if (series[0] + series[1] + series[2] == 0) {
+  //   series = [3200, 3200, 3200]
+  // }
+
+
+  const sliceColor = ['#91C788', '#FBC687', '#F38181']
 
   useEffect(() => {
-    var today = new Date();
-    var year = today.getFullYear();
-    var month = ('0' + (today.getMonth() + 1)).slice(-2);
-    setTargetMonth(month)
-    setTargetYear(year)
-
     getMonth()
     console.log('p', pcnt, 'n', ncnt, 'ng', ngcnt)
-  }, [])
+  }, [targetMonth, targetYear])
 
   const getAll = () => {
     AsyncStorage.getItem('token', (err, result) => {
@@ -116,18 +137,10 @@ const Analysis = () => {
     setVisible3(true)
   }
 
-  const closeModal3 = () => {
+  const closeModal3 = async() => {
     setVisible3(false)
   }
 
-  const widthAndHeight = 225
-  var series = [60, 25, 15]
-  if ( pcnt+ncnt+ngcnt == 0 || pcnt == undefined || ncnt == undefined || ngcnt == undefined ) {}
-  else {
-    series = [Math.round(positive / (pcnt+ncnt+ngcnt)), Math.round(neutral / (pcnt+ncnt+ngcnt)), Math.round(negative / (pcnt+ncnt+ngcnt))]
-  } 
-
-  const sliceColor = ['#91C788', '#FBC687', '#F38181']
 
   return (
     <View style={{ backgroundColor: '#FFF9F8', flex: 1 }}>
@@ -138,7 +151,10 @@ const Analysis = () => {
       <View style={{ flex: 1.2, flexDirection: 'row' }}>
         <View style={{ marginLeft: '7.5%', justifyContent: 'center', flex: 0.7 }} >
           { pcnt+ncnt+ngcnt == 0 || pcnt == undefined || ncnt == undefined || ngcnt == undefined ?
-          null
+          <View style={{ flex:1, justifyContent:'center', alignItems:'center'}}>
+            <Image source={ch_neutral} style={{ width:100, height:100 }}/>
+            <Text>이 달엔 일기를 쓰지 않았어요</Text>
+          </View>
           :
           <PieChart
             widthAndHeight={widthAndHeight}
@@ -238,19 +254,19 @@ const Analysis = () => {
                 <View style={{ flex: 0.0625 }} />
                 <View style={{ flex: 0.25, flexDirection: 'row' }}>
                   <View style={{ flex: 0.04 }} />
-                  <Pressable style={{ flex: 0.2, backgroundColor: '#FFEBA5', justifyContent: 'center', alignItems: 'center', borderRadius: 30 }} onPress={() => { setTargetMonth(1); closeModal3(); getMonth(); }}>
+                  <Pressable style={{ flex: 0.2, backgroundColor: '#FFEBA5', justifyContent: 'center', alignItems: 'center', borderRadius: 30 }} onPress={() => { setTargetMonth(1); closeModal3(); }}>
                     <Text style={{ fontWeight: 'bold' }}>1월</Text>
                   </Pressable>
                   <View style={{ flex: 0.04 }} />
-                  <Pressable style={{ flex: 0.2, backgroundColor: '#FFEBA5', justifyContent: 'center', alignItems: 'center', borderRadius: 30 }} onPress={() => { setTargetMonth(2); closeModal3(); getMonth(); }}>
+                  <Pressable style={{ flex: 0.2, backgroundColor: '#FFEBA5', justifyContent: 'center', alignItems: 'center', borderRadius: 30 }} onPress={() => { setTargetMonth(2); closeModal3(); }}>
                     <Text style={{ fontWeight: 'bold' }}>2월</Text>
                   </Pressable>
                   <View style={{ flex: 0.04 }} />
-                  <Pressable style={{ flex: 0.2, backgroundColor: '#FFEBA5', justifyContent: 'center', alignItems: 'center', borderRadius: 30 }} onPress={() => { setTargetMonth(3); closeModal3(); getMonth();  }}>
+                  <Pressable style={{ flex: 0.2, backgroundColor: '#FFEBA5', justifyContent: 'center', alignItems: 'center', borderRadius: 30 }} onPress={() => { setTargetMonth(3); closeModal3(); }}>
                     <Text style={{ fontWeight: 'bold' }}>3월</Text>
                   </Pressable>
                   <View style={{ flex: 0.04 }} />
-                  <Pressable style={{ flex: 0.2, backgroundColor: '#FFEBA5', justifyContent: 'center', alignItems: 'center', borderRadius: 30 }} onPress={() => { setTargetMonth(4); closeModal3(); getMonth();  }}>
+                  <Pressable style={{ flex: 0.2, backgroundColor: '#FFEBA5', justifyContent: 'center', alignItems: 'center', borderRadius: 30 }} onPress={() => { setTargetMonth(4); closeModal3(); }}>
                     <Text style={{ fontWeight: 'bold' }}>4월</Text>
                   </Pressable>
                   <View style={{ flex: 0.04 }} />
@@ -258,19 +274,19 @@ const Analysis = () => {
                 <View style={{ flex: 0.0625 }} />
                 <View style={{ flex: 0.25, flexDirection: 'row' }}>
                   <View style={{ flex: 0.04 }} />
-                  <Pressable style={{ flex: 0.2, backgroundColor: '#FFEBA5', justifyContent: 'center', alignItems: 'center', borderRadius: 30 }} onPress={() => { setTargetMonth(5); closeModal3(); getMonth();  }}>
+                  <Pressable style={{ flex: 0.2, backgroundColor: '#FFEBA5', justifyContent: 'center', alignItems: 'center', borderRadius: 30 }} onPress={() => { setTargetMonth(5); closeModal3(); }}>
                     <Text style={{ fontWeight: 'bold' }}>5월</Text>
                   </Pressable>
                   <View style={{ flex: 0.04 }} />
-                  <Pressable style={{ flex: 0.2, backgroundColor: '#FFEBA5', justifyContent: 'center', alignItems: 'center', borderRadius: 30 }} onPress={() => { setTargetMonth(6); closeModal3(); getMonth();  }}>
+                  <Pressable style={{ flex: 0.2, backgroundColor: '#FFEBA5', justifyContent: 'center', alignItems: 'center', borderRadius: 30 }} onPress={() => { setTargetMonth(6); closeModal3(); }}>
                     <Text style={{ fontWeight: 'bold' }}>6월</Text>
                   </Pressable>
                   <View style={{ flex: 0.04 }} />
-                  <Pressable style={{ flex: 0.2, backgroundColor: '#FFEBA5', justifyContent: 'center', alignItems: 'center', borderRadius: 30 }} onPress={() => { setTargetMonth(7); closeModal3(); getMonth();  }}>
+                  <Pressable style={{ flex: 0.2, backgroundColor: '#FFEBA5', justifyContent: 'center', alignItems: 'center', borderRadius: 30 }} onPress={() => { setTargetMonth(7); closeModal3(); }}>
                     <Text style={{ fontWeight: 'bold' }}>7월</Text>
                   </Pressable>
                   <View style={{ flex: 0.04 }} />
-                  <Pressable style={{ flex: 0.2, backgroundColor: '#FFEBA5', justifyContent: 'center', alignItems: 'center', borderRadius: 30 }} onPress={() => { setTargetMonth(8); closeModal3(); getMonth();  }}>
+                  <Pressable style={{ flex: 0.2, backgroundColor: '#FFEBA5', justifyContent: 'center', alignItems: 'center', borderRadius: 30 }} onPress={() => { setTargetMonth(8); closeModal3();  }}>
                     <Text style={{ fontWeight: 'bold' }}>8월</Text>
                   </Pressable>
                   <View style={{ flex: 0.04 }} />
@@ -278,19 +294,19 @@ const Analysis = () => {
                 <View style={{ flex: 0.0625 }} />
                 <View style={{ flex: 0.25, flexDirection: 'row' }}>
                   <View style={{ flex: 0.04 }} />
-                  <Pressable style={{ flex: 0.2, backgroundColor: '#FFEBA5', justifyContent: 'center', alignItems: 'center', borderRadius: 30 }} onPress={() => { setTargetMonth(9); closeModal3(); getMonth();  }}>
+                  <Pressable style={{ flex: 0.2, backgroundColor: '#FFEBA5', justifyContent: 'center', alignItems: 'center', borderRadius: 30 }} onPress={() => { setTargetMonth(9); closeModal3(); }}>
                     <Text style={{ fontWeight: 'bold' }}>9월</Text>
                   </Pressable>
                   <View style={{ flex: 0.04 }} />
-                  <Pressable style={{ flex: 0.2, backgroundColor: '#FFEBA5', justifyContent: 'center', alignItems: 'center', borderRadius: 30 }} onPress={() => { setTargetMonth(10); closeModal3(); getMonth();  }}>
+                  <Pressable style={{ flex: 0.2, backgroundColor: '#FFEBA5', justifyContent: 'center', alignItems: 'center', borderRadius: 30 }} onPress={() => { setTargetMonth(10); closeModal3(); }}>
                     <Text style={{ fontWeight: 'bold' }}>10월</Text>
                   </Pressable>
                   <View style={{ flex: 0.04 }} />
-                  <Pressable style={{ flex: 0.2, backgroundColor: '#FFEBA5', justifyContent: 'center', alignItems: 'center', borderRadius: 30 }} onPress={() => { setTargetMonth(11); closeModal3(); getMonth();  }}>
+                  <Pressable style={{ flex: 0.2, backgroundColor: '#FFEBA5', justifyContent: 'center', alignItems: 'center', borderRadius: 30 }} onPress={() => { setTargetMonth(11); closeModal3(); }}>
                     <Text style={{ fontWeight: 'bold' }}>11월</Text>
                   </Pressable>
                   <View style={{ flex: 0.04 }} />
-                  <Pressable style={{ flex: 0.2, backgroundColor: '#FFEBA5', justifyContent: 'center', alignItems: 'center', borderRadius: 30 }} onPress={() => { setTargetMonth(12); closeModal3(); getMonth();  }}>
+                  <Pressable style={{ flex: 0.2, backgroundColor: '#FFEBA5', justifyContent: 'center', alignItems: 'center', borderRadius: 30 }} onPress={() => { setTargetMonth(12); closeModal3(); }}>
                     <Text style={{ fontWeight: 'bold' }}>12월</Text>
                   </Pressable>
                   <View style={{ flex: 0.04 }} />
@@ -302,15 +318,24 @@ const Analysis = () => {
 
           <View style={{ flexDirection: 'row', marginTop: '25%' }}>
             <Image source={mm_positive} style={{ width: 23, height: 23 }} />
-            <Text style={{ fontSize: 15, marginLeft: '3%' }}>긍정 {series[0]}%</Text>
+            {positive != 3200 ? 
+              <Text style={{ fontSize: 15, marginLeft: '3%' }}>
+                긍정 {Math.round(series[0]/(pcnt+ncnt+ngcnt))}%
+              </Text> : null}
           </View>
           <View style={{ flexDirection: 'row', marginTop: '15%' }}>
             <Image source={mm_neutral} style={{ width: 23, height: 23 }} />
-            <Text style={{ fontSize: 15, marginLeft: '3%' }}>중립 {series[1]}%</Text>
+            {neutral != 3200 ? 
+            <Text style={{ fontSize: 15, marginLeft: '3%' }}>
+              중립 {Math.round(series[1]/(pcnt+ncnt+ngcnt))}%
+            </Text> : null }
           </View>
           <View style={{ flexDirection: 'row', marginTop: '15%' }}>
             <Image source={mm_negative} style={{ width: 23, height: 23 }} />
-            <Text style={{ fontSize: 15, marginLeft: '3%' }}>부정 {series[2]}%</Text>
+            {negative != 3200 ?
+            <Text style={{ fontSize: 15, marginLeft: '3%' }}>
+              부정 {Math.round(series[2]/(pcnt+ncnt+ngcnt))}%
+            </Text> : null }
           </View>
         </View>
       </View>
