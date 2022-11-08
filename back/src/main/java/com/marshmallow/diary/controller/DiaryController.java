@@ -32,7 +32,8 @@ public class DiaryController {
 
     @PostMapping("/regist/diary")
     @ApiOperation(value="다이어리 내용 등록", notes = "제목,내용,날씨,날짜를 입력받아 다이어리를 등록하는 기능")
-    public ResponseEntity<DiaryResponse.Regist> registDiary( @RequestBody DiaryRequest.Create diary) throws JSONException, IOException, AlreadyRegistDiary, CanNotRegistDiary {
+    public ResponseEntity<DiaryResponse.Regist> registDiary(@RequestBody DiaryRequest.Created diary) throws JSONException, IOException, AlreadyRegistDiary, CanNotRegistDiary {
+        System.out.println(diary);
         return ResponseEntity.ok().body(diaryService.registDiary(diary));
     }
 

@@ -21,7 +21,7 @@ public class MusicController {
 
     @PostMapping("/regist")
     @ApiOperation(value="노래 등록", notes = "노래 제목, 가수, 감정, url 입력하여 노래 등록하는 기능")
-    public ResponseEntity<?> registDiary(@RequestBody MusicRequest.Create request){
+    public ResponseEntity<?> registMusic(@RequestBody MusicRequest.Create request){
         int regist = musicService.regist(request);
         if(regist == 0){
             return ResponseEntity.ok().body("true");
