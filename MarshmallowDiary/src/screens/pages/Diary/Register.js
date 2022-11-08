@@ -10,42 +10,37 @@ import axios from 'axios'
 import { connect } from 'react-redux'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { set } from 'date-fns';
+import { http } from '../../../api/http'
 
 
 export default function DiaryRegister() {
 
   // Asyncstorage에서 토큰을 받고, 토큰이 있으면 토큰을 헤더로 넣어 diary를 post 한다 
-  useEffect(() => {
-    AsyncStorage.getItem('token', (err, result) => {
-      const token = result;
-      console.log(token)
-    })
-  }, [])
 
-  async function Register(token) {
+  function Register() {
     // const { date } = route.params;
     // const { diaryDetail, setDiaryDetail } = useState()
     // 등록하고나서는 그날 일기 조회 화면으로 보내야함
 
-    axios.post('http://k7a303.p.ssafy.io:9090/api/v1/diary/regist/diary', {
-      title: title,
-      content: content,
-      weather: 1,
-      date: '2022-11-08'
-    }, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      }
-    })
-      .then(res => {
-        console.log('일기 등록 완료')
-        console.log(res.date)
+    // axios.post('http://k7a303.p.ssafy.io:9090/api/v1/diary/regist/diary', {
+    //   title: title,
+    //   content: content,
+    //   weather: 1,
+    //   date: '2022-11-08'
+    // }, {
+    //   headers: {
+    //     Authorization: `Bearer ${token}`,
+    //   }
+    // })
+    //   .then(res => {
+    //     console.log('일기 등록 완료')
+    //     console.log(res.date)
 
-      })
-      .catch(err => {
-        console.log('일기 등록 실패')
-        console.log(err)
-      })
+    //   })
+    //   .catch(err => {
+    //     console.log('일기 등록 실패')
+    //     console.log(err)
+    //   })
 
     // 이러면 비동기말고 순차적으로 처리되는게 맞나...?
     // axios.post('http://k7a303.p.ssafy.io:9090/api/v1/diary/regist/photo/{date}', {
@@ -64,12 +59,47 @@ export default function DiaryRegister() {
     //     console.log(err)
     //   })
     // };
+    // useEffect(() => {
+    // AsyncStorage.getItem('token', (err, result) => {
+    //   const token = result;
+    //   console.log(token)
+    // })
+
+    http.post('/diary/regist/diary', {
+      title: title,
+      content: content,
+      weather: weather,
+      date: date
+    })
+      .then(res => {
+        console.log('일기 등록 완료')
+        console.log(res.date)
+
+      })
+      .catch(err => {
+        console.log('일기 등록 실패')
+        console.log(date)
+        console.log(title)
+        console.log(content)
+        console.log(weather)
+        console.log(err)
+      })
+    // }, [])
   }
 
   const [title, setTitle] = useState('')
   const [content, setContent] = useState('')
   // const [weather, setWeather] = useState('')
-  // const [date, setDate] = useState('')
+  const weather = 1
+
+  const date = new Date()
+  const day = new Date().getDate()
+  const month = new Date().getMonth() + 1;
+  const year = new Date().getFullYear();
+
+  const dayformatted = `${year}년 ${month}월 ${day}일`;
+
+
 
   return (
     <View style={{ flex: 1 }}>
@@ -78,16 +108,15 @@ export default function DiaryRegister() {
           {/* 날짜, 날씨, 등록버튼 - 일기장 헤더 */}
           <View style={styles.block}>
             {/* 날짜 */}
-            <DayPicker />
-            {/* <Text>{year}년  {month}월  {date}일</Text> */}
+            <Text style={styles.changeDay}>{dayformatted}</Text>
 
             {/* 날씨 선택 */}
-            {/* <TouchableOpacity TouchableOpacity onPress={WeatherPicker} >
-                <Image
-                  source={require('../../../assets/images/weather/1_sunny.png')}
-                  style={styles.weatherButton}
-                />
-              </TouchableOpacity> */}
+            {/* <TouchableOpacity TouchableOpacity onPress={} >
+              <Image
+                source={require('../../../assets/images/weather/1_sunny.png')}
+                style={styles.weatherButton}
+              />
+            </TouchableOpacity> */}
           </View>
 
           <View style={styles.block3}>
@@ -223,5 +252,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     paddingBottom: 5,
-  }
+  },
+  changeDay: {
+    fontSize: 18,
+  },
 });

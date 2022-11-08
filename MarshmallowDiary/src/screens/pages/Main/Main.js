@@ -16,44 +16,26 @@ const Main = ({ navigation }) => {
 
   var dateString = year + '-' + month + '-' + day;
 
-  AsyncStorage.getItem('token', (err, result) => {
-    const token = result;
-    console.log(token)
-  });
-
-  // AsyncStorage.getItem('password', (err, result) => {
-  //   const pw = result;
-  //   console.log(pw)
-  // });
-
   const [words, setWords] = useState()
 
-<<<<<<< HEAD
-
-  useEffect(() => {
-    AsyncStorage.getItem('token', (err, result) => {
-      const token = result;
-      console.log(token)
-=======
   // const [test, setTest] = useState()
   // AsyncStorage.getItem('token', (err, result) => {
   //   const token = result;
   //   setTest(token)
   // })  
   // console.log('test',test)
->>>>>>> 91ce75e6769efd7ceebfee5b176a0ba2df259e2e
 
   useEffect(() => {
     // AsyncStorage.getItem('token', (err, result) => {
     //   const token = result;
     //   console.log(token)
 
-      // axios.get('http://k7a303.p.ssafy.io:9090/api/v1/analysis/loyalty', {
-      //   headers: {
-      //     Authorization: `Bearer ${token}`
-      //   }
-      // })
-      http.get('/analysis/loyalty')
+    // axios.get('http://k7a303.p.ssafy.io:9090/api/v1/analysis/loyalty', {
+    //   headers: {
+    //     Authorization: `Bearer ${token}`
+    //   }
+    // })
+    http.get('/analysis/loyalty')
       .then(res => {
         // console.log(res.data)
         // console.log(typeof(res.data))
@@ -66,7 +48,7 @@ const Main = ({ navigation }) => {
   }, [])
 
   return (
-    <View style={{ flex: 1, backgroundColor:'#FFF9F8'  }}>
+    <View style={{ flex: 1, backgroundColor: '#FFF9F8' }}>
       <View style={{ flex: 1 }}>
         <Calendar />
         {/* <Calendar
