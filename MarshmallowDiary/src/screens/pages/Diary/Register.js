@@ -4,134 +4,138 @@ import Footer from '../../components/component/Footer';
 import DayPicker from './DatePicker';
 import WeatherPicker from './WeatherPicker';
 import { launchImageLibrary } from 'react-native-image-picker';
-import ButtonRegister from '../../components/component/ButtonRegister'
+// import ButtonRegister from '../../components/component/ButtonRegister'
 import SelectImages from './SelectImages';
 import axios from 'axios'
 import { connect } from 'react-redux'
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { set } from 'date-fns';
 
-var date = new Date().getDate()
-var month = new Date().getMonth() + 1;
-var year = new Date().getFullYear();
-// 보내는 date는 포맷팅 없이 보내야함
 
-this.state = {
-  diaryTitle: '',
-  diaryContent: '',
-  diaryWeather: '1',
-  diaryDate : '',
-}
+export default function DiaryRegister() {
 
-function DiaryRegister ({navigation}) {
-
-  const diary = {
-    content: this.state.diaryContent,
-    date: this.state.diaryDate,
-    title: this.state.diaryTitle,
-    weather: this.state.diaryWeather,
-  }
-
-  AsyncStorage.getItem('token', (err, result) => {
-    const token = result;
-    console.log(token)
-  });
-
+  // Asyncstorage에서 토큰을 받고, 토큰이 있으면 토큰을 헤더로 넣어 diary를 post 한다 
   useEffect(() => {
     AsyncStorage.getItem('token', (err, result) => {
       const token = result;
       console.log(token)
+    })
+  }, [])
 
-      axios.post('http://k7a303.p.ssafy.io:9090/api/v1/diary/regist/diary/', diary, {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      })
+  async function Register(token) {
+    // const { date } = route.params;
+    // const { diaryDetail, setDiaryDetail } = useState()
+    // 등록하고나서는 그날 일기 조회 화면으로 보내야함
+
+    axios.post('http://k7a303.p.ssafy.io:9090/api/v1/diary/regist/diary', {
+      title: title,
+      content: content,
+      weather: 1,
+      date: '2022-11-08'
+    }, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      }
+    })
       .then(res => {
-        console.log(diary)
-        this.state.diaryTitle=''
-        this.state.diaryConnect=''
-        alert("일기 등록 완료")
-        navigation.navigate('Today')
+        console.log('일기 등록 완료')
+        console.log(res.date)
+
       })
       .catch(err => {
-        if (err.response.status === 405) {
-          alert("오늘은 일기를 이미 작성했습니다.")
-          navigation.navigate('Today')
-        }
+        console.log('일기 등록 실패')
+        console.log(err)
       })
-    })
-  })
-  return (
-    console.log('제발 성공 좀~~~')
-  )
-}
 
-function Register () {
+    // 이러면 비동기말고 순차적으로 처리되는게 맞나...?
+    // axios.post('http://k7a303.p.ssafy.io:9090/api/v1/diary/regist/photo/{date}', {
+    //   // 사진 폼데이터
+    // }, {
+    //   headers: {
+    //     Authorization: `Bearer ${token}`
+    //   }
+    // })
+    //   .then(res => {
+    //     console.log('사진 등록 완료')
+    //     console.log(res.date)
+
+    //   })
+    //   .catch(err => {
+    //     console.log(err)
+    //   })
+    // };
+  }
+
+  const [title, setTitle] = useState('')
+  const [content, setContent] = useState('')
+  // const [weather, setWeather] = useState('')
+  // const [date, setDate] = useState('')
+
   return (
     <View style={{ flex: 1 }}>
-      <ScrollView>
+      <View>
         <View style={styles.block2}>
           {/* 날짜, 날씨, 등록버튼 - 일기장 헤더 */}
           <View style={styles.block}>
             {/* 날짜 */}
-            <Text>{year}년  {month}월  {date}일</Text>
+            <DayPicker />
+            {/* <Text>{year}년  {month}월  {date}일</Text> */}
 
             {/* 날씨 선택 */}
-            < TouchableOpacity onPress={WeatherPicker} >
-              <Image
-                source={require('../../../assets/images/weather/1_sunny.png')}
-                style={styles.weatherButton}
-              />
-            </ TouchableOpacity>
+            {/* <TouchableOpacity TouchableOpacity onPress={WeatherPicker} >
+                <Image
+                  source={require('../../../assets/images/weather/1_sunny.png')}
+                  style={styles.weatherButton}
+                />
+              </TouchableOpacity> */}
           </View>
 
           <View style={styles.block3}>
             {/* 글 등록 버튼 */}
-            < ButtonRegister >
-              <Text style={styles.buttonText}>등록</Text>
-            </ ButtonRegister>
-          </View>
-          </View>
-
-          <View>
-            {/* 제목 */}
-            <TextInput
-              placeholder="제목을 입력하세요."
-              style={styles.titleInput}
-              value={this.state.diaryTitle}
-              onChangeText={text => {
-                this.setState({ diaryTitle: text });
-              }} />
-
-            {/* 사진 첨부 */}
-            {/* < View style={styles.imageInput} >
-              <TouchableOpacity onPress={SelectImages}>
-                <Image
-                  source={require('../../../assets/images/etc/photo.png')}
-                  style={styles.imageButton}
-                />
+            <View>
+              <TouchableOpacity onPress={Register}>
+                <View style={styles.buttonRegister}>
+                  <Text style={styles.buttonText}>등록</Text>
+                </View>
               </TouchableOpacity>
-            </View > */}
-            {/* <SelectImages />
-
-            {/* 일기 작성 */}
-            <TextInput
-              placeholder="오늘의 기록을 남겨보세요."
-              multiline={true}
-              style={styles.diaryInput}
-              value={this.state.diaryContent}
-              onChangeText={(text) => {
-                this.setState({ diaryContent: text })
-              }}
-            />
+            </View>
           </View>
-      </ScrollView>
+        </View>
+
+        <View>
+          {/* 제목 */}
+          <TextInput
+            placeholder="제목을 입력하세요."
+            style={styles.titleInput}
+            value={title}
+            onChangeText={text => setTitle(text)} />
+
+          {/* 사진 첨부
+            {/* < View style={styles.imageInput} >
+                <TouchableOpacity onPress={SelectImages}>
+                  <Image
+                    source={require('../../../assets/images/etc/photo.png')}
+                    style={styles.imageButton}
+                  />
+                </TouchableOpacity>
+              </View > */}
+          {/* <SelectImages /> */}
+
+          {/* 일기 작성 */}
+          <TextInput
+            placeholder="오늘의 기록을 남겨보세요."
+            multiline={true}
+            style={styles.diaryInput}
+            value={content}
+            onChangeText={text => setContent(text)}
+          />
+        </View>
+      </View>
       <Footer />
     </View>
   )
-}
 
-export default Register
+}
 
 const styles = StyleSheet.create({
   block: {
@@ -210,5 +214,14 @@ const styles = StyleSheet.create({
     borderRadius: 18,
     marginHorizontal: 15,
     textAlignVertical: 'top',
+  },
+  buttonRegister: {
+    borderRadius: 10,
+    backgroundColor: '#FFEBA5',
+    height: 33,
+    width: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingBottom: 5,
   }
 });

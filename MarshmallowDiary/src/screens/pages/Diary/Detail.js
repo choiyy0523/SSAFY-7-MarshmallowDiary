@@ -1,9 +1,41 @@
-import React from 'react';
-import { BackHandler, StyleSheet, TextInput, Alert, Text, View, Button, TouchableOpacity, Image } from 'react-native'
-import DiaryPictureCarousel from './DiaryPictureCarousel'
+import React, { useEffect, useState } from 'react';
+import { BackHandler, StyleSheet, TextInput, Alert, Text, View, Button, TouchableOpacity, FlatList, Image, ScrollView } from 'react-native'
+import DiaryPictureCarousel from './DiaryPictureCarousel';
 import Footer from '../../components/component/Footer';
+import DayPicker from './DatePicker';
+import WeatherPicker from './WeatherPicker';
+import { launchImageLibrary } from 'react-native-image-picker';
+import ButtonRegister from '../../components/component/ButtonRegister'
+import SelectImages from './SelectImages';
+import axios from 'axios'
+import { connect } from 'react-redux'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-function Detail() {
+
+const Detail = ({ route, navigation }) => {
+  const { diaryDate } = route.params;
+  const [diaryDetail, setDiaryDetail] = useState()
+
+  useEffect(() => {
+    AsyncStorage.getItem('token', (err, result) => {
+      axios.post('http://k7a303.p.ssafy.io:9090/api/v1/detail', {
+        date: diaryDate
+      }, {
+        headers: {
+          Authorization: `Bearer ${result}`
+        }
+      })
+        .then(res => {
+          console.log(res.data_list)
+          setDiaryDetail(res.data.list)
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    })
+  }, [])
+
+  // 어떤 날짜를 diaryDate로 보낼건지 설정하는 코드 필요
 
   return (
     <View style={{ flex: 1 }}>
@@ -37,7 +69,7 @@ function Detail() {
       <Footer />
     </View>
   )
-};
+}
 
 
 const styles = StyleSheet.create({

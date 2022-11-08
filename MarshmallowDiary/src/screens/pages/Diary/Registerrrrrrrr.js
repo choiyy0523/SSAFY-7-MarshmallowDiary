@@ -8,6 +8,8 @@ import ButtonRegister from '../../components/component/ButtonRegister'
 import SelectImages from './SelectImages';
 import axios from 'axios'
 import { connect } from 'react-redux'
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 // const mapStateToProps = (state) => ({
 //   token: state
@@ -20,9 +22,38 @@ import { connect } from 'react-redux'
 var date = new Date().getDate()
 var month = new Date().getMonth() + 1;
 var year = new Date().getFullYear();
-
-
 // 보내는 date는 포맷팅 없이 보내야함
+
+AsyncStorage.getItem('token', (err, result) => {
+  const token = result;
+  console.log(token)
+});
+
+useEffect(() => {
+  AsyncStorage.getItem('token', (err, result) => {
+    const token = result;
+    console.log(token)
+
+    axios.post('http://k7a303.p.ssafy.io:9090/api/v1/diary/regist/diary/', diary, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+      .then(res => {
+        console.log(diary)
+        this.state.diaryTitle = ''
+        this.state.diaryConnect = ''
+        alert("일기 등록 완료")
+        navigation.navigate('Today')
+      })
+      .catch(err => {
+        if (err.response.status === 405) {
+          alert("오늘은 일기를 이미 작성했습니다.")
+          navigation.navigate('Today')
+        }
+      })
+  })
+})
 
 class DiaryRegister extends React.Component {
   constructor(props) {
@@ -31,7 +62,7 @@ class DiaryRegister extends React.Component {
       diaryTitle: '',
       diaryContent: '',
       diaryWeather: '1',
-      diaryDate : '',
+      diaryDate: '',
     }
   }
 
@@ -43,25 +74,8 @@ class DiaryRegister extends React.Component {
       weather: this.state.diaryWeather,
     }
 
-    await axios.post('http://k7a303.p.ssafy.io:9090/api/v1/diary/regist/diary/', diary,
-      // {
-      //   headers: {
-      //     'Authorizaion': `Token ${this.props.token.auth.token}`
-      //   }
-      // }
-    )
-      .then((res) => {
-        this.state.diaryTitle = ''
-        this.state.diaryConnent = ''
-        alert("등록 완료 되었습니다.")
-        this.props.navigation.navigate('Today')
-      })
-      .catch(err => {
-        if (err.response.status === 405) {
-          alert("오늘 일기를 이미 작성했습니다.")
-          this.props.navigation.navigate('Today')
-        }
-      })
+
+
   }
 
   render() {
