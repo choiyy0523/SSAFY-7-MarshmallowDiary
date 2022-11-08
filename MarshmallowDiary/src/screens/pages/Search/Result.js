@@ -4,7 +4,6 @@ import Footer from '../../components/component/Footer';
 import { TextInput } from 'react-native-gesture-handler';
 import { Icon } from '@rneui/themed';
 import negative from '../../../assets/images/character/negative.png'
-import http from '../../../api/http';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Pagination from './Pagination';

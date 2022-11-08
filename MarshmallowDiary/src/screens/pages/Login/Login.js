@@ -51,8 +51,17 @@ const Login = ({navigation}) => {
       AsyncStorage.setItem('refresh', res.data.refreshToken)
       AsyncStorage.setItem('userId', res.data.userId)
       
+      AsyncStorage.getItem('password', (err, result) => {
+        const pw = result;
+        console.log(pw)
+        if (pw == null) {
+          navigation.navigate('Main')
+        }
+        else {
+          navigation.navigate('Password')
+        }
+      })
     })
-
     // http.post('/user/login', {
     //   authId: profile.id,
     //   nickname: profile.nickname,
@@ -84,8 +93,6 @@ const Login = ({navigation}) => {
         <View>
           <Text style={{ fontSize: 30 }}>마시멜로일기</Text>
         </View>
-        {/* <Text>result : {result}</Text>
-        <Text>result2 : {result2}</Text> */}
         
         <TouchableOpacity style={{ flex:0.3 }} onPress={() => signInWithKakao() && getKakaoProfile()}>
           <Image source={kakao} style={{ marginTop: '40%' }} />
