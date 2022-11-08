@@ -52,7 +52,7 @@ public class Diary {
     @JsonFormat(shape= JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
     @Temporal(TemporalType.DATE)
     private Date date;
-    public static Diary DiaryCreate(User user, DiaryRequest.Create request, String photo){
+    public static Diary DiaryCreate(User user, DiaryRequest.Created request, String photo){
         return Diary.builder()
                 .title(request.getTitle())
                 .content(request.getContent())

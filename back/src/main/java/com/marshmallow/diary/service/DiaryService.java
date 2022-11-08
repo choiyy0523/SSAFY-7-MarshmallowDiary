@@ -51,7 +51,7 @@ public class DiaryService {
     private final AwsS3Service awsS3Service;
 
     private final DiaryRepositoryImpl diaryRepoImpl;
-    public DiaryResponse.Regist registDiary(DiaryRequest.Create request) throws IOException, JSONException, AlreadyRegistDiary, CanNotRegistDiary {
+    public DiaryResponse.Regist registDiary(DiaryRequest.Created request) throws IOException, JSONException, AlreadyRegistDiary, CanNotRegistDiary {
 
         User user = this.getCurrentUser();
         Optional<Diary> checkdiary = diaryRepository.findByUser_UserIdAndDate(user.getUserId(), request.getDate());

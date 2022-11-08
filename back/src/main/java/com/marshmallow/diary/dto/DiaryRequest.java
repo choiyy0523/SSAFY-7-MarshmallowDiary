@@ -2,8 +2,8 @@ package com.marshmallow.diary.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
+
 import java.util.Date;
-import java.util.UUID;
 
 
 public class DiaryRequest {
@@ -12,7 +12,7 @@ public class DiaryRequest {
         @NoArgsConstructor(access = AccessLevel.PRIVATE)
         @AllArgsConstructor(access = AccessLevel.PRIVATE)
         @ToString
-        public static class Create{
+        public static class Created{
                 private String title;
                 private String content;
                 private int weather;
