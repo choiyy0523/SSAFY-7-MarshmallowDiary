@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Text, View, Image, Modal, Button, Pressable } from 'react-native';
+import { Text, View, Image, Modal, Pressable } from 'react-native';
 import Footer from '../../components/component/Footer';
-import ChipYellow from '../../components/component/ChipYellow';
 import { Icon } from '@rneui/themed';
 import { Chip } from "@react-native-material/core";
 import PieChart from 'react-native-pie-chart';
@@ -9,10 +8,9 @@ import mm_positive from '../../../assets/images/mm/mm_positive.png'
 import mm_neutral from '../../../assets/images/mm/mm_neutral.png'
 import mm_negative from '../../../assets/images/mm/mm_negative.png'
 import ch_neutral from '../../../assets/images/character/neutral.png'
-import { TouchableOpacity } from 'react-native-gesture-handler';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
+import {http} from '../../../api/http'
 
 const Analysis = () => {
   var today = new Date();
@@ -31,20 +29,49 @@ const Analysis = () => {
   const [ngcnt, setNgcnt] = useState()
   const [best, setBest] = useState()
 
+  // const getMonth = () => {
+  //   AsyncStorage.getItem('token', (err, result) => {
+  //     axios.post('http://k7a303.p.ssafy.io:9090/api/v1/analysis/month', {
+  //       month: targetMonth,
+  //       year: targetYear
+  //     }, {
+  //       headers: {
+  //         Authorization: `Bearer ${result}`
+  //       }
+  //     })
+  //     .then(res => {
+  //       if ( res.data.positive == 0) {
+  //         setPositive(3200)
+  //       }
+  //       else {
+  //         setPositive(res.data.positive)
+  //       }
+  //       if (res.data.neutral == 0) {
+  //         setNeutral(3200)
+  //       }
+  //       else {
+  //         setNeutral(res.data.neutral)
+  //       }
+  //       if (res.data.negative == 0) {
+  //         setNegative(3200)
+  //       }
+  //       else {
+  //         setNegative(res.data.negative)
+  //       }
+  //       setPcnt(res.data.positiveCnt)
+  //       setNcnt(res.data.neutralCnt)
+  //       setNgcnt(res.data.negativeCnt)
+  //       setBest(res.data.bestPositiveDate)
+  //     })
+  //   });
+  // }
+
   const getMonth = () => {
-    AsyncStorage.getItem('token', (err, result) => {
-      axios.post('http://k7a303.p.ssafy.io:9090/api/v1/analysis/month', {
+    http.post('/analysis/month', {
         month: targetMonth,
         year: targetYear
-      }, {
-        headers: {
-          Authorization: `Bearer ${result}`
-        }
       })
       .then(res => {
-        // setPositive(res.data.positive)
-        // setNeutral(res.data.neutral)
-        // setNegative(res.data.negative)
         if ( res.data.positive == 0) {
           setPositive(3200)
         }
@@ -68,8 +95,9 @@ const Analysis = () => {
         setNgcnt(res.data.negativeCnt)
         setBest(res.data.bestPositiveDate)
       })
-    });
-  }
+    };
+  
+
 
   const widthAndHeight = 225
   var series = [60, 25, 15]
