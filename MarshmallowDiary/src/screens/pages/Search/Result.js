@@ -4,32 +4,43 @@ import Footer from '../../components/component/Footer';
 import { TextInput } from 'react-native-gesture-handler';
 import { Icon } from '@rneui/themed';
 import negative from '../../../assets/images/character/negative.png'
-import http from '../../../api/http';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Pagination from './Pagination';
 import positive from '../../../assets/images/character/positive.png'
+import { http } from '../../../api/http'
 
 const Result = ({route, navigation}) => {
   const { searchWord } = route.params;
   const [searchResult, setSearchResult] = useState()
 
   useEffect(() => {
-    AsyncStorage.getItem('token', (err, result) => {
-      axios.post('http://k7a303.p.ssafy.io:9090/api/v1/diary/search', {
+    // AsyncStorage.getItem('token', (err, result) => {
+    //   axios.post('http://k7a303.p.ssafy.io:9090/api/v1/diary/search', {
+    //     keyword: searchWord
+    //   }, {
+    //     headers: {
+    //       Authorization: `Bearer ${result}`
+    //     }
+    //   })
+    //   .then(res => {
+    //     console.log(res.data.list)
+    //     setSearchResult(res.data.list)
+    //   })
+    //   .catch(err => {
+    //     console.log(err)
+    //   })
+    // });
+    http.post('/diary/search', {
         keyword: searchWord
-      }, {
-        headers: {
-          Authorization: `Bearer ${result}`
-        }
       })
       .then(res => {
+        console.log(res.data.list)
         setSearchResult(res.data.list)
       })
       .catch(err => {
         console.log(err)
       })
-    });
   }, [])
 
   const [inputs, setInputs] = useState({
@@ -116,9 +127,13 @@ const Result = ({route, navigation}) => {
                   <View style={{ flex: 0.25, justifyContent:'center', alignItems:'center'}}>
                     <Text>{data.date}</Text>
                   </View>
+                  {!data.header_img ? 
+                  <View style={{ flex: 0.5, justifyContent:'center', alignItems:'center'}}>
+                    <Image source={positive} style={{ width:100, height:100 }}/>
+                  </View> :
                   <View style={{ flex: 0.5, justifyContent:'center', alignItems:'center'}}>
                     <Image source={{uri: `https://marshmallow-bucket.s3.ap-northeast-2.amazonaws.com/${data.header_img}`}} style={{ width:100, height:100 }}/>
-                  </View>
+                  </View>}
                   <View style={{ flex: 0.25, justifyContent:'center', alignItems:'center'}}>
                     <Text>{data.title}</Text>
                   </View>

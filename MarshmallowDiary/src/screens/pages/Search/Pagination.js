@@ -38,8 +38,8 @@ function Pagination({ total, limit, page, setPage }) {
       <View style={{ flexDirection:'row', flex:0.6, justifyContent:'center', alignItems:'center' }}>
         {numPages.slice(offset, offset + limit2).map(function (number) {
             return (
-              <TouchableOpacity>
-                <Text key={number} onPress={() => setPage(number)} style={{ margin:7, fontSize:20 }}>
+              <TouchableOpacity key={number} onPress={() => setPage(number)}>
+                <Text style={{ margin:7, fontSize:20 }}>
                   {number}
                 </Text>
               </TouchableOpacity>
