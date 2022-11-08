@@ -9,7 +9,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import mm_positive from '../../../assets/images/mm/mm_positive.png'
 import mm_neutral from '../../../assets/images/mm/mm_neutral.png'
 import mm_negative from '../../../assets/images/mm/mm_negative.png'
-
+import { http } from '../../../api/http'
 
 
 const Calendar = ({navigation}) => {
@@ -88,19 +88,23 @@ const Calendar = ({navigation}) => {
   const [monthData, setMonthData] = useState()
 
   const getMonthData = () => {
-    AsyncStorage.getItem('token', (err, result) => {
-      const token = result;
-      // console.log(token)
+    // AsyncStorage.getItem('token', (err, result) => {
+    //   const token = result;
+    //   // console.log(token)
 
-      axios.get(`http://k7a303.p.ssafy.io:9090/api/v1/diary?month=${targetMonth}&year=${targetYear}`, {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      })
-      .then(res => {
-        // console.log(res.data.list)
-        setMonthData(res.data.list)
-      })
+    //   axios.get(`http://k7a303.p.ssafy.io:9090/api/v1/diary?month=${targetMonth}&year=${targetYear}`, {
+    //     headers: {
+    //       Authorization: `Bearer ${token}`
+    //     }
+    //   })
+    //   .then(res => {
+    //     // console.log(res.data.list)
+    //     setMonthData(res.data.list)
+    //   })
+    // })
+    http.get(`diary?month=${targetMonth}&year=${targetYear}`)
+    .then(res => {
+      setMonthData(res.data.list)
     })
   }
 

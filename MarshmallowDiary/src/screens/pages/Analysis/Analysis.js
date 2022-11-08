@@ -10,7 +10,7 @@ import mm_negative from '../../../assets/images/mm/mm_negative.png'
 import ch_neutral from '../../../assets/images/character/neutral.png'
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-// import {http2} from '../../../api/http'
+import {http} from '../../../api/http'
 
 const Analysis = () => {
   var today = new Date();
@@ -29,47 +29,15 @@ const Analysis = () => {
   const [ngcnt, setNgcnt] = useState()
   const [best, setBest] = useState()
 
-  const getMonth = () => {
-    AsyncStorage.getItem('token', (err, result) => {
-      axios.post('http://k7a303.p.ssafy.io:9090/api/v1/analysis/month', {
-        month: targetMonth,
-        year: targetYear
-      }, {
-        headers: {
-          Authorization: `Bearer ${result}`
-        }
-      })
-      .then(res => {
-        if ( res.data.positive == 0) {
-          setPositive(3200)
-        }
-        else {
-          setPositive(res.data.positive)
-        }
-        if (res.data.neutral == 0) {
-          setNeutral(3200)
-        }
-        else {
-          setNeutral(res.data.neutral)
-        }
-        if (res.data.negative == 0) {
-          setNegative(3200)
-        }
-        else {
-          setNegative(res.data.negative)
-        }
-        setPcnt(res.data.positiveCnt)
-        setNcnt(res.data.neutralCnt)
-        setNgcnt(res.data.negativeCnt)
-        setBest(res.data.bestPositiveDate)
-      })
-    });
-  }
-
   // const getMonth = () => {
-  //   http2.post('/analysis/month', {
+  //   AsyncStorage.getItem('token', (err, result) => {
+  //     axios.post('http://k7a303.p.ssafy.io:9090/api/v1/analysis/month', {
   //       month: targetMonth,
   //       year: targetYear
+  //     }, {
+  //       headers: {
+  //         Authorization: `Bearer ${result}`
+  //       }
   //     })
   //     .then(res => {
   //       if ( res.data.positive == 0) {
@@ -95,7 +63,39 @@ const Analysis = () => {
   //       setNgcnt(res.data.negativeCnt)
   //       setBest(res.data.bestPositiveDate)
   //     })
-  //   };
+  //   });
+  // }
+
+  const getMonth = () => {
+    http.post('/analysis/month', {
+        month: targetMonth,
+        year: targetYear
+      })
+      .then(res => {
+        if ( res.data.positive == 0) {
+          setPositive(3200)
+        }
+        else {
+          setPositive(res.data.positive)
+        }
+        if (res.data.neutral == 0) {
+          setNeutral(3200)
+        }
+        else {
+          setNeutral(res.data.neutral)
+        }
+        if (res.data.negative == 0) {
+          setNegative(3200)
+        }
+        else {
+          setNegative(res.data.negative)
+        }
+        setPcnt(res.data.positiveCnt)
+        setNcnt(res.data.neutralCnt)
+        setNgcnt(res.data.negativeCnt)
+        setBest(res.data.bestPositiveDate)
+      })
+    };
   
 
 

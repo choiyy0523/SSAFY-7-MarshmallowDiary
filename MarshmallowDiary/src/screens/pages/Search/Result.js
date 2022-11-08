@@ -8,19 +8,31 @@ import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Pagination from './Pagination';
 import positive from '../../../assets/images/character/positive.png'
+import { http } from '../../../api/http'
 
 const Result = ({route, navigation}) => {
   const { searchWord } = route.params;
   const [searchResult, setSearchResult] = useState()
 
   useEffect(() => {
-    AsyncStorage.getItem('token', (err, result) => {
-      axios.post('http://k7a303.p.ssafy.io:9090/api/v1/diary/search', {
+    // AsyncStorage.getItem('token', (err, result) => {
+    //   axios.post('http://k7a303.p.ssafy.io:9090/api/v1/diary/search', {
+    //     keyword: searchWord
+    //   }, {
+    //     headers: {
+    //       Authorization: `Bearer ${result}`
+    //     }
+    //   })
+    //   .then(res => {
+    //     console.log(res.data.list)
+    //     setSearchResult(res.data.list)
+    //   })
+    //   .catch(err => {
+    //     console.log(err)
+    //   })
+    // });
+    http.post('/diary/search', {
         keyword: searchWord
-      }, {
-        headers: {
-          Authorization: `Bearer ${result}`
-        }
       })
       .then(res => {
         console.log(res.data.list)
@@ -29,7 +41,6 @@ const Result = ({route, navigation}) => {
       .catch(err => {
         console.log(err)
       })
-    });
   }, [])
 
   const [inputs, setInputs] = useState({

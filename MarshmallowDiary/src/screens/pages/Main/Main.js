@@ -2,20 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { Button } from 'react-native';
 import { Text, View, SafeAreaView, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import Footer from '../../components/component/Footer';
-// import { Calendar, CalendarList, Agenda, LocaleConfig } from 'react-native-calendars'
-import { Icon } from '@rneui/themed';
 import Calendar from './Calendar';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
-
-// LocaleConfig.locales['fr'] = {
-//   monthNames: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
-//   monthNamesShort: ['Janv.', 'Févr.', 'Mars', 'Avril', 'Mai', 'Juin', 'Juil.', 'Août', 'Sept.', 'Oct.', 'Nov.', 'Déc.'],
-//   dayNames: ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'],
-//   dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
-//   today: 'Aujourd\'hui'
-// };
-// LocaleConfig.defaultLocale = 'fr';
+import { http } from '../../../api/http'
 
 const Main = ({ navigation }) => {
   var today = new Date();
@@ -36,15 +26,16 @@ const Main = ({ navigation }) => {
   // console.log('test',test)
 
   useEffect(() => {
-    AsyncStorage.getItem('token', (err, result) => {
-      const token = result;
-      console.log(token)
+    // AsyncStorage.getItem('token', (err, result) => {
+    //   const token = result;
+    //   console.log(token)
 
-      axios.get('http://k7a303.p.ssafy.io:9090/api/v1/analysis/loyalty', {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      })
+      // axios.get('http://k7a303.p.ssafy.io:9090/api/v1/analysis/loyalty', {
+      //   headers: {
+      //     Authorization: `Bearer ${token}`
+      //   }
+      // })
+      http.get('/analysis/loyalty')
       .then(res => {
         // console.log(res.data)
         // console.log(typeof(res.data))
@@ -53,7 +44,7 @@ const Main = ({ navigation }) => {
           setWords(v)
         })
       })
-    });
+    // });
   }, [])
 
   return (

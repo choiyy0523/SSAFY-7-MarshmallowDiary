@@ -3,28 +3,32 @@ import axios from "axios";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
-const axiosApi = () => {
-  const instance = axios.create({
-    baseURL: process.env.REACT_NATIVE_APP_BASE_URL
-  })
-  return instance
-}
+const axiosInstance = axios.create({
+  baseURL: 'http://k7a303.p.ssafy.io:9090/api/v1',
+  headers: {
+    "Content-type": "application/json",
+  },
+})
 
+axiosInstance.interceptors.request.use(
+  async(config : any) => {
+    const token = await AsyncStorage.getItem('token')
+    config.headers["Content-Type"] = "application/json; charset=utf-8"
+    config.headers["Authorization"] = `Bearer ${token}`
+    return config;
+  },
+  err => {
+    return Promise.reject(err)
+  }
+)
 
-const axiosAuthApi = () => {
-  AsyncStorage.getItem('token', (err, result) => {
-    const token = result;
-    
-    const instance = axios.create({
-      baseURL: process.env.REACT_NATIVE_APP_BASE_URL,
-      headers: {
-        Authorization: `Bearer ${token}` 
-      }
-    })
+axiosInstance.interceptors.request.use(
+  config => {
+    return config
+  },
+  err => {
+    return Promise.reject(err)
+  }
+)
 
-    return instance
-  })
-}
-
-export const http = axiosApi(process.env.REACT_NATIVE_APP_BASE_URL)
-export const http2 = axiosAuthApi(process.env.REACT_NATIVE_APP_BASE_URL)
+export const http = axiosInstance

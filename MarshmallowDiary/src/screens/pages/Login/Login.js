@@ -14,7 +14,7 @@ import {
 
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import http  from '../../../api/http';
+import {http} from '../../../api/http';
 
 
 const Login = ({navigation}) => {
@@ -35,8 +35,8 @@ const Login = ({navigation}) => {
   
   const getKakaoProfile = async (): Promise<void> => {
     const profile: KakaoProfile = await getProfile();
-  
-    axios.post('http://k7a303.p.ssafy.io:9090/api/v1/user/login', {
+
+    http.post('/user/login', {
       authId: profile.id,
       nickname: profile.nickname,
     })
@@ -62,7 +62,8 @@ const Login = ({navigation}) => {
         }
       })
     })
-    // http.post('/user/login', {
+  
+    // axios.post('http://k7a303.p.ssafy.io:9090/api/v1/user/login', {
     //   authId: profile.id,
     //   nickname: profile.nickname,
     // })
@@ -70,10 +71,23 @@ const Login = ({navigation}) => {
     //   console.log(res.data)
     //   console.log(res.data.userId)
     //   console.log(res.data.accessToken)
+    //   console.log(res.data.refreshToken)
 
     //   AsyncStorage.setItem('token', res.data.accessToken)
     //   AsyncStorage.setItem('isNew', 'false')
+    //   AsyncStorage.setItem('refresh', res.data.refreshToken)
+    //   AsyncStorage.setItem('userId', res.data.userId)
       
+    //   AsyncStorage.getItem('password', (err, result) => {
+    //     const pw = result;
+    //     console.log(pw)
+    //     if (pw == null) {
+    //       navigation.navigate('Main')
+    //     }
+    //     else {
+    //       navigation.navigate('Password')
+    //     }
+    //   })
     // })
   };
 

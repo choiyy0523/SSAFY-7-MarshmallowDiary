@@ -3,6 +3,7 @@ import { Text, View } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { KakaoProfile, getProfile } from '@react-native-seoul/kakao-login';
 import axios from 'axios';
+import { http } from '../../../api/http'
 
 const LoginCheck = ({navigation}) => {
   
@@ -23,9 +24,13 @@ const LoginCheck = ({navigation}) => {
         console.log('refresh', refresh)
   
         if (id != null && refresh != null) {
-          axios.post('http://k7a303.p.ssafy.io:9090/api/v1/user/reissue', {
+          // axios.post('http://k7a303.p.ssafy.io:9090/api/v1/user/reissue', {
+          //   userId: id,
+          //   refreshToken: refresh
+          // })
+          http.post('/user/reissue', {
             userId: id,
-            refreshToken: refresh
+            refresh: refresh
           })
           .then(res => {
             console.log(res.data)
