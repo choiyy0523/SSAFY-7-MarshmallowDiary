@@ -46,7 +46,7 @@ const Detail = ({ route, navigation }) => {
           <Text style={styles.dateStyle}> 2022년 10월 31일 </Text>
           {/* 날씨 */}
           <Image
-            source={require('../../../assets/images/weather/1_sunny.png')}
+            source={require('../../../assets/images/weather/1.png')}
             style={styles.weatherButton}
           />
         </View>

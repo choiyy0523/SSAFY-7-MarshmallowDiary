@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { BackHandler, StyleSheet, TextInput, Alert, Text, View, Button, TouchableOpacity, FlatList, Image, ScrollView } from 'react-native'
+import { BackHandler, StyleSheet, TextInput, Alert, Pressable, Modal, Text, View, Button, TouchableOpacity, FlatList, Image, ScrollView } from 'react-native'
 import Footer from '../../components/component/Footer';
 import DayPicker from './DatePicker';
 import WeatherPicker from './WeatherPicker';
@@ -12,35 +12,10 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { set } from 'date-fns';
 import { http } from '../../../api/http'
 
-
-export default function DiaryRegister() {
-
-  // Asyncstorage에서 토큰을 받고, 토큰이 있으면 토큰을 헤더로 넣어 diary를 post 한다 
+export default function DiaryRegister() { 
 
   function Register() {
-    // const { date } = route.params;
-    // const { diaryDetail, setDiaryDetail } = useState()
     // 등록하고나서는 그날 일기 조회 화면으로 보내야함
-
-    // axios.post('http://k7a303.p.ssafy.io:9090/api/v1/diary/regist/diary', {
-    //   title: title,
-    //   content: content,
-    //   weather: 1,
-    //   date: '2022-11-08'
-    // }, {
-    //   headers: {
-    //     Authorization: `Bearer ${token}`,
-    //   }
-    // })
-    //   .then(res => {
-    //     console.log('일기 등록 완료')
-    //     console.log(res.date)
-
-    //   })
-    //   .catch(err => {
-    //     console.log('일기 등록 실패')
-    //     console.log(err)
-    //   })
 
     // 이러면 비동기말고 순차적으로 처리되는게 맞나...?
     // axios.post('http://k7a303.p.ssafy.io:9090/api/v1/diary/regist/photo/{date}', {
@@ -73,7 +48,7 @@ export default function DiaryRegister() {
     })
       .then(res => {
         console.log('일기 등록 완료')
-        console.log(res.date)
+        console.log(res)
 
       })
       .catch(err => {
@@ -84,13 +59,33 @@ export default function DiaryRegister() {
         console.log(weather)
         console.log(err)
       })
+
+      // http.post('/diary/regist/photo/${date}', {
+      //   date: today
+      // })
+      //   .then(res => {
+      //     console.log('사진 등록 완료')
+      //     console.log(res)
+  
+      //   })
+      //   .catch(err => {
+      //     console.log('사진 등록 실패')
+      //     console.log(date)
+      //     console.log(err)
+      //   })
+
     // }, [])
   }
 
   const [title, setTitle] = useState('')
   const [content, setContent] = useState('')
-  // const [weather, setWeather] = useState('')
-  const weather = 1
+  const [weather, setWeather] = useState(1)
+
+  const getWeather = (weather) => {
+    setWeather(weather)
+  }
+
+  // const weather = 1
 
   const date = new Date()
   const day = new Date().getDate()
@@ -98,12 +93,13 @@ export default function DiaryRegister() {
   const year = new Date().getFullYear();
 
   const dayformatted = `${year}년 ${month}월 ${day}일`;
+  const today = `${year}-${month}-${day}`
 
 
 
   return (
     <View style={{ flex: 1 }}>
-      <View>
+      <ScrollView>
         <View style={styles.block2}>
           {/* 날짜, 날씨, 등록버튼 - 일기장 헤더 */}
           <View style={styles.block}>
@@ -111,12 +107,8 @@ export default function DiaryRegister() {
             <Text style={styles.changeDay}>{dayformatted}</Text>
 
             {/* 날씨 선택 */}
-            {/* <TouchableOpacity TouchableOpacity onPress={} >
-              <Image
-                source={require('../../../assets/images/weather/1_sunny.png')}
-                style={styles.weatherButton}
-              />
-            </TouchableOpacity> */}
+            <WeatherPicker weather={weather} getWeather={getWeather}/>
+
           </View>
 
           <View style={styles.block3}>
@@ -139,7 +131,7 @@ export default function DiaryRegister() {
             value={title}
             onChangeText={text => setTitle(text)} />
 
-          {/* 사진 첨부
+          {/* 사진 첨부*/}
             {/* < View style={styles.imageInput} >
                 <TouchableOpacity onPress={SelectImages}>
                   <Image
@@ -147,8 +139,8 @@ export default function DiaryRegister() {
                     style={styles.imageButton}
                   />
                 </TouchableOpacity>
-              </View > */}
-          {/* <SelectImages /> */}
+              </View > 
+          <SelectImages /> */}
 
           {/* 일기 작성 */}
           <TextInput
@@ -159,7 +151,7 @@ export default function DiaryRegister() {
             onChangeText={text => setContent(text)}
           />
         </View>
-      </View>
+      </ScrollView>
       <Footer />
     </View>
   )
@@ -190,11 +182,15 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'flex-end'
   },
-  weatherButton: {
+  weatherPicker: {
     marginHorizontal: 10,
     width: 40,
     height: 40,
     marginVertical: -10,
+  },
+  weatherButton: {
+    width: 40,
+    height: 40,
   },
   buttonText: {
     // fontFamily: 'GangwonEduAllBold',
