@@ -80,6 +80,12 @@ public class DiaryControllerTest {
         private Date date;
     }
 
+    @AllArgsConstructor
+    @Getter
+    public static class SearchDiary {
+        private String keyword;
+    }
+
 
     /***********************다이어리 조회***********************/
     @Test
@@ -329,23 +335,40 @@ public class DiaryControllerTest {
 
     /***********************검색 기록 조회***********************/
     @Test
-    @DisplayName("일기 검색-결과 있음(제목)")
+    @DisplayName("일기 검색-결과 있음")
     @Rollback
-    public void searchDiary_TitleExist() throws Exception {
+    public void searchDiary_Exist() throws Exception {
+        String keyword = "테스트";
+        SearchDiary searchDiary = new SearchDiary(keyword);
+        String requestContent = objectMapper.writeValueAsString(searchDiary);
 
-    }
-
-    @Test
-    @DisplayName("일기 검색-결과 있음(내용)")
-    @Rollback
-    public void searchDiary_ContentExist() throws Exception {
-
+        mockMvc.perform(
+                        MockMvcRequestBuilders
+                                .post("/diary/search")
+                                .header(HttpHeaders.AUTHORIZATION, "Bearer " + accessToken)
+                                .content(requestContent)
+                                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                )
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.list.length()").value(2));
     }
 
     @Test
     @DisplayName("일기 검색-결과 없음")
     @Rollback
     public void searchDiary_NotExist() throws Exception {
+        String keyword = "결과없는거";
+        SearchDiary searchDiary = new SearchDiary(keyword);
+        String requestContent = objectMapper.writeValueAsString(searchDiary);
 
+        mockMvc.perform(
+                        MockMvcRequestBuilders
+                                .post("/diary/search")
+                                .header(HttpHeaders.AUTHORIZATION, "Bearer " + accessToken)
+                                .content(requestContent)
+                                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                )
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.list.length()").value(0));
     }
 }

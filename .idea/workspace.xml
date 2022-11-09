@@ -136,8 +136,8 @@
       <recent name="com.marshmallow.interceptor" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.DiaryControllerTest.monthlyRecord">
-    <configuration name="DiaryControllerTest.createDiary_Text" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.DiaryControllerTest">
+    <configuration name="DiaryControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="marshmallow.test" />
       <extension name="coverage">
         <pattern>
@@ -147,8 +147,7 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.marshmallow" />
       <option name="MAIN_CLASS_NAME" value="com.marshmallow.DiaryControllerTest" />
-      <option name="METHOD_NAME" value="createDiary_Text" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -185,6 +184,22 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="DiaryControllerTest.searchDiary_Exist" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="marshmallow.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.marshmallow.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.marshmallow" />
+      <option name="MAIN_CLASS_NAME" value="com.marshmallow.DiaryControllerTest" />
+      <option name="METHOD_NAME" value="searchDiary_Exist" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="DiaryControllerTest.searchDiary_NotExist" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="marshmallow.test" />
       <extension name="coverage">
@@ -196,22 +211,6 @@
       <option name="PACKAGE_NAME" value="com.marshmallow" />
       <option name="MAIN_CLASS_NAME" value="com.marshmallow.DiaryControllerTest" />
       <option name="METHOD_NAME" value="searchDiary_NotExist" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="DiaryControllerTest.searchDiary_TitleExist" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="marshmallow.test" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.marshmallow.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.marshmallow" />
-      <option name="MAIN_CLASS_NAME" value="com.marshmallow.DiaryControllerTest" />
-      <option name="METHOD_NAME" value="searchDiary_TitleExist" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -238,11 +237,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.DiaryControllerTest" />
+        <item itemvalue="JUnit.DiaryControllerTest.searchDiary_NotExist" />
+        <item itemvalue="JUnit.DiaryControllerTest.searchDiary_Exist" />
         <item itemvalue="JUnit.DiaryControllerTest.monthlyRecord" />
         <item itemvalue="JUnit.DiaryControllerTest.deleteDiary" />
-        <item itemvalue="JUnit.DiaryControllerTest.searchDiary_TitleExist" />
-        <item itemvalue="JUnit.DiaryControllerTest.searchDiary_NotExist" />
-        <item itemvalue="JUnit.DiaryControllerTest.createDiary_Text" />
       </list>
     </recent_temporary>
   </component>
@@ -272,7 +271,7 @@
       <workItem from="1667792512404" duration="3904000" />
       <workItem from="1667865730959" duration="9962000" />
       <workItem from="1667952052260" duration="5809000" />
-      <workItem from="1667958577492" duration="16284000" />
+      <workItem from="1667958577492" duration="17447000" />
     </task>
     <servers />
   </component>
