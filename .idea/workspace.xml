@@ -131,71 +131,53 @@
       <recent name="com.marshmallow.interceptor" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.DiaryControllerTest.detailsDiary_Exist">
-    <configuration name="DiaryControllerTest.detailsDiary_Exist" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/back" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":test" />
-            <option value="--tests" />
-            <option value="&quot;com.marshmallow.DiaryControllerTest.detailsDiary_Exist&quot;" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
+  <component name="RunManager" selected="JUnit.DiaryControllerTest">
+    <configuration name="DiaryControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="marshmallow.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.marshmallow.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.marshmallow" />
+      <option name="MAIN_CLASS_NAME" value="com.marshmallow.DiaryControllerTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
-    <configuration name="back [clean]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/back" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value="clean" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
+    <configuration name="DiaryControllerTest.createDiary_EmptyContent" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="marshmallow.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.marshmallow.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.marshmallow" />
+      <option name="MAIN_CLASS_NAME" value="com.marshmallow.DiaryControllerTest" />
+      <option name="METHOD_NAME" value="createDiary_EmptyContent" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
-    <configuration name="back [compileQuerydsl]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/back" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value="compileQuerydsl" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
+    <configuration name="DiaryControllerTest.createDiary_Text" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="marshmallow.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.marshmallow.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.marshmallow" />
+      <option name="MAIN_CLASS_NAME" value="com.marshmallow.DiaryControllerTest" />
+      <option name="METHOD_NAME" value="createDiary_Text" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
     <configuration name="DiaryControllerTest.detailsDiary_Exist" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="marshmallow.test" />
@@ -213,7 +195,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="DiaryControllerTest.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="DiaryControllerTest.detailsDiary_NotExist" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="marshmallow.test" />
       <extension name="coverage">
         <pattern>
@@ -223,7 +205,7 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.marshmallow" />
       <option name="MAIN_CLASS_NAME" value="com.marshmallow.DiaryControllerTest" />
-      <option name="METHOD_NAME" value="test" />
+      <option name="METHOD_NAME" value="detailsDiary_NotExist" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -250,11 +232,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.DiaryControllerTest" />
         <item itemvalue="JUnit.DiaryControllerTest.detailsDiary_Exist" />
-        <item itemvalue="JUnit.DiaryControllerTest.test" />
-        <item itemvalue="Gradle.DiaryControllerTest.detailsDiary_Exist" />
-        <item itemvalue="Gradle.back [compileQuerydsl]" />
-        <item itemvalue="Gradle.back [clean]" />
+        <item itemvalue="JUnit.DiaryControllerTest.createDiary_Text" />
+        <item itemvalue="JUnit.DiaryControllerTest.createDiary_EmptyContent" />
+        <item itemvalue="JUnit.DiaryControllerTest.detailsDiary_NotExist" />
       </list>
     </recent_temporary>
   </component>
@@ -283,7 +265,7 @@
       <workItem from="1667784612402" duration="604000" />
       <workItem from="1667792512404" duration="3904000" />
       <workItem from="1667865730959" duration="9962000" />
-      <workItem from="1667952052260" duration="1407000" />
+      <workItem from="1667952052260" duration="5231000" />
     </task>
     <servers />
   </component>
