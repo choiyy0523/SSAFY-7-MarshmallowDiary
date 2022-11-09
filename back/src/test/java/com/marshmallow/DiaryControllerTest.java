@@ -54,7 +54,7 @@ public class DiaryControllerTest {
     @Autowired
     ResourceLoader loader;
 
-    private final String accessToken = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiLsnbTrj4Tsl7AiLCJpYXQiOjE2Njc4OTczODUsImV4cCI6MTY3MDMxNjU4NX0.ipmGbA3lUrkLVmtnxzjsTeOvXiBoM6xKBqbRZZjUSM8";
+    private final String accessToken = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiLsnbTrj4Tsl7AiLCJpYXQiOjE2Njc5NzYwNjYsImV4cCI6MTY2Nzk3NjEyNn0.8By4KBXTR7Vc1FopQacjYNhZcQ3seOWRi1atXgamVBg";
 
     @BeforeEach
     public void init() {
@@ -70,6 +70,12 @@ public class DiaryControllerTest {
         private String title;
         private String content;
         private int weather;
+        @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+9")
+        private Date date;
+    }
+
+    @Setter
+    public static class DeleteDiary {
         @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+9")
         private Date date;
     }
@@ -104,6 +110,7 @@ public class DiaryControllerTest {
     @DisplayName("일기 작성-텍스트")
     @Rollback
     public void createDiary_Text() throws Exception {
+        // 일기 데이터 생성
         String dateString = "2000-01-03";
         SimpleDateFormat dtFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date date = dtFormat.parse(dateString);
@@ -120,6 +127,7 @@ public class DiaryControllerTest {
                 .build();
         String requestContent = objectMapper.writeValueAsString(inputDiary);
 
+        // 일기 등록
         mockMvc.perform(
                         MockMvcRequestBuilders
                                 .post("/diary/regist/diary")
@@ -129,6 +137,7 @@ public class DiaryControllerTest {
                 )
                 .andExpect(status().isOk());
 
+        // 등록 내용 검증
         mockMvc.perform(
                         MockMvcRequestBuilders
                                 .get("/diary/detail/{date}", dateString)
@@ -139,14 +148,14 @@ public class DiaryControllerTest {
                 .andExpect(jsonPath("content").value(content))
                 .andExpect(jsonPath("date").value(dateString))
                 .andExpect(jsonPath("weather").value(Integer.toString(weather)))
-//                .andExpect(jsonPath("photo").value(null))
-        ;
+                .andExpect(jsonPath("photo").isEmpty());
     }
 
     @Test
     @DisplayName("일기 작성-사진 한장")
     @Rollback
     public void createDiary_Picture() throws Exception {
+        // 사진 파일 생성
         String dateString = "2000-01-02";
         String curPath = new File("").getAbsolutePath();
         String filename = "\\src\\test\\images\\jeju.jpg";
@@ -155,7 +164,8 @@ public class DiaryControllerTest {
         MockMultipartFile multipartFile = new MockMultipartFile("photos", curPath + filename, "image/jpg", Files.readAllBytes(file.toPath()));
 //        MockMultipartFile multipartFile = new MockMultipartFile("image", new FileInputStream(file));
 //        MockMultipartFile multipartFile = new MockMultipartFile("photos", curPath + filename, "image/jpg", "<<jpg data>>".getBytes());
-
+        
+        // 사진 등록
         mockMvc.perform(
                         MockMvcRequestBuilders
                                 .multipart("/diary/regist/photo/{date}", dateString)
@@ -163,7 +173,8 @@ public class DiaryControllerTest {
                                 .header(HttpHeaders.AUTHORIZATION, "Bearer " + accessToken)
                 )
                 .andExpect(status().isOk());
-
+        
+        // 등록된 내용 검증
         mockMvc.perform(
                         MockMvcRequestBuilders
                                 .get("/diary/detail/{date}", dateString)
@@ -180,6 +191,7 @@ public class DiaryControllerTest {
     @DisplayName("일기 작성-사진 여러장")
     @Rollback
     public void createDiary_Pictures() throws Exception {
+        // 사진 파일 생성
         String dateString = "2000-01-02";
         String curPath = new File("").getAbsolutePath();
         String filename1 = "\\src\\test\\images\\jeju.jpg";
@@ -190,6 +202,7 @@ public class DiaryControllerTest {
         MockMultipartFile multipartFile1 = new MockMultipartFile("photos", curPath + filename1, "image/jpg", Files.readAllBytes(file1.toPath()));
         MockMultipartFile multipartFile2 = new MockMultipartFile("photos", curPath + filename2, "image/jpg", Files.readAllBytes(file2.toPath()));
 
+        // 사진 등록
         mockMvc.perform(
                         MockMvcRequestBuilders
                                 .multipart("/diary/regist/photo/{date}", dateString)
@@ -199,6 +212,7 @@ public class DiaryControllerTest {
                 )
                 .andExpect(status().isOk());
 
+        // 등록된 내용 검증
         mockMvc.perform(
                         MockMvcRequestBuilders
                                 .get("/diary/detail/{date}", dateString)
@@ -212,11 +226,82 @@ public class DiaryControllerTest {
     }
 
     /***********************다이어리 삭제***********************/
+    @Test
+    @DisplayName("일기 삭제")
+    @Rollback
+    public void deleteDiary() throws Exception {
+        // 일기 데이터 생성
+        String dateString = "2000-01-05";
+        SimpleDateFormat dtFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = dtFormat.parse(dateString);
 
+        String title = "일기 삭제 테스트";
+        String content = "일기 삭제 테스트 중입니다";
+        int weather = 2;
+
+        TestDiary inputDiary = TestDiary.builder()
+                .title(title)
+                .content(content)
+                .weather(weather)
+                .date(date)
+                .build();
+        String requestContent = objectMapper.writeValueAsString(inputDiary);
+
+        // 일기 등록
+        mockMvc.perform(
+                        MockMvcRequestBuilders
+                                .post("/diary/regist/diary")
+                                .header(HttpHeaders.AUTHORIZATION, "Bearer " + accessToken)
+                                .content(requestContent)
+                                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                )
+                .andExpect(status().isOk());
+
+        // 일기 삭제
+        DeleteDiary deleteDiary = new DeleteDiary();
+        deleteDiary.setDate(date);
+        String deleteRequestContent = objectMapper.writeValueAsString(deleteDiary);
+
+        mockMvc.perform(
+                        MockMvcRequestBuilders
+                                .post("/diary/delete", dateString)
+                                .header(HttpHeaders.AUTHORIZATION, "Bearer " + accessToken)
+                                .content(deleteRequestContent)
+                                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                )
+                .andExpect(status().isOk());
+    }
 
 
     /***********************한달 다이어리 기록 조회***********************/
+    @Test
+    @DisplayName("한달 기록 조회")
+    @Rollback
+    public void monthlyRecord() throws Exception {
+
+    }
 
 
     /***********************검색 기록 조회***********************/
+    @Test
+    @DisplayName("일기 검색-결과 있음(제목)")
+    @Rollback
+    public void searchDiary_TitleExist() throws Exception {
+
+        
+    }
+
+    @Test
+    @DisplayName("일기 검색-결과 있음(내용)")
+    @Rollback
+    public void searchDiary_ContentExist() throws Exception {
+
+    }
+
+    @Test
+    @DisplayName("일기 검색-결과 없음")
+    @Rollback
+    public void searchDiary_NotExist() throws Exception {
+
+    }
 }
