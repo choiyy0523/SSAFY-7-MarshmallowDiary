@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { BackHandler, StyleSheet, TextInput, Alert, Pressable, Modal, Text, View, Button, TouchableOpacity, FlatList, Image, ScrollView } from 'react-native'
 import Footer from '../../components/component/Footer';
-import DayPicker from './DatePicker';
 import WeatherPicker from './WeatherPicker';
 import { launchImageLibrary } from 'react-native-image-picker';
 // import ButtonRegister from '../../components/component/ButtonRegister'
@@ -11,9 +10,20 @@ import { connect } from 'react-redux'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { set } from 'date-fns';
 import { http } from '../../../api/http'
-import ImagePicker from 'react-native-image-crop-picker';
+import { util } from '../../../api/util'
 
-export default function DiaryRegister({ navigation }) {
+
+// const ShowPicker = () => {
+//   //launchImageLibrary : 사용자 앨범 접근
+//   launchImageLibrary({}, (res) => {
+//     alert(res.assets[0].uri)
+//     const formdata = new FormData()
+//     formdata.append('file', res.assets[0].uri);
+//     console.log(res);
+//   })
+// }
+
+export default function DiaryRegister() {
 
   function Register() {
     http.post('/diary/regist/diary', {
@@ -35,6 +45,42 @@ export default function DiaryRegister({ navigation }) {
       })
   }
 
+  const ShowPicker = () => {
+    //launchImageLibrary : 사용자 앨범 접근
+    launchImageLibrary({}, (res) => {
+      // console.log("왈왈")
+      // alert(res.assets[0].uri)
+      const formdata = new FormData()
+      formdata.append('file', res.assets[0].uri);
+      console.log(res);
+      console.log("멍멍")
+      console.log(date)
+      console.log(formdata)
+
+      util.post(`/diary/regist/photo/${date}`, formdata)
+        .then(response => {
+          if (response) {
+            console.log("야옹")
+            console.log(response.data)
+          }
+        })
+        .catch((error) => {
+          if (error.response) {
+            console.log("냐옹")
+            console.log(error.response.data);
+            console.log(error.response.status);
+            console.log(error.response.headers);
+          } else if (error.request) {
+            console.log("먀옹")
+            console.log(error.request);
+          } else {
+            console.log("갸옹")
+            console.log('Error', error.message);
+          }
+        })
+    })
+  }
+
   const [title, setTitle] = useState('')
   const [content, setContent] = useState('')
   const [weather, setWeather] = useState(1)
@@ -50,7 +96,7 @@ export default function DiaryRegister({ navigation }) {
   const year = new Date().getFullYear();
 
   const dayformatted = `${year}년 ${month}월 ${day}일`;
-  const today = `${year}-${month}-${day}`
+  // const today = `${year}-${month}-${day}`
 
 
 
@@ -89,6 +135,15 @@ export default function DiaryRegister({ navigation }) {
             onChangeText={text => setTitle(text)} />
 
           {/* 사진 첨부*/}
+          {/* <Image source={{ uri: photo }} /> */}
+          <View style={styles.imageInput}>
+            <TouchableOpacity onPress={ShowPicker}>
+              <Image
+                source={require('../../../assets/images/etc/photo.png')}
+                style={styles.imageButton}
+              />
+            </TouchableOpacity>
+          </View >
 
 
 
