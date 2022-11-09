@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { BackHandler, StyleSheet, TextInput, Alert, Text, View, Button, TouchableOpacity, FlatList, Image, ScrollView } from 'react-native'
 import DiaryPictureCarousel from './DiaryPictureCarousel';
 import Footer from '../../components/component/Footer';
-import DayPicker from './DatePicker';
 import WeatherPicker from './WeatherPicker';
 import { launchImageLibrary } from 'react-native-image-picker';
 import ButtonRegister from '../../components/component/ButtonRegister'
@@ -10,32 +9,26 @@ import SelectImages from './SelectImages';
 import axios from 'axios'
 import { connect } from 'react-redux'
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { http } from '../../../api/http'
 
+const Detail = () => {
+  // { route, navigation })
+  // const { diaryDate } = route.params;
+  // const { diaryDetail, setDiaryDetail } = useState()
 
-const Detail = ({ route, navigation }) => {
-  const { diaryDate } = route.params;
-  const [diaryDetail, setDiaryDetail] = useState()
+  // const params = {}
 
   useEffect(() => {
-    AsyncStorage.getItem('token', (err, result) => {
-      axios.post('http://k7a303.p.ssafy.io:9090/api/v1/detail', {
-        date: diaryDate
-      }, {
-        headers: {
-          Authorization: `Bearer ${result}`
-        }
-      })
-        .then(res => {
-          console.log(res.data_list)
-          setDiaryDetail(res.data.list)
-        })
-        .catch(err => {
-          console.log(err)
-        })
+    http.get('diary/detail', { params: { date: date } })
+  })
+    .then(res => {
+      console.log(res)
+      console.log(res.title)
+      console.log(res.content)
     })
-  }, [])
-
-  // 어떤 날짜를 diaryDate로 보낼건지 설정하는 코드 필요
+    .catch(err => {
+      console.log(err)
+    })
 
   return (
     <View style={{ flex: 1 }}>
@@ -43,7 +36,7 @@ const Detail = ({ route, navigation }) => {
         {/* 날짜, 날씨, 등록버튼 - 일기장 헤더 */}
         <View style={styles.block}>
           {/* 날짜 */}
-          <Text style={styles.dateStyle}> 2022년 10월 31일 </Text>
+          <Text style={styles.dateStyle}> {res.date} </Text>
           {/* 날씨 */}
           <Image
             source={require('../../../assets/images/weather/1.png')}
@@ -53,24 +46,23 @@ const Detail = ({ route, navigation }) => {
 
         {/* 제목 */}
         <Text style={styles.titleInput}>
-          오늘은 10월 31일입니다.
+          {res.title}
         </Text>
 
         {/* 사진 */}
-        <DiaryPictureCarousel />
+        {/* <DiaryPictureCarousel /> */}
 
         {/* 일기 작성 */}
         <Text
           multiline={true}
           style={styles.diaryInput}>
-          오늘은 10월 31일 입니다. 자율 프로젝트 4주차 입니다. 오늘 점심은 해물잡탕밥이었습니다. 맛있었습니다. 후식은 아메리카노였습니다.
+          {res.content}
         </Text>
       </View>
       <Footer />
     </View>
   )
 }
-
 
 const styles = StyleSheet.create({
   block: {

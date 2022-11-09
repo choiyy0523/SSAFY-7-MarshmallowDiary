@@ -21,7 +21,6 @@ const SelectImages = () => {
         maximumMessage: '사진은 10장까지 첨부 가능합니다. ',
         selectedColor: '#91C788'
       });
-      console.log('여기')
       console.log('response: ', response);
       setImages(response);
     } catch (e) {
@@ -76,7 +75,7 @@ const SelectImages = () => {
         renderItem={renderItem}
         numColumns={3}
       />
-      {/* 
+      {/*
         <View style={style.bottom}>
           <TouchableOpacity style={style.openPicker} onPress={openPicker}>
             <Text style={style.openText}>open</Text>

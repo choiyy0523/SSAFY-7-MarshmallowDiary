@@ -11,35 +11,11 @@ import { connect } from 'react-redux'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { set } from 'date-fns';
 import { http } from '../../../api/http'
+import ImagePicker from 'react-native-image-crop-picker';
 
-export default function DiaryRegister() { 
+export default function DiaryRegister({ navigation }) {
 
   function Register() {
-    // 등록하고나서는 그날 일기 조회 화면으로 보내야함
-
-    // 이러면 비동기말고 순차적으로 처리되는게 맞나...?
-    // axios.post('http://k7a303.p.ssafy.io:9090/api/v1/diary/regist/photo/{date}', {
-    //   // 사진 폼데이터
-    // }, {
-    //   headers: {
-    //     Authorization: `Bearer ${token}`
-    //   }
-    // })
-    //   .then(res => {
-    //     console.log('사진 등록 완료')
-    //     console.log(res.date)
-
-    //   })
-    //   .catch(err => {
-    //     console.log(err)
-    //   })
-    // };
-    // useEffect(() => {
-    // AsyncStorage.getItem('token', (err, result) => {
-    //   const token = result;
-    //   console.log(token)
-    // })
-
     http.post('/diary/regist/diary', {
       title: title,
       content: content,
@@ -48,8 +24,6 @@ export default function DiaryRegister() {
     })
       .then(res => {
         console.log('일기 등록 완료')
-        console.log(res)
-
       })
       .catch(err => {
         console.log('일기 등록 실패')
@@ -59,22 +33,6 @@ export default function DiaryRegister() {
         console.log(weather)
         console.log(err)
       })
-
-      // http.post('/diary/regist/photo/${date}', {
-      //   date: today
-      // })
-      //   .then(res => {
-      //     console.log('사진 등록 완료')
-      //     console.log(res)
-  
-      //   })
-      //   .catch(err => {
-      //     console.log('사진 등록 실패')
-      //     console.log(date)
-      //     console.log(err)
-      //   })
-
-    // }, [])
   }
 
   const [title, setTitle] = useState('')
@@ -83,9 +41,8 @@ export default function DiaryRegister() {
 
   const getWeather = (weather) => {
     setWeather(weather)
+    console.log(weather)
   }
-
-  // const weather = 1
 
   const date = new Date()
   const day = new Date().getDate()
@@ -107,7 +64,7 @@ export default function DiaryRegister() {
             <Text style={styles.changeDay}>{dayformatted}</Text>
 
             {/* 날씨 선택 */}
-            <WeatherPicker weather={weather} getWeather={getWeather}/>
+            <WeatherPicker weather={weather} getWeather={getWeather} />
 
           </View>
 
@@ -132,15 +89,8 @@ export default function DiaryRegister() {
             onChangeText={text => setTitle(text)} />
 
           {/* 사진 첨부*/}
-            {/* < View style={styles.imageInput} >
-                <TouchableOpacity onPress={SelectImages}>
-                  <Image
-                    source={require('../../../assets/images/etc/photo.png')}
-                    style={styles.imageButton}
-                  />
-                </TouchableOpacity>
-              </View > 
-          <SelectImages /> */}
+
+
 
           {/* 일기 작성 */}
           <TextInput
@@ -151,9 +101,9 @@ export default function DiaryRegister() {
             onChangeText={text => setContent(text)}
           />
         </View>
-      </ScrollView>
+      </ScrollView >
       <Footer />
-    </View>
+    </View >
   )
 
 }
