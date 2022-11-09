@@ -4,20 +4,20 @@ import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 import StackNavigation from './navigations/Stack';
 // import SplashScreen from 'react-native-splash-screen';
 import { lightTheme, darkTheme } from "./theme/theme";
+import SplashScreen from "react-native-splash-screen";
 
 
 
 const App = () => {
-  // useEffect(() => {
-  //   try {
-  //     setTimeout(() => {
-  //       SplashScreen.hide();
-  //     }, 2000);
-  //   } catch(e) {
-  //     console.warn('에러발생');
-  //     console.warn(e);
-  //   }
-  // });
+  useEffect(() => {
+    try {
+      setTimeout(() => {
+        SplashScreen.hide();
+      }, 1500); 
+    } catch (e) {
+      console.log(e.message);
+    }
+  });
 
   const isLight = false;
 

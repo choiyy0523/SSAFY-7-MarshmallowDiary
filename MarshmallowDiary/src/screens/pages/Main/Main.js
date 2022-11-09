@@ -4,7 +4,6 @@ import { Text, View, SafeAreaView, StyleSheet, TouchableOpacity, Image } from 'r
 import Footer from '../../components/component/Footer';
 import Calendar from './Calendar';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import axios from 'axios';
 import { http } from '../../../api/http'
 
 const Main = ({ navigation }) => {
@@ -18,49 +17,32 @@ const Main = ({ navigation }) => {
 
   const [words, setWords] = useState()
 
-  // const [test, setTest] = useState()
-  // AsyncStorage.getItem('token', (err, result) => {
-  //   const token = result;
-  //   setTest(token)
-  // })  
-  // console.log('test',test)
+  AsyncStorage.getItem('token', (err, result) => {
+    const token = result;
+    console.log('token',token)
+  })  
+
+  AsyncStorage.getItem('refresh', (err, result) => {
+    const refresh = result;
+    console.log('refresh',refresh)
+  }) 
 
   useEffect(() => {
-    // AsyncStorage.getItem('token', (err, result) => {
-    //   const token = result;
-    //   console.log(token)
-
-      // axios.get('http://k7a303.p.ssafy.io:9090/api/v1/analysis/loyalty', {
-      //   headers: {
-      //     Authorization: `Bearer ${token}`
-      //   }
-      // })
       http.get('/analysis/loyalty')
       .then(res => {
-        // console.log(res.data)
-        // console.log(typeof(res.data))
         Object.entries(res.data).map(([k, v]) => {
-          // console.log('value', v)
           setWords(v)
         })
       })
-    // });
+      .catch(err => {
+        navigation.navigate('LoginCheck')
+      })
   }, [])
 
   return (
     <View style={{ flex: 1, backgroundColor:'#FFF9F8'  }}>
       <View style={{ flex: 1 }}>
         <Calendar />
-        {/* <Calendar
-          style={{ marginTop: '5%' }}
-          monthFormat={'yyyy년 MM월'}
-          renderArrow={(direction) => direction === "left" ? (
-            <Icon name="left" type='antdesign' size={20} color="#000000" />
-          ) : (
-            <Icon name="right" type='antdesign' size={20} color="#000000" />
-          )
-          }
-        /> */}
       </View>
       <View style={{ flex: 0.3, backgroundColor: 'rgba(217,217,217,0.3)', borderRadius: 20, marginLeft: '20%', marginRight: '20%' }}>
         <View style={{ fontSize: 15, alignItems: 'center', justifyContent: 'center', flex: 1 }}>
