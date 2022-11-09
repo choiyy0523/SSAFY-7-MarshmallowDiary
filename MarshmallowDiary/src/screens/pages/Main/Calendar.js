@@ -44,8 +44,6 @@ const Calendar = ({navigation}) => {
     }
 
     rows.push(days)
-    // console.log('rows', rows)
-
     days = []
   }
   for (let x=0; x<7; x++) {
@@ -68,7 +66,6 @@ const Calendar = ({navigation}) => {
 
   const targetYear = format(currentMonth, 'yyyy')
   const targetMonth = format(currentMonth, 'MM')
-  // console.log(targetYear+'-'+targetMonth)
 
   var today = new Date();
 
@@ -88,27 +85,12 @@ const Calendar = ({navigation}) => {
   const [monthData, setMonthData] = useState()
 
   const getMonthData = () => {
-    // AsyncStorage.getItem('token', (err, result) => {
-    //   const token = result;
-    //   // console.log(token)
-
-    //   axios.get(`http://k7a303.p.ssafy.io:9090/api/v1/diary?month=${targetMonth}&year=${targetYear}`, {
-    //     headers: {
-    //       Authorization: `Bearer ${token}`
-    //     }
-    //   })
-    //   .then(res => {
-    //     // console.log(res.data.list)
-    //     setMonthData(res.data.list)
-    //   })
-    // })
     http.get(`diary?month=${targetMonth}&year=${targetYear}`)
     .then(res => {
       setMonthData(res.data.list)
     })
   }
 
-  // console.log(monthData)
   const emotions = []
 
   if (rows[5]) {
@@ -145,16 +127,28 @@ const Calendar = ({navigation}) => {
     getMonthData()
   }, [targetMonth])
 
+  // console.log(rows[parseInt(10/7)][10%7])
+  // console.log(rows[1][3])
+
+  // 누른 날짜 idx와 emotions idx 일치 시키고
+  // emotions[누른 날짜 idx]가 0이 아니면 이동
+
   // const movePage = () => {
   //   for (let i=0; i<emotions.length; i++) {
-  //     if (emotions[i] == 0) {
-  //       navigation.navigate('Register', { targetDate:clickedDate })
+  //     if (emotions[i] != 0) {
+  //       const targetDate = targetYear+'-'+targetMonth+'-'+('0'+rows[parseInt(i/7)][i%7]).slice(-2)
+  //       // navigation.navigate('Detail', { showDetail : targetDate })
+  //       navigation.navigate('Detail')
   //     }
   //     else {
-  //       navigation.navigate('Detail', { targetDate: clickedDate })
+  //       clickedDate()
   //     }
   //   }
   // }
+
+  const movePage = () => {
+    navigation.navigate('Detail')
+  }
 
 
   return (
@@ -183,7 +177,7 @@ const Calendar = ({navigation}) => {
 
       <View style={{ flexDirection:'row', marginTop:'3%' }}>
         {rows[0].map((data, i) => (
-          <TouchableOpacity key={i} style={{flex: 0.14, justifyContent:'center', alignItems:'center' }} onPress={() => {setSelectedDate(('0' + data).slice(-2)); clickedDate();}}>
+          <TouchableOpacity key={i} style={{flex: 0.14, justifyContent:'center', alignItems:'center' }} onPress={() => {setSelectedDate(('0' + data).slice(-2)); clickedDate(); movePage();}}>
             {dateString == targetYear+'-'+targetMonth+'-'+('0' + data).slice(-2) ?
             <View style={{backgroundColor:'#D9D9D9', borderRadius:30}}>
               <Text>  {data}  </Text>

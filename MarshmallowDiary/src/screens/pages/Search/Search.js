@@ -3,9 +3,7 @@ import { Text, View, Image, TouchableOpacity } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 import Footer from '../../components/component/Footer';
 import positive from '../../../assets/images/character/positive.png'
-import { useNavigation } from '@react-navigation/native';
 import { Icon } from '@rneui/themed';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 const Search = ({ navigation }) => {
