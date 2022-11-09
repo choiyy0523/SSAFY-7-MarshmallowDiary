@@ -54,7 +54,7 @@ public class DiaryControllerTest {
     @Autowired
     ResourceLoader loader;
 
-    private final String accessToken = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiLsnbTrj4Tsl7AiLCJpYXQiOjE2Njc5NzYwNjYsImV4cCI6MTY2Nzk3NjEyNn0.8By4KBXTR7Vc1FopQacjYNhZcQ3seOWRi1atXgamVBg";
+    private final String accessToken = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiLsnbTrj4Tsl7AiLCJpYXQiOjE2Njc5ODE1MzMsImV4cCI6MTY3MDQwMDczM30.pe0hC0AtcYU_N9lg2FumWMdPdo_VWo1FS37l6vc8eIw";
 
     @BeforeEach
     public void init() {
@@ -65,7 +65,7 @@ public class DiaryControllerTest {
     }
 
     @Builder
-    @Getter
+    @Getter @Setter
     public static class TestDiary{
         private String title;
         private String content;
@@ -79,6 +79,7 @@ public class DiaryControllerTest {
         @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+9")
         private Date date;
     }
+
 
     /***********************다이어리 조회***********************/
     @Test
@@ -278,7 +279,51 @@ public class DiaryControllerTest {
     @DisplayName("한달 기록 조회")
     @Rollback
     public void monthlyRecord() throws Exception {
+        // 일기 데이터 생성
+        SimpleDateFormat dtFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String title = "일기 삭제 테스트";
+        String content = "일기 삭제 테스트 중입니다";
+        int weather = 2;
 
+        String year = "2000";
+        String month = "2";
+
+        for(int i = 1;i < 10;i++){ //1~9일 9개 일기 삽입
+            String dateString = year + "-0" + month + "-0" + Integer.toString(i);
+            Date date = dtFormat.parse(dateString);
+
+            TestDiary inputDiary = TestDiary.builder()
+                    .title(title)
+                    .content(content)
+                    .weather(weather)
+                    .date(date)
+                    .build();
+
+            String requestContent = objectMapper.writeValueAsString(inputDiary);
+
+            // 일기 등록
+            mockMvc.perform(
+                            MockMvcRequestBuilders
+                                    .post("/diary/regist/diary")
+                                    .header(HttpHeaders.AUTHORIZATION, "Bearer " + accessToken)
+                                    .content(requestContent)
+                                    .contentType(MediaType.APPLICATION_JSON_VALUE)
+                    )
+                    .andExpect(status().isOk());
+        }
+
+        // 한달 일기 기록 조회
+        mockMvc.perform(
+                        MockMvcRequestBuilders
+                                .get("/diary")
+                                .header(HttpHeaders.AUTHORIZATION, "Bearer " + accessToken)
+                                .param("year", year)
+                                .param("month", month)
+                                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                )
+                .andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.list.length()").value(9))
+                .andReturn();
     }
 
 
@@ -288,7 +333,6 @@ public class DiaryControllerTest {
     @Rollback
     public void searchDiary_TitleExist() throws Exception {
 
-        
     }
 
     @Test
