@@ -1,6 +1,7 @@
 package com.marshmallow.analysis.dto;
 
 import com.marshmallow.analysis.entity.Analysis;
+import com.marshmallow.music.entity.Music;
 import lombok.*;
 
 
@@ -17,12 +18,18 @@ public class AnalysisResponse {
         private int positive;
         private int negative;
         private int neutral;
+        private String title;
+        private String singer;
+        private String url;
 
-    public static AnalysisResponse.getResult build(Analysis analysis){
-        return AnalysisResponse.getResult.builder()
+    public static AnalysisResponse.getResult build(Analysis analysis, Music music){
+        return getResult.builder()
                 .positive(round(analysis.getPositive()))
                 .negative(round(analysis.getNegative()))
                 .neutral(round(analysis.getNeutral()))
+                .title(music.getTitle())
+                .singer(music.getSinger())
+                .url(music.getUrl())
                 .build();
         }
     }

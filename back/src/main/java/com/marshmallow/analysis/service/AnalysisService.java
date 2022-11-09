@@ -5,28 +5,19 @@ import com.marshmallow.analysis.entity.Analysis;
 import com.marshmallow.analysis.repository.AnaylsisRepository;
 import com.marshmallow.diary.entity.Diary;
 import com.marshmallow.diary.repository.DiaryRepository;
+import com.marshmallow.music.entity.Music;
+import com.marshmallow.music.repository.MusicRepository;
 import com.marshmallow.user.entity.User;
 import com.marshmallow.user.repository.UserRepository;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.PropertySources;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-import java.net.URL;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.*;
 
 
@@ -46,14 +37,22 @@ public class AnalysisService {
     @Autowired
     UserRepository userRepository;
 
+    @Autowired
+    MusicRepository musicRepository;
+
 
     public AnalysisResponse.getResult diaryResult(Date date) throws Exception{
         UUID userId = getCurrentUser().getUserId();
 
         Optional<Diary> diary = diaryRepository.findByUser_UserIdAndDate(userId, date);
         Optional<Analysis> analysis = anaylsisRepository.findByDiary_DiaryId(diary.get().getDiaryId());
-
-        return AnalysisResponse.getResult.build(analysis.get());
+        List<Music> musics = musicRepository.findAllByEmotion(analysis.get().getSentiment());
+        Music music = new Music();
+        if(musics.size() != 0){
+            Random idx = new Random();
+            music = musics.get(idx.nextInt(musics.size()));
+        }
+        return AnalysisResponse.getResult.build(analysis.get(), music);
     }
 
     private User getCurrentUser() {

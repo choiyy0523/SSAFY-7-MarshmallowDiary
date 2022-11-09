@@ -8,14 +8,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import java.text.ParseException;
 import java.util.Date;
 import java.util.Map;
-import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
@@ -27,7 +24,7 @@ public class AnalysisController {
     private AnalysisService analysisService;
 
     @GetMapping("/{date}")
-    @ApiOperation(value = "해당 일기의 감정 분석 결과", notes = "다이어리 날짜를 입력받아 해당 일기의 감정 분석 결과 조회 기능")
+    @ApiOperation(value = "해당 일기의 감정 분석 결과 및 노래 추천", notes = "다이어리 날짜를 입력받아 해당 일기의 감정 분석 결과 및 감정에 따른 노래 추천")
     public ResponseEntity<AnalysisResponse.getResult> getEmotion(@PathVariable("date") @DateTimeFormat(pattern="yyyy-MM-dd") Date date) throws Exception {
 
         AnalysisResponse.getResult result = analysisService.diaryResult(date);
