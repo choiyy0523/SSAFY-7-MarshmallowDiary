@@ -72,7 +72,7 @@ const lightTheme = {
     iconColor: '#525252'
   }
 }
-import { lightTheme, darkTheme } from "./theme/theme";
+// import { lightTheme, darkTheme } from "./theme/theme";
 import SplashScreen from "react-native-splash-screen";
 
 

@@ -152,7 +152,7 @@ function Detail({ route }) {
         </Chip>
       </View>
 
-      <Footer />
+      {/* <Footer /> */}
     </View >
   )
 }

@@ -56,8 +56,8 @@ const Today = ({ route }) => {
           console.log('그날 일기 분석결과 조회 실패')
           console.log(err)
         })
-    }, [])
-  })
+    })
+  }, [])
 
   return (
     <View style={{ flex: 1 }}>
