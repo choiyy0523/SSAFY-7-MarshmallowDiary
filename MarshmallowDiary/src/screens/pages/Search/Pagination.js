@@ -27,7 +27,7 @@ function Pagination({ total, limit, page, setPage }) {
     }
   }
 
-  console.log('page', page)
+  // console.log('page', page)
 
   return (
     <View style={{ flexDirection:'row', flex:1, justifyContent:'center', alignItems:'center'}}>

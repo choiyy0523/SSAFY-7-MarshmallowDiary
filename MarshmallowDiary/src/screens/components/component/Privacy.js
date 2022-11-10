@@ -17,7 +17,7 @@ const Privacy = () => {
     if (route.name == 'Password') {
       if (input.length >= 4) {
         if (input.slice(0, 3) == pw) {
-          navigation.navigate('Main')
+          navigation.replace('Main')
         }
         else {
           setInput('')

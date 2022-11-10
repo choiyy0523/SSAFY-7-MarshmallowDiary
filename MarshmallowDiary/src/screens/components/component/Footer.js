@@ -8,8 +8,7 @@ import negative from '../../../assets/images/character/negative.png'
 import search from '../../../assets/images/footer/search.png'
 import settings from '../../../assets/images/footer/settings.png'
 import { useNavigation, useRoute } from '@react-navigation/native';
-import axios from 'axios';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { http } from '../../../api/http';
 
 const Footer = () => {
   const navigation = useNavigation()
@@ -17,30 +16,33 @@ const Footer = () => {
 
   const [loyalty, setLoyalty] = useState()
 
-  useEffect(() => {
-    AsyncStorage.getItem('token', (err, result) => {
-      const token = result;
+  var today = new Date();
 
-      axios.get('http://k7a303.p.ssafy.io:9090/api/v1/analysis/loyalty', {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      })
+  var year = today.getFullYear();
+  var month = ('0' + (today.getMonth() + 1)).slice(-2);
+  var day2 = ('0' + today.getDate()).slice(-2);
+  
+  var dateString = year + '-' + month + '-' + day2;
+
+  const [written, setWritten] = useState()
+
+  useEffect(() => {
+    http.get('/analysis/loyalty')
       .then(res => {
-        // console.log(res.data)
-        // console.log(typeof(res.data))
-        // console.log(Object.keys(res.data))
-        // console.log(typeof(Object.keys(res.data)))
-        // console.log(Object.keys(res.data)[0])
-        // console.log(typeof(Object.keys(res.data)[0]))
         setLoyalty(Object.keys(res.data)[0])
       })
-    });
-  }, [])
-  
-  // console.log(loyalty)
-  // console.log(typeof(loyalty))
+      .catch(err => {
+        navigation.navigate('LoginCheck')
+      })
 
+    http.get(`/diary/detail/${dateString}`)
+    .then(res => {
+      setWritten(true)
+    })
+    .catch(err => {
+      setWritten(false)
+    })
+  }, []);
 
   return (
     <SafeAreaView>
@@ -67,6 +69,12 @@ const Footer = () => {
           {route.name === 'Register' || route.name === 'Detail' ?
             <TouchableOpacity style={{ width: '20%', alignItems: 'center', justifyContent: 'center', flex: 1, height: 60, backgroundColor: 'rgba(251, 198, 135, 0.3)' }}>
               {loyalty == '0' ? <Image source={positive} style={{ width: 33, height: 33 }} /> : 
+              loyalty == '1' ?  <Image source={neutral} style={{ width: 33, height: 33 }} /> : 
+                                  <Image source={negative} style={{ width: 33, height: 33 }} /> }
+            </TouchableOpacity> :
+            (written) ?
+            <TouchableOpacity style={{ width: '20%', alignItems: 'center', justifyContent: 'center', flex: 1 }} onPress={() => navigation.navigate('Detail', {targetDate: dateString})}>
+              {loyalty == '0' || loyalty == undefined ? <Image source={positive} style={{ width: 33, height: 33 }} /> : 
               loyalty == '1' ?  <Image source={neutral} style={{ width: 33, height: 33 }} /> : 
                                   <Image source={negative} style={{ width: 33, height: 33 }} /> }
             </TouchableOpacity> :

@@ -1,18 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import {Text, View, TouchableOpacity, Image} from 'react-native';
-import { format, addMonths, subMonths, getMonth } from 'date-fns';
+import {Text, View, TouchableOpacity, Image, Pressable} from 'react-native';
+import { format, addMonths, subMonths, addDays } from 'date-fns';
 import { startOfMonth, endOfMonth, startOfWeek, endOfWeek } from 'date-fns'
-import { isSameMonth, isSameDay, addDays, parse} from 'date-fns'
 import { Icon } from '@rneui/themed';
-import axios from 'axios';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import mm_positive from '../../../assets/images/mm/mm_positive.png'
 import mm_neutral from '../../../assets/images/mm/mm_neutral.png'
 import mm_negative from '../../../assets/images/mm/mm_negative.png'
 import { http } from '../../../api/http'
+import { useNavigation } from '@react-navigation/native';
+import { useIsFocused } from '@react-navigation/native';
 
 
-const Calendar = ({navigation}) => {
+
+const Calendar = () => {
+  const navigation = useNavigation()
+  const isFocused = useIsFocused()
   const [currentMonth, setCurrentMonth] = useState(new Date());
 
   const prevMonth = () => {
@@ -38,7 +40,6 @@ const Calendar = ({navigation}) => {
   while( day <= endDate ) {
     for (let i=0; i<7; i++) {
       formattedDate = format(day, 'd')
-      const cloneDay = day
       days.push(formattedDate)
       day = addDays(day, 1)
     }
@@ -46,16 +47,19 @@ const Calendar = ({navigation}) => {
     rows.push(days)
     days = []
   }
+
   for (let x=0; x<7; x++) {
     if (rows[0][x] > 10) {
       rows[0][x] = 100
     }
   }
+
   for (let y=0; y<7; y++) {
     if (rows[4][y] < 10) {
       rows[4][y] = 0
     }
   }
+  
   if (rows[5]) {
     for (let z=0; z<7; z++) {
       if (rows[5][z] < 10) {
@@ -75,7 +79,6 @@ const Calendar = ({navigation}) => {
 
   var dateString = year + '-' + month + '-' + day2;
   
-
   const [selectedDate, setSelectedDate] = useState(day2)
 
   const clickedDate = () => {
@@ -88,6 +91,9 @@ const Calendar = ({navigation}) => {
     http.get(`diary?month=${targetMonth}&year=${targetYear}`)
     .then(res => {
       setMonthData(res.data.list)
+    })
+    .catch(err => {
+      navigation.navigate('LoginCheck')
     })
   }
 
@@ -115,9 +121,6 @@ const Calendar = ({navigation}) => {
       }
     }
   }
-  
-  // console.log(rows)
-  // console.log(emotions)
 
   useEffect(() => {
     clickedDate()
@@ -125,26 +128,23 @@ const Calendar = ({navigation}) => {
 
   useEffect(() => {
     getMonthData()
-  }, [targetMonth])
+  }, [targetMonth, isFocused])
 
-  // console.log(rows[parseInt(10/7)][10%7])
-  // console.log(rows[1][3])
+  const monthDays = []
+  if (monthData) {
+    for (let i=0; i<monthData.length; i++) {
+      monthDays.push(monthData[i].day)
+    }
+  }
 
-  // 누른 날짜 idx와 emotions idx 일치 시키고
-  // emotions[누른 날짜 idx]가 0이 아니면 이동
-
-  // const movePage = () => {
-  //   for (let i=0; i<emotions.length; i++) {
-  //     if (emotions[i] != 0) {
-  //       const targetDate = targetYear+'-'+targetMonth+'-'+('0'+rows[parseInt(i/7)][i%7]).slice(-2)
-  //       // navigation.navigate('Detail', { showDetail : targetDate })
-  //       navigation.navigate('Detail')
-  //     }
-  //     else {
-  //       clickedDate()
-  //     }
-  //   }
-  // }
+  const movePage = () => {
+    if (monthDays.includes(targetYear+'-'+targetMonth+'-'+selectedDate)) {
+      navigation.navigate('Detail', { targetDate: targetYear+'-'+targetMonth+'-'+selectedDate })
+    }
+    else {
+      clickedDate()
+    }
+  }
 
   const movePage = () => {
     navigation.navigate('Detail')
@@ -177,7 +177,8 @@ const Calendar = ({navigation}) => {
 
       <View style={{ flexDirection:'row', marginTop:'3%' }}>
         {rows[0].map((data, i) => (
-          <TouchableOpacity key={i} style={{flex: 0.14, justifyContent:'center', alignItems:'center' }} onPress={() => {setSelectedDate(('0' + data).slice(-2)); clickedDate(); movePage();}}>
+          <Pressable key={i} style={{flex: 0.14, justifyContent:'center', alignItems:'center' }}
+            onPressIn={() => setSelectedDate(('0' + data).slice(-2))} onPress={movePage}>
             {dateString == targetYear+'-'+targetMonth+'-'+('0' + data).slice(-2) ?
             <View style={{backgroundColor:'#D9D9D9', borderRadius:30}}>
               <Text>  {data}  </Text>
@@ -186,7 +187,7 @@ const Calendar = ({navigation}) => {
             <Text>
               {data}
             </Text> : null}
-          </TouchableOpacity> 
+          </Pressable> 
         ))}
       </View>
 
@@ -208,7 +209,8 @@ const Calendar = ({navigation}) => {
 
       <View style={{ flexDirection:'row' }}>
         {rows[1].map((data, i) => (
-          <TouchableOpacity key={i} style={{flex: 0.14, justifyContent:'center', alignItems:'center' }} onPress={() => {setSelectedDate(('0' + data).slice(-2)); clickedDate();}}>
+          <Pressable key={i} style={{flex: 0.14, justifyContent:'center', alignItems:'center' }} 
+            onPressIn={() => {setSelectedDate(('0' + data).slice(-2))}} onPress={movePage}>
             {dateString == targetYear+'-'+targetMonth+'-'+('0' + data).slice(-2) ?
             <View style={{backgroundColor:'#D9D9D9', borderRadius:30}}>
               <Text>  {data}  </Text>
@@ -217,7 +219,7 @@ const Calendar = ({navigation}) => {
             <Text>
               {data}
             </Text>}
-          </TouchableOpacity>
+          </Pressable>
         ))}
       </View>
 
@@ -239,7 +241,8 @@ const Calendar = ({navigation}) => {
 
       <View style={{ flexDirection:'row' }}>
         {rows[2].map((data, i) => (
-          <TouchableOpacity key={i} style={{flex: 0.14, justifyContent:'center', alignItems:'center' }} onPress={() => {setSelectedDate(('0' + data).slice(-2)); clickedDate();}}>
+          <Pressable key={i} style={{flex: 0.14, justifyContent:'center', alignItems:'center' }} 
+            onPressIn={() => {setSelectedDate(('0' + data).slice(-2))}} onPress={movePage}>
             {dateString == targetYear+'-'+targetMonth+'-'+('0' + data).slice(-2) ?
             <View style={{backgroundColor:'#D9D9D9', borderRadius:30}}>
               <Text>  {data}  </Text>
@@ -248,7 +251,7 @@ const Calendar = ({navigation}) => {
             <Text>
               {data}
             </Text>}
-          </TouchableOpacity>
+          </Pressable>
         ))}
       </View>
 
@@ -270,7 +273,8 @@ const Calendar = ({navigation}) => {
 
       <View style={{ flexDirection:'row' }}>
         {rows[3].map((data, i) => (
-          <TouchableOpacity key={i} style={{flex: 0.14, justifyContent:'center', alignItems:'center' }} onPress={() => {setSelectedDate(('0' + data).slice(-2)); clickedDate();}}>
+          <Pressable key={i} style={{flex: 0.14, justifyContent:'center', alignItems:'center' }} 
+            onPressIn={() => {setSelectedDate(('0' + data).slice(-2))}} onPress={movePage}>
             {dateString == targetYear+'-'+targetMonth+'-'+('0' + data).slice(-2) ?
             <View style={{backgroundColor:'#D9D9D9', borderRadius:30}}>
               <Text>  {data}  </Text>
@@ -279,7 +283,7 @@ const Calendar = ({navigation}) => {
             <Text>
               {data}
             </Text>}
-          </TouchableOpacity>
+          </Pressable>
         ))}
       </View>
 
@@ -301,7 +305,8 @@ const Calendar = ({navigation}) => {
 
       <View style={{ flexDirection:'row' }}>
         {rows[4].map((data, i) => (
-          <TouchableOpacity key={i} style={{flex: 0.14, justifyContent:'center', alignItems:'center' }} onPress={() => {setSelectedDate(('0' + data).slice(-2)); clickedDate();}}>
+          <Pressable key={i} style={{flex: 0.14, justifyContent:'center', alignItems:'center' }} 
+            onPressIn={() => {setSelectedDate(('0' + data).slice(-2))}} onPress={movePage}>
             {dateString == targetYear+'-'+targetMonth+'-'+('0' + data).slice(-2) ?
             <View style={{backgroundColor:'#D9D9D9', borderRadius:30}}>
               <Text>  {data}  </Text>
@@ -310,7 +315,7 @@ const Calendar = ({navigation}) => {
             <Text>
               {data}
             </Text>: null}
-          </TouchableOpacity>
+          </Pressable>
         ))}
       </View>
 
@@ -333,7 +338,8 @@ const Calendar = ({navigation}) => {
       {rows[5] ?
         <View style={{ flexDirection:'row' }}>
           {rows[5].map((data, i) => (
-            <TouchableOpacity key={i} style={{flex: 0.14, justifyContent:'center', alignItems:'center' }} onPress={() => {setSelectedDate(('0' + data).slice(-2)); clickedDate();}}>
+            <Pressable key={i} style={{flex: 0.14, justifyContent:'center', alignItems:'center' }} 
+              onPressIn={() => {setSelectedDate(('0' + data).slice(-2))}} onPress={movePage}>
               {dateString == targetYear+'-'+targetMonth+'-'+('0' + data).slice(-2) ?
             <View style={{backgroundColor:'#D9D9D9', borderRadius:30}}>
               <Text>  {data}  </Text>
@@ -342,7 +348,7 @@ const Calendar = ({navigation}) => {
             <Text>
               {data}
             </Text>: null}
-            </TouchableOpacity>
+            </Pressable>
           ))}
         </View> : null}
 
@@ -362,9 +368,6 @@ const Calendar = ({navigation}) => {
             </View>
           ))}
         </View> : null}
-
-
-      
     </View>
   )
 }

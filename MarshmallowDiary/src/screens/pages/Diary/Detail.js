@@ -2,7 +2,10 @@ import React from 'react';
 import { BackHandler, StyleSheet, TextInput, Alert, Text, View, Button, TouchableOpacity, Image } from 'react-native'
 import DiaryPictureCarousel from './DiaryPictureCarousel'
 
-function Detail() {
+
+function Detail({route}) {
+  const { targetDate } = route.params;
+  console.log(targetDate)
 
   return (
     <View>

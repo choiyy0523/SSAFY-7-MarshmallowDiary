@@ -8,11 +8,9 @@ import mm_positive from '../../../assets/images/mm/mm_positive.png'
 import mm_neutral from '../../../assets/images/mm/mm_neutral.png'
 import mm_negative from '../../../assets/images/mm/mm_negative.png'
 import ch_neutral from '../../../assets/images/character/neutral.png'
-import axios from 'axios';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import {http} from '../../../api/http'
 
-const Analysis = () => {
+const Analysis = ({navigation}) => {
   var today = new Date();
 
   var year = today.getFullYear();
@@ -28,43 +26,6 @@ const Analysis = () => {
   const [ncnt, setNcnt] = useState()
   const [ngcnt, setNgcnt] = useState()
   const [best, setBest] = useState()
-
-  // const getMonth = () => {
-  //   AsyncStorage.getItem('token', (err, result) => {
-  //     axios.post('http://k7a303.p.ssafy.io:9090/api/v1/analysis/month', {
-  //       month: targetMonth,
-  //       year: targetYear
-  //     }, {
-  //       headers: {
-  //         Authorization: `Bearer ${result}`
-  //       }
-  //     })
-  //     .then(res => {
-  //       if ( res.data.positive == 0) {
-  //         setPositive(3200)
-  //       }
-  //       else {
-  //         setPositive(res.data.positive)
-  //       }
-  //       if (res.data.neutral == 0) {
-  //         setNeutral(3200)
-  //       }
-  //       else {
-  //         setNeutral(res.data.neutral)
-  //       }
-  //       if (res.data.negative == 0) {
-  //         setNegative(3200)
-  //       }
-  //       else {
-  //         setNegative(res.data.negative)
-  //       }
-  //       setPcnt(res.data.positiveCnt)
-  //       setNcnt(res.data.neutralCnt)
-  //       setNgcnt(res.data.negativeCnt)
-  //       setBest(res.data.bestPositiveDate)
-  //     })
-  //   });
-  // }
 
   const getMonth = () => {
     http.post('/analysis/month', {
@@ -95,6 +56,9 @@ const Analysis = () => {
         setNgcnt(res.data.negativeCnt)
         setBest(res.data.bestPositiveDate)
       })
+      .catch(err => {
+        navigation.navigate('LoginCheck')
+      })
     };
   
 
@@ -102,10 +66,6 @@ const Analysis = () => {
   const widthAndHeight = 225
   var series = [60, 25, 15]
   series = [Math.round(positive), Math.round(neutral), Math.round(negative)]
-  // if (series[0] + series[1] + series[2] == 0) {
-  //   series = [3200, 3200, 3200]
-  // }
-
 
   const sliceColor = ['#91C788', '#FBC687', '#F38181']
 
@@ -115,13 +75,7 @@ const Analysis = () => {
   }, [targetMonth, targetYear])
 
   const getAll = () => {
-    AsyncStorage.getItem('token', (err, result) => {
-      axios.get('http://k7a303.p.ssafy.io:9090/api/v1/analysis/all', 
-      {
-        headers: {
-          Authorization: `Bearer ${result}`
-        }
-      })
+      http.get('/analysis/all')
       .then(res => {
         console.log('all', res.data)
         setPositive(res.data.positive)
@@ -132,8 +86,10 @@ const Analysis = () => {
         setNgcnt(res.data.negativeCnt)
         setBest(res.data.bestPositiveDate)
       })
-    });
-  }
+      .catch(err => {
+        navigation.navigate('LoginCheck')
+      });
+    }
 
   const [isAll, setIsAll] = useState(false)
   const selectAll = () => {
