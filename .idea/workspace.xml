@@ -6,58 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="7b1ca06a-03f9-4914-a961-b3046016f9ec" name="Changes" comment="# [#Issue Number] type: 제목&#10;# [#Issue Number] init: 초기 설정 (환경 설정 등)&#10;# [#Issue Number] feat: 기능 (새로운 기능)&#10;# [#Issue Number] fix: 버그 (버그 수정)&#10;# [#Issue Number] refactor: 리팩토링&#10;# [#Issue Number] docs: 문서 (문서 추가, 수정, 삭제)&#10;# [#Issue Number] test: 테스트 (테스트 코드 추가, 수정, 삭제: 비즈니스 로직에 변경 없음)&#10;# [#Issue Number] chore: 기타 변경사항 (빌드 스크립트 수정 등)&#10;# —————————&#10;#     제목 끝에 마침표(.) 금지&#10;#     제목과 본문을 한 줄 띄워 분리하기&#10;#     본문은 “어떻게” 보다 “무엇을“, “왜”를 설명한다.&#10;# —————————&#10;######## 제목은 한 줄에 최대 50 글자까지만 입력 ############ -&gt; |&#10;&#10;&#10;######## 본문은 한 줄에 최대 72 글자까지만 입력 ################################## -&gt; |">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/classes/application.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/MarshmallowApplication.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/analysis/controller/AnalysisController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/analysis/dto/AnalysisRequest$monthReq.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/analysis/dto/AnalysisRequest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/analysis/dto/AnalysisResponse$getAllEmotion$getAllEmotionBuilder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/analysis/dto/AnalysisResponse$getAllEmotion.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/analysis/dto/AnalysisResponse$getResult$getResultBuilder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/analysis/dto/AnalysisResponse$getResult.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/analysis/dto/AnalysisResponse$getdiaryId$getdiaryIdBuilder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/analysis/dto/AnalysisResponse$getdiaryId.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/analysis/dto/AnalysisResponse.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/analysis/entity/Analysis$AnalysisBuilder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/analysis/entity/Analysis.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/analysis/repository/AnaylsisRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/analysis/service/AnalysisService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/config/AwsS3Config.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/config/SecurityConfig.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/config/SwaggerConfig.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/config/WebConfig.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/diary/controller/DiaryController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/diary/dto/DiaryRequest$Create.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/diary/dto/DiaryRequest$GetDiary.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/diary/dto/DiaryRequest$TotalDiary.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/diary/dto/DiaryRequest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/diary/dto/DiaryResponse$Delete$DeleteBuilder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/diary/dto/DiaryResponse$Delete.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/diary/dto/DiaryResponse$Detail$DetailBuilder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/diary/dto/DiaryResponse$Detail.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/diary/dto/DiaryResponse$Regist$RegistBuilder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/diary/dto/DiaryResponse$Regist.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/diary/dto/DiaryResponse$totalDiary$totalDiaryBuilder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/diary/dto/DiaryResponse$totalDiary.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/diary/dto/DiaryResponse.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/diary/dto/MainDiaryInfo$MainDiaryInfoBuilder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/diary/dto/MainDiaryInfo.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/diary/entity/Diary$DiaryBuilder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/diary/entity/Diary.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/diary/repository/DiaryRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/diary/service/AwsS3Service.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/diary/service/DiaryService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/exception/exception.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/user/controller/UserController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/user/dto/UserRequest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/user/entity/User$UserBuilder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/user/entity/User.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/user/repository/UserRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/classes/com/marshmallow/user/service/UserService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/classpath.idx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/application/BOOT-INF/layers.idx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/application/META-INF/MANIFEST.MF" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/jenkins/backend-dev.jenkinsfile" beforeDir="false" afterPath="$PROJECT_DIR$/jenkins/backend-dev.jenkinsfile" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,7 +28,29 @@
         </task>
         <projects_view>
           <tree_state>
-            <expand />
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="marshmallow" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="marshmallow" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="marshmallow" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="build" type="c8890929:TasksNode$1" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="marshmallow" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="other" type="c8890929:TasksNode$1" />
+              </path>
+            </expand>
             <select />
           </tree_state>
         </projects_view>
@@ -124,32 +94,41 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/SSAFY/workspace/marshmallow/back&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Users/SSAFY/workspace/marshmallow/back/src/test/images",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle",
+    "spring.configuration.checksum": "a67f6e19f4c7a39c00df1b7d2dab1927"
   }
-}</component>
+}]]></component>
+  <component name="ReactorSettings">
+    <option name="notificationShown" value="true" />
+  </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\SSAFY\workspace\marshmallow\back\src\test\images" />
       <recent name="C:\Users\SSAFY\workspace\marshmallow" />
       <recent name="C:\Users\SSAFY\marshmallow\src\main\java\com\marshmallow\user" />
       <recent name="C:\Users\SSAFY\marshmallow\src\main\java\com\marshmallow\diary" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\SSAFY\workspace\marshmallow\back\src\test" />
+      <recent name="C:\Users\SSAFY\workspace\marshmallow\back\src\main\resources" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.marshmallow.config" />
@@ -157,7 +136,97 @@
       <recent name="com.marshmallow.interceptor" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="JUnit.DiaryControllerTest">
+    <configuration name="DiaryControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="marshmallow.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.marshmallow.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.marshmallow" />
+      <option name="MAIN_CLASS_NAME" value="com.marshmallow.DiaryControllerTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DiaryControllerTest.deleteDiary" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="marshmallow.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.marshmallow.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.marshmallow" />
+      <option name="MAIN_CLASS_NAME" value="com.marshmallow.DiaryControllerTest" />
+      <option name="METHOD_NAME" value="deleteDiary" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DiaryControllerTest.monthlyRecord" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="marshmallow.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.marshmallow.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.marshmallow" />
+      <option name="MAIN_CLASS_NAME" value="com.marshmallow.DiaryControllerTest" />
+      <option name="METHOD_NAME" value="monthlyRecord" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DiaryControllerTest.searchDiary_Exist" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="marshmallow.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.marshmallow.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.marshmallow" />
+      <option name="MAIN_CLASS_NAME" value="com.marshmallow.DiaryControllerTest" />
+      <option name="METHOD_NAME" value="searchDiary_Exist" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DiaryControllerTest.searchDiary_NotExist" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="marshmallow.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.marshmallow.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.marshmallow" />
+      <option name="MAIN_CLASS_NAME" value="com.marshmallow.DiaryControllerTest" />
+      <option name="METHOD_NAME" value="searchDiary_NotExist" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="MarshmallowApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <option name="ACTIVE_PROFILES" />
       <module name="marshmallow.main" />
@@ -166,6 +235,15 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.DiaryControllerTest" />
+        <item itemvalue="JUnit.DiaryControllerTest.searchDiary_NotExist" />
+        <item itemvalue="JUnit.DiaryControllerTest.searchDiary_Exist" />
+        <item itemvalue="JUnit.DiaryControllerTest.monthlyRecord" />
+        <item itemvalue="JUnit.DiaryControllerTest.deleteDiary" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -185,6 +263,15 @@
       <workItem from="1667350253916" duration="333000" />
       <workItem from="1667353684951" duration="616000" />
       <workItem from="1667374428198" duration="34000" />
+      <workItem from="1667463934394" duration="29000" />
+      <workItem from="1667463974239" duration="1009000" />
+      <workItem from="1667537872716" duration="5024000" />
+      <workItem from="1667548486695" duration="600000" />
+      <workItem from="1667784612402" duration="604000" />
+      <workItem from="1667792512404" duration="3904000" />
+      <workItem from="1667865730959" duration="9962000" />
+      <workItem from="1667952052260" duration="5809000" />
+      <workItem from="1667958577492" duration="17447000" />
     </task>
     <servers />
   </component>
