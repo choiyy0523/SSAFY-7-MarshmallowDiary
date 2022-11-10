@@ -38,7 +38,7 @@ public class MusicController {
         // csv 데이타 파일
         String curPath = new File("").getAbsolutePath();
         String filepath = curPath + "\\back\\src\\main\\resources\\";
-        String filename = "music.csv";
+        String filename = "neutral.csv";
 
         File csv = new File(filepath + filename);
 
@@ -60,8 +60,8 @@ public class MusicController {
             String url = token[3].replace("\"", "");
             MusicRequest.Create request = new MusicRequest.Create(title, singer, emotion, url);
 
-            System.out.println(request);
-//            this.registMusic(request);
+//            System.out.println(request);
+            this.registMusic(request);
         }
         br.close();
         System.out.println("데이터 삽입 완료!!");
