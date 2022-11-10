@@ -19,7 +19,6 @@ const Today = ({ route }) => {
 
   var todayDate = targetDiary
   //2022-11-10
-
   //0123456789
 
   const TodayYear = todayDate.substr(0, 4)

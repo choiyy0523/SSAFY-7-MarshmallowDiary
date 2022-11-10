@@ -10,6 +10,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 // import { ThemeProvider } from "styled-components"
 
 // import SplashScreen from 'react-native-splash-screen';
+
 // import { lightTheme, darkTheme } from "./theme/theme";
 
 // import { setCustomText } from 'react-native-global-props'
@@ -71,20 +72,22 @@ const lightTheme = {
     iconColor: '#525252'
   }
 }
+import { lightTheme, darkTheme } from "./theme/theme";
+import SplashScreen from "react-native-splash-screen";
 
 
 
 const App = () => {
-  // useEffect(() => {
-  //   try {
-  //     setTimeout(() => {
-  //       SplashScreen.hide();
-  //     }, 2000);
-  //   } catch(e) {
-  //     console.warn('에러발생');
-  //     console.warn(e);
-  //   }
-  // });
+  useEffect(() => {
+    try {
+      setTimeout(() => {
+        SplashScreen.hide();
+      }, 1500);
+    }
+    catch (e) {
+      console.log(e.message);
+    }
+  });
 
 
 

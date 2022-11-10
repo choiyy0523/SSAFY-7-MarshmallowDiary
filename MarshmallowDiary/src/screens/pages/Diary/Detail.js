@@ -15,8 +15,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { http } from '../../../api/http'
 
 
-const Detail = ({ route }) => {
 
+function Detail({ route }) {
   const { targetDate } = route.params
   // console.log(diaryDate)
   console.log(targetDate)
