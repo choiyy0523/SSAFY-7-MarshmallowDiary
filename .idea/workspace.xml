@@ -38,6 +38,12 @@
                 <item name="marshmallow" type="f1a62948:ProjectNode" />
                 <item name="Tasks" type="e4a08cd1:TasksNode" />
               </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="marshmallow" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="reporting" type="c8890929:TasksNode$1" />
+              </path>
             </expand>
             <select />
           </tree_state>
@@ -125,7 +131,28 @@
       <recent name="com.marshmallow.interceptor" />
     </key>
   </component>
-  <component name="RunManager" selected="Spring Boot.MarshmallowApplication">
+  <component name="RunManager" selected="Gradle.back [generateLicenseReport]">
+    <configuration name="back [generateLicenseReport]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/back" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="generateLicenseReport" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
     <configuration name="DiaryControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="marshmallow.test" />
       <extension name="coverage">
@@ -137,22 +164,6 @@
       <option name="PACKAGE_NAME" value="com.marshmallow" />
       <option name="MAIN_CLASS_NAME" value="com.marshmallow.DiaryControllerTest" />
       <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="DiaryControllerTest.deleteDiary" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="marshmallow.test" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.marshmallow.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.marshmallow" />
-      <option name="MAIN_CLASS_NAME" value="com.marshmallow.DiaryControllerTest" />
-      <option name="METHOD_NAME" value="deleteDiary" />
-      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -226,11 +237,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.back [generateLicenseReport]" />
         <item itemvalue="JUnit.DiaryControllerTest" />
         <item itemvalue="JUnit.DiaryControllerTest.searchDiary_NotExist" />
         <item itemvalue="JUnit.DiaryControllerTest.searchDiary_Exist" />
         <item itemvalue="JUnit.DiaryControllerTest.monthlyRecord" />
-        <item itemvalue="JUnit.DiaryControllerTest.deleteDiary" />
       </list>
     </recent_temporary>
   </component>
@@ -262,7 +273,7 @@
       <workItem from="1667952052260" duration="5809000" />
       <workItem from="1667958577492" duration="17447000" />
       <workItem from="1668057543377" duration="2161000" />
-      <workItem from="1668065750938" duration="319000" />
+      <workItem from="1668065750938" duration="1444000" />
     </task>
     <servers />
   </component>

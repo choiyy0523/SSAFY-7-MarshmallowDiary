@@ -10,6 +10,10 @@ plugins {
     //querydsl 추가
     id "com.ewerk.gradle.plugins.querydsl" version "1.0.10"
     id 'java'
+
+    // for opensource license
+//    id 'com.github.jk1.dependency-license-report' version '2.0'
+    id 'com.github.jk1.dependency-license-report' version '1.17'
 }
 
 group = 'com'
@@ -106,4 +110,22 @@ bootJar {
     layered {
         includeLayerTools = true
     }
+}
+
+
+licenseReport {
+    // 라이센스 고지 파일을 반환할 경로 default는 $projectDir/reports/dependency-license
+    outputDir = "$projectDir/build/licenses"
+
+    // markdown 생성
+    // renderers = [new InventoryMarkdownReportRenderer()]
+
+    // html 생성
+    // renderers = [new InventoryHtmlReportRenderer()]
+
+    // xml 생성
+    // renderers = [new XmlReportRenderer()]
+
+    // 보고서에 첫 번째 수준 종속성만 표기
+    // filters = [new LicenseBundleNormalizer(), new ExcludeTransitiveDependenciesFilter()]
 }
