@@ -3,8 +3,10 @@ import { Text, View, TouchableOpacity, Image, StyleSheet, ScrollView } from 'rea
 import Footer from '../../components/component/Footer';
 import { Icon } from '@rneui/themed';
 import SwitchComponent from './Switch';
+import { useTheme } from 'react-native-paper';
 
-const Settings = ({ navigation }) => {
+const Settings = ({ navigation, props }) => {
+  const { colors } = useTheme();
   return (
     <View style={{ flex: 1 }}>
       <ScrollView style={{ flex: 1 }}>
@@ -14,7 +16,7 @@ const Settings = ({ navigation }) => {
         <TouchableOpacity style={{ paddingHorizontal: 20, paddingVertical: 15 }}>
           <View style={styles.barStyle}>
             <View>
-              <Icon name='lock-outline' type='materialcommunityicons' size={25} color="#525252" style={styles.iconStyle} />
+              <Icon name='lock-outline' type='materialcommunityicons' size={25} color={colors.iconColor} style={styles.iconStyle} />
             </View>
             <View style={styles.menuStyle}>
               <Text>
@@ -43,7 +45,7 @@ const Settings = ({ navigation }) => {
                 name="moon"
                 type="feather"
                 size={25}
-                color="#525252"
+                color={colors.iconColor}
                 style={styles.iconStyle}
               />
             </View>
@@ -69,7 +71,7 @@ const Settings = ({ navigation }) => {
           <View style={styles.barStyle}>
 
             <View>
-              <Icon name='font' type='fontisto' size={20} color="#525252" style={styles.iconStyle2} />
+              <Icon name='font' type='fontisto' size={20} color={colors.iconColor} style={styles.iconStyle2} />
             </View>
             <View style={styles.menuStyle}>
               <Text >
@@ -97,7 +99,7 @@ const Settings = ({ navigation }) => {
                 name="bell"
                 type="feather"
                 size={25}
-                color="#525252"
+                color={colors.iconColor}
                 style={styles.iconStyle}
               />
             </View>
@@ -126,7 +128,7 @@ const Settings = ({ navigation }) => {
                 name="file-text"
                 type="feather"
                 size={25}
-                color="#525252"
+                color={colors.iconColor}
                 style={styles.iconStyle}
               />
             </View>
@@ -155,7 +157,7 @@ const Settings = ({ navigation }) => {
                 name="book-open"
                 type="feather"
                 size={25}
-                color="#525252"
+                color={colors.iconColor}
                 style={styles.iconStyle}
               />
             </View>
@@ -184,7 +186,7 @@ const Settings = ({ navigation }) => {
                 name="alternate-email"
                 type="materialicons"
                 size={25}
-                color="#525252"
+                color={colors.iconColor}
                 style={styles.iconStyle}
               />
             </View>
@@ -214,7 +216,7 @@ const Settings = ({ navigation }) => {
                 name="user-x"
                 type="feather"
                 size={25}
-                color="#525252"
+                color={colors.iconColor}
                 style={styles.iconStyle}
               />
             </View>

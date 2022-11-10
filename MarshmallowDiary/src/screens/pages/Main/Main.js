@@ -19,16 +19,16 @@ const Main = ({ navigation }) => {
 
   AsyncStorage.getItem('token', (err, result) => {
     const token = result;
-    console.log('token',token)
-  })  
+    console.log('token', token)
+  })
 
   AsyncStorage.getItem('refresh', (err, result) => {
     const refresh = result;
-    console.log('refresh',refresh)
-  }) 
+    console.log('refresh', refresh)
+  })
 
   useEffect(() => {
-      http.get('/analysis/loyalty')
+    http.get('/analysis/loyalty')
       .then(res => {
         Object.entries(res.data).map(([k, v]) => {
           setWords(v)
@@ -40,7 +40,7 @@ const Main = ({ navigation }) => {
   }, [])
 
   return (
-    <View style={{ flex: 1, backgroundColor:'#FFF9F8'  }}>
+    <View style={{ flex: 1, backgroundColor: '#FFF9F8' }}>
       <View style={{ flex: 1 }}>
         <Calendar />
       </View>

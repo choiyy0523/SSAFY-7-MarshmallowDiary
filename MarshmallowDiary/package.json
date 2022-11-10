@@ -10,6 +10,7 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@baronha/react-native-multiple-image-picker": "^0.4.13",
     "@react-native-async-storage/async-storage": "^1.17.10",
     "@react-native-community/art": "^1.2.0",
     "@react-native-community/masked-view": "^0.1.11",
@@ -20,11 +21,15 @@
     "@react-navigation/stack": "^6.3.2",
     "@rneui/base": "^4.0.0-rc.6",
     "@rneui/themed": "^4.0.0-rc.6",
+    "aws-sdk": "^2.1247.0",
     "axios": "^0.27.2",
     "base-64": "^1.0.0",
     "date-fns": "^2.29.3",
+    "multer": "^1.4.5-lts.1",
+    "multer-s3": "^3.0.1",
     "react": "18.1.0",
     "react-native": "0.70.3",
+    "react-native-actionsheet": "^2.4.2",
     "react-native-calendars": "^1.1290.0",
     "react-native-chart-kit": "^6.12.0",
     "react-native-charts-wrapper": "^0.5.11",
@@ -33,6 +38,7 @@
     "react-native-global-props": "^1.1.5",
     "react-native-image-picker": "^4.10.0",
     "react-native-modal-datetime-picker": "^14.0.0",
+    "react-native-paper": "^4.12.5",
     "react-native-pie-chart": "^2.0.2",
     "react-native-reanimated": "^2.11.0",
     "react-native-reanimated-carousel": "^3.1.1",
@@ -41,6 +47,8 @@
     "react-native-snap-carousel": "^3.9.1",
     "react-native-splash-screen": "^3.3.0",
     "react-native-vector-icons": "^9.2.0",
+    "react-redux": "^8.0.5",
+    "redux": "^4.2.0",
     "rnpm": "^1.5.1"
   },
   "devDependencies": {
