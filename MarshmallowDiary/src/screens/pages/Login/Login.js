@@ -28,6 +28,7 @@ const Login = ({navigation}) => {
   
   const getKakaoProfile = async (): Promise<void> => {
     const profile: KakaoProfile = await getProfile();
+    console.log('profile', profile)
 
     // 카카오 로그인 성공하면(실패 시 로그인 안되는 건 카카오가 해줌)
     // 받아온 카카오프로필 id, nickname으로 요청 보냄(로그인 성공 시 무조건 성공)
@@ -54,6 +55,13 @@ const Login = ({navigation}) => {
         }
       })
     })
+    .catch(err => {
+      console.log('로그인 오류?')
+      Promise.reject(error)
+      console.log(err)
+      console.log('로그인 오류')
+      navigation.replace('Home')
+    })
   };
 
   // const unlinkKakao = async (): Promise<void> => {
@@ -64,18 +72,18 @@ const Login = ({navigation}) => {
 
   return (
     <View style={{ backgroundColor: '#FFF9F8', flex: 1 }}>
-      <View style={{ alignItems: 'center' }}>
+      <View style={{ alignItems: 'center', flex: 0.85 }}>
         <View>
           <Image source={logo} style={{ width: 150, height: 150, marginTop: '40%' }} />
         </View>
         <View>
           <Text style={{ fontSize: 30 }}>마시멜로일기</Text>
         </View>
-        
-        <TouchableOpacity style={{ flex:0.3 }} onPress={() => signInWithKakao() && getKakaoProfile()}>
-          <Image source={kakao} style={{ marginTop: '40%' }} />
-        </TouchableOpacity>
       </View>
+        
+      <TouchableOpacity style={{ flex:0.15, justifyContent:'center', alignItems:'center' }} onPress={() => {signInWithKakao(); getKakaoProfile();}}>
+        <Image source={kakao} />
+      </TouchableOpacity>
     </View>
   )
 };

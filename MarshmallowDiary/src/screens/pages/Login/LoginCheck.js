@@ -49,7 +49,7 @@ const LoginCheck = ({navigation}) => {
           })
           // refresh 만료면 로그인 페이지로
           .catch(err => {
-            console.log('err')
+            console.log('refresh 만료')
             navigation.replace('Login')
           })
         }
