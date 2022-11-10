@@ -146,6 +146,10 @@ const Calendar = () => {
     }
   }
 
+  const movePage = () => {
+    navigation.navigate('Detail')
+  }
+
 
   return (
     <View style={{ flex:1 , backgroundColor:'#FFF9F8'}}>
