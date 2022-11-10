@@ -1,34 +1,85 @@
-// 1) register 화면에 띄울 `<WeatherPicker />`
-// 2) WeatherPicker.js -> touchable opacity 선택시 rn element dialog에서 날씨 선택 가능 + 선택한 날씨 이미지를 버튼으로 설정
-// 3) element로 꼭 써야하려나 그냥 있는 모달 커스텀 안되려나ㅏㅏㅏㅏㅏ
+import React, { useEffect, useState } from 'react';
+import { Text, View, Image, Modal, Pressable, TouchableOpacity, StyleSheet } from 'react-native';
+import { weatherIconPath } from './WeatherIcon';
 
-import React, { useState } from 'react'
-import { StyleSheet, Button, TouchableOpacity, Text, View, Image, Modal } from 'react-native'
+const WeatherPicker = ({ weather, getWeather }) => {
 
-function WeatherPicker() {
+  // const [weather, setWeather] = useState(0)
 
-  const [weather, setWeather] = useState(new Weather());
-  const [open, setOpen] = useState(false);
+  const [visible, setVisible] = useState(false)
 
-  const weatherUri = `${weather}`;
+  const openModal = () => {
+    setVisible(true)
+  }
+  const closeModal = () => {
+    setVisible(false)
+  }
+
 
   return (
     <View>
-      <TouchableOpacity
-        onPress={() => setOpen(true)}
-        style={styles.changeWeather}>
-        {/* <Image source={require(weatherUri + '.png')} />
-        <Modal>
-
-        </Modal> */}
+      <TouchableOpacity TouchableOpacity onPress={openModal} >
+        <Image
+          source={weatherIconPath.weather2}
+          style={styles.weatherPicker}
+        />
       </TouchableOpacity>
+      <Modal visible={visible} setVisible={setVisible} transparent={true} animationType={'fade'}>
+        <Pressable style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+          <View style={{ flex: 0.4, backgroundColor: 'white', justifyContent: 'center', alignItems: 'center', width: '70%', borderRadius: 30 }}>
+            <View style={{ flex: 0.4, flexDirection: 'row' }}>
+
+              {/* 1개 단위 */}
+              <View style={{ flex: 0.04 }} />
+              <TouchableOpacity style={{ flex: 0.2, justifyContent: 'center', alignItems: 'center' }} onPress={() => { getWeather(1); closeModal(); }} >
+                <Image source={require('../../../assets/images/weather/1.png')} style={styles.weatherButton} />
+              </TouchableOpacity>
+
+              <View style={{ flex: 0.04 }} />
+              <TouchableOpacity style={{ flex: 0.2, justifyContent: 'center', alignItems: 'center' }} onPress={() => { getWeather(2); closeModal(); }} >
+                <Image source={require('../../../assets/images/weather/2.png')} style={styles.weatherButton} />
+              </TouchableOpacity>
+
+              <View style={{ flex: 0.04 }} />
+              <TouchableOpacity style={{ flex: 0.2, justifyContent: 'center', alignItems: 'center' }} onPress={() => { getWeather(3); closeModal(); }} >
+                <Image source={require('../../../assets/images/weather/3.png')} style={styles.weatherButton} />
+              </TouchableOpacity>
+            </View>
+
+            <View style={{ flex: 0.4, flexDirection: 'row' }}>
+              <View style={{ flex: 0.04 }} />
+              <TouchableOpacity style={{ flex: 0.2, justifyContent: 'center', alignItems: 'center' }} onPress={() => { getWeather(4); closeModal(); }} >
+                <Image source={require('../../../assets/images/weather/4.png')} style={styles.weatherButton} />
+              </TouchableOpacity>
+
+              <View style={{ flex: 0.04 }} />
+              <TouchableOpacity style={{ flex: 0.2, justifyContent: 'center', alignItems: 'center' }} onPress={() => { getWeather(5); closeModal(); }} >
+                <Image source={require('../../../assets/images/weather/5.png')} style={styles.weatherButton} />
+              </TouchableOpacity>
+
+              <View style={{ flex: 0.04 }} />
+              <TouchableOpacity style={{ flex: 0.2, justifyContent: 'center', alignItems: 'center' }} onPress={() => { getWeather(6); closeModal(); }} >
+                <Image source={require('../../../assets/images/weather/6.png')} style={styles.weatherButton} />
+              </TouchableOpacity>
+            </View>
+          </View>
+        </Pressable>
+      </Modal>
     </View>
   )
 }
 
+export default WeatherPicker;
+
 const styles = StyleSheet.create({
-  changeWeather: {
-    width: 20,
-    height: 20,
-  }
+  weatherPicker: {
+    marginHorizontal: 10,
+    width: 40,
+    height: 40,
+    marginVertical: -10,
+  },
+  weatherButton: {
+    width: 40,
+    height: 40,
+  },
 })
