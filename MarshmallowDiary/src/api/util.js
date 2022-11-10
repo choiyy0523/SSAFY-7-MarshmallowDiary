@@ -16,7 +16,6 @@ axiosInstance.interceptors.request.use(
     const token = await AsyncStorage.getItem('token')
     config.headers["Content-Type"] = 'multipart/form-data'
     config.headers["Authorization"] = `Bearer ${token}`
-    config.transformRequest = 
     return config;
   },
   err => {

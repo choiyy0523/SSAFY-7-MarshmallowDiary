@@ -11,7 +11,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { set } from 'date-fns';
 import { http } from '../../../api/http'
 import { util } from '../../../api/util'
-
+import { useNavigation } from '@react-navigation/native';
 
 // const ShowPicker = () => {
 //   //launchImageLibrary : 사용자 앨범 접근
@@ -23,9 +23,19 @@ import { util } from '../../../api/util'
 //   })
 // }
 
+
 export default function DiaryRegister() {
 
+  const navigation = useNavigation()
+  // Register (내용 등록, 사진 등록 순으로 진행) 후 Detail로 보내는 코드
+
   function Register() {
+
+
+    // const [dates, setDates] = useState()
+
+    // const { date } = dates;
+
     http.post('/diary/regist/diary', {
       title: title,
       content: content,
@@ -33,53 +43,61 @@ export default function DiaryRegister() {
       date: date
     })
       .then(res => {
-        console.log('일기 등록 완료')
+        // setDates(date)
+        console.log('일기 내용 등록 완료')
+        alert('일기가 등록되었습니다!')
+        navigation.navigate('Detail', { targetDate: today })
+
+        // util.post(`/diary/regist/photo/${date}`, formdata)
+        //   .then(response => {
+        //     if (response) {
+        //       console.log("일기 사진 등록 완료")
+        //       console.log(response.data)
+        //       alert('일기가 등록되었습니다!')
+        //       navigation.navigate('Detail', { targetDate: diarydate })
+        //     }
+        //   })
+        //   .catch((error) => {
+        //     if (error.response) {
+        //       console.log("냐옹")
+        //       console.log(error.response.data);
+        //       console.log(error.response.status);
+        //       console.log(error.response.headers);
+        //     } else if (error.request) {
+        //       console.log("먀옹")
+        //       console.log(error.request);
+        //     } else {
+        //       console.log("갸옹")
+        //       console.log('Error', error.message);
+        //     }
+        //   })
+
+
       })
+
       .catch(err => {
-        console.log('일기 등록 실패')
+        console.log('일기 내용 등록 실패')
         console.log(date)
         console.log(title)
         console.log(content)
         console.log(weather)
         console.log(err)
       })
+
   }
 
-  const ShowPicker = () => {
-    //launchImageLibrary : 사용자 앨범 접근
-    launchImageLibrary({}, (res) => {
-      // console.log("왈왈")
-      // alert(res.assets[0].uri)
-      const formdata = new FormData()
-      formdata.append('file', res.assets[0].uri);
-      console.log(res);
-      console.log("멍멍")
-      console.log(date)
-      console.log(formdata)
-
-      util.post(`/diary/regist/photo/${date}`, formdata)
-        .then(response => {
-          if (response) {
-            console.log("야옹")
-            console.log(response.data)
-          }
-        })
-        .catch((error) => {
-          if (error.response) {
-            console.log("냐옹")
-            console.log(error.response.data);
-            console.log(error.response.status);
-            console.log(error.response.headers);
-          } else if (error.request) {
-            console.log("먀옹")
-            console.log(error.request);
-          } else {
-            console.log("갸옹")
-            console.log('Error', error.message);
-          }
-        })
-    })
-  }
+  // const ShowPicker = () => {
+  //   launchImageLibrary({}, (res) => {
+  //     // console.log("왈왈")
+  //     // alert(res.assets[0].uri)
+  //     const formdata = new FormData()
+  //     formdata.append('file', res.assets[0].uri);
+  //     console.log(res);
+  //     console.log("멍멍")
+  //     console.log(date)
+  //     console.log(formdata)
+  //   })
+  // }
 
   const [title, setTitle] = useState('')
   const [content, setContent] = useState('')
@@ -96,9 +114,7 @@ export default function DiaryRegister() {
   const year = new Date().getFullYear();
 
   const dayformatted = `${year}년 ${month}월 ${day}일`;
-  // const today = `${year}-${month}-${day}`
-
-
+  const today = `${year}-${month}-${day}`
 
   return (
     <View style={{ flex: 1 }}>
@@ -136,16 +152,14 @@ export default function DiaryRegister() {
 
           {/* 사진 첨부*/}
           {/* <Image source={{ uri: photo }} /> */}
-          <View style={styles.imageInput}>
+          {/* <View style={styles.imageInput}>
             <TouchableOpacity onPress={ShowPicker}>
               <Image
                 source={require('../../../assets/images/etc/photo.png')}
                 style={styles.imageButton}
               />
             </TouchableOpacity>
-          </View >
-
-
+          </View > */}
 
           {/* 일기 작성 */}
           <TextInput
