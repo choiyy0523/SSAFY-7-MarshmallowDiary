@@ -10,6 +10,8 @@ import { http } from '../../../api/http'
 import { useNavigation } from '@react-navigation/native';
 import { useIsFocused } from '@react-navigation/native';
 
+
+
 const Calendar = () => {
   const navigation = useNavigation()
   const isFocused = useIsFocused()
@@ -86,7 +88,7 @@ const Calendar = () => {
   const [monthData, setMonthData] = useState()
 
   const getMonthData = () => {
-    http.get(diary ? month = ${ targetMonth } & year=${ targetYear })
+    http.get(`diary?month=${targetMonth}&year=${targetYear}`)
       .then(res => {
         setMonthData(res.data.list)
       })
@@ -143,6 +145,7 @@ const Calendar = () => {
       clickedDate()
     }
   }
+
 
   return (
     <View style={{ flex: 1, backgroundColor: '#FFF9F8' }}>
