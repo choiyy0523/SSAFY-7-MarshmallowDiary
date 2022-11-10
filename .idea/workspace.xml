@@ -103,7 +103,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/SSAFY/workspace/marshmallow/back/src/test/images",
+    "last_opened_file_path": "C:/Users/SSAFY/workspace/marshmallow/back/src/main/resources",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -121,6 +121,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\SSAFY\workspace\marshmallow\back\src\main\resources" />
       <recent name="C:\Users\SSAFY\workspace\marshmallow\back\src\test\images" />
       <recent name="C:\Users\SSAFY\workspace\marshmallow" />
       <recent name="C:\Users\SSAFY\marshmallow\src\main\java\com\marshmallow\user" />
@@ -136,7 +137,7 @@
       <recent name="com.marshmallow.interceptor" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.DiaryControllerTest">
+  <component name="RunManager" selected="Spring Boot.MarshmallowApplication">
     <configuration name="DiaryControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="marshmallow.test" />
       <extension name="coverage">
