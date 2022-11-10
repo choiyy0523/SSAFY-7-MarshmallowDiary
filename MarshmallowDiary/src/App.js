@@ -14,7 +14,8 @@ const App = () => {
       setTimeout(() => {
         SplashScreen.hide();
       }, 1500); 
-    } catch (e) {
+    } 
+    catch (e) {
       console.log(e.message);
     }
   });

@@ -5,7 +5,6 @@ import Footer from '../../components/component/Footer';
 import positive from '../../../assets/images/character/positive.png'
 import { Icon } from '@rneui/themed';
 
-
 const Search = ({ navigation }) => {
     const [inputs, setInputs] = useState({
       name: '',

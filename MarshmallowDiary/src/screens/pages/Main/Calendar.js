@@ -8,11 +8,13 @@ import mm_neutral from '../../../assets/images/mm/mm_neutral.png'
 import mm_negative from '../../../assets/images/mm/mm_negative.png'
 import { http } from '../../../api/http'
 import { useNavigation } from '@react-navigation/native';
+import { useIsFocused } from '@react-navigation/native';
 
 
 
 const Calendar = () => {
   const navigation = useNavigation()
+  const isFocused = useIsFocused()
   const [currentMonth, setCurrentMonth] = useState(new Date());
 
   const prevMonth = () => {
@@ -126,7 +128,7 @@ const Calendar = () => {
 
   useEffect(() => {
     getMonthData()
-  }, [targetMonth])
+  }, [targetMonth, isFocused])
 
   const monthDays = []
   if (monthData) {

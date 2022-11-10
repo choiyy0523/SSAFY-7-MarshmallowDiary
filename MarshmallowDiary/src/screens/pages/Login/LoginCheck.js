@@ -39,18 +39,18 @@ const LoginCheck = ({navigation}) => {
               const password = result;
               if (password == null) {
                 console.log('토큰유효 비번없는 기존회원')
-                navigation.navigate('Main')
+                navigation.replace('Main')
               }
               else {
                 console.log('토큰유효 비번있는 기존회원')
-                navigation.navigate('Password')
+                navigation.replace('Password')
               }
             });
           })
           // refresh 만료면 로그인 페이지로
           .catch(err => {
-            console.log(err)
-            navigation.navigate('Login')
+            console.log('err')
+            navigation.replace('Login')
           })
         }
         // 신규회원이면 id, refresh가 null, 로그인 페이지로
@@ -58,7 +58,7 @@ const LoginCheck = ({navigation}) => {
           AsyncStorage.setItem('token', '')
           AsyncStorage.setItem('password', '')      
           console.log('신규회원 데이터 세팅')
-          navigation.navigate('Login')
+          navigation.replace('Login')
         }
       });
     })

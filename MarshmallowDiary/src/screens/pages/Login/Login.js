@@ -47,10 +47,10 @@ const Login = ({navigation}) => {
         const pw = result;
         console.log(pw)
         if (pw == null) {
-          navigation.navigate('Main')
+          navigation.replace('Main')
         }
         else {
-          navigation.navigate('Password')
+          navigation.replace('Password')
         }
       })
     })
