@@ -5,10 +5,10 @@ import lombok.*;
 public class MusicRequest {
 
     @Getter
-//    @NoArgsConstructor(access = AccessLevel.PRIVATE)
-//    @AllArgsConstructor(access = AccessLevel.PRIVATE)
-    @NoArgsConstructor
-    @AllArgsConstructor
+    @NoArgsConstructor(access = AccessLevel.PRIVATE)
+    @AllArgsConstructor(access = AccessLevel.PRIVATE)
+//    @NoArgsConstructor
+//    @AllArgsConstructor
     @ToString
     public static class Create{
         private String title;
