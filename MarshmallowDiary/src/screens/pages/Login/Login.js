@@ -13,10 +13,10 @@ import {
 } from '@react-native-seoul/kakao-login';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {http} from '../../../api/http';
+import { http } from '../../../api/http';
 
 
-const Login = ({navigation}) => {
+const Login = ({ navigation }) => {
   const [result, setResult] = useState()
   const [hidden, setHidden] = useState(0)
   // const [result2, setResult2] = useState()
@@ -24,38 +24,38 @@ const Login = ({navigation}) => {
   console.log('hidden', hidden)
 
   const increase = () => {
-    setHidden(hidden+1)
+    setHidden(hidden + 1)
   }
 
   const hiddenLogin = () => {
-    if (hidden>=7) {
+    if (hidden >= 7) {
       http.post('/user/login', {
         authId: '7777',
         nickname: 'test',
       })
-      .then(res => {
-        console.log(res.data)
-        AsyncStorage.setItem('token', res.data.accessToken)
-        AsyncStorage.setItem('refresh', res.data.refreshToken)
-        AsyncStorage.setItem('userId', res.data.userId)
-        
-        // pw 있으면 pw, 없으면 main으로
-        AsyncStorage.getItem('password', (err, result) => {
-          const pw = result;
-          console.log(pw)
-          if (pw == null) {
-            navigation.replace('Main')
-          }
-          else {
-            navigation.replace('Password')
-          }
+        .then(res => {
+          console.log(res.data)
+          AsyncStorage.setItem('token', res.data.accessToken)
+          AsyncStorage.setItem('refresh', res.data.refreshToken)
+          AsyncStorage.setItem('userId', res.data.userId)
+
+          // pw 있으면 pw, 없으면 main으로
+          AsyncStorage.getItem('password', (err, result) => {
+            const pw = result;
+            console.log(pw)
+            if (pw == null) {
+              navigation.replace('Main')
+            }
+            else {
+              navigation.replace('Password')
+            }
+          })
         })
-      })
-      .catch(err => {
-        console.log('로그인 오류')
-        Promise.reject(err)
-        navigation.replace('Home')
-      })
+        .catch(err => {
+          console.log('로그인 오류')
+          Promise.reject(err)
+          navigation.replace('Home')
+        })
     }
   }
 
@@ -67,11 +67,11 @@ const Login = ({navigation}) => {
     const token: KakaoOAuthToken = await login()
     // setResult(JSON.stringify(token));
   };
-  
+
   // const signOutWithKakao = async (): Promise<void> => {
   //   const message = await logout();
   // };
-  
+
   const getKakaoProfile = async (): Promise<void> => {
     const profile: KakaoProfile = await getProfile()
     setResult(profile)
@@ -90,35 +90,35 @@ const Login = ({navigation}) => {
         authId: result.id,
         nickname: result.nickname,
       })
-      .then(res => {
-        console.log(res.data)
-        AsyncStorage.setItem('token', res.data.accessToken)
-        AsyncStorage.setItem('refresh', res.data.refreshToken)
-        AsyncStorage.setItem('userId', res.data.userId)
-        
-        // pw 있으면 pw, 없으면 main으로
-        AsyncStorage.getItem('password', (err, result) => {
-          const pw = result;
-          console.log(pw)
-          if (pw == null) {
-            navigation.replace('Main')
-          }
-          else {
-            navigation.replace('Password')
-          }
+        .then(res => {
+          console.log(res.data)
+          AsyncStorage.setItem('token', res.data.accessToken)
+          AsyncStorage.setItem('refresh', res.data.refreshToken)
+          AsyncStorage.setItem('userId', res.data.userId)
+
+          // pw 있으면 pw, 없으면 main으로
+          AsyncStorage.getItem('password', (err, result) => {
+            const pw = result;
+            console.log(pw)
+            if (pw == null) {
+              navigation.replace('Main')
+            }
+            else {
+              navigation.replace('Password')
+            }
+          })
         })
-      })
-      .catch(err => {
-        console.log('로그인 오류')
-        navigation.replace('Home')
-      })
+        .catch(err => {
+          console.log('로그인 오류')
+          navigation.replace('Home')
+        })
     }
   };
-  
+
 
   // const unlinkKakao = async (): Promise<void> => {
   //   const message = await unlink();
-  
+
   //   setResult(message);
   // };
 
@@ -134,8 +134,8 @@ const Login = ({navigation}) => {
           <Text>{result2}</Text> */}
         </View>
       </View>
-        
-      <Pressable style={{ flex:0.15, justifyContent:'center', alignItems:'center' }} onPressIn={signInWithKakao} onPressOut={getKakaoProfile}>
+
+      <Pressable style={{ flex: 0.15, justifyContent: 'center', alignItems: 'center' }} onPressIn={signInWithKakao} onPressOut={getKakaoProfile}>
         <Image source={kakao} />
       </Pressable>
     </View>

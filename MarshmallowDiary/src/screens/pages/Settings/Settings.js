@@ -23,8 +23,11 @@ const Settings = ({ navigation, props }) => {
                 비밀번호 설정
               </Text>
 
-              <Text >
+              {/* <Text >
                 비밀번호 변경
+              </Text> */}
+              <Text >
+                추후 지원 예정 :D
               </Text>
             </View>
             <View style={styles.switchStyle}>
@@ -54,6 +57,9 @@ const Settings = ({ navigation, props }) => {
               <Text>
                 다크모드 설정
               </Text>
+              <Text >
+                추후 지원 예정 :D
+              </Text>
             </View>
 
 
@@ -79,7 +85,7 @@ const Settings = ({ navigation, props }) => {
               </Text>
 
               <Text>
-                강원교육모두체
+                추후 지원 예정 :D
               </Text>
             </View>
             <View style={styles.switchStyle}>
@@ -108,6 +114,9 @@ const Settings = ({ navigation, props }) => {
               <Text>
                 푸시알림 설정
               </Text>
+              <Text >
+                추후 지원 예정 :D
+              </Text>
             </View>
 
 
@@ -135,7 +144,7 @@ const Settings = ({ navigation, props }) => {
 
             <View style={styles.menuStyle}>
               <Text >
-                이용약관
+                개인정보처리방침
               </Text>
             </View>
 
@@ -208,7 +217,7 @@ const Settings = ({ navigation, props }) => {
         {/* 회원 탈퇴 */}
         {/* onPress시 탈퇴 여부 묻는 모달창 띄움 */}
         {/* 회원 탈퇴 선택시 카카오 링크 해제, db삭제 */}
-        <TouchableOpacity style={{ paddingHorizontal: 20, paddingVertical: 15 }}>
+        {/* <TouchableOpacity style={{ paddingHorizontal: 20, paddingVertical: 15 }}>
           <View style={styles.barStyle}>
 
             <View>
@@ -228,12 +237,12 @@ const Settings = ({ navigation, props }) => {
             </View>
 
 
-            <View style={styles.switchStyle}>
-              {/* <SwitchComponent /> */}
-            </View>
+            <View style={styles.switchStyle}> */}
+        {/* <SwitchComponent /> */}
+        {/* </View>
 
           </View>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
 
       </ScrollView>
       <Footer />
