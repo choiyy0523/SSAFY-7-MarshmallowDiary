@@ -20,9 +20,9 @@ const LoginCheck = ({navigation}) => {
         });
         console.log('id', id)
         console.log('refresh', refresh)
-        
-        // 둘다 이미 존재하면 기존 회원
-        if (id != null && refresh != null) {
+      
+        // 존재하면 기존 회원
+        if (id && refresh) {
           http.post('/user/reissue', {
             userId: id,
             refreshToken: refresh
@@ -49,7 +49,7 @@ const LoginCheck = ({navigation}) => {
           })
           // refresh 만료면 로그인 페이지로
           .catch(err => {
-            console.log('err')
+            console.log('refresh 만료')
             navigation.replace('Login')
           })
         }

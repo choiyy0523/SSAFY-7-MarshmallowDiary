@@ -12,9 +12,12 @@ import {http} from '../../../api/http'
 
 const Analysis = ({navigation}) => {
   var today = new Date();
+  const utc = today.getTime() + (today.getTimezoneOffset() * 60 * 1000);
+  const KR_TIME_DIFF = 9 * 60 * 60 * 1000;
+  const kr_today = new Date(utc + KR_TIME_DIFF);
 
-  var year = today.getFullYear();
-  var month = Number(('0' + (today.getMonth() + 1)).slice(-2));
+  var year = kr_today.getFullYear();
+  var month = Number(('0' + (kr_today.getMonth() + 1)).slice(-2));
 
   const [targetYear, setTargetYear] = useState(year)
   const [targetMonth, setTargetMonth] = useState(month)
@@ -125,6 +128,7 @@ const Analysis = ({navigation}) => {
     setVisible3(false)
   }
 
+  const monthlist = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
 
   return (
     <View style={{ flex: 1 }}>
@@ -236,6 +240,7 @@ const Analysis = ({navigation}) => {
             <Pressable style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
               <View style={{ flex: 0.5, backgroundColor: 'white', justifyContent: 'center', alignItems: 'center', width: '90%', borderRadius: 30 }}>
                 <View style={{ flex: 0.0625 }} />
+
                 <View style={{ flex: 0.25, flexDirection: 'row' }}>
                   <View style={{ flex: 0.04 }} />
                   <Pressable style={{ flex: 0.2, backgroundColor: '#FFEBA5', justifyContent: 'center', alignItems: 'center', borderRadius: 30 }} onPress={() => { setTargetMonth(1); closeModal3(); }}>
@@ -255,7 +260,9 @@ const Analysis = ({navigation}) => {
                   </Pressable>
                   <View style={{ flex: 0.04 }} />
                 </View>
+
                 <View style={{ flex: 0.0625 }} />
+
                 <View style={{ flex: 0.25, flexDirection: 'row' }}>
                   <View style={{ flex: 0.04 }} />
                   <Pressable style={{ flex: 0.2, backgroundColor: '#FFEBA5', justifyContent: 'center', alignItems: 'center', borderRadius: 30 }} onPress={() => { setTargetMonth(5); closeModal3(); }}>
@@ -275,7 +282,9 @@ const Analysis = ({navigation}) => {
                   </Pressable>
                   <View style={{ flex: 0.04 }} />
                 </View>
+
                 <View style={{ flex: 0.0625 }} />
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
                 <View style={{ flex: 0.25, flexDirection: 'row' }}>
                   <View style={{ flex: 0.04 }} />
                   <Pressable style={{ flex: 0.2, backgroundColor: '#FFEBA5', justifyContent: 'center', alignItems: 'center', borderRadius: 30 }} onPress={() => { setTargetMonth(9); closeModal3(); }}>
@@ -295,6 +304,7 @@ const Analysis = ({navigation}) => {
                   </Pressable>
                   <View style={{ flex: 0.04 }} />
                 </View>
+
                 <View style={{ flex: 0.0625 }} />
               </View>
             </Pressable>
