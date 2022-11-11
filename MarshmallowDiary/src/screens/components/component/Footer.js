@@ -19,10 +19,13 @@ const Footer = () => {
   const [loyalty, setLoyalty] = useState()
 
   var today = new Date();
+  const utc = today.getTime() + (today.getTimezoneOffset() * 60 * 1000);
+  const KR_TIME_DIFF = 9 * 60 * 60 * 1000;
+  const kr_today = new Date(utc + KR_TIME_DIFF);
 
-  var year = today.getFullYear();
-  var month = ('0' + (today.getMonth() + 1)).slice(-2);
-  var day2 = ('0' + today.getDate()).slice(-2);
+  var year = kr_today.getFullYear();
+  var month = ('0' + (kr_today.getMonth() + 1)).slice(-2);
+  var day2 = ('0' + kr_today.getDate()).slice(-2);
 
   var dateString = year + '-' + month + '-' + day2;
 

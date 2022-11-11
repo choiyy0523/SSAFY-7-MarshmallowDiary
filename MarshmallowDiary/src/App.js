@@ -79,14 +79,7 @@ import SplashScreen from "react-native-splash-screen";
 
 const App = () => {
   useEffect(() => {
-    try {
-      setTimeout(() => {
-        SplashScreen.hide();
-      }, 1500);
-    }
-    catch (e) {
-      console.log(e.message);
-    }
+    SplashScreen.hide();
   });
 
 

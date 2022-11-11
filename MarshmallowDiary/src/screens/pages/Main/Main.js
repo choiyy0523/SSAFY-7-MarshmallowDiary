@@ -8,10 +8,13 @@ import { http } from '../../../api/http'
 
 const Main = ({ navigation }) => {
   var today = new Date();
+  const utc = today.getTime() + (today.getTimezoneOffset() * 60 * 1000);
+  const KR_TIME_DIFF = 9 * 60 * 60 * 1000;
+  const kr_today = new Date(utc + KR_TIME_DIFF);
 
-  var year = today.getFullYear();
-  var month = ('0' + (today.getMonth() + 1)).slice(-2);
-  var day = ('0' + today.getDate()).slice(-2);
+  var year = kr_today.getFullYear();
+  var month = ('0' + (kr_today.getMonth() + 1)).slice(-2);
+  var day = ('0' + kr_today.getDate()).slice(-2);
 
   var dateString = year + '-' + month + '-' + day;
 
@@ -50,7 +53,7 @@ const Main = ({ navigation }) => {
         </View>
       </View>
       <View style={{ flex: 0.1 }}>
-        <Button title='Home' onPress={() => navigation.navigate('Home')} />
+        {/* <Button title='Home' onPress={() => navigation.navigate('Home')} /> */}
       </View>
       <Footer />
     </View>

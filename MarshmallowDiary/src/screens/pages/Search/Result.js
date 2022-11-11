@@ -108,10 +108,10 @@ const Result = ({ route, navigation }) => {
                 </View>
                 {!data.header_img ?
                   <View style={{ flex: 0.5, justifyContent: 'center', alignItems: 'center' }}>
-                    <Image source={positive} style={{ width: 100, height: 100 }} />
+                    <Image source={positive} style={{ width: 60, height: 60 }} />
                   </View> :
                   <View style={{ flex: 0.5, justifyContent: 'center', alignItems: 'center' }}>
-                    <Image source={{ uri: `https://marshmallow-bucket.s3.ap-northeast-2.amazonaws.com/${data.header_img}` }} style={{ width: 100, height: 100 }} />
+                    <Image source={{ uri: `https://marshmallow-bucket.s3.ap-northeast-2.amazonaws.com/${data.header_img}` }} style={{ width: 60, height: 60 }} />
                   </View>}
                 <View style={{ flex: 0.25, justifyContent: 'center', alignItems: 'center' }}>
                   <Text>{data.title}</Text>

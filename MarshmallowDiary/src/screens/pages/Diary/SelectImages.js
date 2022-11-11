@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Dimensions, Image, SafeAreaView, FlatList } from 'react-native';
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
-import MultipleImagePicker from '@baronha/react-native-multiple-image-picker';
 import axios from 'axios';
 
 const SelectImages = () => {
