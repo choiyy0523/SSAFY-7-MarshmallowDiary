@@ -20,9 +20,9 @@ const LoginCheck = ({navigation}) => {
         });
         console.log('id', id)
         console.log('refresh', refresh)
-        
-        // 둘다 이미 존재하면 기존 회원
-        if (id != null && refresh != null) {
+      
+        // 존재하면 기존 회원
+        if (id && refresh) {
           http.post('/user/reissue', {
             userId: id,
             refreshToken: refresh
