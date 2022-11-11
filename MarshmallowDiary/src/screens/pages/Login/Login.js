@@ -13,19 +13,19 @@ import {
 } from '@react-native-seoul/kakao-login';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {http} from '../../../api/http';
+import { http } from '../../../api/http';
 
 
-const Login = ({navigation}) => {
+const Login = ({ navigation }) => {
 
   const signInWithKakao = async (): Promise<void> => {
     const token: KakaoOAuthToken = await login();
   };
-  
+
   // const signOutWithKakao = async (): Promise<void> => {
   //   const message = await logout();
   // };
-  
+
   const getKakaoProfile = async (): Promise<void> => {
     const profile: KakaoProfile = await getProfile();
 
@@ -36,29 +36,29 @@ const Login = ({navigation}) => {
       authId: profile.id,
       nickname: profile.nickname,
     })
-    .then(res => {
-      console.log(res.data)
-      AsyncStorage.setItem('token', res.data.accessToken)
-      AsyncStorage.setItem('refresh', res.data.refreshToken)
-      AsyncStorage.setItem('userId', res.data.userId)
-      
-      // pw 있으면 pw, 없으면 main으로
-      AsyncStorage.getItem('password', (err, result) => {
-        const pw = result;
-        console.log(pw)
-        if (pw == null) {
-          navigation.replace('Main')
-        }
-        else {
-          navigation.replace('Password')
-        }
+      .then(res => {
+        console.log(res.data)
+        AsyncStorage.setItem('token', res.data.accessToken)
+        AsyncStorage.setItem('refresh', res.data.refreshToken)
+        AsyncStorage.setItem('userId', res.data.userId)
+
+        // pw 있으면 pw, 없으면 main으로
+        AsyncStorage.getItem('password', (err, result) => {
+          const pw = result;
+          console.log(pw)
+          if (pw == null) {
+            navigation.replace('Main')
+          }
+          else {
+            navigation.replace('Password')
+          }
+        })
       })
-    })
   };
 
   // const unlinkKakao = async (): Promise<void> => {
   //   const message = await unlink();
-  
+
   //   setResult(message);
   // };
 
@@ -71,8 +71,8 @@ const Login = ({navigation}) => {
         <View>
           <Text style={{ fontSize: 30 }}>마시멜로일기</Text>
         </View>
-        
-        <TouchableOpacity style={{ flex:0.3 }} onPress={() => signInWithKakao() && getKakaoProfile()}>
+
+        <TouchableOpacity style={{ flex: 0.3 }} onPress={() => signInWithKakao() && getKakaoProfile()}>
           <Image source={kakao} style={{ marginTop: '40%' }} />
         </TouchableOpacity>
       </View>

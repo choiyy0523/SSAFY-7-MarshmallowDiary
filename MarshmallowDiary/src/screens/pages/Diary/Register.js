@@ -108,13 +108,28 @@ export default function DiaryRegister() {
     console.log(weather)
   }
 
-  const date = new Date()
-  const day = new Date().getDate()
-  const month = new Date().getMonth() + 1;
-  const year = new Date().getFullYear();
+  // GMT 기준
+  // const date = new Date()
+  // const day = new Date().getDate()
+  // const month = new Date().getMonth() + 1;
+  // const year = new Date().getFullYear();
 
-  const dayformatted = `${year}년 ${month}월 ${day}일`;
-  const today = `${year}-${month}-${day}`
+  // const dayformatted = `${year}년 ${month}월 ${day}일`;
+  // const today = `${year}-${month}-${day}`
+
+
+  /// 한국 시간 기준
+  var date = new Date();
+  const utc = date.getTime() + (date.getTimezoneOffset() * 60 * 1000);
+  const KR_TIME_DIFF = 9 * 60 * 60 * 1000;
+  const kr_date = new Date(utc + KR_TIME_DIFF);
+
+  var year = kr_date.getFullYear();
+  var month = ('0' + (kr_date.getMonth() + 1)).slice(-2);
+  var day2 = ('0' + kr_date.getDate()).slice(-2);
+
+  const today = year + '-' + month + '-' + day2;
+  const dayformatted = `${year}년 ${month}월 ${day2}일`;
 
   return (
     <View style={{ flex: 1 }}>

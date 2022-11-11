@@ -1,13 +1,30 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { FlatList, ListRenderItem, Text, View } from 'react-native';
+import MD_OS_FE from './MD_OS_FE'
+import { MarshmallowDiaryOpenSourceLicenseBE } from './MarshmallowDiaryOpenSourceLicenseBE.json'
+
+const renderItem = ({ item }) => {
+  return (
+    <>
+      <View>
+        <Text>{item.libraryName}</Text>
+        <Text>{item.version}</Text>
+        <Text>{item._license}</Text>
+        <Text>{item._description}</Text>
+      </View>
+    </>
+  );
+}
 
 const OpenSource = () => {
   return (
     <View>
-      <Text>OpenSource</Text>
-      <Text> BE, FE 다 같이 썼던 오픈소스 정리 필요</Text>
+      <FlatList
+        data={MD_OS_FE}
+        renderItem={renderItem}
+        keyExtractor={(item) => String(item.libraryName)}
+      />
     </View>
   )
 };
-
 export default OpenSource;
