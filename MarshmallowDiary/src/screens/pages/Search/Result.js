@@ -101,7 +101,8 @@ const Result = ({ route, navigation }) => {
           </View>
 
           {searchResult.slice(offset, offset + limit).map((data, i) => (
-            <View key={i} style={{ flex: 0.4, backgroundColor: 'rgba(217, 217, 217, 0.3)', borderRadius: 30, marginLeft: '5%', marginRight: '5%', flexDirection: 'row', marginBottom: '5%' }}>
+            <TouchableOpacity key={i} style={{ flex: 0.4, backgroundColor: 'rgba(217, 217, 217, 0.3)', borderRadius: 30, marginLeft: '5%', marginRight: '5%', flexDirection: 'row', marginBottom: '5%' }}
+            onPress={() => {navigation.navigate('Detail', {targetDate: data.date} )}}>
               <View style={{ flex: 0.4 }}>
                 <View style={{ flex: 0.25, justifyContent: 'center', alignItems: 'center' }}>
                   <Text>{data.date}</Text>
@@ -122,7 +123,7 @@ const Result = ({ route, navigation }) => {
                   {data.sub_content}
                 </Text>
               </View>
-            </View>
+            </TouchableOpacity>
           ))}
 
           {searchResult.length % 2 && page == (searchResult.length + 1) / 2 ? <View style={{ flex: 0.4 }} /> : null}

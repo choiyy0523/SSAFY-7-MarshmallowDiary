@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Text, View, Image, Modal, Pressable } from 'react-native';
 import Footer from '../../components/component/Footer';
 import { Icon } from '@rneui/themed';
@@ -9,6 +9,10 @@ import mm_neutral from '../../../assets/images/mm/mm_neutral.png'
 import mm_negative from '../../../assets/images/mm/mm_negative.png'
 import ch_neutral from '../../../assets/images/character/neutral.png'
 import {http} from '../../../api/http'
+import ViewShot from "react-native-view-shot";
+import Share from 'react-native-share'; 
+import Hyperlink from 'react-native-hyperlink' 
+
 
 const Analysis = ({navigation}) => {
   var today = new Date();
@@ -18,6 +22,47 @@ const Analysis = ({navigation}) => {
 
   var year = kr_today.getFullYear();
   var month = Number(('0' + (kr_today.getMonth() + 1)).slice(-2));
+
+  const captureRef = useRef();
+
+  const getPhotoUri = async (): Promise<string> => {
+    const uri = await captureRef.current.capture();
+    console.log(uri);
+    return uri;
+  };
+
+  const onCapture = async () => {
+    try {
+      const uri = await getPhotoUri();
+
+      const options = {
+        title: 'title',
+        message: 'message',
+        url: uri,
+        type: 'image/jpeg',
+      };
+
+      const result = await Share.open({ url: uri})
+      .then((res) => {
+        console.log(res.data);
+        console.log(result)
+      })
+      .catch((err) => {
+        err && console.log(err);
+      }); 
+    } 
+    catch (err) {
+      console.log('failed', err);
+    }
+  };
+
+  // const onShare = () => {
+  //   Share.share({
+  //     message: 'https://play.google.com/store/apps/details?id=com.dxx.firenow'
+  //   })
+  // }
+
+
 
   const [targetYear, setTargetYear] = useState(year)
   const [targetMonth, setTargetMonth] = useState(month)
@@ -131,7 +176,9 @@ const Analysis = ({navigation}) => {
   const monthlist = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
 
   return (
-    <View style={{ flex: 1 }}>
+    // <ViewShot style={{ flex: 1, backgroundColor:'#FFF9F8' }} ref={captureRef} options={{ fileName: "MarshmallowDiary", format: "jpg", quality: 0.9 }}>
+    <View style={{ flex: 1, backgroundColor:'#FFF9F8' }}>
+      <ViewShot style={{ flex: 1, backgroundColor:'#FFF9F8' }} ref={captureRef} options={{ fileName: "MarshmallowDiary", format: "jpg", quality: 0.9 }}>
       <View style={{ alignItems: 'center', justifyContent: 'center', marginTop: '15%' }} >
         <Text style={{ fontSize: 25, fontWeight: 'bold' }}>마로의 감정 분석 레포트</Text>
       </View>
@@ -344,15 +391,17 @@ const Analysis = ({navigation}) => {
             </View>
         </View>
       </View>
+      </ViewShot>
 
-      <View style={{ flex: 0.3, alignItems: 'center', justifyContent: 'center' }}>
-        <Chip style={{ alignItems: 'center', justifyContent: 'center', backgroundColor: '#FFEBA5', width: '30%' }} >
+      <View style={{ flex: 0.2, alignItems: 'center', justifyContent: 'center' }}>
+        <Chip style={{ alignItems: 'center', justifyContent: 'center', backgroundColor: '#FFEBA5', width: '30%' }} onPress={onCapture}>
           <Icon name='share' type='fontisto' />
           <Text style={{ fontSize: 17 }}>  공유하기 </Text>
         </Chip>
-      </View>
+      </View>  
       <Footer />
     </View>
+    // </ViewShot>
   )
 };
 

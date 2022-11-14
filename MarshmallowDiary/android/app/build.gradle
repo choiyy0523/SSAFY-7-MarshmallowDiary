@@ -135,6 +135,7 @@ android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
 
+
     defaultConfig {
         applicationId "com.marshmallowdiary"
         minSdkVersion rootProject.ext.minSdkVersion
@@ -231,7 +232,6 @@ android {
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
     }
-
 
     // applicationVariants are e.g. debug, release
     applicationVariants.all { variant ->
