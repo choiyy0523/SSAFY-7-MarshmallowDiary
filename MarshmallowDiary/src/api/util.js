@@ -8,13 +8,13 @@ const axiosInstance = axios.create({
   headers: {
     'Content-Type': 'multipart/form-data'
   },
-  transformRequest: formData => formData
+  transformRequest: (datas, headers) => datas
 })
 
 axiosInstance.interceptors.request.use(
   async (config) => {
     const token = await AsyncStorage.getItem('token')
-    config.headers["Content-Type"] = 'multipart/form-data'
+    // config.headers["Content-Type"] = 'multipart/form-data'
     config.headers["Authorization"] = `Bearer ${token}`
     return config;
   },

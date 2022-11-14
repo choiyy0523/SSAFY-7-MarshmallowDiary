@@ -40,7 +40,7 @@ const SelectImages = () => {
     return (
       <View>
         <Image
-          width={IMAGE_WIDTH}
+
           source={{
             uri:
               item?.type === 'video'
@@ -94,9 +94,6 @@ const SelectImages = () => {
   );
 }
 
-const { width } = Dimensions.get('window');
-
-const IMAGE_WIDTH = (width - 24) / 3;
 
 
 export default SelectImages
@@ -131,8 +128,6 @@ const style = StyleSheet.create({
   },
   media: {
     marginLeft: 6,
-    width: IMAGE_WIDTH,
-    height: IMAGE_WIDTH,
     marginBottom: 6,
     backgroundColor: 'rgba(0,0,0,0.2)',
   },
