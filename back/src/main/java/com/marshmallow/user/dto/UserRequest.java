@@ -1,8 +1,12 @@
 package com.marshmallow.user.dto;
 
+import lombok.Builder;
 import lombok.Getter;
+import lombok.ToString;
 
 public class UserRequest {
+    @ToString
+    @Builder
     @Getter
     public static class Login {
         private String authId;

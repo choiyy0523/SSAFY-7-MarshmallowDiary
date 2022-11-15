@@ -8,6 +8,7 @@ import java.util.Date;
 
 public class DiaryRequest {
 
+        @Builder
         @Getter
         @NoArgsConstructor(access = AccessLevel.PRIVATE)
         @AllArgsConstructor(access = AccessLevel.PRIVATE)
