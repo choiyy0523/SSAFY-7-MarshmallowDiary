@@ -11,7 +11,6 @@ import ch_neutral from '../../../assets/images/character/neutral.png'
 import {http} from '../../../api/http'
 import ViewShot from "react-native-view-shot";
 import Share from 'react-native-share'; 
-import Hyperlink from 'react-native-hyperlink' 
 
 
 const Analysis = ({navigation}) => {
@@ -25,7 +24,6 @@ const Analysis = ({navigation}) => {
   var month = Number(('0' + (kr_today.getMonth() + 1)).slice(-2));
 
   // 캡처 및 공유
-
   const captureRef = useRef();
 
   const getPhotoUri = async (): Promise<string> => {
@@ -43,12 +41,21 @@ const Analysis = ({navigation}) => {
         message: 'message',
         url: uri,
         type: 'image/jpeg',
+        failOnCancel: false,
       };
 
-      const result = await Share.open({ url: uri})
+      const result = await Share.open(options)
       .then((res) => {
-        console.log(res.data);
-        console.log(result)
+        console.log(res)
+        if (res.message == 'CANCELED') {
+          Share.open({ title:'title', message: 'https://play.google.com/store/apps/details?id=com.dxx.firenow' })
+          .then(res => {
+            console.log(res)
+          })
+          .catch(err => {
+            console.log(err)
+          })
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -58,12 +65,6 @@ const Analysis = ({navigation}) => {
       console.log('failed', err);
     }
   };
-
-  // const onShare = () => {
-  //   Share.share({
-  //     message: 'https://play.google.com/store/apps/details?id=com.dxx.firenow'
-  //   })
-  // }
 
   // axios 변수
   const [targetYear, setTargetYear] = useState(year)
