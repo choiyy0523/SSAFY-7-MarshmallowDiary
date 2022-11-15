@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Text, View, Image, TouchableOpacity, ScrollView } from 'react-native';
+import { Text, View, Image, TouchableOpacity } from 'react-native';
 import Footer from '../../components/component/Footer';
 import { TextInput } from 'react-native-gesture-handler';
 import { Icon } from '@rneui/themed';
@@ -17,7 +17,6 @@ const Result = ({ route, navigation }) => {
       keyword: searchWord
     })
       .then(res => {
-        // console.log(res.data.list)
         setSearchResult(res.data.list)
       })
       .catch(err => {
@@ -69,8 +68,7 @@ const Result = ({ route, navigation }) => {
             flexDirection: 'row', flex: 0.8
           }}>
             <TextInput
-              style={{ width: '85%', marginLeft: '5%' }}
-
+              style={{ width: '85%', marginLeft: '5%', fontFamily:'GangwonEduAllBold' }}
               onChange={(e) => onChange("keyword", e)}
               value={keyword}
             >
@@ -92,12 +90,12 @@ const Result = ({ route, navigation }) => {
       {searchResult == undefined || (searchResult != undefined && searchResult.length == 0) ?
         <View style={{ alignItems: 'center', justifyContent: 'center', flex: 1 }}>
           <Image source={negative} style={{ width: '25%', height: 90 }} />
-          <Text style={{ fontSize: 17, marginTop: '5%' }}>검색 결과가 없습니다</Text>
+          <Text style={{ fontSize: 17, marginTop: '5%', fontFamily:'GangwonEduAllBold' }}>검색 결과가 없습니다</Text>
         </View>
         :
         <View style={{ flex: 1 }}>
           <View style={{ justifyContent: 'center', alignItems: 'center', flex: 0.1, fontSize: 15 }}>
-            <Text>검색 결과</Text>
+            <Text style={{ fontFamily:'GangwonEduAllBold' }}>검색 결과</Text>
           </View>
 
           {searchResult.slice(offset, offset + limit).map((data, i) => (
@@ -105,7 +103,7 @@ const Result = ({ route, navigation }) => {
             onPress={() => {navigation.navigate('Detail', {targetDate: data.date} )}}>
               <View style={{ flex: 0.4 }}>
                 <View style={{ flex: 0.25, justifyContent: 'center', alignItems: 'center' }}>
-                  <Text>{data.date}</Text>
+                  <Text style={{ fontFamily:'GangwonEduAllBold' }}>{data.date}</Text>
                 </View>
                 {!data.header_img ?
                   <View style={{ flex: 0.5, justifyContent: 'center', alignItems: 'center' }}>
@@ -115,11 +113,11 @@ const Result = ({ route, navigation }) => {
                     <Image source={{ uri: `https://marshmallow-bucket.s3.ap-northeast-2.amazonaws.com/${data.header_img}` }} style={{ width: 60, height: 60 }} />
                   </View>}
                 <View style={{ flex: 0.25, justifyContent: 'center', alignItems: 'center' }}>
-                  <Text>{data.title}</Text>
+                  <Text style={{ fontFamily:'GangwonEduAllBold' }}>{data.title}</Text>
                 </View>
               </View>
               <View style={{ flex: 0.6, justifyContent: 'center', alignItems: 'center' }}>
-                <Text>
+                <Text style={{ fontFamily:'GangwonEduAllBold' }}>
                   {data.sub_content}
                 </Text>
               </View>

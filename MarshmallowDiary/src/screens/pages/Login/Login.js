@@ -1,11 +1,10 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import { Text, View, SafeAreaView, Image, Button, TouchableOpacity, Pressable } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { Text, View, Image, TouchableOpacity, Pressable } from 'react-native';
 import logo from '../../../assets/logo.png'
 import kakao from '../../../assets/kakao.png'
 import {
   KakaoOAuthToken,
   KakaoProfile,
-  // getProfile as getKakaoProfile,
   getProfile,
   login,
   logout,
@@ -18,10 +17,8 @@ import { http } from '../../../api/http';
 
 const Login = ({ navigation }) => {
   const [result, setResult] = useState()
+  // 검수용 계정 로그인(7번 클릭)
   const [hidden, setHidden] = useState(0)
-  // const [result2, setResult2] = useState()
-  console.log('result', result)
-  console.log('hidden', hidden)
 
   const increase = () => {
     setHidden(hidden + 1)
@@ -39,7 +36,6 @@ const Login = ({ navigation }) => {
           AsyncStorage.setItem('refresh', res.data.refreshToken)
           AsyncStorage.setItem('userId', res.data.userId)
 
-          // pw 있으면 pw, 없으면 main으로
           AsyncStorage.getItem('password', (err, result) => {
             const pw = result;
             console.log(pw)
@@ -63,15 +59,16 @@ const Login = ({ navigation }) => {
     hiddenLogin()
   }, [hidden])
 
+  // 카카오 소셜 로그인
   const signInWithKakao = async (): Promise<void> => {
     const token: KakaoOAuthToken = await login()
-    // setResult(JSON.stringify(token));
   };
 
   // const signOutWithKakao = async (): Promise<void> => {
   //   const message = await logout();
   // };
 
+  // 카카오 프로필 가져오기
   const getKakaoProfile = async (): Promise<void> => {
     const profile: KakaoProfile = await getProfile()
     setResult(profile)
@@ -83,7 +80,7 @@ const Login = ({ navigation }) => {
 
   const log_in = () => {
     // 카카오 로그인 성공하면(실패 시 로그인 안되는 건 카카오가 해줌)
-    // 받아온 카카오프로필 id, nickname으로 요청 보냄(로그인 성공 시 무조건 성공)
+    // 받아온 카카오프로필 id, nickname으로 요청 보냄(카카오 로그인 성공 시 무조건 성공)
     // storage에 access토큰, refresh토큰, userId, 기존회원 set
     if (result) {
       http.post('/user/login', {
@@ -118,7 +115,6 @@ const Login = ({ navigation }) => {
 
   // const unlinkKakao = async (): Promise<void> => {
   //   const message = await unlink();
-
   //   setResult(message);
   // };
 
@@ -129,9 +125,7 @@ const Login = ({ navigation }) => {
           <Image source={logo} style={{ width: 150, height: 150, marginTop: '40%' }} />
         </TouchableOpacity>
         <View>
-          <Text style={{ fontSize: 30 }}>마시멜로일기</Text>
-          {/* <Text>{result}</Text>
-          <Text>{result2}</Text> */}
+          <Text style={{ fontSize: 30, fontFamily:'GangwonEduAllBold' }}>마시멜로일기</Text>
         </View>
       </View>
 

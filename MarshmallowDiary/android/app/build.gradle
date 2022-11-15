@@ -135,7 +135,6 @@ android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
 
-
     defaultConfig {
         applicationId "com.marshmallowdiary"
         minSdkVersion rootProject.ext.minSdkVersion
