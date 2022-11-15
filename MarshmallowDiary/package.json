@@ -10,7 +10,6 @@
     "lint": "eslint ."
   },
   "dependencies": {
-    "@baronha/react-native-multiple-image-picker": "^0.4.13",
     "@react-native-async-storage/async-storage": "^1.17.10",
     "@react-native-community/art": "^1.2.0",
     "@react-native-community/cli-platform-android": "^9.3.1",
@@ -22,7 +21,7 @@
     "@react-navigation/stack": "^6.3.2",
     "@rneui/base": "^4.0.0-rc.6",
     "@rneui/themed": "^4.0.0-rc.6",
-    "aws-sdk": "^2.1247.0",
+    "aws-sdk": "^2.1254.0",
     "axios": "^0.27.2",
     "base-64": "^1.0.0",
     "date-fns": "^2.29.3",
