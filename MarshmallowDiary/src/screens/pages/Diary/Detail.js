@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { BackHandler, StyleSheet, TextInput, Alert, Text, View, Button, TouchableOpacity, FlatList, Image, ScrollView, Modal } from 'react-native'
-import DiaryPictureCarousel from './DiaryPictureCarousel';
 import Footer from '../../components/component/Footer';
 import { Icon } from '@rneui/themed';
 import { Chip } from "@react-native-material/core";
@@ -13,7 +12,7 @@ import axios from 'axios'
 import { connect } from 'react-redux'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { http } from '../../../api/http'
-import ImageViewer from 'react-native-image-zoom-viewer';
+
 
 
 function Detail({ route }) {
