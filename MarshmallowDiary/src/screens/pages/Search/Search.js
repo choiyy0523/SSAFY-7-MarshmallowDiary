@@ -5,13 +5,12 @@ import Footer from '../../components/component/Footer';
 import positive from '../../../assets/images/character/positive.png'
 import { Icon } from '@rneui/themed';
 
-
 const Search = ({ navigation }) => {
   const [inputs, setInputs] = useState({
     name: '',
   });
 
-
+  // 사용자 입력값 = 검색어
   const { keyword } = inputs;
 
   const onChange = (keyvalue, e) => {
@@ -20,7 +19,6 @@ const Search = ({ navigation }) => {
       ...inputs,
       [keyvalue]: text
     });
-
   };
 
   const onReset = () => {
@@ -41,7 +39,7 @@ const Search = ({ navigation }) => {
         <View style={{ alignItems: 'center', justifyContent: 'center', flex: 1, flexDirection: 'row' }}>
           <View style={{ backgroundColor: 'rgba(255,255,255,0.9)', height: 40, borderRadius: 30, flexDirection: 'row', flex: 0.8 }}>
             <TextInput
-              style={{ width: '85%', marginLeft: '5%' }}
+              style={{ width: '85%', marginLeft: '5%', fontFamily:'GangwonEduAllBold' }}
               onChange={(e) => onChange("keyword", e)}
               value={keyword}
             >
@@ -60,10 +58,9 @@ const Search = ({ navigation }) => {
         </View>
       </View>
 
-
       <View style={{ alignItems: 'center', justifyContent: 'center', flex: 1 }} >
         <Image source={positive} style={{ width: '25%', height: 90 }} />
-        <Text style={{ fontSize: 17, marginTop: '5%' }}>다시 보고 싶은 일기가 있으신가요?</Text>
+        <Text style={{ fontSize: 17, marginTop: '5%', fontFamily:'GangwonEduAllBold' }}>다시 보고 싶은 일기가 있으신가요?</Text>
       </View>
       <Footer />
     </View>

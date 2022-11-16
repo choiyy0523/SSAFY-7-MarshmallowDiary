@@ -8,7 +8,7 @@ function Pagination({ total, limit, page, setPage }) {
     numPages.push(i);
   }
 
-  const [limit2, setLimit2] = useState(10);
+  const [limit2, setLimit2] = useState(10); // 한번에 10페이지씩
   const offset = Math.floor((page - 1) / 10) * limit2;
 
   const toLeft = () => {
@@ -26,8 +26,6 @@ function Pagination({ total, limit, page, setPage }) {
       setPage(Math.floor((page + 9) / 10) * 10 + 1)
     }
   }
-
-  // console.log('page', page)
 
   return (
     <View style={{ flexDirection:'row', flex:1, justifyContent:'center', alignItems:'center'}}>

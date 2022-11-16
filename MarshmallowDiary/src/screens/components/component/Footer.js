@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, SafeAreaView, Image, Button, TouchableOpacity, Pressable } from 'react-native';
+import { View, Image, TouchableOpacity } from 'react-native';
 import home from '../../../assets/images/footer/home.png'
 import analysis from '../../../assets/images/footer/analysis.png'
 import positive from '../../../assets/images/character/positive.png'
@@ -16,6 +16,7 @@ const Footer = () => {
   const isFocused = useIsFocused()
   const route = useRoute()
 
+  // register / detail 캐릭터 구분용
   const [loyalty, setLoyalty] = useState()
 
   var today = new Date();
@@ -29,6 +30,7 @@ const Footer = () => {
 
   var dateString = year + '-' + month + '-' + day2;
 
+  // 오늘 diary 유무 확인
   const [written, setWritten] = useState()
 
   useEffect(() => {
@@ -39,7 +41,8 @@ const Footer = () => {
       .catch(err => {
         navigation.navigate('LoginCheck')
       })
-
+    
+    // detail 삭제시 register로
     http.get(`/diary/detail/${dateString}`)
       .then(res => {
         setWritten(true)
@@ -50,7 +53,7 @@ const Footer = () => {
   }, [isFocused]);
 
   return (
-    <SafeAreaView>
+    <View>
       <View style={{ height: 60, backgroundColor: '#FFF9F8' }}>
         <View style={{ flexDirection: 'row' }}>
           {route.name === 'Main' ?
@@ -71,7 +74,7 @@ const Footer = () => {
           }
 
           {/* 오늘 detail 없으면 register, 있으면 detail로 보내는 함수 db 적용 후 작성예정 */}
-          {route.name === 'Register' || route.name === 'Detail' ?
+          {route.name === 'Register' || route.name === 'Today' ?
             <TouchableOpacity style={{ width: '20%', alignItems: 'center', justifyContent: 'center', flex: 1, height: 60, backgroundColor: 'rgba(251, 198, 135, 0.3)' }}>
               {loyalty == '0' ? <Image source={positive} style={{ width: 33, height: 33 }} /> :
                 loyalty == '1' ? <Image source={neutral} style={{ width: 33, height: 33 }} /> :
@@ -107,11 +110,9 @@ const Footer = () => {
               <Image source={settings} style={{ width: 33, height: 33 }} />
             </TouchableOpacity>
           }
-
-
         </View>
       </View>
-    </SafeAreaView>
+    </View>
   )
 };
 

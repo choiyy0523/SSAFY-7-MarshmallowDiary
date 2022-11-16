@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Button } from 'react-native';
-import { Text, View, SafeAreaView, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import { Text, View } from 'react-native';
 import Footer from '../../components/component/Footer';
 import Calendar from './Calendar';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -18,18 +18,20 @@ const Main = ({ navigation }) => {
 
   var dateString = year + '-' + month + '-' + day;
 
+  // 캐릭터 문구
   const [words, setWords] = useState()
 
-  AsyncStorage.getItem('token', (err, result) => {
-    const token = result;
-    console.log('token', token)
-  })
+  // AsyncStorage.getItem('token', (err, result) => {
+  //   const token = result;
+  //   console.log('token', token)
+  // })
 
-  AsyncStorage.getItem('refresh', (err, result) => {
-    const refresh = result;
-    console.log('refresh', refresh)
-  })
+  // AsyncStorage.getItem('refresh', (err, result) => {
+  //   const refresh = result;
+  //   console.log('refresh', refresh)
+  // })
 
+  // 캐릭터별 문구 요청 및 세팅 
   useEffect(() => {
     http.get('/analysis/loyalty')
       .then(res => {
@@ -49,7 +51,7 @@ const Main = ({ navigation }) => {
       </View>
       <View style={{ flex: 0.3, backgroundColor: 'rgba(217,217,217,0.3)', borderRadius: 20, marginLeft: '20%', marginRight: '20%' }}>
         <View style={{ fontSize: 15, alignItems: 'center', justifyContent: 'center', flex: 1 }}>
-          <Text>{words}</Text>
+          <Text style={{ fontFamily:'GangwonEduAllBold' }}>{words}</Text>
         </View>
       </View>
       <View style={{ flex: 0.1 }}>
