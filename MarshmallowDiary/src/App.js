@@ -6,44 +6,11 @@ import StackNavigation from './navigations/Stack';
 import { Provider as PaperProvider } from 'react-native-paper';
 import { Text } from 'react-native-paper';
 import AsyncStorage from "@react-native-async-storage/async-storage";
-// import { configureFonts, DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
-// import { ThemeProvider } from "styled-components"
+import SplashScreen from "react-native-splash-screen";
+import ChangeDarkModeSwitch from "./screens/pages/Settings/darkSwitch";
 
-// import SplashScreen from 'react-native-splash-screen';
 
-// import { lightTheme, darkTheme } from "./theme/theme";
 
-// import { setCustomText } from 'react-native-global-props'
-
-// const customTextProps = {
-//   style: {
-//     fontFamily: 'GangwonEduAllBold'
-//   }
-// }
-
-// setCustomText(customTextProps)
-
-// const fontConfig = {
-//   default: {
-//     regular: {
-//       fontFamily: 'GangwonEduAllBold',
-//       fontWeight: 'normal',
-//     },
-//     medium: {
-//       fontFamily: 'GangwonEduAllBold',
-//       fontWeight: 'normal',
-//     },
-//     light: {
-//       fontFamily: 'GangwonEduAllBold',
-//       fontWeight: 'normal',
-//     },
-//     thin: {
-//       fontFamily: 'GangwonEduAllBold',
-//       fontWeight: 'normal',
-//     },
-//   },
-
-// };
 
 const darkTheme = {
   dark: true,
@@ -72,8 +39,6 @@ const lightTheme = {
     iconColor: '#525252'
   }
 }
-// import { lightTheme, darkTheme } from "./theme/theme";
-import SplashScreen from "react-native-splash-screen";
 
 
 
@@ -82,7 +47,16 @@ const App = () => {
     SplashScreen.hide();
   });
 
-
+  const load = async () => {
+    try {
+      const nowThemeStirng = await AsyncStorage.getItem('nowTheme');
+      const nowTheme = JSON.parse(nowThemeStirng); // 저장된 객체 변환
+    } catch (e) {
+      console.log("아이스티")
+      console.log(e)
+      console.log(nowTheme)
+    }
+  }
 
   // AsyncStorage.setItem(theme, lightTheme)
   //   .then(() => console.log('테마 변경 성공'))

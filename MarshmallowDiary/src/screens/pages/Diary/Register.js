@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { BackHandler, StyleSheet, TextInput, Alert, Pressable, Modal, Text, View, Button, TouchableOpacity, FlatList, Image, ScrollView } from 'react-native'
+import { BackHandler, StyleSheet, Dimensions, TextInput, Alert, Pressable, Modal, Text, View, Button, TouchableOpacity, FlatList, Image, ScrollView } from 'react-native'
 import Footer from '../../components/component/Footer';
 import WeatherPicker from './WeatherPicker';
 import { launchImageLibrary } from 'react-native-image-picker';
@@ -12,30 +12,69 @@ import { set } from 'date-fns';
 import { http } from '../../../api/http'
 import { util } from '../../../api/util'
 import { useNavigation } from '@react-navigation/native';
-
-// const ShowPicker = () => {
-//   //launchImageLibrary : 사용자 앨범 접근
-//   launchImageLibrary({}, (res) => {
-//     alert(res.assets[0].uri)
-//     const formdata = new FormData()
-//     formdata.append('file', res.assets[0].uri);
-//     console.log(res);
-//   })
-// }
+// import MultipleImagePicker from '@baronha/react-native-multiple-image-picker';
+// import ImagePicker from 'react-native-image-crop-picker';
 
 
-export default function DiaryRegister() {
+function DiaryRegister() {
 
   const navigation = useNavigation()
   // Register (내용 등록, 사진 등록 순으로 진행) 후 Detail로 보내는 코드
+  const [title, setTitle] = useState('')
+  const [content, setContent] = useState('')
+  const [weather, setWeather] = useState(1)
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [thumbnailImage, setThumbnailImage] = useState(null);
+
+
+  // 라이브러리에서 사진 선택
+  const UploadImage = async () => {
+    const image = {
+      uri: '',
+      type: 'image/jpeg',
+      name: 'test',
+    };
+    await launchImageLibrary({ maxWidth: 1024, maxHeight: 1024 }, res => { // 가로 세로 중 최대 크기 1024로 limit 설정
+      if (res.didCancel) {
+        console.log('사진 등록을 취소했습니다. ');
+      }
+      else if (res.errorCode) {
+        console.log('사진 선택 오류 : ', res.errorCode);
+      }
+      else if (res.assets) { //정상적으로 사진을 반환 받았을 때
+        console.log('사진 선택 성공', res);
+        image.name = res.assets[0].fileName;
+        image.type = res.assets[0].type;
+        image.uri = res.assets[0].uri;
+      }
+    })
+    const formdata = new FormData();
+    formdata.append('photos', image);
+    const selectedImage = formdata
+    setSelectedImage(selectedImage)
+    setThumbnailImage(image.uri)
+
+
+    const headers = {
+      'Content-Type': 'multipart/form-data'
+    };
+    console.log(image);
+    console.log('모짜')
+    console.log(image.uri);
+    console.log('렐라')
+    console.log(selectedImage)
+  }
+
+
+  const DeleteImage = () => {
+    setSelectedImage(null)
+    console.log("치즈")
+    console.log(selectedImage)
+  }
+
+
 
   function Register() {
-
-
-    // const [dates, setDates] = useState()
-
-    // const { date } = dates;
-
     http.post('/diary/regist/diary', {
       title: title,
       content: content,
@@ -45,63 +84,47 @@ export default function DiaryRegister() {
       .then(res => {
         // setDates(date)
         console.log('일기 내용 등록 완료')
-        alert('일기가 등록되었습니다!')
-        navigation.navigate('Detail', { targetDate: today })
+        // navigation.navigate('Detail', { targetDate: today })
 
-        // util.post(`/diary/regist/photo/${date}`, formdata)
-        //   .then(response => {
-        //     if (response) {
-        //       console.log("일기 사진 등록 완료")
-        //       console.log(response.data)
-        //       alert('일기가 등록되었습니다!')
-        //       navigation.navigate('Detail', { targetDate: diarydate })
-        //     }
-        //   })
-        //   .catch((error) => {
-        //     if (error.response) {
-        //       console.log("냐옹")
-        //       console.log(error.response.data);
-        //       console.log(error.response.status);
-        //       console.log(error.response.headers);
-        //     } else if (error.request) {
-        //       console.log("먀옹")
-        //       console.log(error.request);
-        //     } else {
-        //       console.log("갸옹")
-        //       console.log('Error', error.message);
-        //     }
-        //   })
-
+        // 사진 Formdata 처리
+        util.post(`/diary/regist/photo/${today}`, selectedImage)
+          .then(response => {
+            if (response) {
+              console.log("일기 사진 등록 완료")
+              console.log(response.data)
+              alert('일기가 등록되었습니다!')
+              navigation.navigate('Detail', { targetDate: today })
+            }
+          })
+          .catch((error) => {
+            if (error.response) {
+              console.log("냐옹")
+              console.log(error.response.data);
+              console.log(error.response.status);
+              console.log(error.response.headers);
+            } else if (error.request) {
+              console.log("먀옹")
+              console.log(error.request);
+            } else {
+              console.log("갸옹")
+              console.log('Error', error.message);
+            }
+          })
 
       })
 
       .catch(err => {
-        console.log('일기 내용 등록 실패')
-        console.log(date)
-        console.log(title)
-        console.log(content)
-        console.log(weather)
+        console.log('일기 사진 등록 실패')
         console.log(err)
       })
 
   }
 
-  // const ShowPicker = () => {
-  //   launchImageLibrary({}, (res) => {
-  //     // console.log("왈왈")
-  //     // alert(res.assets[0].uri)
-  //     const formdata = new FormData()
-  //     formdata.append('file', res.assets[0].uri);
-  //     console.log(res);
-  //     console.log("멍멍")
-  //     console.log(date)
-  //     console.log(formdata)
-  //   })
-  // }
 
-  const [title, setTitle] = useState('')
-  const [content, setContent] = useState('')
-  const [weather, setWeather] = useState(1)
+
+  // let renderImage = (file === []) ? `require('../../../assets/images/etc/photo.png')` : { uri: res.assets[0].uri }
+  // console.log(renderImage)
+
 
   const getWeather = (weather) => {
     setWeather(weather)
@@ -133,7 +156,7 @@ export default function DiaryRegister() {
 
   return (
     <View style={{ flex: 1 }}>
-      <ScrollView>
+      <View style={{ flex: 1 }}>
         <View style={styles.block2}>
           {/* 날짜, 날씨, 등록버튼 - 일기장 헤더 */}
           <View style={styles.block}>
@@ -166,16 +189,34 @@ export default function DiaryRegister() {
             onChangeText={text => setTitle(text)} />
 
           {/* 사진 첨부*/}
-          {/* <Image source={{ uri: photo }} /> */}
-          {/* <View style={styles.imageInput}>
-            <TouchableOpacity onPress={ShowPicker}>
-              <Image
-                source={require('../../../assets/images/etc/photo.png')}
-                style={styles.imageButton}
-              />
-            </TouchableOpacity>
-          </View > */}
+          {selectedImage == undefined || (selectedImage != undefined && selectedImage.length == 0) ?
+            // 사진 없을 때
+            <View style={styles.imageInput}>
+              <TouchableOpacity onPress={UploadImage}>
+                <Image
+                  source={require('../../../assets/images/etc/photo.png')}
+                  style={styles.imageButton}
+                />
 
+              </TouchableOpacity>
+
+
+              <Text style={{ fontsize: 10, color: "#999696", marginTop: 10 }}>
+                오늘을 사진 한 장으로 표현할 수 있다면?
+              </Text>
+            </View >
+            :
+            // 사진 있을 때
+            <View style={styles.imageInput2}>
+              <TouchableOpacity onPress={DeleteImage} >
+                <Image
+                  source={{ uri: thumbnailImage }}
+                  style={{ width: 300, height: 200, borderRadius: 20 }}
+                />
+              </TouchableOpacity>
+            </View >
+
+          }
           {/* 일기 작성 */}
           <TextInput
             placeholder="오늘의 기록을 남겨보세요."
@@ -185,12 +226,15 @@ export default function DiaryRegister() {
             onChangeText={text => setContent(text)}
           />
         </View>
-      </ScrollView >
+      </View >
+      <View style={{ flex: 0.1 }}>
+        {/* <Button title='Home' onPress={() => navigation.navigate('Home')} /> */}
+      </View>
       <Footer />
     </View >
   )
-
 }
+
 
 const styles = StyleSheet.create({
   block: {
@@ -246,10 +290,19 @@ const styles = StyleSheet.create({
   },
   imageInput: {
     paddingVertical: 8,
-    height: 100,
+    height: 120,
     paddingHorizontal: 16,
     backgroundColor: 'rgba(217, 217, 217, 0.3)',
     borderRadius: 18,
+    marginBottom: 20,
+    marginHorizontal: 15,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  imageInput2: {
+    paddingVertical: 8,
+    height: 200,
+    paddingHorizontal: 16,
     marginBottom: 20,
     marginHorizontal: 15,
     justifyContent: 'center',
@@ -279,6 +332,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFEBA5',
     height: 33,
     width: 50,
+    marginHorizontal: -25,
     justifyContent: 'center',
     alignItems: 'center',
     paddingBottom: 5,
@@ -287,3 +341,5 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
 });
+
+export default DiaryRegister

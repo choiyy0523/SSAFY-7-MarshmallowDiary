@@ -4,6 +4,7 @@ import Footer from '../../components/component/Footer';
 import { Icon } from '@rneui/themed';
 import SwitchComponent from './Switch';
 import { useTheme } from 'react-native-paper';
+import ChangeDarkModeSwitch from './darkSwitch';
 
 const Settings = ({ navigation, props }) => {
   const { colors } = useTheme();
@@ -64,7 +65,7 @@ const Settings = ({ navigation, props }) => {
 
 
             <View style={styles.switchStyle}>
-              <SwitchComponent />
+              <ChangeDarkModeSwitch />
             </View>
 
           </View>

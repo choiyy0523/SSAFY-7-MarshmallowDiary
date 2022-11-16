@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { BackHandler, StyleSheet, TextInput, Alert, Text, View, Button, TouchableOpacity, FlatList, Image, ScrollView } from 'react-native'
-import DiaryPictureCarousel from './DiaryPictureCarousel';
+import { BackHandler, StyleSheet, TextInput, Alert, Text, View, Button, TouchableOpacity, FlatList, Image, ScrollView, Modal } from 'react-native'
 import Footer from '../../components/component/Footer';
 import { Icon } from '@rneui/themed';
 import { Chip } from "@react-native-material/core";
@@ -27,6 +26,16 @@ function Detail({ route }) {
   const [diaryTitle, setDiaryTitle] = useState()
   const [diaryWeather, setDiaryWeather] = useState()
   const [diaryContent, setDiaryContent] = useState()
+  const [diaryImage, setDiaryImage] = useState()
+
+  console.log("카페라떼")
+  console.log(diaryImage) //[파일명.jpg, 파일명.png...] diaryImage[i]
+  if (diaryImage != null) {
+    console.log(diaryImage[0])
+    console.log(typeof (diaryImage[0]))
+  } else {
+    console.log("뭐지")
+  }
 
 
   // const todayDate = diaryDate.substr(10)
@@ -47,6 +56,12 @@ function Detail({ route }) {
           setDiaryTitle(res.data.title)
           setDiaryWeather(res.data.weather)
           setDiaryContent(res.data.content)
+          setDiaryImage(res.data.photo)
+          console.log("토피넛라떼")
+          console.log(diaryImage)
+          console.log(typeof (diaryImage))
+          console.log(diaryImage[0])
+          console.log(typeof (diaryImage[0]))
         })
         .catch(err => {
           console.log('일기 조회 실패')
@@ -133,7 +148,30 @@ function Detail({ route }) {
             {diaryTitle}
           </Text>
 
-          {/* 사진 첨부*/}
+          {/* 사진*/}
+          {diaryImage == undefined || (diaryImage != undefined && diaryImage.length == 0) ?
+            // 사진 없을 때
+            <View style={styles.imageOutput}>
+              <TouchableOpacity>
+                <Image
+                  style={{ height: 80, width: 80 }}
+                  source={require('../../../assets/images/character/positive.png')}
+                />
+              </TouchableOpacity>
+            </View >
+            :
+            // 사진 있을 때
+            <View style={styles.imageOutput}>
+              <TouchableOpacity>
+                <Image
+                  style={{ width: 300, height: 300, borderRadius: 20 }}
+                  source={{ uri: `https://marshmallow-bucket.s3.ap-northeast-2.amazonaws.com/${diaryImage[0]}` }}
+                />
+              </TouchableOpacity>
+            </View >
+
+
+          }
 
           {/* 일기 작성 */}
           <Text
@@ -208,11 +246,9 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     marginHorizontal: 15,
   },
-  imageInput: {
+  imageOutput: {
     paddingVertical: 8,
-    height: 100,
     paddingHorizontal: 16,
-    backgroundColor: 'rgba(217, 217, 217, 0.3)',
     borderRadius: 18,
     marginBottom: 20,
     marginHorizontal: 15,
