@@ -27,8 +27,8 @@ const Login = ({ navigation }) => {
   const hiddenLogin = () => {
     if (hidden >= 7) {
       http.post('/user/login', {
-        authId: '7777',
-        nickname: 'test',
+        authId: '2508568765',
+        nickname: '최윤영',
       })
         .then(res => {
           console.log(res.data)
@@ -125,7 +125,7 @@ const Login = ({ navigation }) => {
           <Image source={logo} style={{ width: 150, height: 150, marginTop: '40%' }} />
         </TouchableOpacity>
         <View>
-          <Text style={{ fontSize: 30, fontFamily:'GangwonEduAllBold' }}>마시멜로일기</Text>
+          <Text style={{ fontSize: 30, fontFamily: 'GangwonEduAllBold' }}>마시멜로일기</Text>
         </View>
       </View>
 
