@@ -1,4 +1,4 @@
 <resources>
     <string name="app_name">MarshmallowDiary</string>
-    <string name="kakao_app_key">@string/KAKAO_NATIVE_APP_KEY</string>
+    <string name="kakao_app_key">aeedbada1130d2fb1e4d4508606c4b6b</string>
 </resources>

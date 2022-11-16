@@ -24,6 +24,7 @@ const Login = ({ navigation }) => {
     setHidden(hidden + 1)
   }
 
+
   const hiddenLogin = () => {
     if (hidden >= 7) {
       http.post('/user/login', {
@@ -107,6 +108,7 @@ const Login = ({ navigation }) => {
         })
         .catch(err => {
           console.log('로그인 오류')
+          Promise.reject(err)
           navigation.replace('Home')
         })
     }
