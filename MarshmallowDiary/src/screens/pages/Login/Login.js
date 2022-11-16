@@ -17,6 +17,7 @@ import { http } from '../../../api/http';
 
 const Login = ({ navigation }) => {
   const [result, setResult] = useState()
+  const [error, setError] = useState()
   // 검수용 계정 로그인(7번 클릭)
   const [hidden, setHidden] = useState(0)
 
@@ -50,7 +51,8 @@ const Login = ({ navigation }) => {
         .catch(err => {
           console.log('로그인 오류')
           Promise.reject(err)
-          navigation.replace('Home')
+          setError(Promise.reject(err))
+          // navigation.replace('Home')
         })
     }
   }
@@ -107,7 +109,8 @@ const Login = ({ navigation }) => {
         })
         .catch(err => {
           console.log('로그인 오류')
-          navigation.replace('Home')
+          setError(Promise.reject(err))
+          // navigation.replace('Home')
         })
     }
   };
@@ -127,6 +130,11 @@ const Login = ({ navigation }) => {
         <View>
           <Text style={{ fontSize: 30, fontFamily:'GangwonEduAllBold' }}>마시멜로일기</Text>
         </View>
+      </View>
+
+      <View>
+        <Text>result: {result}</Text>
+        <Text>error: {error}</Text>
       </View>
 
       <Pressable style={{ flex: 0.15, justifyContent: 'center', alignItems: 'center' }} onPressIn={signInWithKakao} onPressOut={getKakaoProfile}>
