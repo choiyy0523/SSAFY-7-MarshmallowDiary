@@ -32,9 +32,9 @@
         <category android:name="android.intent.category.DEFAULT" />
         <category android:name="android.intent.category.BROWSABLE" />
           <data android:host="kakaolink"
-              android:scheme="kakaoaeedbada1130d2fb1e4d4508606c4b6b" />
+              android:scheme="kakao" + @string/KAKAO_NATIVE_APP_KEY />
         <data android:host="oauth"
-            android:scheme="kakaoaeedbada1130d2fb1e4d4508606c4b6b" /> 
+            android:scheme="kakao" + @string/KAKAO_NATIVE_APP_KEY /> 
       </intent-filter>
       </activity>
     </application>

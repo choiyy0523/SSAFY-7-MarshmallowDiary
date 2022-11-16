@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { Text, View, Image, Modal, Pressable } from 'react-native';
 import Footer from '../../components/component/Footer';
-import { Icon } from '@rneui/themed';
+import { Icon, Button } from '@rneui/themed';
 import { Chip } from "@react-native-material/core";
 import PieChart from 'react-native-pie-chart';
 import mm_positive from '../../../assets/images/mm/mm_positive.png'
@@ -11,7 +11,6 @@ import ch_neutral from '../../../assets/images/character/neutral.png'
 import {http} from '../../../api/http'
 import ViewShot from "react-native-view-shot";
 import Share from 'react-native-share'; 
-
 
 const Analysis = ({navigation}) => {
   // 이번 달 기본으로 세팅
@@ -71,6 +70,7 @@ const Analysis = ({navigation}) => {
   const [targetMonth, setTargetMonth] = useState(month)
 
   // response 세팅
+  // const [data, setData] = useState()
   const [positive, setPositive] = useState()
   const [neutral, setNeutral] = useState()
   const [negative, setNegative] = useState()
@@ -87,6 +87,7 @@ const Analysis = ({navigation}) => {
     })
     .then(res => {
       // target 년월 data 0이면 pie 그래프 에러
+      // setData(res.data)
       if ( res.data.positive == 0) {
         setPositive(3200)
       }
@@ -130,6 +131,7 @@ const Analysis = ({navigation}) => {
   const getAll = () => {
       http.get('/analysis/all')
       .then(res => {
+        // setData(res.data)
         setPositive(res.data.positive)
         setNeutral(res.data.neutral)
         setNegative(res.data.negative)
@@ -186,6 +188,19 @@ const Analysis = ({navigation}) => {
   const month1 = [1, 2, 3, 4]
   const month2 = [5, 6, 7, 8]
   const month3 = [9, 10, 11, 12]
+  // 로딩
+  // const [ready, setReady] = useState(true)
+
+  // useEffect(()=>{        
+  //   setTimeout(()=>{                 
+  //     setReady(false)     
+  //   },500)          
+  // },[ready, data])
+
+  // useEffect(() => {
+  //   setReady(true)
+  // }, [targetMonth, targetYear, isAll])
+
 
   return (
     <View style={{ flex: 1, backgroundColor:'#FFF9F8' }}>
@@ -196,6 +211,10 @@ const Analysis = ({navigation}) => {
 
       <View style={{ flex: 1.2, flexDirection: 'row' }}>
         <View style={{ marginLeft: '7.5%', justifyContent: 'center', flex: 0.7 }} >
+        {/* {ready ?  
+          <View style={{justifyContent:'center', alignItems:'center'}}>
+            <Button buttonStyle={{ backgroundColor:'rgba(217,217,217,0.3)', width:50 }} loading />
+          </View> : */}
           { pcnt+ncnt+ngcnt == 0 || pcnt == undefined || ncnt == undefined || ngcnt == undefined ?
           <View style={{ flex:1, justifyContent:'center', alignItems:'center'}}>
             <Image source={ch_neutral} style={{ width:100, height:100 }}/>

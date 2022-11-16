@@ -33,6 +33,7 @@
     "react-native-calendars": "^1.1290.0",
     "react-native-chart-kit": "^6.12.0",
     "react-native-charts-wrapper": "^0.5.11",
+    "react-native-config": "^1.4.11",
     "react-native-date-picker": "^4.2.5",
     "react-native-gesture-handler": "^2.8.0",
     "react-native-global-props": "^1.1.5",

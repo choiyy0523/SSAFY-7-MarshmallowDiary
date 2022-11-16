@@ -14,7 +14,6 @@ import com.marshmallowdiary.newarchitecture.MainApplicationReactNativeHost;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
-
 public class MainApplication extends Application implements ReactApplication {
 
   private final ReactNativeHost mReactNativeHost =
@@ -51,6 +50,7 @@ public class MainApplication extends Application implements ReactApplication {
     }
   }
 
+
   @Override
   public void onCreate() {
     super.onCreate();
@@ -58,7 +58,6 @@ public class MainApplication extends Application implements ReactApplication {
     ReactFeatureFlags.useTurboModules = BuildConfig.IS_NEW_ARCHITECTURE_ENABLED;
     SoLoader.init(this, /* native exopackage */ false);
     initializeFlipper(this, getReactNativeHost().getReactInstanceManager());
-    KakaoSdk.init(this, "aeedbada1130d2fb1e4d4508606c4b6b");
   }
 
   /**
@@ -73,7 +72,7 @@ public class MainApplication extends Application implements ReactApplication {
     if (BuildConfig.DEBUG) {
       try {
         /*
-         We use reflection here to pick up the class that initializes Flipper,
+        We use reflection here to pick up the class that initializes Flipper,
         since Flipper library is not available in release mode
         */
         Class<?> aClass = Class.forName("com.marshmallowdiary.ReactNativeFlipper");

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Text, View, Image, TouchableOpacity } from 'react-native';
 import Footer from '../../components/component/Footer';
 import { TextInput } from 'react-native-gesture-handler';
-import { Icon } from '@rneui/themed';
+import { Icon, Button } from '@rneui/themed';
 import negative from '../../../assets/images/character/negative.png'
 import Pagination from './Pagination';
 import positive from '../../../assets/images/character/positive.png'
@@ -59,6 +59,15 @@ const Result = ({ route, navigation }) => {
     setPage(page);
   };
 
+   // 로딩
+  const [ready, setReady] = useState(true)
+
+  useEffect(()=>{        
+    setTimeout(()=>{                 
+      setReady(false)     
+    },300)          
+  },[]) 
+
   return (
     <View style={{ backgroundColor: '#FFF9F8', flex: 1 }}>
       <View style={{ backgroundColor: '#D9D9D9', height: 60 }}>
@@ -86,8 +95,11 @@ const Result = ({ route, navigation }) => {
         </View>
       </View>
 
-
-      {searchResult == undefined || (searchResult != undefined && searchResult.length == 0) ?
+      {ready ? 
+        <View style={{justifyContent:'center', alignItems:'center', flex: 1}}>
+          <Button buttonStyle={{ backgroundColor:'rgba(217,217,217,0.3)', width:50 }} loading />
+        </View> :
+      (searchResult == undefined || (searchResult != undefined && searchResult.length == 0))  ?
         <View style={{ alignItems: 'center', justifyContent: 'center', flex: 1 }}>
           <Image source={negative} style={{ width: '25%', height: 90 }} />
           <Text style={{ fontSize: 17, marginTop: '5%', fontFamily:'GangwonEduAllBold' }}>검색 결과가 없습니다</Text>
@@ -97,7 +109,7 @@ const Result = ({ route, navigation }) => {
           <View style={{ justifyContent: 'center', alignItems: 'center', flex: 0.1, fontSize: 15 }}>
             <Text style={{ fontFamily:'GangwonEduAllBold' }}>검색 결과</Text>
           </View>
-
+        
           {searchResult.slice(offset, offset + limit).map((data, i) => (
             <TouchableOpacity key={i} style={{ flex: 0.4, backgroundColor: 'rgba(217, 217, 217, 0.3)', borderRadius: 30, marginLeft: '5%', marginRight: '5%', flexDirection: 'row', marginBottom: '5%' }}
             onPress={() => {navigation.navigate('Detail', {targetDate: data.date} )}}>
@@ -123,7 +135,7 @@ const Result = ({ route, navigation }) => {
               </View>
             </TouchableOpacity>
           ))}
-
+      
           {searchResult.length % 2 && page == (searchResult.length + 1) / 2 ? <View style={{ flex: 0.4 }} /> : null}
 
           <View style={{ flex: 0.1, justifyContent: 'center', alignItems: 'center' }}>
@@ -136,6 +148,7 @@ const Result = ({ route, navigation }) => {
           </View>
         </View>
       }
+      
       <Footer />
     </View>
   )
