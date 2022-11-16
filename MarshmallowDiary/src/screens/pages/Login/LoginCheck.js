@@ -18,8 +18,6 @@ const LoginCheck = ({ navigation }) => {
             refresh = store[i][1]
           }
         });
-        console.log('id', id)
-        console.log('refresh', refresh)
 
         // 존재하면 기존 회원
         if (id && refresh) {
@@ -29,7 +27,6 @@ const LoginCheck = ({ navigation }) => {
           })
             // refresh 토큰 유효하면 access, refresh 재발급
             .then(res => {
-              // console.log(res.data)
               console.log('기존회원 토큰 재발급')
               AsyncStorage.setItem('token', res.data.accessToken)
               AsyncStorage.setItem('refresh', res.data.refreshToken)
