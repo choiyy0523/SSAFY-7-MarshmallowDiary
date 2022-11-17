@@ -84,9 +84,9 @@ const Login = ({ navigation }) => {
     setCheck2('pass')
   }
 
-  useEffect(() => {
-    log_in()
-  }, [result])
+  // useEffect(() => {
+  //   log_in()
+  // }, [result])
 
   // const log_in = () => {
   //   // 카카오 로그인 성공하면(실패 시 로그인 안되는 건 카카오가 해줌)

@@ -17,6 +17,7 @@ const LocalLogin = ({navigation}) => {
     .then(res => {
       AsyncStorage.setItem('token', res.data.accessToken)
       AsyncStorage.setItem('refresh', res.data.refreshToken)
+      AsyncStorage.setItem('userId', res.data.userId)
       
       AsyncStorage.getItem('password', (err, result) => {
         const pw = result;
@@ -53,7 +54,7 @@ const LocalLogin = ({navigation}) => {
         </View>
       </View>
 
-      <View style={{ flex: 0.4, justifyContent:'center', alignItems:'center'}}>
+      <View style={{ flex: 0.4, justifyContent:'center', alignItems:'center', marginLeft:'10%', marginRight:'10%' }}>
         <Input placeholder="Id" onChangeText={text => setId(text)} />
         <Input placeholder="Password" secureTextEntry={true} onChangeText={text => setPass(text)}/>
         <TouchableOpacity onPress={login}>
