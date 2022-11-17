@@ -18,28 +18,33 @@
 
 ## 2. 주요 기술
 
----
-
 ### BackEnd
 
 - IntelliJ IDEA 2022.2.2
-- Spring Boot Security
+- Java 11.0.17 (corretto-11)
+- Spring Boot(Security) 2.7.5
 - Spring Data JPA
 - Spring Web
-- Swagger
-- QueryDsl
-- MySQL DB
+- Swagger 2.9.2
+- QueryDsl 1.0.10
+- Gradle 7.5
+- MySQL
+- Redis 5.0.7
 
 ### FrontEnd
 
 - Visual Studio CODE
 - React Native
+- Node.js 16.16.0
+- Chocolatey 1.2.0
 - Android Studio
+  - Android Studio Dolphin | 2021.3.1 Patch 1 for Windows 64-bit (912 MiB)
+  - SDK 31
 
 ### Deploy
 
 - AWS EC2
-- Ubuntu
+- Ubuntu 20.04 LTS
 - Docker
 - Jenkins
 - Nginx
@@ -49,11 +54,9 @@
 
 ### 파일 구조
 
-- (파일 구조 사진)
+![file_structure](/README_assets/file_structure.png)
 
 ## 4. 팀원 소개
-
----
 
 - 최윤영(FE/팀장): (프론트 담당 업무)
 - 김현지(BE): 다이어리 작성 및 조회, 검색
@@ -63,8 +66,6 @@
 - 전상현(FE): (프론트 담당 업무)
 
 ## 5. 프로젝트 산출물
-
----
 
 - 기능 정의서
 - 와이어프레임
@@ -76,15 +77,11 @@
 
 ## 6. 프로젝트 결과물
 
----
-
 - 포팅매뉴얼
 - 중간발표 자료
 - 최종발표 자료
 
 ## 7. 서비스 화면
-
----
 
 ### 회원가입 및 로그인
 
@@ -98,27 +95,34 @@
 ### 일기 작성
 
 - 일기 작성 설명
+- 일기 작성 사진
 
 ### 일기 조회
 
 - 일기 조회 설명
+- 일기 조회 사진
 
 ### 감정 분석 조회
 
 - 감정 분석 조회 설명
+- 사진
 
 ### 카카오톡 공유
 
 - 설명
+- 사진
 
 ### 비밀번호 설정
 
 - 설명
+- 사진
 
 ### 다크모드 설정
 
 - 설명
+- 사진
 
 ### 글씨체 변경
 
 - 설명
+- 사진
