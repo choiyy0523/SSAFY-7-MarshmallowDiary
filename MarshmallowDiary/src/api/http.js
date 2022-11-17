@@ -12,8 +12,6 @@ const axiosInstance = axios.create({
   },
 })
 
-console.log(Config.REACT_APP_API_BASE_URL)
-
 axiosInstance.interceptors.request.use(
   async (config: any) => {
     const token = await AsyncStorage.getItem('token')

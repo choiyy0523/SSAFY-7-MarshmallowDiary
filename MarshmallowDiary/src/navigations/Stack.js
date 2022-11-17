@@ -22,6 +22,8 @@ import PwReset from '../screens/pages/Settings/PwReset';
 import Settings from '../screens/pages/Settings/Settings';
 import Terms from '../screens/pages/Settings/Terms';
 import ResetCheck from '../screens/pages/Settings/ResetCheck';
+import LocalLogin from '../screens/pages/LocalLogin/LocalLogin';
+import SignUp from '../screens/pages/LocalLogin/SignUp';
 
 const Stack = createStackNavigator();
 
@@ -50,6 +52,8 @@ const StackNavigation = () => {
       <Stack.Screen name='ResetCheck' component={ResetCheck} />
       <Stack.Screen name='Settings' component={Settings} />
       <Stack.Screen name='Terms' component={Terms} />
+      <Stack.Screen name='LocalLogin' component={LocalLogin} />
+      <Stack.Screen name='SignUp' component={SignUp} />
     </Stack.Navigator>
   );
 };

@@ -47,7 +47,7 @@ const LoginCheck = ({ navigation }) => {
             // refresh 만료면 로그인 페이지로
             .catch(err => {
               console.log('refresh 만료')
-              navigation.replace('Login')
+              navigation.replace('LocalLogin')
             })
         }
         // 신규회원이면 id, refresh가 null, 로그인 페이지로
@@ -55,7 +55,7 @@ const LoginCheck = ({ navigation }) => {
           AsyncStorage.setItem('token', '')
           AsyncStorage.setItem('password', '')
           console.log('신규회원 데이터 세팅')
-          navigation.replace('Login')
+          navigation.replace('LocalLogin')
         }
       });
     })
