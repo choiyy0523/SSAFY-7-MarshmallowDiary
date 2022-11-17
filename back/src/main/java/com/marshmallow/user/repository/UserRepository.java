@@ -7,8 +7,8 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface UserRepository extends JpaRepository<User, UUID> {
-    Optional<User> findBySocialId(String authId);
-    User saveAndFlush(User entity);
-    User findByUsername(String username);
+
     User findByUserId(UUID userId);
+
+    Optional<User> findByAccountId(String accountId);
 }

@@ -27,14 +27,11 @@ public class User {
     @Column(name = "user_id")
     private UUID userId;
 
-    @Column(name = "username")
-    private String username;
+    @Column(name = "account_id")
+    private String accountId;
 
     @Column(name = "nickname")
     private String nickname;
-
-    @Column(name = "social_id")
-    private String socialId;
 
     @Column(name = "password")
     private String password;
