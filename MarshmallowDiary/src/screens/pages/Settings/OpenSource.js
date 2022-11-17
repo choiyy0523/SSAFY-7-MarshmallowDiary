@@ -1,7 +1,8 @@
-import React from 'react';
-import { FlatList, ListRenderItem, Text, View, StyleSheet } from 'react-native';
+import React, { useCallback } from 'react';
+import { FlatList, ListRenderItem, Text, View, StyleSheet, Linking, Button } from 'react-native';
 import MD_OS_FE from './MD_OS_FE'
 import { MarshmallowDiaryOpenSourceLicenseBE } from './MarshmallowDiaryOpenSourceLicenseBE.json'
+import OpenSourceButton from './OpenSourceButton';
 // import Hyperlink from 'react-native-hyperlink'
 // import openURL from '../../components/component/openUrl';
 
@@ -53,13 +54,19 @@ import { MarshmallowDiaryOpenSourceLicenseBE } from './MarshmallowDiaryOpenSourc
 //     color: '#111111'
 //   }
 // })
+const OPENSOURCE_WEB_LINK = "https://marshmallowdiary.notion.site/1a6a1966970742c7bc1940d7db4144d5"
 
 
 const OpenSource = () => {
   return (
-    <View>
-      <Text> 오픈소스 라이센스 : https://marshmallowdiary.notion.site/1a6a1966970742c7bc1940d7db4144d5 </Text>
+    <View style={styles.container}>
+      <OpenSourceButton url={OPENSOURCE_WEB_LINK}>오픈소스 라이센스 목록</OpenSourceButton>
     </View>
-  )
+  );
 };
-export default OpenSource
+
+const styles = StyleSheet.create({
+  container: { flex: 1, justifyContent: "center", alignItems: "center", backgroundColor: "#fff9f8" },
+});
+
+export default OpenSource;

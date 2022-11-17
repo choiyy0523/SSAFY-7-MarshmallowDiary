@@ -20,14 +20,14 @@ const Settings = ({ navigation, props }) => {
               <Icon name='lock-outline' type='materialcommunityicons' size={25} color={colors.iconColor} style={styles.iconStyle} />
             </View>
             <View style={styles.menuStyle}>
-              <Text>
+              <Text style={{ fontFamily: 'GangwonEduAllBold' }}>
                 비밀번호 설정
               </Text>
 
               {/* <Text >
                 비밀번호 변경
               </Text> */}
-              <Text >
+              <Text style={{ fontFamily: 'GangwonEduAllBold' }} >
                 추후 지원 예정 :D
               </Text>
             </View>
@@ -55,10 +55,10 @@ const Settings = ({ navigation, props }) => {
             </View>
 
             <View style={styles.menuStyle}>
-              <Text>
+              <Text style={{ fontFamily: 'GangwonEduAllBold' }}>
                 다크모드 설정
               </Text>
-              <Text >
+              <Text style={{ fontFamily: 'GangwonEduAllBold' }}>
                 추후 지원 예정 :D
               </Text>
             </View>
@@ -81,11 +81,11 @@ const Settings = ({ navigation, props }) => {
               <Icon name='font' type='fontisto' size={20} color={colors.iconColor} style={styles.iconStyle2} />
             </View>
             <View style={styles.menuStyle}>
-              <Text >
+              <Text style={{ fontFamily: 'GangwonEduAllBold' }}>
                 폰트 설정
               </Text>
 
-              <Text>
+              <Text style={{ fontFamily: 'GangwonEduAllBold' }}>
                 추후 지원 예정 :D
               </Text>
             </View>
@@ -112,10 +112,10 @@ const Settings = ({ navigation, props }) => {
             </View>
 
             <View style={styles.menuStyle}>
-              <Text>
+              <Text style={{ fontFamily: 'GangwonEduAllBold' }}>
                 푸시알림 설정
               </Text>
-              <Text >
+              <Text style={{ fontFamily: 'GangwonEduAllBold' }}>
                 추후 지원 예정 :D
               </Text>
             </View>
@@ -144,7 +144,7 @@ const Settings = ({ navigation, props }) => {
             </View>
 
             <View style={styles.menuStyle}>
-              <Text >
+              <Text style={{ fontFamily: 'GangwonEduAllBold' }}>
                 개인정보처리방침
               </Text>
             </View>
@@ -173,7 +173,7 @@ const Settings = ({ navigation, props }) => {
             </View>
 
             <View style={styles.menuStyle}>
-              <Text>
+              <Text style={{ fontFamily: 'GangwonEduAllBold' }}>
                 오픈소스 라이선스
               </Text>
             </View>
@@ -202,7 +202,7 @@ const Settings = ({ navigation, props }) => {
             </View>
 
             <View style={styles.menuStyle}>
-              <Text>
+              <Text style={{ fontFamily: 'GangwonEduAllBold' }}>
                 이메일 문의
               </Text>
             </View>

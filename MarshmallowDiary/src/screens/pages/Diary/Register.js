@@ -4,7 +4,6 @@ import Footer from '../../components/component/Footer';
 import WeatherPicker from './WeatherPicker';
 import { launchImageLibrary } from 'react-native-image-picker';
 // import ButtonRegister from '../../components/component/ButtonRegister'
-import SelectImages from './SelectImages';
 import axios from 'axios'
 import { connect } from 'react-redux'
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -65,12 +64,22 @@ function DiaryRegister() {
     console.log(selectedImage)
   }
 
+  const [count, setCount] = useState(0)
+  const countUp = () => {
+    setCount(count + 1)
+  }
+
 
   const DeleteImage = () => {
-    setSelectedImage(null)
-    console.log("치즈")
-    console.log(selectedImage)
+    if (count = 2) {
+      setSelectedImage(null)
+      console.log("치즈")
+      console.log(selectedImage)
+      setCount(0)
+    }
   }
+
+
 
 
 
@@ -201,14 +210,14 @@ function DiaryRegister() {
               </TouchableOpacity>
 
 
-              <Text style={{ fontsize: 10, color: "#999696", marginTop: 10 }}>
-                오늘을 사진 한 장으로 표현할 수 있다면?
+              <Text style={{ fontsize: 10, color: "#999696", marginTop: 10, fontFamily: 'GangwonEduAllBold' }}>
+                오늘을 사진 한 장으로 표현한다면?
               </Text>
             </View >
             :
             // 사진 있을 때
             <View style={styles.imageInput2}>
-              <TouchableOpacity onPress={DeleteImage} >
+              <TouchableOpacity onPress={countUp} >
                 <Image
                   source={{ uri: thumbnailImage }}
                   style={{ width: 300, height: 200, borderRadius: 20 }}
@@ -271,14 +280,14 @@ const styles = StyleSheet.create({
     height: 40,
   },
   buttonText: {
-    // fontFamily: 'GangwonEduAllBold',
+    fontFamily: 'GangwonEduAllBold',
     fontSize: 15,
     fontWeight: 'Bold'
   },
   titleInput: {
     fontSize: 15,
     paddingVertical: 8,
-    // fontFamily: 'GangwonEduAllBold',
+    fontFamily: 'GangwonEduAllBold',
     height: 50,
     paddingHorizontal: 16,
     justifyContent: 'flex-start',
@@ -318,7 +327,7 @@ const styles = StyleSheet.create({
   diaryInput: {
     fontSize: 15,
     paddingVertical: 15,
-    // fontFamily: 'GangwonEduAllLight',
+    fontFamily: 'GangwonEduAllLight',
     height: 250,
     paddingHorizontal: 16,
     justifyContent: 'flex-start',
@@ -339,6 +348,7 @@ const styles = StyleSheet.create({
   },
   changeDay: {
     fontSize: 18,
+    fontFamily: 'GangwonEduAllBold'
   },
 });
 
