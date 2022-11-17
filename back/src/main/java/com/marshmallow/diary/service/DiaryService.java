@@ -259,12 +259,9 @@ public class DiaryService {
     }
 
     private User getCurrentUser() {
-        String username = SecurityContextHolder.getContext().getAuthentication().getName();
-        return userRepository.findByUsername(username);
+        String id = SecurityContextHolder.getContext().getAuthentication().getName();
+        return userRepository.findByAccountId(id).orElseThrow();
     }
-
-
-
 
 }
 

@@ -34,14 +34,27 @@ public class UserService {
     @Value("${jwt.expirationtime.refresh}")
     private long REFRESH_TOKEN_EXPIRE_TIME; // s
 
-    public UserResponse.Token login(UserRequest.Login loginDto) {
-        User user = userRepository.findBySocialId(loginDto.getAuthId()).orElseGet(() -> userRepository.saveAndFlush(User.builder().username(loginDto.getAuthId()).socialId(loginDto.getAuthId()).nickname(loginDto.getNickname()).password(passwordEncoder.encode("pwd")).role("ROLE_USER").build()));
+    public UserResponse.Result signup(UserRequest.Signup signupDto) {
+        userRepository.save(User.builder()
+                .nickname(signupDto.getNickname())
+                .accountId(signupDto.getAccountId())
+                .password(passwordEncoder.encode(signupDto.getPassword()))
+                .role("ROLE_USER")
+                .build());
+        return UserResponse.Result.builder()
+                .result("success")
+                .message("회원 가입 완료").build();
+    }
+
+    public UserResponse.Token signin(UserRequest.Signin signinDto) {
         Authentication authentication = authenticationManagerBuilder
                 .getObject()
-                .authenticate(new UsernamePasswordAuthenticationToken(user.getSocialId(), "pwd"));
+                .authenticate(new UsernamePasswordAuthenticationToken(signinDto.getAccountId(), signinDto.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String accessToken = tokenProvider.generateToken(authentication);
         String refreshToken = tokenProvider.generateRefreshToken();
+
+        User user = userRepository.findByAccountId(signinDto.getAccountId()).orElseThrow();
 
         // RefreshToken Redis에 업데이트
         redisTemplate.opsForValue().set(
@@ -58,6 +71,31 @@ public class UserService {
                 .build();
     }
 
+
+//    public UserResponse.Token login(UserRequest.Login loginDto) {
+//        User user = userRepository.findByAccountId(loginDto.getAccountId()).orElseGet(() -> userRepository.saveAndFlush(User.builder().username(loginDto.getAuthId()).socialId(loginDto.getAuthId()).nickname(loginDto.getNickname()).password(passwordEncoder.encode("pwd")).role("ROLE_USER").build()));
+//        Authentication authentication = authenticationManagerBuilder
+//                .getObject()
+//                .authenticate(new UsernamePasswordAuthenticationToken(user.getSocialId(), "pwd"));
+//        SecurityContextHolder.getContext().setAuthentication(authentication);
+//        String accessToken = tokenProvider.generateToken(authentication);
+//        String refreshToken = tokenProvider.generateRefreshToken();
+//
+//        // RefreshToken Redis에 업데이트
+//        redisTemplate.opsForValue().set(
+//                user.getUserId().toString(),
+//                refreshToken
+//        );
+//        redisTemplate.expire(user.getUserId().toString(), REFRESH_TOKEN_EXPIRE_TIME, TimeUnit.SECONDS);
+//
+//        // refresh token 저장하기
+//        return UserResponse.Token.builder()
+//                .userId(user.getUserId().toString())
+//                .accessToken(accessToken)
+//                .refreshToken(refreshToken)
+//                .build();
+//    }
+
     public UserResponse.Token reissue(UserRequest.Reissue reissueRequest) throws Exception {
         if (!StringUtils.hasText(reissueRequest.getRefreshToken()) || !tokenProvider.validateToken(reissueRequest.getRefreshToken())) {
             throw new Exception();
@@ -70,7 +108,7 @@ public class UserService {
             throw new Exception();
         }
 
-        String accessToken = tokenProvider.generateToken(user.getUsername());
+        String accessToken = tokenProvider.generateToken(user.getAccountId());
         String refreshToken = tokenProvider.generateRefreshToken();
 
         // RefreshToken Redis에 업데이트
@@ -102,7 +140,18 @@ public class UserService {
     }
 
     private User getCurrentUser() {
-        String username = SecurityContextHolder.getContext().getAuthentication().getName();
-        return userRepository.findByUsername(username);
+        String id = SecurityContextHolder.getContext().getAuthentication().getName();
+        return userRepository.findByAccountId(id).orElseThrow();
+    }
+
+    public UserResponse.Result isValidId(String id) {
+        if (userRepository.findByAccountId(id).isPresent()) {
+            return UserResponse.Result.builder()
+                    .result("false")
+                    .message("이미 존재하는 ID 입니다.").build();
+        }
+        return UserResponse.Result.builder()
+                .result("true")
+                .message("사용할 수 있는 ID 입니다.").build();
     }
 }
