@@ -137,11 +137,11 @@ const Login = ({ navigation }) => {
           <Image source={logo} style={{ width: 150, height: 150, marginTop: '40%' }} />
         </TouchableOpacity>
         <View>
-          <Text style={{ fontSize: 30, fontFamily:'GangwonEduAllBold' }}>마시멜로일기</Text>
+          <Text style={{ fontSize: 30, fontFamily: 'GangwonEduAllBold' }}>마시멜로일기</Text>
         </View>
       </View>
 
-      <View style={{ justifyContent:'center', alignItems:'center' }}>
+      <View style={{ justifyContent: 'center', alignItems: 'center' }}>
         <Text>check1: {check1}</Text>
         <Text>check2: {check2}</Text>
         <Text>check3: {check3}</Text>
@@ -156,3 +156,4 @@ const Login = ({ navigation }) => {
 };
 
 export default Login;
+
