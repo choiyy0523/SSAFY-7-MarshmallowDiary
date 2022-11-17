@@ -131,7 +131,7 @@
       <recent name="com.marshmallow.interceptor" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.back [generateLicenseReport]">
+  <component name="RunManager" selected="JUnit.DiaryControllerTest">
     <configuration name="back [generateLicenseReport]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -237,8 +237,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.back [generateLicenseReport]" />
         <item itemvalue="JUnit.DiaryControllerTest" />
+        <item itemvalue="Gradle.back [generateLicenseReport]" />
         <item itemvalue="JUnit.DiaryControllerTest.searchDiary_NotExist" />
         <item itemvalue="JUnit.DiaryControllerTest.searchDiary_Exist" />
         <item itemvalue="JUnit.DiaryControllerTest.monthlyRecord" />
@@ -273,7 +273,13 @@
       <workItem from="1667952052260" duration="5809000" />
       <workItem from="1667958577492" duration="17447000" />
       <workItem from="1668057543377" duration="2161000" />
-      <workItem from="1668065750938" duration="1444000" />
+      <workItem from="1668065750938" duration="1480000" />
+      <workItem from="1668141184705" duration="2596000" />
+      <workItem from="1668391637495" duration="513000" />
+      <workItem from="1668408176655" duration="2067000" />
+      <workItem from="1668474785754" duration="604000" />
+      <workItem from="1668484733087" duration="105000" />
+      <workItem from="1668496231019" duration="902000" />
     </task>
     <servers />
   </component>
