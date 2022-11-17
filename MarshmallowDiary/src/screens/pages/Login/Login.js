@@ -30,42 +30,42 @@ const Login = ({ navigation }) => {
     setHidden(hidden + 1)
   }
 
-  const hiddenLogin = () => {
-    if (hidden >= 7) {
-      http.post('/user/login', {
-        authId: '7777',
-        nickname: 'test',
-      })
-        .then(res => {
-          setCheck4('pass')
-          console.log(res.data)
-          AsyncStorage.setItem('token', res.data.accessToken)
-          AsyncStorage.setItem('refresh', res.data.refreshToken)
-          AsyncStorage.setItem('userId', res.data.userId)
+  // const hiddenLogin = () => {
+  //   if (hidden >= 7) {
+  //     http.post('/user/login', {
+  //       authId: '7777',
+  //       nickname: 'test',
+  //     })
+  //       .then(res => {
+  //         setCheck4('pass')
+  //         console.log(res.data)
+  //         AsyncStorage.setItem('token', res.data.accessToken)
+  //         AsyncStorage.setItem('refresh', res.data.refreshToken)
+  //         AsyncStorage.setItem('userId', res.data.userId)
 
-          AsyncStorage.getItem('password', (err, result) => {
-            const pw = result;
-            console.log(pw)
-            if (pw == null) {
-              navigation.replace('Main')
-            }
-            else {
-              navigation.replace('Password')
-            }
-          })
-        })
-        .catch(err => {
-          console.log('로그인 오류')
-          // Promise.reject(err)
-          setCheck4('err')
-          // navigation.replace('Home')
-        })
-    }
-  }
+  //         AsyncStorage.getItem('password', (err, result) => {
+  //           const pw = result;
+  //           console.log(pw)
+  //           if (pw == null) {
+  //             navigation.replace('Main')
+  //           }
+  //           else {
+  //             navigation.replace('Password')
+  //           }
+  //         })
+  //       })
+  //       .catch(err => {
+  //         console.log('로그인 오류')
+  //         // Promise.reject(err)
+  //         setCheck4('err')
+  //         // navigation.replace('Home')
+  //       })
+  //   }
+  // }
 
-  useEffect(() => {
-    hiddenLogin()
-  }, [hidden])
+  // useEffect(() => {
+  //   hiddenLogin()
+  // }, [hidden])
 
   // 카카오 소셜 로그인
   const signInWithKakao = async (): Promise<void> => {
@@ -84,46 +84,46 @@ const Login = ({ navigation }) => {
     setCheck2('pass')
   }
 
-  useEffect(() => {
-    log_in()
-  }, [result])
+  // useEffect(() => {
+  //   log_in()
+  // }, [result])
 
-  const log_in = () => {
-    // 카카오 로그인 성공하면(실패 시 로그인 안되는 건 카카오가 해줌)
-    // 받아온 카카오프로필 id, nickname으로 요청 보냄(카카오 로그인 성공 시 무조건 성공)
-    // storage에 access토큰, refresh토큰, userId, 기존회원 set
-    if (result) {
-      http.post('/user/login', {
-        authId: result.id,
-        nickname: result.nickname,
-      })
-        .then(res => {
-          console.log(res.data)
-          setCheck3('pass')
-          AsyncStorage.setItem('token', res.data.accessToken)
-          AsyncStorage.setItem('refresh', res.data.refreshToken)
-          AsyncStorage.setItem('userId', res.data.userId)
+  // const log_in = () => {
+  //   // 카카오 로그인 성공하면(실패 시 로그인 안되는 건 카카오가 해줌)
+  //   // 받아온 카카오프로필 id, nickname으로 요청 보냄(카카오 로그인 성공 시 무조건 성공)
+  //   // storage에 access토큰, refresh토큰, userId, 기존회원 set
+  //   if (result) {
+  //     http.post('/user/login', {
+  //       authId: result.id,
+  //       nickname: result.nickname,
+  //     })
+  //       .then(res => {
+  //         console.log(res.data)
+  //         setCheck3('pass')
+  //         AsyncStorage.setItem('token', res.data.accessToken)
+  //         AsyncStorage.setItem('refresh', res.data.refreshToken)
+  //         AsyncStorage.setItem('userId', res.data.userId)
 
-          // pw 있으면 pw, 없으면 main으로
-          AsyncStorage.getItem('password', (err, result) => {
-            const pw = result;
-            console.log(pw)
-            if (pw == null) {
-              navigation.replace('Main')
-            }
-            else {
-              navigation.replace('Password')
-            }
-          })
-        })
-        .catch(err => {
-          console.log('로그인 오류')
-          // Promise.reject(err)
-          setCheck3('err')
-          // navigation.replace('Home')
-        })
-    }
-  };
+  //         // pw 있으면 pw, 없으면 main으로
+  //         AsyncStorage.getItem('password', (err, result) => {
+  //           const pw = result;
+  //           console.log(pw)
+  //           if (pw == null) {
+  //             navigation.replace('Main')
+  //           }
+  //           else {
+  //             navigation.replace('Password')
+  //           }
+  //         })
+  //       })
+  //       .catch(err => {
+  //         console.log('로그인 오류')
+  //         // Promise.reject(err)
+  //         setCheck3('err')
+  //         // navigation.replace('Home')
+  //       })
+  //   }
+  // };
 
   // const unlinkKakao = async (): Promise<void> => {
   //   const message = await unlink();

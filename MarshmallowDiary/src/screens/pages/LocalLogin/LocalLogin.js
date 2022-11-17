@@ -36,6 +36,7 @@ const LocalLogin = ({ navigation }) => {
       })
   }
 
+
   // useEffect(() => {
   //   console.log(id)
   // }, [id])
@@ -53,7 +54,7 @@ const LocalLogin = ({ navigation }) => {
         </View>
       </View>
 
-      <View style={{ flex: 0.4, justifyContent: 'center', alignItems: 'center' }}>
+      <View style={{ flex: 0.4, justifyContent: 'center', alignItems: 'center', marginLeft: '10%', marginRight: '10%' }}>
         <Input placeholder="Id" onChangeText={text => setId(text)} />
         <Input placeholder="Password" secureTextEntry={true} onChangeText={text => setPass(text)} />
         <TouchableOpacity onPress={login}>
