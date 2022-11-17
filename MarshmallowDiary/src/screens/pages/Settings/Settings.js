@@ -74,7 +74,7 @@ const Settings = ({ navigation, props }) => {
         {/* 폰트 설정 */}
         {/* onPress시 모달로 폰트 선택 옵션 띄우기
         선택한 폰트 옵션으로 asyncstorage 변경 */}
-        <TouchableOpacity style={{ paddingHorizontal: 20, paddingVertical: 15 }}>
+        {/* <TouchableOpacity style={{ paddingHorizontal: 20, paddingVertical: 15 }}>
           <View style={styles.barStyle}>
 
             <View>
@@ -90,11 +90,10 @@ const Settings = ({ navigation, props }) => {
               </Text>
             </View>
             <View style={styles.switchStyle}>
-              {/* <SwitchComponent /> */}
             </View>
 
           </View>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
 
         {/* 푸쉬 알림 설정 */}
         {/* toggle on일 때 asyncstorage 변경 */}

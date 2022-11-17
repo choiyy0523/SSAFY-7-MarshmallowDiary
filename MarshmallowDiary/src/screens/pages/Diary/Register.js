@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useFocusEffect, useCallback, useRoute } from 'react';
 import { BackHandler, StyleSheet, Dimensions, TextInput, Alert, Pressable, Modal, Text, View, Button, TouchableOpacity, FlatList, Image, ScrollView } from 'react-native'
 import Footer from '../../components/component/Footer';
 import WeatherPicker from './WeatherPicker';
@@ -24,7 +24,9 @@ function DiaryRegister() {
   const [weather, setWeather] = useState(1)
   const [selectedImage, setSelectedImage] = useState(null);
   const [thumbnailImage, setThumbnailImage] = useState(null);
-
+  console.log(thumbnailImage)
+  console.log(selectedImage)
+  console.log('콜라사탕')
 
   // 라이브러리에서 사진 선택
   const UploadImage = async () => {
@@ -34,8 +36,16 @@ function DiaryRegister() {
       name: 'test',
     };
     await launchImageLibrary({ maxWidth: 1024, maxHeight: 1024 }, res => { // 가로 세로 중 최대 크기 1024로 limit 설정
+      console.log(thumbnailImage)
+      console.log(selectedImage)
+      console.log('콜라사탕')
       if (res.didCancel) {
         console.log('사진 등록을 취소했습니다. ');
+        console.log(thumbnailImage)
+        console.log(selectedImage)
+        console.log('마시멜로는 살안쪄')
+        setSelectedImage(null)
+        setThumbnailImage(null)
       }
       else if (res.errorCode) {
         console.log('사진 선택 오류 : ', res.errorCode);
@@ -45,40 +55,36 @@ function DiaryRegister() {
         image.name = res.assets[0].fileName;
         image.type = res.assets[0].type;
         image.uri = res.assets[0].uri;
+
+        const formdata = new FormData();
+        formdata.append('photos', image);
+        const selectedImage = formdata
+        setSelectedImage(selectedImage)
+        setThumbnailImage(image.uri)
       }
     })
-    const formdata = new FormData();
-    formdata.append('photos', image);
-    const selectedImage = formdata
-    setSelectedImage(selectedImage)
-    setThumbnailImage(image.uri)
 
 
     const headers = {
       'Content-Type': 'multipart/form-data'
     };
-    console.log(image);
     console.log('모짜')
-    console.log(image.uri);
     console.log('렐라')
     console.log(selectedImage)
   }
 
   const [count, setCount] = useState(0)
   const countUp = () => {
+    console.log(count)
+    console.log("개구리")
     setCount(count + 1)
-  }
-
-
-  const DeleteImage = () => {
-    if (count = 2) {
+    if (count == 1) {
       setSelectedImage(null)
       console.log("치즈")
       console.log(selectedImage)
       setCount(0)
     }
   }
-
 
 
 
@@ -102,7 +108,8 @@ function DiaryRegister() {
               console.log("일기 사진 등록 완료")
               console.log(response.data)
               alert('일기가 등록되었습니다!')
-              navigation.navigate('Detail', { targetDate: today })
+
+              navigation.replace('Detail', { targetDate: today })
             }
           })
           .catch((error) => {
@@ -198,8 +205,8 @@ function DiaryRegister() {
             onChangeText={text => setTitle(text)} />
 
           {/* 사진 첨부*/}
-          {selectedImage == undefined || (selectedImage != undefined && selectedImage.length == 0) ?
-            // 사진 없을 때
+          {selectedImage == undefined || (selectedImage != undefined && selectedImage.length == 0) ? // 사진이 없다
+            // 사진 없다면 (true)
             <View style={styles.imageInput}>
               <TouchableOpacity onPress={UploadImage}>
                 <Image
@@ -215,7 +222,7 @@ function DiaryRegister() {
               </Text>
             </View >
             :
-            // 사진 있을 때
+            // 사진 있다면 (false)
             <View style={styles.imageInput2}>
               <TouchableOpacity onPress={countUp} >
                 <Image
@@ -223,6 +230,9 @@ function DiaryRegister() {
                   style={{ width: 300, height: 200, borderRadius: 20 }}
                 />
               </TouchableOpacity>
+              <Text style={{ fontsize: 10, color: "#999696", marginTop: 10, fontFamily: 'GangwonEduAllBold' }}>
+                2번 터치하면 사진이 삭제됩니다!
+              </Text>
             </View >
 
           }
