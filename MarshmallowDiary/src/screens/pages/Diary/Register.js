@@ -201,7 +201,7 @@ function DiaryRegister() {
               </TouchableOpacity>
 
 
-              <Text style={{ fontsize: 10, color: "#999696", marginTop: 10 }}>
+              <Text style={{ fontsize: 10, color: "#999696", marginTop: 10, fontFamily: 'GangwonEduAllBold' }}>
                 오늘을 사진 한 장으로 표현할 수 있다면?
               </Text>
             </View >
@@ -271,14 +271,14 @@ const styles = StyleSheet.create({
     height: 40,
   },
   buttonText: {
-    // fontFamily: 'GangwonEduAllBold',
+    fontFamily: 'GangwonEduAllBold',
     fontSize: 15,
     fontWeight: 'Bold'
   },
   titleInput: {
     fontSize: 15,
     paddingVertical: 8,
-    // fontFamily: 'GangwonEduAllBold',
+    fontFamily: 'GangwonEduAllBold',
     height: 50,
     paddingHorizontal: 16,
     justifyContent: 'flex-start',
@@ -318,7 +318,7 @@ const styles = StyleSheet.create({
   diaryInput: {
     fontSize: 15,
     paddingVertical: 15,
-    // fontFamily: 'GangwonEduAllLight',
+    fontFamily: 'GangwonEduAllLight',
     height: 250,
     paddingHorizontal: 16,
     justifyContent: 'flex-start',
@@ -339,6 +339,7 @@ const styles = StyleSheet.create({
   },
   changeDay: {
     fontSize: 18,
+    fontFamily: 'GangwonEduAllBold'
   },
 });
 
