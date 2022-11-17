@@ -18,6 +18,8 @@ const Home = ({ navigation }) => {
             <Button title='로그인' onPress={() => navigation.navigate('Login')} />
             <Button title='패스워드' onPress={() => navigation.navigate('Password')} />
             <Button title='로그인체크' onPress={() => navigation.navigate('LoginCheck')} />
+            <Button title='로컬로그인' onPress={() => navigation.navigate('SignIn')} />
+            <Button title='로컬회원가입' onPress={() => navigation.navigate('SignUp')} />
         </View>
 
     )

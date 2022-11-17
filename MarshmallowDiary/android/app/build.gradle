@@ -213,10 +213,10 @@ android {
     }
     signingConfigs {
         debug {
-            storeFile file('debug.keystore')
-            storePassword 'android'
-            keyAlias 'androiddebugkey'
-            keyPassword 'android'
+            storeFile file('mdKEY.jks')
+            storePassword 'maro1229'
+            keyAlias 'mdKEY'
+            keyPassword 'maro1229'
         }
     }
     buildTypes {
