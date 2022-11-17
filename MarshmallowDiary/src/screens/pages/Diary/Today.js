@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Text, View, Image, Modal, Button, Pressable, StyleSheet, ScrollView } from 'react-native';
+import { Text, View, Image, Modal, Button, Pressable, StyleSheet, ScrollView, Linking } from 'react-native';
 import { Icon } from '@rneui/themed';
 import { Chip } from "@react-native-material/core";
 import Footer from '../../components/component/Footer';
@@ -63,8 +63,8 @@ const Today = ({ route }) => {
     <View style={{ flex: 1 }}>
       <ScrollView >
         <View style={{ alignItems: 'center', justifyContent: 'center', marginTop: '15%' }} >
-          <Text style={{ fontSize: 25, fontWeight: 'bold' }}>{dayformatted2}</Text>
-          <Text style={{ fontSize: 30, fontWeight: 'bold' }}>감정 분석 결과</Text>
+          <Text style={{ fontSize: 25, fontFamily: 'GangwonEduAllBold' }}>{dayformatted2}</Text>
+          <Text style={{ fontSize: 30, fontFamily: 'GangwonEduAllBold' }}>감정 분석 결과</Text>
         </View>
 
         <View style={styles.vertical}>
@@ -94,22 +94,22 @@ const Today = ({ route }) => {
 
         </View>
 
-        <View >
-          <Text> 오늘의 추천 노래 </Text>
-          <Text >{todaySinger}</Text>
-          <Text >{todayTitle}</Text>
-          <Text >{todayUrl}</Text>
+        <View style={{ justifyContent: 'center', alignItems: "center", marginBottom: '5%' }} >
+          <Text style={{ fontsize: 10, color: "#999696", marginTop: 10, fontFamily: 'GangwonEduAllBold' }}> 오늘의 추천 노래 </Text>
+          <Text style={{ fontsize: 10, color: "#999696", marginTop: 10, fontFamily: 'GangwonEduAllBold' }}>{todaySinger}</Text>
+          <Text style={{ fontsize: 10, color: "#999696", marginTop: 10, fontFamily: 'GangwonEduAllBold' }} >{todayTitle}</Text>
+          <Text style={{ fontsize: 10, color: "#999696", marginTop: 10, fontFamily: 'GangwonEduAllBold' }}>{todayUrl}</Text>
         </View>
 
-
+        <View style={{ flex: 0.3, alignItems: 'center', justifyContent: 'center' }}>
+          <Chip style={{ alignItems: 'center', justifyContent: 'center', backgroundColor: '#FFEBA5', width: '30%' }} >
+            <Icon name='share' type='fontisto' />
+            <Text style={{ fontSize: 17, fontFamily: 'GangwonEduAllBold' }}>  공유하기 </Text>
+          </Chip>
+        </View>
 
       </ScrollView>
-      <View style={{ flex: 0.3, alignItems: 'center', justifyContent: 'center' }}>
-        <Chip style={{ alignItems: 'center', justifyContent: 'center', backgroundColor: '#FFEBA5', width: '30%' }} >
-          <Icon name='share' type='fontisto' />
-          <Text style={{ fontSize: 17 }}>  공유하기 </Text>
-        </Chip>
-      </View>
+
       <Footer />
 
     </View>
@@ -124,7 +124,8 @@ const styles = StyleSheet.create(
     vertical: {
       flexDirection: 'row',
       justifyContent: 'center',
-      paddingVertical: 25
+      paddingVertical: 25,
+      fontFamily: 'GangwonEduAllBold'
     },
     horizontal: {
       flexDirection: 'column',
@@ -132,6 +133,7 @@ const styles = StyleSheet.create(
       paddingTop: 43,
       paddingHorizontal: 13,
       fontSize: 20,
+      fontFamily: 'GangwonEduAllBold'
     },
     mmSize: {
       height: 65,
