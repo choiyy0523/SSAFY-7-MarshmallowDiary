@@ -1,4 +1,4 @@
-package com.marshmallow.config.controller;
+package com.marshmallow.user.controller;
 
 import com.marshmallow.user.dto.UserRequest;
 import com.marshmallow.user.dto.UserResponse;
@@ -7,10 +7,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @ApiOperation(value = "[유저] User Controller")
 @RequestMapping("/user")
@@ -18,6 +15,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
     @Autowired
     private UserService userService;
+
+    @ApiOperation(value="아이디 중복 검사", notes = "사용할 수 있는 아이디인지 확인")
+    @GetMapping("/idcheck")
+    public ResponseEntity<?> isValidId(@RequestParam String id) {
+        return new ResponseEntity<UserResponse.Result>(userService.isValidId(id), HttpStatus.OK);
+    }
 
     @ApiOperation(value="회원 가입", notes = "회원 가입 기능")
     @PostMapping("/signup")
