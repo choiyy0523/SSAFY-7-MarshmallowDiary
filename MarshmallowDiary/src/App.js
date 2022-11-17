@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { StyleSheet, Dimensions } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import StackNavigation from './navigations/Stack';
+import { RecoilRoot } from 'recoil'; 
 
 import { Provider as PaperProvider } from 'react-native-paper';
 import { Text } from 'react-native-paper';
@@ -63,13 +64,13 @@ const App = () => {
   //   .catch(e => console.log('테마 변경 실패', e.message))
 
   return (
-
-    <PaperProvider theme={lightTheme}>
-      <NavigationContainer theme={lightTheme} >
-        <StackNavigation theme={lightTheme} />
-      </NavigationContainer>
-    </PaperProvider>
-
+    <RecoilRoot>
+      <PaperProvider theme={lightTheme}>
+        <NavigationContainer theme={lightTheme} >
+          <StackNavigation theme={lightTheme} />
+        </NavigationContainer>
+      </PaperProvider>
+    </RecoilRoot>
   )
 }
 
