@@ -17,7 +17,8 @@ const LocalLogin = ({navigation}) => {
     .then(res => {
       AsyncStorage.setItem('token', res.data.accessToken)
       AsyncStorage.setItem('refresh', res.data.refreshToken)
-
+      AsyncStorage.setItem('userId', res.data.userId)
+      
       AsyncStorage.getItem('password', (err, result) => {
         const pw = result;
         console.log(pw)
@@ -34,6 +35,7 @@ const LocalLogin = ({navigation}) => {
       navigation.navigate('LoginCheck')
     })
   }
+
 
   // useEffect(() => {
   //   console.log(id)
@@ -52,18 +54,18 @@ const LocalLogin = ({navigation}) => {
         </View>
       </View>
 
-  <View style={{ flex: 0.4, justifyContent:'center', alignItems:'center'}}>
-    <Input placeholder="Id" onChangeText={text => setId(text)} />
-    <Input placeholder="Password" secureTextEntry={true} onChangeText={text => setPass(text)}/>
-    <TouchableOpacity onPress={login}>
-      <Text>Login</Text>
-    </TouchableOpacity>
-    <View style={{flex:0.1}}/>
-    <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
-      <Text>SignUp</Text>
-    </TouchableOpacity>
-  </View>
-</View>
+      <View style={{ flex: 0.4, justifyContent:'center', alignItems:'center', marginLeft:'10%', marginRight:'10%' }}>
+        <Input placeholder="Id" onChangeText={text => setId(text)} />
+        <Input placeholder="Password" secureTextEntry={true} onChangeText={text => setPass(text)}/>
+        <TouchableOpacity onPress={login}>
+          <Text>Login</Text>
+        </TouchableOpacity>
+        <View style={{flex:0.1}}/>
+        <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
+          <Text>SignUp</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
   )
 } 
 

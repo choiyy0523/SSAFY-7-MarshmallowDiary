@@ -6,7 +6,6 @@ import { Chip } from "@react-native-material/core";
 import WeatherPicker from './WeatherPicker';
 import { launchImageLibrary } from 'react-native-image-picker';
 import ButtonRegister from '../../components/component/ButtonRegister'
-import SelectImages from './SelectImages';
 import { useNavigation } from '@react-navigation/native';
 import axios from 'axios'
 import { connect } from 'react-redux'
