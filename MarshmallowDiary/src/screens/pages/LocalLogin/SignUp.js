@@ -19,7 +19,9 @@ const SignUp = ({navigation}) => {
       <View style={{ flex: 0.4, alignItems:'center'}}>
         <Input placeholder="Id" />
         <Input placeholder="Password" secureTextEntry={true} />
-        <Input placeholder="PasswordCheck" secureTextEntry={true} />
+        <TouchableOpacity>
+          <Text>완료</Text>
+        </TouchableOpacity>
       </View>
     </View>
   )
