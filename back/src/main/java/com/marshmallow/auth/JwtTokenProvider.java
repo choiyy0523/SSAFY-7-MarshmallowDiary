@@ -65,9 +65,9 @@ public class JwtTokenProvider {
         return new UsernamePasswordAuthenticationToken(userDetails.getUsername(), null, userDetails.getAuthorities());
     }
 
-    public String generateToken(String username) {
+    public String generateToken(String id) {
         return Jwts.builder()
-                .setSubject((String) username) // claims의 subject 설정
+                .setSubject((String) id) // claims의 subject 설정
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * ACCESS_TOKEN_EXPIRE_TIME))
                 .signWith(SignatureAlgorithm.HS256, secretKey)
