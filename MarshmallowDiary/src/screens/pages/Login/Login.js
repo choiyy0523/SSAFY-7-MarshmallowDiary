@@ -18,6 +18,11 @@ import { http } from '../../../api/http';
 const Login = ({ navigation }) => {
   const [result, setResult] = useState()
   const [error, setError] = useState()
+
+  const [check1, setCheck1] = useState()
+  const [check2, setCheck2] = useState()
+  const [check3, setCheck3] = useState()
+  const [check4, setCheck4] = useState()
   // 검수용 계정 로그인(7번 클릭)
   const [hidden, setHidden] = useState(0)
 
@@ -32,6 +37,7 @@ const Login = ({ navigation }) => {
         nickname: 'test',
       })
         .then(res => {
+          setCheck4('pass')
           console.log(res.data)
           AsyncStorage.setItem('token', res.data.accessToken)
           AsyncStorage.setItem('refresh', res.data.refreshToken)
@@ -50,8 +56,8 @@ const Login = ({ navigation }) => {
         })
         .catch(err => {
           console.log('로그인 오류')
-          Promise.reject(err)
-          setError(Promise.reject(err))
+          // Promise.reject(err)
+          setCheck4('err')
           // navigation.replace('Home')
         })
     }
@@ -64,6 +70,7 @@ const Login = ({ navigation }) => {
   // 카카오 소셜 로그인
   const signInWithKakao = async (): Promise<void> => {
     const token: KakaoOAuthToken = await login()
+    setCheck1('pass')
   };
 
   // const signOutWithKakao = async (): Promise<void> => {
@@ -74,6 +81,7 @@ const Login = ({ navigation }) => {
   const getKakaoProfile = async (): Promise<void> => {
     const profile: KakaoProfile = await getProfile()
     setResult(profile)
+    setCheck2('pass')
   }
 
   useEffect(() => {
@@ -91,6 +99,7 @@ const Login = ({ navigation }) => {
       })
         .then(res => {
           console.log(res.data)
+          setCheck3('pass')
           AsyncStorage.setItem('token', res.data.accessToken)
           AsyncStorage.setItem('refresh', res.data.refreshToken)
           AsyncStorage.setItem('userId', res.data.userId)
@@ -109,12 +118,12 @@ const Login = ({ navigation }) => {
         })
         .catch(err => {
           console.log('로그인 오류')
-          setError(Promise.reject(err))
+          // Promise.reject(err)
+          setCheck3('err')
           // navigation.replace('Home')
         })
     }
   };
-
 
   // const unlinkKakao = async (): Promise<void> => {
   //   const message = await unlink();
@@ -132,9 +141,11 @@ const Login = ({ navigation }) => {
         </View>
       </View>
 
-      <View>
-        <Text>result: {result}</Text>
-        <Text>error: {error}</Text>
+      <View style={{ justifyContent:'center', alignItems:'center' }}>
+        <Text>check1: {check1}</Text>
+        <Text>check2: {check2}</Text>
+        <Text>check3: {check3}</Text>
+        <Text>check4: {check4}</Text>
       </View>
 
       <Pressable style={{ flex: 0.15, justifyContent: 'center', alignItems: 'center' }} onPressIn={signInWithKakao} onPressOut={getKakaoProfile}>
