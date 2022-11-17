@@ -143,4 +143,15 @@ public class UserService {
         String id = SecurityContextHolder.getContext().getAuthentication().getName();
         return userRepository.findByAccountId(id).orElseThrow();
     }
+
+    public UserResponse.Result isValidId(String id) {
+        if (userRepository.findByAccountId(id).isPresent()) {
+            return UserResponse.Result.builder()
+                    .result("false")
+                    .message("이미 존재하는 ID 입니다.").build();
+        }
+        return UserResponse.Result.builder()
+                .result("true")
+                .message("사용할 수 있는 ID 입니다.").build();
+    }
 }
