@@ -58,7 +58,7 @@ public class DiaryService {
         if(checkdiary.isPresent()){
             throw new AlreadyRegistDiary();
         }
-        if(request.getTitle() == null || request.getContent() == null || request.getDate() == null || request.getWeather() == 0){
+        if(request.getTitle() == null || request.getContent() == null || request.getDate() == null || request.getWeather() == 0 || request.getTitle().length() == 0 || request.getContent().length() == 0){
             throw new CanNotRegistDiary();
         }
         String photos = null;
