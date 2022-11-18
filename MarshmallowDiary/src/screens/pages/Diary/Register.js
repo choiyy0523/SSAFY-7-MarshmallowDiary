@@ -22,6 +22,7 @@ function DiaryRegister() {
   const [title, setTitle] = useState('')
   const [content, setContent] = useState('')
   const [weather, setWeather] = useState(1)
+  
   const [selectedImage, setSelectedImage] = useState(null);
   const [thumbnailImage, setThumbnailImage] = useState(null);
   console.log(thumbnailImage)
@@ -38,7 +39,7 @@ function DiaryRegister() {
     await launchImageLibrary({ maxWidth: 1024, maxHeight: 1024 }, res => { // 가로 세로 중 최대 크기 1024로 limit 설정
       console.log(thumbnailImage)
       console.log(selectedImage)
-      console.log('콜라사탕')
+      console.log('레몬사탕')
       if (res.didCancel) {
         console.log('사진 등록을 취소했습니다. ');
         console.log(thumbnailImage)
@@ -55,15 +56,23 @@ function DiaryRegister() {
         image.name = res.assets[0].fileName;
         image.type = res.assets[0].type;
         image.uri = res.assets[0].uri;
-
         const formdata = new FormData();
         formdata.append('photos', image);
         const selectedImage = formdata
         setSelectedImage(selectedImage)
         setThumbnailImage(image.uri)
+        // 이게 여기 안에 있는게 스토어 코드 (스토어 설치 정상작동, 에뮬 에러발생(버킷사진등록안됨)) ver.1 >> 시연기기 apk 에러발생
+   
       }
+
     })
 
+        // 이게 여기 밖에 있는게 현재 고민중인 코드 (스토어 설치 정상작동여부 알 수 없음, 에뮬 정상작동) ver.2
+        // const formdata = new FormData();
+        // formdata.append('photos', image);
+        // const selectedImage = formdata
+        // setSelectedImage(selectedImage)
+        // setThumbnailImage(image.uri)
 
     const headers = {
       'Content-Type': 'multipart/form-data'
@@ -87,56 +96,71 @@ function DiaryRegister() {
   }
 
 
-
-
   function Register() {
     http.post('/diary/regist/diary', {
       title: title,
       content: content,
       weather: weather,
-      date: date
+      date: today
     })
       .then(res => {
-        // setDates(date)
-        console.log('일기 내용 등록 완료')
-        // navigation.navigate('Detail', { targetDate: today })
-
-        // 사진 Formdata 처리
-        util.post(`/diary/regist/photo/${today}`, selectedImage)
-          .then(response => {
-            if (response) {
-              console.log("일기 사진 등록 완료")
-              console.log(response.data)
-              alert('일기가 등록되었습니다!')
-
-              navigation.replace('Detail', { targetDate: today })
-            }
-          })
-          .catch((error) => {
-            if (error.response) {
-              console.log("냐옹")
-              console.log(error.response.data);
-              console.log(error.response.status);
-              console.log(error.response.headers);
-            } else if (error.request) {
-              console.log("먀옹")
-              console.log(error.request);
-            } else {
-              console.log("갸옹")
-              console.log('Error', error.message);
-            }
-          })
+        // 일단 만약 글이나 내용이 비었으면 얼럿
+        if (title === null && content === null) {
+          alert('제목과 일기는 반드시 쓰셔야 합니다!')
+          console.log("슈붕")
+          null
+        }
+        // 글과 내용은 다 썼고, 
+         else {
+          // 만약 선택된 이미지가 있다면 사진 등록도 같이 처리
+          if (selectedImage != undefined) {
+          // setDates(date)
+          console.log('일기 내용 등록 완료')
+          // navigation.navigate('Detail', { targetDate: today })
+  
+                // 사진 Formdata 처리
+                util.post(`/diary/regist/photo/${today}`, selectedImage)
+                .then(response => {
+                  if (response) {
+                    console.log("일기 사진 등록 완료")
+                    console.log(response.data)
+                    alert('일기가 등록되었습니다!') // 모달로 변경해야함
+      
+                    navigation.replace('Detail', { targetDate: today })
+                  }
+                })
+                .catch((error) => {
+                  if (error.response) {
+                    console.log("냐옹")
+                    console.log(error.response.data);
+                    console.log(error.response.status);
+                    console.log(error.response.headers);
+                  } else if (error.request) {
+                    console.log("먀옹")
+                    console.log(error.request);
+                  } else {
+                    console.log("갸옹")
+                    console.log('Error', error.message);
+                  }
+                })
+    } else {
+  // 사진이 없다면 일기만 등록
+  console.log('일기 내용만 등록 완료')
+  alert("일기가 등록되었습니다!")
+  navigation.navigate('Detail', { targetDate: today })
+    }
+}
 
       })
 
       .catch(err => {
-        console.log('일기 사진 등록 실패')
+        console.log('일기 등록 실패')
         console.log(err)
+        console.log("팥붕")
+        alert('제목과 일기내용은 반드시 쓰셔야 합니다!')
       })
 
   }
-
-
 
   // let renderImage = (file === []) ? `require('../../../assets/images/etc/photo.png')` : { uri: res.assets[0].uri }
   // console.log(renderImage)
@@ -167,8 +191,8 @@ function DiaryRegister() {
   var month = ('0' + (kr_date.getMonth() + 1)).slice(-2);
   var day2 = ('0' + kr_date.getDate()).slice(-2);
 
-  const today = year + '-' + month + '-' + day2;
-  const dayformatted = `${year}년 ${month}월 ${day2}일`;
+  const today = year + '-' + month + '-' + day2; // 사진 넘기고 detail navigation용
+  const dayformatted = `${year}년 ${month}월 ${day2}일`; // register 화면표시용
 
   return (
     <View style={{ flex: 1 }}>
@@ -205,7 +229,7 @@ function DiaryRegister() {
             onChangeText={text => setTitle(text)} />
 
           {/* 사진 첨부*/}
-          {selectedImage == undefined || (selectedImage != undefined && selectedImage.length == 0) ? // 사진이 없다
+          {selectedImage == undefined || (selectedImage != undefined && selectedImage.length === 0) ? // 사진이 없다
             // 사진 없다면 (true)
             <View style={styles.imageInput}>
               <TouchableOpacity onPress={UploadImage}>
@@ -351,7 +375,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFEBA5',
     height: 33,
     width: 50,
-    marginHorizontal: -25,
     justifyContent: 'center',
     alignItems: 'center',
     paddingBottom: 5,

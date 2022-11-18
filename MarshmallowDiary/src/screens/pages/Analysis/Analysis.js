@@ -392,3 +392,4 @@ const Analysis = ({ navigation }) => {
 };
 
 export default Analysis;
+

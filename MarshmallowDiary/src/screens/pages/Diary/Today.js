@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Text, View, Image, Modal, Button, Pressable, StyleSheet, ScrollView, Linking } from 'react-native';
 import { Icon } from '@rneui/themed';
 import { Chip } from "@react-native-material/core";
@@ -9,6 +9,8 @@ import mm_negative from '../../../assets/images/mm/mm_negative.png'
 import axios from 'axios'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { http } from '../../../api/http'
+import ViewShot from "react-native-view-shot";
+import Share from 'react-native-share';
 
 
 
@@ -59,9 +61,53 @@ const Today = ({ route }) => {
     })
   }, [])
 
+  //캡처 및 공유
+  const captureRef = useRef();
+
+  const getPhotoUri = async (): Promise<string> => {
+    const uri = await captureRef.current.capture();
+    console.log(uri);
+    return uri;
+  };
+
+  const onCapture = async () => {
+    try {
+      const uri = await getPhotoUri();
+
+      const options = {
+        title: 'title',
+        message: 'message',
+        url: uri,
+        type: 'image/jpeg',
+        failOnCancel: false,
+      };
+
+      const result = await Share.open(options)
+        // .then((res) => {
+        //   console.log(res)
+        //   if (res.message == 'CANCELED') {
+        //     Share.open({ title: 'title', message: 'https://play.google.com/store/apps/details?id=com.marshmallowdiary' })
+        //       .then(res => {
+        //         console.log(res)
+        //       })
+        //       .catch(err => {
+        //         console.log(err)
+        //       })
+        //   }
+        // })
+        // .catch((err) => {
+        //   console.log(err);
+        // });
+    }
+    catch (err) {
+      console.log('failed', err);
+    }
+  };
+
   return (
     <View style={{ flex: 1 }}>
       <ScrollView >
+      <ViewShot style={{ flex: 1, backgroundColor: '#FFF9F8' }} ref={captureRef} options={{ fileName: "MarshmallowDiary", format: "jpg", quality: 0.9 }}>
         <View style={{ alignItems: 'center', justifyContent: 'center', marginTop: '15%' }} >
           <Text style={{ fontSize: 25, fontFamily: 'GangwonEduAllBold' }}>{dayformatted2}</Text>
           <Text style={{ fontSize: 30, fontFamily: 'GangwonEduAllBold' }}>감정 분석 결과</Text>
@@ -100,9 +146,10 @@ const Today = ({ route }) => {
           <Text style={{ fontsize: 10, color: "#999696", marginTop: 10, fontFamily: 'GangwonEduAllBold' }} >{todayTitle}</Text>
           <Text style={{ fontsize: 10, color: "#999696", marginTop: 10, fontFamily: 'GangwonEduAllBold' }}>{todayUrl}</Text>
         </View>
+      </ViewShot>
 
         <View style={{ flex: 0.3, alignItems: 'center', justifyContent: 'center' }}>
-          <Chip style={{ alignItems: 'center', justifyContent: 'center', backgroundColor: '#FFEBA5', width: '30%' }} >
+          <Chip style={{ alignItems: 'center', justifyContent: 'center', backgroundColor: '#FFEBA5', width: '30%' }} onPress={onCapture}>
             <Icon name='share' type='fontisto' />
             <Text style={{ fontSize: 17, fontFamily: 'GangwonEduAllBold' }}>  공유하기 </Text>
           </Chip>
