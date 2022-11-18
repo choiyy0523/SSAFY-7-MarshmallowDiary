@@ -59,7 +59,7 @@ const Settings = ({ navigation, props }) => {
 
         {/* 다크모드 설정 */}
         {/* toggle on일 때 asyncstorage 변경 */}
-        <TouchableOpacity style={{ paddingHorizontal: 20, paddingVertical: 15 }}>
+        {/* <TouchableOpacity style={{ paddingHorizontal: 20, paddingVertical: 15 }}>
 
           <View style={styles.barStyle}>
 
@@ -88,7 +88,7 @@ const Settings = ({ navigation, props }) => {
             </View>
 
           </View>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
 
         {/* 폰트 설정 */}
         {/* onPress시 모달로 폰트 선택 옵션 띄우기

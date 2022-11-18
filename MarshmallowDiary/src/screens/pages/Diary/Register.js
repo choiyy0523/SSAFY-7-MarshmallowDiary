@@ -61,18 +61,10 @@ function DiaryRegister() {
         const selectedImage = formdata
         setSelectedImage(selectedImage)
         setThumbnailImage(image.uri)
-        // 이게 여기 안에 있는게 스토어 코드 (스토어 설치 정상작동, 에뮬 에러발생(버킷사진등록안됨)) ver.1 >> 시연기기 apk 에러발생
-   
       }
 
     })
 
-        // 이게 여기 밖에 있는게 현재 고민중인 코드 (스토어 설치 정상작동여부 알 수 없음, 에뮬 정상작동) ver.2
-        // const formdata = new FormData();
-        // formdata.append('photos', image);
-        // const selectedImage = formdata
-        // setSelectedImage(selectedImage)
-        // setThumbnailImage(image.uri)
 
     const headers = {
       'Content-Type': 'multipart/form-data'
@@ -95,6 +87,29 @@ function DiaryRegister() {
     }
   }
 
+  // 빈칸 경고 모달
+const [visible, setVisible] = useState(false)
+const openModal = () => {
+  setVisible(true)
+}
+const closeModal = () => {
+  setVisible(false)
+}
+
+const [overlap, setOverlap] = useState()
+
+
+// 등록 완료 모달
+const [visible2, setVisible2] = useState(false)
+const openModal2 = () => {
+  setVisible2(true)
+}
+const closeModal2 = () => {
+  setVisible2(false)
+}
+
+const [overlap2, setOverlap2] = useState()
+
 
   function Register() {
     http.post('/diary/regist/diary', {
@@ -106,9 +121,10 @@ function DiaryRegister() {
       .then(res => {
         // 일단 만약 글이나 내용이 비었으면 얼럿
         if (title === null && content === null) {
-          alert('제목과 일기는 반드시 쓰셔야 합니다!')
+          // alert('제목과 일기는 반드시 쓰셔야 합니다!')
           console.log("슈붕")
-          null
+          setOverlap(false)
+          openModal()
         }
         // 글과 내용은 다 썼고, 
          else {
@@ -124,8 +140,9 @@ function DiaryRegister() {
                   if (response) {
                     console.log("일기 사진 등록 완료")
                     console.log(response.data)
-                    alert('일기가 등록되었습니다!') // 모달로 변경해야함
-      
+                    // alert('일기가 등록되었습니다!')
+                    setOverlap2(false)
+                    openModal2()
                     navigation.replace('Detail', { targetDate: today })
                   }
                 })
@@ -146,7 +163,9 @@ function DiaryRegister() {
     } else {
   // 사진이 없다면 일기만 등록
   console.log('일기 내용만 등록 완료')
-  alert("일기가 등록되었습니다!")
+  // alert("일기가 등록되었습니다!")
+  setOverlap2(false)
+  openModal2()
   navigation.navigate('Detail', { targetDate: today })
     }
 }
@@ -157,7 +176,9 @@ function DiaryRegister() {
         console.log('일기 등록 실패')
         console.log(err)
         console.log("팥붕")
-        alert('제목과 일기내용은 반드시 쓰셔야 합니다!')
+        setOverlap(false)
+          openModal()
+        // alert('제목과 일기내용은 반드시 쓰셔야 합니다!')
       })
 
   }
@@ -218,6 +239,42 @@ function DiaryRegister() {
               </TouchableOpacity>
             </View>
           </View>
+
+{/* 빈칸 경고 */}
+          <Modal visible={visible} setVisible={setVisible} transparent={true} animationType={'fade'}>
+          <Pressable style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }} onPress={closeModal}>
+            <View style={{ flex: 0.2, backgroundColor: 'white', justifyContent: 'center', alignItems: 'center', width: '80%', borderRadius: 30 }}>
+              { overlap ? 
+                <Text style={{ fontFamily:'GangwonEduAllBold'}} >
+                  글과 제목은 반드시 입력해야 합니다! 
+                </Text>
+                :
+                <Text style={{ fontFamily:'GangwonEduAllBold'}} >
+                  글과 제목은 반드시 입력해야 합니다! 
+                </Text>
+              }      
+            </View>
+          </Pressable>
+        </Modal>
+
+        {/* 등록 성공 알림 */}
+        <Modal visible={visible2} setVisible={setVisible2} transparent={true} animationType={'fade'}>
+          <Pressable style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }} onPress={closeModal2}>
+            <View style={{ flex: 0.2, backgroundColor: 'white', justifyContent: 'center', alignItems: 'center', width: '80%', borderRadius: 30 }}>
+              { overlap2 ? 
+                <Text style={{ fontFamily:'GangwonEduAllBold'}} >
+                  일기가 등록되었습니다! 
+                </Text>
+                :
+                <Text style={{ fontFamily:'GangwonEduAllBold'}} >
+                  일기가 등록되었습니다! 
+                </Text>
+              }      
+            </View>
+          </Pressable>
+        </Modal>
+
+
         </View>
 
         <View>

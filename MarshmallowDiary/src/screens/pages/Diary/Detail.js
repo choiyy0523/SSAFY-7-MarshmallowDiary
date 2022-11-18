@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { BackHandler, StyleSheet, TextInput, Alert, Text, View, Button, TouchableOpacity, FlatList, Image, ScrollView, Modal } from 'react-native'
+import { BackHandler, Pressable, StyleSheet, TextInput, Alert, Text, View, Button, TouchableOpacity, FlatList, Image, ScrollView, Modal } from 'react-native'
 import Footer from '../../components/component/Footer';
 import { Icon } from '@rneui/themed';
 import { Chip } from "@react-native-material/core";
@@ -89,6 +89,16 @@ function Detail({ route }) {
 
 
   // 일기 삭제 기능
+  // 삭제 확인 모달
+const [visible, setVisible] = useState(false)
+const openModal = () => {
+  setVisible(true)
+}
+const closeModal = () => {
+  setVisible(false)
+}
+
+const [overlap, setOverlap] = useState()
   const navigation = useNavigation()
 
   function Delete() {
@@ -101,7 +111,9 @@ function Detail({ route }) {
     })
       .then(res => {
         console.log('일기 삭제 완료')
-        alert('일기가 삭제되었습니다.')
+        // alert('일기가 삭제되었습니다.')
+        setOverlap(false)
+        openModal()
         navigation.navigate('Main')
       })
       .catch(err => {
@@ -137,6 +149,23 @@ function Detail({ route }) {
                   <Text style={styles.buttonText}>삭제</Text>
                 </View>
               </TouchableOpacity>
+              {/* 글 삭제 알림 */}
+              <Modal visible={visible} setVisible={setVisible} transparent={true} animationType={'fade'}>
+          <Pressable style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }} onPress={closeModal}>
+            <View style={{ flex: 0.2, backgroundColor: 'white', justifyContent: 'center', alignItems: 'center', width: '80%', borderRadius: 30 }}>
+              { overlap ? 
+                <Text style={{ fontFamily:'GangwonEduAllBold'}} >
+                  일기가 삭제되었습니다!
+                </Text>
+                :
+                <Text style={{ fontFamily:'GangwonEduAllBold'}} >
+                  일기가 삭제되었습니다!
+                </Text>
+              }      
+            </View>
+          </Pressable>
+        </Modal>
+
             </View>
           </View>
         </View>
