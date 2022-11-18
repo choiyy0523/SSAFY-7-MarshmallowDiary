@@ -51,11 +51,11 @@ const Main = ({ navigation }) => {
       </View>
       <View style={{ flex: 0.3, backgroundColor: 'rgba(217,217,217,0.3)', borderRadius: 20, marginLeft: '20%', marginRight: '20%' }}>
         <View style={{ fontSize: 15, alignItems: 'center', justifyContent: 'center', flex: 1 }}>
-          <Text style={{ fontFamily:'GangwonEduAllBold' }}>{words}</Text>
+          <Text style={{ fontFamily: 'GangwonEduAllBold' }}>{words}</Text>
         </View>
       </View>
       <View style={{ flex: 0.1 }}>
-        <Button title='Home' onPress={() => navigation.navigate('Home')} />
+        {/* <Button title='Home' onPress={() => navigation.navigate('Home')} /> */}
       </View>
       <Footer />
     </View>

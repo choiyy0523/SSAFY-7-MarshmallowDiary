@@ -126,7 +126,7 @@ function Detail({ route }) {
               source={require('../../../assets/images/weather/1.png')}
               style={styles.weatherButton}
             />
-            <Text style={styles.changeDay}>{diaryWeather}</Text>
+            {/* <Text style={styles.changeDay}>{diaryWeather}</Text> */}
           </View>
 
           <View style={styles.block3}>
@@ -179,17 +179,19 @@ function Detail({ route }) {
             {diaryContent}
           </Text>
         </View>
+
+        <View style={{ flex: 0.3, alignItems: 'center', justifyContent: 'center', marginVertical: '10%' }}>
+          <Chip onPress={moveToToday} style={{ alignItems: 'center', justifyContent: 'center', backgroundColor: '#FFEBA5', width: '30%' }} >
+            {/* <Icon name='share' type='fontisto' /> */}
+            <Text style={{ fontsize: 10, color: "#999696", fontFamily: 'GangwonEduAllBold' }}>  분석 결과 </Text>
+          </Chip>
+        </View>
       </ScrollView >
 
 
-      <View style={{ flex: 0.3, alignItems: 'center', justifyContent: 'center' }}>
-        <Chip onPress={moveToToday} style={{ alignItems: 'center', justifyContent: 'center', backgroundColor: '#FFEBA5', width: '30%' }} >
-          {/* <Icon name='share' type='fontisto' /> */}
-          <Text style={{ fontSize: 17 }}>  분석 결과 </Text>
-        </Chip>
-      </View>
 
-      {/* <Footer /> */}
+
+      <Footer />
     </View >
   )
 }
@@ -224,18 +226,20 @@ const styles = StyleSheet.create({
     marginVertical: -10,
   },
   weatherButton: {
+    marginHorizontal: 10,
+    marginVertical: -10,
     width: 40,
     height: 40,
   },
   buttonText: {
-    // fontFamily: 'GangwonEduAllBold',
+    fontFamily: 'GangwonEduAllBold',
     fontSize: 15,
     fontWeight: 'Bold'
   },
   titleInput: {
     fontSize: 15,
     paddingVertical: 8,
-    // fontFamily: 'GangwonEduAllBold',
+    fontFamily: 'GangwonEduAllBold',
     height: 50,
     paddingHorizontal: 16,
     justifyContent: 'flex-start',
@@ -264,7 +268,7 @@ const styles = StyleSheet.create({
   diaryInput: {
     fontSize: 15,
     paddingVertical: 15,
-    // fontFamily: 'GangwonEduAllLight',
+    fontFamily: 'GangwonEduAllLight',
     height: 250,
     paddingHorizontal: 16,
     justifyContent: 'flex-start',
@@ -278,12 +282,14 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFEBA5',
     height: 33,
     width: 50,
+    marginHorizontal: 25,
     justifyContent: 'center',
     alignItems: 'center',
     paddingBottom: 5,
   },
   changeDay: {
     fontSize: 18,
+    fontFamily: 'GangwonEduAllBold'
   },
 });
 
