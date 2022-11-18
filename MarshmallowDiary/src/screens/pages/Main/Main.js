@@ -31,6 +31,11 @@ const Main = ({ navigation }) => {
   //   console.log('refresh', refresh)
   // })
 
+  // AsyncStorage.getItem('userId', (err, result) => {
+  //   const userId = result;
+  //   console.log('userId', userId)
+  // })
+
   // 캐릭터별 문구 요청 및 세팅 
   useEffect(() => {
     http.get('/analysis/loyalty')
@@ -55,7 +60,7 @@ const Main = ({ navigation }) => {
         </View>
       </View>
       <View style={{ flex: 0.1 }}>
-        {/* <Button title='Home' onPress={() => navigation.navigate('Home')} /> */}
+        <Button title='Home' onPress={() => navigation.navigate('Home')} />
       </View>
       <Footer />
     </View>

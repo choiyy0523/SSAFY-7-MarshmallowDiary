@@ -1,28 +1,8 @@
 import React, { useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { http } from '../../../api/http'
-import { userState } from '../../../states/userState'
-import { useRecoilValue, useSetRecoilState } from 'recoil' 
 
 const LoginCheck = ({ navigation }) => {  
-  const userInfo = useRecoilValue(userState);
-  console.log('info', userInfo)
-
-  // useEffect(() => {
-  //   var id = userInfo.id
-  //   var refresh = userInfo.refresh
-
-  //   if (id && refresh) {
-  //     http.post('/user/reissue', {
-  //       userId: id,
-  //       refreshToken: refresh
-  //     })
-  //     .then(res => {
-  //       console.log('기존회원 토큰 재발급')
-  //       useSetRecoilState(userState)
-  //     })
-  //   }
-  // })
 
   useEffect(() => {
     AsyncStorage.getAllKeys((err, keys) => {
