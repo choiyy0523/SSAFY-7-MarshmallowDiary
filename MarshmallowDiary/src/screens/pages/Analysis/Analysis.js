@@ -11,6 +11,7 @@ import ch_neutral from '../../../assets/images/character/neutral.png'
 import { http } from '../../../api/http'
 import ViewShot from "react-native-view-shot";
 import Share from 'react-native-share';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const Analysis = ({ navigation }) => {
   // 이번 달 기본으로 세팅
@@ -44,21 +45,6 @@ const Analysis = ({ navigation }) => {
       };
 
       const result = await Share.open(options)
-        // .then((res) => {
-        //   console.log(res)
-        //   if (res.message == 'CANCELED') {
-        //     Share.open({ title: 'title', message: 'https://play.google.com/store/apps/details?id=com.marshmallowdiary' })
-        //       .then(res => {
-        //         console.log(res)
-        //       })
-        //       .catch(err => {
-        //         console.log(err)
-        //       })
-        //   }
-        // })
-        // .catch((err) => {
-        //   console.log(err);
-        // });
     }
     catch (err) {
       console.log('failed', err);
@@ -188,19 +174,6 @@ const Analysis = ({ navigation }) => {
   const month1 = [1, 2, 3, 4]
   const month2 = [5, 6, 7, 8]
   const month3 = [9, 10, 11, 12]
-  // 로딩
-  // const [ready, setReady] = useState(true)
-
-  // useEffect(()=>{        
-  //   setTimeout(()=>{                 
-  //     setReady(false)     
-  //   },500)          
-  // },[ready, data])
-
-  // useEffect(() => {
-  //   setReady(true)
-  // }, [targetMonth, targetYear, isAll])
-
 
   return (
     <View style={{ flex: 1, backgroundColor: '#FFF9F8' }}>
@@ -211,10 +184,6 @@ const Analysis = ({ navigation }) => {
 
         <View style={{ flex: 1.2, flexDirection: 'row' }}>
           <View style={{ marginLeft: '7.5%', justifyContent: 'center', flex: 0.7 }} >
-            {/* {ready ?  
-          <View style={{justifyContent:'center', alignItems:'center'}}>
-            <Button buttonStyle={{ backgroundColor:'rgba(217,217,217,0.3)', width:50 }} loading />
-          </View> : */}
             {pcnt + ncnt + ngcnt == 0 || pcnt == undefined || ncnt == undefined || ngcnt == undefined ?
               <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                 <Image source={ch_neutral} style={{ width: 100, height: 100 }} />
@@ -370,11 +339,20 @@ const Analysis = ({ navigation }) => {
 
         <View style={{ flex: 0.8, backgroundColor: 'rgba(217,217,217,0.3)', borderRadius: 20, marginLeft: '5%', marginRight: '5%', justifyContent: 'center', alignItems: 'center' }}>
           <View style={{ fontSize: 15 }}>
-            <View>
-              <Text style={{ fontFamily: 'GangwonEduAllBold' }}>긍정 : {pcnt} 회</Text>
-              <Text style={{ fontFamily: 'GangwonEduAllBold' }}>중립 : {ncnt} 회</Text>
-              <Text style={{ fontFamily: 'GangwonEduAllBold' }}>부정 : {ngcnt} 회</Text>
-              {best != -1 ? <Text style={{ fontFamily: 'GangwonEduAllBold' }}>추천 긍정일기 : {best}</Text> : null}
+            <View style={{ flex: 0.5, justifyContent: 'center', alignItems: 'center' }}>
+              <Text style={{ fontFamily: 'GangwonEduAllBold' }}>
+                이 기간에는 긍정적인 일기를 {pcnt} 회, 중립적인 일기를 {ncnt} 회, 부정적인 일기를 {ngcnt} 회썼어요! 
+              </Text>
+            </View>
+            <View style={{flex:0.2}} />
+            <View style={{flex:0.3 , justifyContent: 'center', alignItems: 'center'}}>
+              {best != -1 ? 
+                <TouchableOpacity>
+                  <Text style={{ fontFamily: 'GangwonEduAllBold' }} onPress={() => navigation.navigate('Detail', {targetDate: best })}>
+                    추천 긍정일기 보러가기
+                  </Text>
+                </TouchableOpacity>
+                : null}
             </View>
           </View>
         </View>

@@ -24,6 +24,7 @@ import Terms from '../screens/pages/Settings/Terms';
 import ResetCheck from '../screens/pages/Settings/ResetCheck';
 import LocalLogin from '../screens/pages/LocalLogin/LocalLogin';
 import SignUp from '../screens/pages/LocalLogin/SignUp';
+import LogOut from '../screens/pages/Login/LogOut';
 
 const Stack = createStackNavigator();
 
@@ -54,6 +55,7 @@ const StackNavigation = () => {
       <Stack.Screen name='Terms' component={Terms} />
       <Stack.Screen name='LocalLogin' component={LocalLogin} />
       <Stack.Screen name='SignUp' component={SignUp} />
+      <Stack.Screen name='LogOut' component={LogOut} />
     </Stack.Navigator>
   );
 };
