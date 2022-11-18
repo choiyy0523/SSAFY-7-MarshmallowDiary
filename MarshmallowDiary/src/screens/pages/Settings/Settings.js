@@ -1,13 +1,30 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { Text, View, TouchableOpacity, Image, StyleSheet, ScrollView } from 'react-native';
 import Footer from '../../components/component/Footer';
 import { Icon } from '@rneui/themed';
 import SwitchComponent from './Switch';
 import { useTheme } from 'react-native-paper';
 import ChangeDarkModeSwitch from './darkSwitch';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Settings = ({ navigation, props }) => {
   const { colors } = useTheme();
+  const [pwExist, setPwExist] = useState()
+
+  useEffect(() => {
+    AsyncStorage.getItem('password', (err, result) => {
+      const pw = result;
+  
+      if (pw) {
+        setPwExist(true)
+      }
+      else {
+        setPwExist(false)
+      }
+    })
+  }, [pwExist])
+
+
   return (
     <View style={{ flex: 1 }}>
       <ScrollView style={{ flex: 1 }}>
@@ -19,21 +36,23 @@ const Settings = ({ navigation, props }) => {
             <View>
               <Icon name='lock-outline' type='materialcommunityicons' size={25} color={colors.iconColor} style={styles.iconStyle} />
             </View>
-            <View style={styles.menuStyle}>
-              <Text style={{ fontFamily: 'GangwonEduAllBold' }}>
-                비밀번호 설정
-              </Text>
+            { pwExist ? 
+              <TouchableOpacity style={styles.menuStyle} onPress={() => navigation.navigate('PwCheck')}>
+                <Text style={{ fontFamily: 'GangwonEduAllBold' }}>
+                  비밀번호 변경
+                </Text>
+              </TouchableOpacity>
+              :
+              <TouchableOpacity style={styles.menuStyle} onPress={() => navigation.navigate('PwSet')}>
+                <Text style={{ fontFamily: 'GangwonEduAllBold' }}>
+                  비밀번호 설정
+                </Text>
+              </TouchableOpacity>
+            }
 
-              {/* <Text >
-                비밀번호 변경
-              </Text> */}
-              <Text style={{ fontFamily: 'GangwonEduAllBold' }} >
-                추후 지원 예정 :D
-              </Text>
-            </View>
-            <View style={styles.switchStyle}>
+            {/* <View style={styles.switchStyle}>
               <SwitchComponent />
-            </View>
+            </View> */}
 
           </View>
         </TouchableOpacity>
