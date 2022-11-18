@@ -38,23 +38,22 @@ const Privacy = () => {
       }
     }
 
-    if (route.name == 'ResetCheck') {
-      if (input.length >= 4) {
-        if (input.slice(0, 3) == pw) {
-          navigation.replace('Settings')
-        }
-        else {
-          setInput('')
-        }
-      }
-    }
-  }); 
+    // if (route.name == 'ResetCheck') {
+    //   if (input.length >= 4) {
+    //     if (input.slice(0, 3) == pw) {
+    //       navigation.replace('Settings')
+    //     }
+    //     else {
+    //       setInput('')
+    //     }
+    //   }
+    // }
 
-  // 비밀번호 설정 
+      // 비밀번호 설정 
   if (route.name == 'PwSet') {
     if (input.length >= 4) {
       AsyncStorage.setItem('password', input.slice(0, 3))
-      navigation.replace('PwCheck')
+      navigation.replace('Settings')
     }
   }
 
@@ -62,9 +61,12 @@ const Privacy = () => {
   if (route.name == 'PwReset') {
     if (input.length >= 4) {
       AsyncStorage.setItem('password', input.slice(0, 3))
-      navigation.replace('ResetCheck')
+      navigation.replace('Settings')
     }
   }
+  }); 
+
+
 
 
   const row1 = [1, 2, 3]
