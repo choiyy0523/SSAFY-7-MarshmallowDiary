@@ -55,7 +55,7 @@ const Main = ({ navigation }) => {
         </View>
       </View>
       <View style={{ flex: 0.1 }}>
-        {/* <Button title='Home' onPress={() => navigation.navigate('Home')} /> */}
+        <Button title='Home' onPress={() => navigation.navigate('Home')} />
       </View>
       <Footer />
     </View>

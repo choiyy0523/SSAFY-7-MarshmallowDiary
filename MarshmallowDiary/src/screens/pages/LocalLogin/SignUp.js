@@ -60,7 +60,7 @@ const SignUp = ({ navigation }) => {
             const pw = result;
             console.log(pw)
             if (pw == null) {
-              navigation.replace('Main')
+              navigation.replace('LocalLogin')
             }
             else {
               navigation.replace('Password')

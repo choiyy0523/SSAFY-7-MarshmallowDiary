@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { http } from '../../../api/http'
 import { userState } from '../../../states/userState'
-import { useRecoilValue, useSetRecoilState } from 'recoil' 
+import { useRecoilValue, useRecoilState } from 'recoil' 
 
 const LoginCheck = ({ navigation }) => {  
   const userInfo = useRecoilValue(userState);

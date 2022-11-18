@@ -1,14 +1,26 @@
 import { atom } from 'recoil';
 
+// const user = {
+//   id: '',
+//   token: '',
+//   refresh: '',
+//   password: '',
+//   theme: 'light',
+//   font: '',
+//   push: ''
+// }
+
 export const userState = atom({
   key:'user',
-  default: {
-    token: '',
-    refresh: '',
-    password: '',
-    id: '',
-    theme: 'light',
-    font: '',
-    push: '',
-  }
+  default: [
+    {
+      id: '',
+      token: '',
+      refresh: '',
+      password: '',
+      font: '',
+      push: ''
+    }
+  ]
 })
+

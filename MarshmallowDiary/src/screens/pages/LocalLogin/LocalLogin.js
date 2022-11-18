@@ -10,31 +10,33 @@ const LocalLogin = ({ navigation }) => {
   const [pass, setPass] = useState()
 
   const login = () => {
-    http.post('/user/signin', {
-      accountId: id,
-      password: pass
-    })
-      .then(res => {
-        AsyncStorage.setItem('token', res.data.accessToken)
-        AsyncStorage.setItem('refresh', res.data.refreshToken)
-        AsyncStorage.setItem('userId', res.data.userId)
-
-        AsyncStorage.getItem('password', (err, result) => {
-          const pw = result;
-          console.log(pw)
-          if (pw == null) {
-            navigation.replace('Main')
-          }
-          else {
-            navigation.replace('Password')
-          }
+    if (id && pass) {
+      http.post('/user/signin', {
+        accountId: id,
+        password: pass
+      })
+        .then(res => {
+          AsyncStorage.setItem('token', res.data.accessToken)
+          AsyncStorage.setItem('refresh', res.data.refreshToken)
+          AsyncStorage.setItem('userId', res.data.userId)
+  
+          AsyncStorage.getItem('password', (err, result) => {
+            const pw = result;
+            console.log(pw)
+            if (pw == null) {
+              navigation.replace('Main')
+            }
+            else {
+              navigation.replace('Password')
+            }
+          })
         })
-      })
-      .catch(err => {
-        Promise.reject(err)
-        navigation.navigate('LoginCheck')
-      })
-  }
+        .catch(err => {
+          Promise.reject(err)
+          navigation.navigate('LoginCheck')
+        })
+      }
+    }
 
 
   // useEffect(() => {
@@ -57,13 +59,15 @@ const LocalLogin = ({ navigation }) => {
       <View style={{ flex: 0.4, justifyContent: 'center', alignItems: 'center', marginLeft: '10%', marginRight: '10%' }}>
         <Input placeholder="Id" onChangeText={text => setId(text)} />
         <Input placeholder="Password" secureTextEntry={true} onChangeText={text => setPass(text)} />
-        <TouchableOpacity onPress={login}>
-          <Text>Login</Text>
-        </TouchableOpacity>
-        <View style={{ flex: 0.1 }} />
-        <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
-          <Text>SignUp</Text>
-        </TouchableOpacity>
+        <View style={{flexDirection:'row' }}>
+          <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
+            <Text>SignUp</Text>
+          </TouchableOpacity>
+          <View style={{ flex:0.8 }} />
+          <TouchableOpacity onPress={login}>
+            <Text>Login</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   )

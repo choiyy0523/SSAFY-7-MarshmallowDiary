@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { Text, View, Image, Modal, Pressable } from 'react-native';
 import Footer from '../../components/component/Footer';
-import { Icon, Button } from '@rneui/themed';
+import { Icon } from '@rneui/themed';
 import { Chip } from "@react-native-material/core";
 import PieChart from 'react-native-pie-chart';
 import mm_positive from '../../../assets/images/mm/mm_positive.png'
@@ -44,21 +44,21 @@ const Analysis = ({ navigation }) => {
       };
 
       const result = await Share.open(options)
-        .then((res) => {
-          console.log(res)
-          if (res.message == 'CANCELED') {
-            Share.open({ title: 'title', message: 'https://play.google.com/store/apps/details?id=com.dxx.firenow' })
-              .then(res => {
-                console.log(res)
-              })
-              .catch(err => {
-                console.log(err)
-              })
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+        // .then((res) => {
+        //   console.log(res)
+        //   if (res.message == 'CANCELED') {
+        //     Share.open({ title: 'title', message: 'https://play.google.com/store/apps/details?id=com.marshmallowdiary' })
+        //       .then(res => {
+        //         console.log(res)
+        //       })
+        //       .catch(err => {
+        //         console.log(err)
+        //       })
+        //   }
+        // })
+        // .catch((err) => {
+        //   console.log(err);
+        // });
     }
     catch (err) {
       console.log('failed', err);
