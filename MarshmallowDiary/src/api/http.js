@@ -6,7 +6,7 @@ import Config from "react-native-config";
 
 const axiosInstance = axios.create({
   // baseURL: Config.API_BASE_URL,
-  baseURL: "http://k7a303.p.ssafy.io:9090/api/v1",
+  baseURL: "https://marshmallowdiary.com/api/v1",
   headers: {
     "Content-type": "application/json",
   },
