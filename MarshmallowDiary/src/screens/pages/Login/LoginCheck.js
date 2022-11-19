@@ -30,6 +30,8 @@ const LoginCheck = ({ navigation }) => {
               console.log('기존회원 토큰 재발급')
               AsyncStorage.setItem('token', res.data.accessToken)
               AsyncStorage.setItem('refresh', res.data.refreshToken)
+              console.log("스웨거용 토큰")
+              console.log(res.data.accessToken)
 
               // 비번 있으면 >> PW, 없으면 >> Main
               AsyncStorage.getItem('password', (err, result) => {

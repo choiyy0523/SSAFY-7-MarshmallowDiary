@@ -52,7 +52,7 @@ const Today = ({route}) => {
   useEffect(() => {
     AsyncStorage.getItem('token', (err, result) => {
       axios
-        .get(`http://k7a303.p.ssafy.io:9090/api/v1/analysis/${targetDiary}`, {
+        .get(`https://marshmallowdiary.com/api/v1/analysis/${targetDiary}`, {
           headers: {
             Authorization: `Bearer ${result}`,
           },
@@ -240,15 +240,6 @@ const Today = ({route}) => {
                 </TouchableOpacity>
               </View>
             </View>
-
-            {/* 
-            <YouTube
-              videoId="6H8QHeC_VPs"
-              apiKey="AIzaSyBIl_RoMETu6Rz7yE2vBap1-u7SuiwYXNM"
-              play={true}
-              fullscreen={false}
-              style={{width: '100%', height: 300}}
-            /> */}
           </View>
         </ViewShot>
 

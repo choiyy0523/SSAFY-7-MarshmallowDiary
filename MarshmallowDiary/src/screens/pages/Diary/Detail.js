@@ -55,7 +55,7 @@ function Detail({route}) {
       (err, result) => {
         axios
           .get(
-            `http://k7a303.p.ssafy.io:9090/api/v1/diary/detail/${targetDate}`,
+            `https://marshmallowdiary.com/api/v1/diary/detail/${targetDate}`,
             {
               headers: {
                 Authorization: `Bearer ${result}`,
