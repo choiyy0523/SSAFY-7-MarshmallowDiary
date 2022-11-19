@@ -242,7 +242,7 @@ function DiaryRegister() {
 
           <View style={styles.block3}>
             {/* 글 등록 버튼 */}
-            <View>
+            <View style={{marginLeft: '15%'}}>
               <TouchableOpacity onPress={Register}>
                 <View style={styles.buttonRegister}>
                   <Text style={styles.buttonText}>등록</Text>
@@ -266,7 +266,7 @@ function DiaryRegister() {
                   backgroundColor: 'white',
                   justifyContent: 'center',
                   alignItems: 'center',
-                  width: '80%',
+                  width: '60%',
                   borderRadius: 30,
                 }}>
                 {overlap ? (
@@ -297,7 +297,7 @@ function DiaryRegister() {
                   backgroundColor: 'white',
                   justifyContent: 'center',
                   alignItems: 'center',
-                  width: '80%',
+                  width: '60%',
                   borderRadius: 30,
                 }}>
                 {overlap2 ? (
@@ -351,14 +351,14 @@ function DiaryRegister() {
               <TouchableOpacity onPress={countUp}>
                 <Image
                   source={{uri: thumbnailImage}}
-                  style={{width: 300, height: 200, borderRadius: 20}}
+                  style={{width: 350, height: 190, borderRadius: 20}}
                 />
               </TouchableOpacity>
               <Text
                 style={{
                   fontsize: 10,
                   color: '#999696',
-                  marginTop: 10,
+                  marginTop: '5%',
                   fontFamily: 'GangwonEduAllBold',
                 }}>
                 2번 터치하면 사진이 삭제됩니다!
@@ -405,7 +405,6 @@ const styles = StyleSheet.create({
     marginHorizontal: 85,
     justifyContent: 'flex-end',
     flexDirection: 'row',
-    alignItems: 'flex-end',
   },
   weatherPicker: {
     marginHorizontal: 10,
@@ -414,6 +413,8 @@ const styles = StyleSheet.create({
     marginVertical: -10,
   },
   weatherButton: {
+    marginHorizontal: 10,
+    marginVertical: -10,
     width: 40,
     height: 40,
   },
@@ -471,6 +472,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     backgroundColor: 'rgba(217, 217, 217, 0.3)',
     borderRadius: 18,
+    marginTop: '3%',
     marginHorizontal: 15,
     textAlignVertical: 'top',
   },
