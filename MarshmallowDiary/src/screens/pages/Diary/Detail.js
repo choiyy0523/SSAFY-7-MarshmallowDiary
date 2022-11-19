@@ -126,28 +126,30 @@ function Detail({route}) {
   return (
     <View style={{flex: 1}}>
       <ScrollView>
-        <View style={styles.block2}>
-          {/* 날짜, 날씨, 삭제버튼 - 일기장 헤더 */}
-          <View style={styles.block}>
-            {/* 날짜 */}
-            <Text style={styles.changeDay}>{diaryDate}</Text>
+        <View style={{flex: 1}}>
+          <View style={styles.block2}>
+            {/* 날짜, 날씨, 삭제버튼 - 일기장 헤더 */}
+            <View style={styles.block}>
+              {/* 날짜 */}
+              <Text style={styles.changeDay}>{diaryDate}</Text>
 
-            {/* 날씨 */}
-            <Image
-              source={weatherIconPath[diaryWeather]}
-              style={styles.weatherButton}
-            />
-            {/* <Text style={styles.changeDay}>{diaryWeather}</Text> */}
-          </View>
+              {/* 날씨 */}
+              <Image
+                source={weatherIconPath[diaryWeather]}
+                style={styles.weatherButton}
+              />
+              {/* <Text style={styles.changeDay}>{diaryWeather}</Text> */}
+            </View>
 
-          <View style={styles.block3}>
-            {/* 글 삭제 버튼*/}
-            <View>
-              <TouchableOpacity onPress={Delete}>
-                <View style={styles.buttonDelete}>
-                  <Text style={styles.buttonText}>삭제</Text>
-                </View>
-              </TouchableOpacity>
+            <View style={styles.block3}>
+              {/* 글 삭제 버튼*/}
+              <View style={{marginLeft: '30%'}}>
+                <TouchableOpacity onPress={Delete}>
+                  <View style={styles.buttonDelete}>
+                    <Text style={styles.buttonText}>삭제</Text>
+                  </View>
+                </TouchableOpacity>
+              </View>
               {/* 글 삭제 알림 */}
               <Modal
                 visible={visible}
@@ -167,7 +169,7 @@ function Detail({route}) {
                       backgroundColor: 'white',
                       justifyContent: 'center',
                       alignItems: 'center',
-                      width: '80%',
+                      width: '60%',
                       borderRadius: 30,
                     }}>
                     {overlap ? (
@@ -207,7 +209,7 @@ function Detail({route}) {
             <View style={styles.imageOutput}>
               <TouchableOpacity>
                 <Image
-                  style={{width: 300, height: 300, borderRadius: 20}}
+                  style={{width: 350, height: 300, borderRadius: 20}}
                   source={{
                     uri: `https://marshmallow-bucket.s3.ap-northeast-2.amazonaws.com/${diaryImage[0]}`,
                   }}
@@ -241,7 +243,7 @@ function Detail({route}) {
             <Text
               style={{
                 fontsize: 10,
-                color: '#999696',
+                color: '#525252',
                 fontFamily: 'GangwonEduAllBold',
               }}>
               {' '}
@@ -277,7 +279,6 @@ const styles = StyleSheet.create({
     marginHorizontal: 85,
     justifyContent: 'flex-end',
     flexDirection: 'row',
-    alignItems: 'flex-end',
   },
   weatherPicker: {
     marginHorizontal: 10,
@@ -298,7 +299,7 @@ const styles = StyleSheet.create({
   },
   titleInput: {
     fontSize: 15,
-    paddingVertical: 8,
+    paddingVertical: 15,
     fontFamily: 'GangwonEduAllBold',
     height: 50,
     paddingHorizontal: 16,
@@ -306,14 +307,14 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(217, 217, 217, 0.3)',
     borderRadius: 18,
     marginTop: 5,
-    marginBottom: 20,
+    marginBottom: '3%',
     marginHorizontal: 15,
   },
   imageOutput: {
     paddingVertical: 8,
     paddingHorizontal: 16,
     borderRadius: 18,
-    marginBottom: 20,
+    marginBottom: '3%',
     marginHorizontal: 15,
     justifyContent: 'center',
     alignItems: 'center',
@@ -342,7 +343,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFEBA5',
     height: 33,
     width: 50,
-    marginHorizontal: 25,
     justifyContent: 'center',
     alignItems: 'center',
     paddingBottom: 5,
