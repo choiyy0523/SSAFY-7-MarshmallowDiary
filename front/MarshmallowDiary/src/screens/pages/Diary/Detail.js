@@ -32,7 +32,6 @@ function Detail({route}) {
   console.log(targetDate);
 
   /// DB에서 해당 일자 일기 받아오는 코드
-
   const [diaryDate, setDiaryDate] = useState();
   const [diaryTitle, setDiaryTitle] = useState();
   const [diaryWeather, setDiaryWeather] = useState();
@@ -80,11 +79,10 @@ function Detail({route}) {
     );
   });
 
-  ////
 
   const targetDay = targetDate;
 
-  // Detail >>> Today로 보내는 코드 // 작업중
+  // Detail >>> Today로 보내는 코드
   const moveToToday = () => {
     navigation.navigate('Today', {targetDiary: diaryDate});
   };
@@ -239,7 +237,6 @@ function Detail({route}) {
               backgroundColor: '#FFEBA5',
               width: '30%',
             }}>
-            {/* <Icon name='share' type='fontisto' /> */}
             <Text
               style={{
                 fontsize: 10,

@@ -158,10 +158,8 @@ const Settings = ({navigation, props}) => {
           </View>
         </TouchableOpacity> */}
 
-        {/* 이용 약관 */}
-        {/* onPress시 terms.js로 이동 */}
+        {/* 개인정보 처리 방침 */}
         <TouchableOpacity
-          // onPress={() => navigation.navigate('Terms')}
           onPress={url =>
             openURL(
               'https://www.notion.so/marshmallowdiary/bbb8d3a9a67a4c81b26ba7e224b172c9',
@@ -190,9 +188,7 @@ const Settings = ({navigation, props}) => {
         </TouchableOpacity>
 
         {/* 오픈소스 라이선스 */}
-        {/* onPress시 opensource.js로 이동 */}
         <TouchableOpacity
-          // onPress={() => navigation.navigate('OpenSource')}
           onPress={url =>
             openURL(
               'https://marshmallowdiary.notion.site/1a6a1966970742c7bc1940d7db4144d5',

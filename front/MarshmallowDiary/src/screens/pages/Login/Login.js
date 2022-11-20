@@ -30,11 +30,12 @@ const Login = ({ navigation }) => {
     setHidden(hidden + 1)
   }
 
+  // 검수용 테스트 계정
   // const hiddenLogin = () => {
   //   if (hidden >= 7) {
   //     http.post('/user/login', {
-  //       authId: '7777',
-  //       nickname: 'test',
+  //       authId: '',
+  //       nickname: '',
   //     })
   //       .then(res => {
   //         setCheck4('pass')
