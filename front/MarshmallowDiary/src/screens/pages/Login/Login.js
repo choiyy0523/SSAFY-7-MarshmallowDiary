@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Text, View, Image, TouchableOpacity, Pressable } from 'react-native';
 import logo from '../../../assets/logo.png'
-import kakao from '../../../assets/kakao.png'
 import {
   KakaoOAuthToken,
   KakaoProfile,

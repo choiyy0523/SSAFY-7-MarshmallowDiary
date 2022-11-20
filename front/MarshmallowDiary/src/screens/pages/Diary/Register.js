@@ -404,6 +404,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
     paddingVertical: 8,
     fontFamily: 'GangwonEduAllBold',
+    color: "#525252",
     height: 50,
     paddingHorizontal: 16,
     justifyContent: 'flex-start',

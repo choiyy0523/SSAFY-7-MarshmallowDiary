@@ -19,7 +19,7 @@ const darkTheme = {
     background: '#525252',
     surface: '#525252',
     text: '#fff9f8',
-    placeholder: '#fff9f8',
+    placeholder: '#525252',
     footBackColor: 'rgba(150, 150, 150, 0.3)',
     iconColor: '#fff9f8',
   },

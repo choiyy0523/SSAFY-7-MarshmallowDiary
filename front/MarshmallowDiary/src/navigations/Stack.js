@@ -15,12 +15,9 @@ import Main from '../screens/pages/Main/Main';
 import Result from '../screens/pages/Search/Result';
 import Search from '../screens/pages/Search/Search';
 import FAQ from '../screens/pages/Settings/FAQ';
-import OpenSource from '../screens/pages/Settings/OpenSource';
-// import Push from '../screens/pages/Settings/Push';
 import PwCheck from '../screens/pages/Settings/PwCheck';
 import PwReset from '../screens/pages/Settings/PwReset';
 import Settings from '../screens/pages/Settings/Settings';
-import Terms from '../screens/pages/Settings/Terms';
 import ResetCheck from '../screens/pages/Settings/ResetCheck';
 import LocalLogin from '../screens/pages/LocalLogin/LocalLogin';
 import SignUp from '../screens/pages/LocalLogin/SignUp';
@@ -48,14 +45,11 @@ const StackNavigation = () => {
       <Stack.Screen name="Result" component={Result} />
       <Stack.Screen name="Search" component={Search} />
       <Stack.Screen name="FAQ" component={FAQ} />
-      <Stack.Screen name="OpenSource" component={OpenSource} />
-      {/* <Stack.Screen name="Push" component={Push} /> */}
       <Stack.Screen name="PwCheck" component={PwCheck} />
       <Stack.Screen name="PwReset" component={PwReset} />
       <Stack.Screen name="ResetCheck" component={ResetCheck} />
       <Stack.Screen name="PwSet" component={PwSet} />
       <Stack.Screen name="Settings" component={Settings} />
-      <Stack.Screen name="Terms" component={Terms} />
       <Stack.Screen name="LocalLogin" component={LocalLogin} />
       <Stack.Screen name="SignUp" component={SignUp} />
       <Stack.Screen name="LogOut" component={LogOut} />
