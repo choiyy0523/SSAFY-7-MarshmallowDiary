@@ -12,7 +12,7 @@ import ChangeDarkModeSwitch from './screens/pages/Settings/darkSwitch';
 import PushNotification from 'react-native-push-notification';
 
 const darkTheme = {
-  dark: true,
+  dark: false,
   // fonts: configureFonts(),
   myOwnProperty: true,
   colors: {

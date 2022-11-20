@@ -24,7 +24,6 @@ import {
 import Footer from '../../components/component/Footer';
 import WeatherPicker from './WeatherPicker';
 import {launchImageLibrary} from 'react-native-image-picker';
-// import ButtonRegister from '../../components/component/ButtonRegister'
 import axios from 'axios';
 import {connect} from 'react-redux';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -32,11 +31,10 @@ import {set} from 'date-fns';
 import {http} from '../../../api/http';
 import {util} from '../../../api/util';
 import {useNavigation} from '@react-navigation/native';
-// import MultipleImagePicker from '@baronha/react-native-multiple-image-picker';
-// import ImagePicker from 'react-native-image-crop-picker';
 
 function DiaryRegister() {
   const navigation = useNavigation();
+
   // Register (내용 등록, 사진 등록 순으로 진행) 후 Detail로 보내는 코드
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
@@ -54,21 +52,14 @@ function DiaryRegister() {
     };
     await launchImageLibrary({maxWidth: 1024, maxHeight: 1024}, res => {
       // 가로 세로 중 최대 크기 1024로 limit 설정
-      console.log(thumbnailImage);
-      console.log(selectedImage);
-      console.log('레몬사탕');
       if (res.didCancel) {
         console.log('사진 등록을 취소했습니다. ');
-        console.log(thumbnailImage);
-        console.log(selectedImage);
-        console.log('마시멜로는 살안쪄');
         setSelectedImage(null);
         setThumbnailImage(null);
       } else if (res.errorCode) {
         console.log('사진 선택 오류 : ', res.errorCode);
       } else if (res.assets) {
         //정상적으로 사진을 반환 받았을 때
-        console.log('콜라사탕2');
         console.log(res.assets);
         console.log('사진 선택 성공', res);
         image.name = res.assets[0].fileName;
@@ -85,19 +76,14 @@ function DiaryRegister() {
     const headers = {
       'Content-Type': 'multipart/form-data',
     };
-    console.log('모짜');
-    console.log('렐라');
-    console.log(selectedImage);
   };
 
   const [count, setCount] = useState(0);
   const countUp = () => {
     console.log(count);
-    console.log('개구리');
     setCount(count + 1);
     if (count == 1) {
       setSelectedImage(null);
-      console.log('치즈');
       console.log(selectedImage);
       setCount(0);
     }
@@ -137,7 +123,6 @@ function DiaryRegister() {
         // 일단 만약 글이나 내용이 비었으면 모달
         if (title === null && content === null) {
           // alert('제목과 일기는 반드시 쓰셔야 합니다!')
-          console.log('슈붕');
           setOverlap(false);
           openModal();
         }
@@ -145,9 +130,7 @@ function DiaryRegister() {
         else {
           // 만약 선택된 이미지가 있다면 사진 등록도 같이 처리
           if (selectedImage != undefined) {
-            // setDates(date)
             console.log('일기 내용 등록 완료');
-            // navigation.navigate('Detail', { targetDate: today })
 
             // 사진 Formdata 처리
             util
@@ -164,15 +147,12 @@ function DiaryRegister() {
               })
               .catch(error => {
                 if (error.response) {
-                  console.log('냐옹');
                   console.log(error.response.data);
                   console.log(error.response.status);
                   console.log(error.response.headers);
                 } else if (error.request) {
-                  console.log('먀옹');
                   console.log(error.request);
                 } else {
-                  console.log('갸옹');
                   console.log('Error', error.message);
                 }
               });
@@ -190,15 +170,11 @@ function DiaryRegister() {
       .catch(err => {
         console.log('일기 등록 실패');
         console.log(err);
-        console.log('팥붕');
         setOverlap(false);
         openModal();
         // alert('제목과 일기내용은 반드시 쓰셔야 합니다!')
       });
   }
-
-  // let renderImage = (file === []) ? `require('../../../assets/images/etc/photo.png')` : { uri: res.assets[0].uri }
-  // console.log(renderImage)
 
   const getWeather = weather => {
     setWeather(weather);
@@ -326,7 +302,7 @@ function DiaryRegister() {
 
           {/* 사진 첨부*/}
           {selectedImage == undefined ||
-          (selectedImage != undefined && selectedImage.length === 0) ? ( // 사진이 없다
+          (selectedImage != undefined && selectedImage.length === 0) ? ( 
             // 사진 없다면 (true)
             <View style={styles.imageInput}>
               <TouchableOpacity onPress={UploadImage}>
@@ -377,7 +353,6 @@ function DiaryRegister() {
         </View>
       </View>
       <View style={{flex: 0.1, height:200}}>
-        {/* <Button title='Home' onPress={() => navigation.navigate('Home')} /> */}
       </View>
       </ScrollView>
       <Footer />

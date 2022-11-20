@@ -43,13 +43,9 @@ const Home = ({navigation}) => {
         onPress={() => navigation.navigate('LoginCheck')}
       />
       <Button title="로그아웃" onPress={() => navigation.navigate('LogOut')} />
-      {/* <Button title="푸시테스트" onPress={() => navigation.navigate('Push')} /> */}
     </View>
   );
 };
 
-// const styles = StyleSheet.create({
-
-// })
 
 export default Home;

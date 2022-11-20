@@ -7,7 +7,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const ChangeDarkModeSwitch = () => {
   var nowTheme = lightTheme
   const [isDark, setIsDark] = useState(false);
-  console.log("캐모마일릴렉서")
   console.log(isDark)
 
   const darkSwitch = () => {
@@ -18,7 +17,6 @@ const ChangeDarkModeSwitch = () => {
     } else {
       nowTheme = darkTheme
     }
-    console.log("밀크티")
     console.log(nowTheme)
   }
 
@@ -26,7 +24,6 @@ const ChangeDarkModeSwitch = () => {
     try {
       await AsyncStorage.setItem('nowTheme', JSON.stringify(nowTheme))
     } catch (e) {
-      console.log("자바칩프라푸치노")
       console.log(e)
     }
   }
@@ -68,9 +65,6 @@ const lightTheme = {
     iconColor: '#525252'
   }
 }
-
-
-
 
 
 const styles = StyleSheet.create({
