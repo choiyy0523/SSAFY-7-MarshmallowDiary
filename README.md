@@ -72,12 +72,12 @@
 
 > | 소개                  | 이름   | 담당 파트                                                   |
 > | --------------------- | ------ | ----------------------------------------------------------- |
-> | :yellow_heart:팀장    | 최윤영 | `FE` 다이어리 작성 및 조회, 다이어리 분석 및 추천, 환경설정 |
-> | :heart:팀원           | 김현지 | `BE` 다이어리 작성 및 조회, 검색                            |
-> | :purple_heart:팀원    | 박현영 | `BE` 회원가입 및 로그인, 회원 정보 관리                     |
-> | :sparkling_heart:팀원 | 유지슬 | `BE` 다이어리 감정 분석 및 결과 조회                        |
-> | :green_heart:팀원     | 이도연 | `BE` 서버 배포 및 테스트 코드 작성                          |
-> | :blue_heart:팀원      | 전상현 | `FE` 회원가입/로그인, 메인, 분석/통계, 검색                 |
+> | 🧡팀장    | 최윤영 | `FE` 다이어리 작성 및 조회, 다이어리 분석 및 추천, 환경설정 |
+> | 💖팀원    | 김현지 | `BE` 다이어리 작성 및 조회, 검색                          |
+> | 💜팀원    | 박현영 | `BE` 회원가입 및 로그인, 회원 정보 관리                    |
+> | 💝팀원    | 유지슬 | `BE` 다이어리 감정 분석 및 결과 조회                        |
+> | 💚팀원    | 이도연 | `BE` 서버 배포 및 테스트 코드 작성                          |
+> | 💙팀원    | 전상현 | `FE` 회원가입/로그인, 메인, 분석/통계, 검색                 |
 
 ---
 
@@ -211,9 +211,9 @@
 
 
 
-### :nine: 포팅 메뉴얼
+### :nine: 포팅 매뉴얼
 
-[Git 내부 링크] 소스 코드 정리 후 추가
+[포팅 매뉴얼](https://lab.ssafy.com/s07-final/S07P31A303/-/blob/628d353763f2cb932bf0e1939c2d3d74f112a0dc/exec/A303_%ED%8F%AC%ED%8C%85%EB%A7%A4%EB%89%B4%EC%96%BC.docx)
 
 ---
 
@@ -225,7 +225,7 @@
 
 > #### 1. 회원가입 및 로그인
 >
-> <img src="assets/회원가입로그인.gif" alt="회원가입로그인" style="zoom:25%;" />
+> <img src="https://lab.ssafy.com/s07-final/S07P31A303/-/blob/628d353763f2cb932bf0e1939c2d3d74f112a0dc/assets/%ED%9A%8C%EC%9B%90%EA%B0%80%EC%9E%85%EB%A1%9C%EA%B7%B8%EC%9D%B8.gif" alt="회원가입로그인" style="zoom:25%;" />
 >
 > - 아이디와 비밀번호만 입력하면 쉽고 빠르게 회원가입 할 수 있습니다.
 > - 기존회원의 경우 자동으로 로그인이 됩니다.
@@ -234,7 +234,7 @@
 
 > #### 2. 홈 화면
 >
-> <img src="assets/홈화면.gif" alt="홈화면" style="zoom:25%;" />
+> <img src="https://lab.ssafy.com/s07-final/S07P31A303/-/blob/628d353763f2cb932bf0e1939c2d3d74f112a0dc/assets/%ED%99%88%ED%99%94%EB%A9%B4.gif" alt="홈화면" style="zoom:25%;" />
 >
 > - 그 달의 캘린더와 함께, 일기를 작성한 날짜에 대표 감정에 해당하는 마시멜로가 표시됩니다.
 > - 일기를 작성한 날짜를 클릭하면 해당 날짜의 일기를 조회할 수 있습니다.
@@ -245,7 +245,7 @@
 
 > #### 3. 일기 작성
 >
-> <img src="assets/일기작성삭제.gif" alt="일기작성삭제" style="zoom:25%;" />
+> <img src="https://lab.ssafy.com/s07-final/S07P31A303/-/blob/628d353763f2cb932bf0e1939c2d3d74f112a0dc/assets/%EC%9D%BC%EA%B8%B0%EC%9E%91%EC%84%B1%EC%82%AD%EC%A0%9C.gif" alt="일기작성삭제" style="zoom:25%;" />
 >
 > - 일기는 오늘 날짜로만 작성할 수 있습니다.
 > - 일기에는 날씨와 제목, 사진과 내용을 등록할 수 있습니다
@@ -254,7 +254,7 @@
 
 > #### 4. 일기 조회
 >
-> <img src="assets/일기-조회.gif" alt="일기-조회" style="zoom:25%;" />
+> <img src="https://lab.ssafy.com/s07-final/S07P31A303/-/blob/628d353763f2cb932bf0e1939c2d3d74f112a0dc/assets/%EC%9D%BC%EA%B8%B0-%EC%A1%B0%ED%9A%8C.gif" alt="일기-조회" style="zoom:25%;" />
 >
 > - 해당 날짜에 작성한 일기의 날씨와 제목, 사진과 내용을 조회할 수 있습니다.
 > - 아래의 `분석 결과` 버튼을 통해 감정 분석 결과를 조회할 수 있습니다.
@@ -263,7 +263,7 @@
 
 > #### 5. 감정 분석
 >
-> <img src="assets/감정분석.gif" alt="감정분석" style="zoom:25%;" />
+> <img src="https://lab.ssafy.com/s07-final/S07P31A303/-/blob/628d353763f2cb932bf0e1939c2d3d74f112a0dc/assets/%EA%B0%90%EC%A0%95%EB%B6%84%EC%84%9D.gif" alt="감정분석" style="zoom:25%;" />
 >
 > - 작성된 일기를 기반으로 일기 작성자의 감정을 분석합니다.
 > - 분석한 감정에 따른 노래를 추천하며, 링크 클릭 시 유튜브로 이동됩니다.
@@ -272,7 +272,7 @@
 
 > #### 6. 감정 통계
 >
-> <img src="assets/감정통계.gif" alt="감정통계" style="zoom:25%;" />
+> <img src="https://lab.ssafy.com/s07-final/S07P31A303/-/blob/628d353763f2cb932bf0e1939c2d3d74f112a0dc/assets/%EA%B0%90%EC%A0%95%ED%86%B5%EA%B3%84.gif" alt="감정통계" style="zoom:25%;" />
 >
 > - 한 달 단위 혹은 전체 기간 동안 작성한 일기의 감정 분석 결과 통계를 확인할 수 있습니다.
 > - 해당 기간 중 가장 긍정 수치가 높았던 일기를 다시 볼 수 있는 링크를 제공합니다.
@@ -281,7 +281,7 @@
 
 > #### 7. 공유하기
 >
-> <img src="assets/공유기능.gif" alt="공유기능" style="zoom:25%;" />
+> <img src="https://lab.ssafy.com/s07-final/S07P31A303/-/blob/628d353763f2cb932bf0e1939c2d3d74f112a0dc/assets/%EA%B3%B5%EC%9C%A0%EA%B8%B0%EB%8A%A5.gif" alt="공유기능" style="zoom:25%;" />
 >
 > - 그날의 감정 분석 결과, 전체 통계 그래프를 카카오톡, 메시지, 메일 등 다양한 플랫폼을 통해 이미지로 공유할 수 있습니다.
 
@@ -289,7 +289,7 @@
 
 > #### . 검색하기
 >
-> <img src="assets/검색.gif" alt="검색" style="zoom:25%;" />
+> <img src="https://lab.ssafy.com/s07-final/S07P31A303/-/blob/628d353763f2cb932bf0e1939c2d3d74f112a0dc/assets/%EA%B2%80%EC%83%89.gif" alt="검색" style="zoom:25%;" />
 >
 > - 다시 보고 싶은 일기를 키워드로 검색할 수 있습니다.
 
@@ -297,7 +297,7 @@
 
 > #### 9. 비밀번호 설정
 >
-> <img src="assets/비밀번호.gif" alt="비밀번호" style="zoom:25%;" />
+> <img src="https://lab.ssafy.com/s07-final/S07P31A303/-/blob/628d353763f2cb932bf0e1939c2d3d74f112a0dc/assets/%EB%B9%84%EB%B0%80%EB%B2%88%ED%98%B8.gif" alt="비밀번호" style="zoom:25%;" />
 >
 > - 사생활 보호에 신경 쓰시는 분이라면 추가적인 비밀번호 설정을 통해 프라이버시 보호를 강화할 수 있습니다.
 
@@ -311,11 +311,11 @@
 
 ### 중간 발표
 
-[서울_3반_A303_중간발표자료.pdf](assets\서울_3반_A303_중간발표자료.pdf) 
+[서울_3반_A303_중간발표자료.pdf](https://lab.ssafy.com/s07-final/S07P31A303/-/blob/628d353763f2cb932bf0e1939c2d3d74f112a0dc/assets/%EC%84%9C%EC%9A%B8_3%EB%B0%98_A303_%EC%A4%91%EA%B0%84%EB%B0%9C%ED%91%9C%EC%9E%90%EB%A3%8C.pdf) 
 
 ### 최종 발표
 
-[서울_3반_A303_최종발표자료.pdf](assets\서울_3반_A303_최종발표자료.pdf) 
+[서울_3반_A303_최종발표자료.pdf](https://lab.ssafy.com/s07-final/S07P31A303/-/blob/628d353763f2cb932bf0e1939c2d3d74f112a0dc/assets/%EC%84%9C%EC%9A%B8_3%EB%B0%98_A303_%EC%B5%9C%EC%A2%85%EB%B0%9C%ED%91%9C%EC%9E%90%EB%A3%8C.pdf) 
 
 ---
 
