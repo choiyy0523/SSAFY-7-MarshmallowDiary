@@ -229,6 +229,7 @@ function DiaryRegister() {
 
   return (
     <View style={{flex: 1}}>
+      <ScrollView>
       <View style={{flex: 1}}>
         <View style={styles.block2}>
           {/* 날짜, 날씨, 등록버튼 - 일기장 헤더 */}
@@ -375,9 +376,10 @@ function DiaryRegister() {
           />
         </View>
       </View>
-      <View style={{flex: 0.1}}>
+      <View style={{flex: 0.1, height:200}}>
         {/* <Button title='Home' onPress={() => navigation.navigate('Home')} /> */}
       </View>
+      </ScrollView>
       <Footer />
     </View>
   );
