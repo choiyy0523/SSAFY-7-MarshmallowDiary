@@ -1,0 +1,13 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "src/assets/fonts/GangwonEduAllBold.ttf",
+      "sha1": "3d79faadb80e6097dcc18a683785e507da4c6eb4"
+    },
+    {
+      "path": "src/assets/fonts/GangwonEduAllLight.ttf",
+      "sha1": "83b78e96a1626533320db5d55adbd06e1db6e827"
+    }
+  ]
+}
