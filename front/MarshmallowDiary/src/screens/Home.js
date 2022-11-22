@@ -7,10 +7,6 @@ const Home = ({navigation}) => {
   return (
     <View>
       <Text>Home</Text>
-      <Button
-        title="go to the list screen"
-        onPress={() => navigation.navigate('List')}
-      />
       <Button title="일기 조회" onPress={() => navigation.navigate('Detail')} />
       <Button
         title="일기 등록"
@@ -22,11 +18,7 @@ const Home = ({navigation}) => {
         onPress={() => navigation.navigate('Settings')}
       />
       <Button
-        title="go to the list screen"
-        onPress={() => navigation.navigate('List')}
-      />
-      <Button
-        title="go to the main screen"
+        title="메인"
         onPress={() => navigation.navigate('Main')}
       />
       <Button title="로그인" onPress={() => navigation.navigate('Login')} />

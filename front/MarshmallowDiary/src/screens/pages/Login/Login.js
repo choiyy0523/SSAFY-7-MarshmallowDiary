@@ -29,7 +29,7 @@ const Login = ({ navigation }) => {
     setHidden(hidden + 1)
   }
 
-  // 검수용 테스트 계정
+  // 검수용 테스트 계정 // Id, Pwd 는 삭제
   // const hiddenLogin = () => {
   //   if (hidden >= 7) {
   //     http.post('/user/login', {

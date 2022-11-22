@@ -1,6 +1,6 @@
 node {
   stage ("git checkout") {
-   git branch: "back", credentialsId: "${env.CREDENTIAL_ID}", url: "https://lab.ssafy.com/s07-final/S07P31A303.git"
+   git branch: "back", credentialsId: "${env.CREDENTIAL_ID}", url: "https://"
   }
 
   stage ("image prune") {

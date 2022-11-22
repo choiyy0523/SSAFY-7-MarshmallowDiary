@@ -60,5 +60,3 @@ public class SwaggerConfig {
     }
 
 }
-
-// http://localhost:9090/api/v1/swagger-ui.html

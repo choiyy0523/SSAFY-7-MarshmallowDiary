@@ -139,8 +139,9 @@ android {
         applicationId "com.marshmallowdiary"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 7
-        versionName "1.6"
+        versionCode // version 코드 삭제
+        versionName // version 네임 삭제
+
         buildConfigField "boolean", "IS_NEW_ARCHITECTURE_ENABLED", isNewArchitectureEnabled().toString()
 
         if (isNewArchitectureEnabled()) {
@@ -212,11 +213,11 @@ android {
         }
     }
     signingConfigs {
-        debug {
-            storeFile file('mdKEY.jks')
-            storePassword 'maro1229'
-            keyAlias 'mdKEY'
-            keyPassword 'maro1229'
+        debug { // 스토어 배포용 해시키 비밀번호, 파일명 삭제
+            storeFile file('')
+            storePassword ''
+            keyAlias ''
+            keyPassword ''
         }
     }
     buildTypes {

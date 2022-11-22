@@ -20,6 +20,7 @@ const WeatherPicker = ({weather, getWeather}) => {
     setVisible(false);
   };
 
+  // 이미지 동적 렌더링
   const weatherIconPath = {
     1: require('../../../assets/images/weather/1.png'),
     2: require('../../../assets/images/weather/2.png'),
