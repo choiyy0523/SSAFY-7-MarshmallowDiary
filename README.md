@@ -349,7 +349,7 @@
 
 - 이 레포지토리의 파일들은 포트폴리오용이므로 각종 key, 테스트용 사진등이 포함되어 있지 않아 정상 동작은 되지 않습니다. 
 
-- 만약 사용 및 테스트를 희망하신다면 플레이 스토어에서 다운로드 혹은 apk 파일(ver 1.6)(front\MarshmallowDiary\android\app\release\MarshmallowDiary_221121_master.apk) 설치 후 테스트 가능합니다.
+- 만약 사용 및 테스트를 희망하신다면 플레이 스토어에서 다운로드 혹은 apk 파일(ver 1.6)(`front\MarshmallowDiary\android\app\release\MarshmallowDiary_221121_master.apk`) 설치 후 테스트 가능합니다.
 
 - apk 파일이나 플레이 스토어의 경우에도, 테스트 시점에 EC2 서버가 만료되었을 경우 정상 동작 하지 않을 수 있습니다. 
 
