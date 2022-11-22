@@ -304,7 +304,7 @@
 ## :star2: 발표 자료
 
 ### 발표 자료
-[서울 3반 발표 자료](https://marshmallowdiary.notion.site/831ec3e1fd7e45d4bc7c1c9c7112d4c5)
+[서울 3반 A303 발표 자료](https://marshmallowdiary.notion.site/831ec3e1fd7e45d4bc7c1c9c7112d4c5)
 
 
 ### UCC
