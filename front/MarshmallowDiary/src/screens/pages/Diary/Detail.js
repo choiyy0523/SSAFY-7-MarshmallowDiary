@@ -53,7 +53,7 @@ function Detail({route}) {
       (err, result) => {
         axios
           .get(
-            `https://marshmallowdiary.com/api/v1/diary/detail/${targetDate}`,
+            `https:///detail/${targetDate}`, // api URL 삭제
             {
               headers: {
                 Authorization: `Bearer ${result}`,
@@ -208,7 +208,7 @@ function Detail({route}) {
                 <Image
                   style={{width: 350, height: 300, borderRadius: 20}}
                   source={{
-                    uri: `https://marshmallow-bucket.s3.ap-northeast-2.amazonaws.com/${diaryImage[0]}`,
+                    uri: `https://[S3 링크 삭제]amazonaws.com/${diaryImage[0]}`, // S3 링크 삭제
                   }}
                 />
               </TouchableOpacity>

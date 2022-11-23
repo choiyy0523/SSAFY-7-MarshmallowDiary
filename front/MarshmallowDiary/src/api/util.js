@@ -4,7 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 const axiosInstance = axios.create({
-  baseURL: 'https://marshmallowdiary.com/api/v1',
+  baseURL: 'https://', //baseURL 삭제
   headers: {
     'Content-Type': 'multipart/form-data'
   },

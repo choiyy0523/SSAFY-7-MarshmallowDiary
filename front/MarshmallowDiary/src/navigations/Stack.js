@@ -32,8 +32,6 @@ const StackNavigation = () => {
       initialRouteName="LoginCheck"
       screenOptions={{headerShown: false}}>
       <Stack.Screen name="Home" component={Home} />
-      <Stack.Screen name="List" component={List} />
-      <Stack.Screen name="Item" component={Item} />
       <Stack.Screen name="Analysis" component={Analysis} />
       <Stack.Screen name="Detail" component={Detail} />
       <Stack.Screen name="Register" component={Register} />

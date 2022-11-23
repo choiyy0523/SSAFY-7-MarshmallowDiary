@@ -50,7 +50,7 @@ const Today = ({route}) => {
   useEffect(() => {
     AsyncStorage.getItem('token', (err, result) => {
       axios
-        .get(`https://marshmallowdiary.com/api/v1/analysis/${targetDiary}`, {
+        .get(`https:///analysis/${targetDiary}`, { // api URL 삭제
           headers: {
             Authorization: `Bearer ${result}`,
           },

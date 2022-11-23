@@ -196,7 +196,7 @@ const Result = ({route, navigation}) => {
                     }}>
                     <Image
                       source={{
-                        uri: `https://marshmallow-bucket.s3.ap-northeast-2.amazonaws.com/${data.header_img}`,
+                        uri: `https://[S3 링크 삭제]amazonaws.com/${data.header_img}`, // S3 링크 삭제
                       }}
                       style={{
                         width: 100,
