@@ -2,8 +2,6 @@ import React from 'react';
 import {StyleSheet} from 'react-native';
 import {createStackNavigator} from '@react-navigation/stack';
 import Home from '../screens/Home';
-import List from '../screens/List';
-import Item from '../screens/Item';
 import Analysis from '../screens/pages/Analysis/Analysis';
 import Detail from '../screens/pages/Diary/Detail';
 import Register from '../screens/pages/Diary/Register';
